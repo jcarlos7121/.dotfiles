@@ -1,2 +1,4 @@
 .config/fish
 .config/fish/functions
+.vim/config
+.config/terminator

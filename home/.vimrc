@@ -34,8 +34,6 @@ set shiftwidth=2
 set expandtab
 set autochdir
 set foldmethod=indent
-set foldnestmax=10
-set nofoldenable
 set foldlevel=2
 set pastetoggle=<F2>
 
