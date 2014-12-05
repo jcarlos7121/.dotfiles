@@ -90,6 +90,7 @@ Bundle 'pangloss/vim-javascript'
 Bundle 'briancollins/vim-jst'
 Bundle 'ngmy/vim-rubocop'
 Bundle 'ap/vim-css-color'
+Bundle 'MattesGroeger/vim-bookmarks'
 
 ""Color"
 color distinguished
@@ -168,6 +169,12 @@ imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
       \ "\<Plug>(neosnippet_expand_or_jump)"
       \: "\<TAB>"
+
+"Vim Bookmarks
+highlight BookmarkSign ctermbg=NONE ctermfg=23
+highlight BookmarkLine ctermbg=0 ctermfg=NONE
+let g:bookmark_sign = '₪'
+let g:bookmark_highlight_lines = 1
 
 "Vim Rspec
 map <Leader>w :call RunAllSpecs()<CR>
