@@ -2,3 +2,4 @@
 .config/fish/functions
 .vim/config
 .config/terminator
+.config/tint2
