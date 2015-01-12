@@ -91,6 +91,7 @@ Bundle 'briancollins/vim-jst'
 Bundle 'ngmy/vim-rubocop'
 Bundle 'ap/vim-css-color'
 Bundle 'MattesGroeger/vim-bookmarks'
+Bundle 'chrisbra/NrrwRgn'
 
 ""Color"
 color distinguished
@@ -150,6 +151,7 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd BufNewFile,BufRead *.coffee set filetype=coffee
+autocmd VimResized * wincmd =
 au BufNewFile,BufRead *.ejs set filetype=html
 
 if !exists('g:neocomplete#sources#omni#input_patterns')
