@@ -4,9 +4,6 @@ set nocompatible | filetype indent plugin on | syn on | filetype plugin on
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
 
-syntax enable                           " Switch syntax highlighting on
-syntax on
-
 set t_Co=256                            " User 256 colors
 set synmaxcol=240                       " Hightlight only the first n chars
 set tabstop=2
@@ -34,7 +31,7 @@ set shiftwidth=2
 set expandtab
 set autochdir
 set foldmethod=indent
-set foldlevel=2
+set foldlevel=1
 set pastetoggle=<F2>
 
 Bundle 'gmarik/vundle'
@@ -92,6 +89,11 @@ Bundle 'ngmy/vim-rubocop'
 Bundle 'ap/vim-css-color'
 Bundle 'MattesGroeger/vim-bookmarks'
 Bundle 'chrisbra/NrrwRgn'
+Bundle 'danchoi/ri.vim'
+Bundle 'mtscout6/vim-cjsx'
+
+syntax enable                           " Switch syntax highlighting on
+syntax on
 
 ""Color"
 color distinguished
@@ -151,6 +153,7 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd BufNewFile,BufRead *.coffee set filetype=coffee
+autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent
 autocmd VimResized * wincmd =
 au BufNewFile,BufRead *.ejs set filetype=html
 
