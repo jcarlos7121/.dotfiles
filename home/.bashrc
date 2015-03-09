@@ -118,11 +118,12 @@ fi
 #let r=$r+2
 #fi
 
+export EDITOR='vi'
 PROMPT_COMMAND='CurDir=`pwd|sed -e "s!$HOME!~!"|sed -re "s!([^/])[^/]+/!\1/!g"`'
 PS1=" \[\033[0;"$r"m\][ \u \[\033[0;"$r"m\] \$CurDir] \$ \[\033[0m\]"
 PATH=$PATH:$HOME/bin/android-studio/bin
-PATH=$PATH:$HOME/bin/android-studio/sdk/tools
-PATH=$PATH:$HOME/bin/android-studio/sdk/platform-tools
+PATH=$PATH:$HOME/Android/Sdk/platform-tools
+PATH=$PATH:$HOME/Android/Sdk/tools
 PATH=$PATH:$HOME/bin/phantomjs-1.9.7-linux-x86_64/bin
 PATH=$PATH:$HOME/bin/the_silver_searcher
 PATH=$PATH:$HOME/bin/Popcorn-Time
