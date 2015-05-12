@@ -107,6 +107,9 @@ NeoBundle 'danchoi/ri.vim'
 NeoBundle 'mtscout6/vim-cjsx'
 NeoBundle 'ntpeters/vim-better-whitespace'
 NeoBundle 'tpope/vim-rake'
+NeoBundle 'jgdavey/vim-blockle'
+NeoBundle 'majutsushi/tagbar'
+"NeoBundle '0x0dea/vim-molasses'
 
 " You can specify revision/branch/tag.
 NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
@@ -129,6 +132,7 @@ syntax on
 ""Color"
 color distinguished
 let g:airline_theme='thechosen'
+"let g:molasses_wait=5000
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled = 1
 let g:hybrid_use_Xresources = 1
@@ -155,6 +159,8 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 nnoremap <F5> :call NTFinderP()<CR>
 nnoremap <F6> :GundoToggle<CR>
+nnoremap <leader>. :CtrlPTag<cr>
+nmap <F8> :TagbarToggle<CR>
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 nmap <silent> <leader>c :!zenity --color-selection<CR>
