@@ -129,8 +129,10 @@ PATH=$PATH:$HOME/bin/the_silver_searcher
 PATH=$PATH:$HOME/bin/Popcorn-Time
 PATH=$PATH:$HOME/bin/wmname
 PATH=$PATH:$HOME/.linuxbrew/bin
+PATH=$PATH:$HOME/.nodenv/bin
 PATH="/usr/local/heroku/bin:$PATH"
 #source /home/juancarlos/bin/pvm/pvm.sh
 wmname LG3D
 eval "$(rbenv init -)"
+eval "$(nodenv init -)"
 fish

@@ -30,6 +30,7 @@ set autochdir
 set foldmethod=indent
 set foldlevel=1
 set pastetoggle=<F2>
+set tags+=gems.tags
 
 " NeoBundle Scripts-----------------------------
 if has('vim_starting')
@@ -109,6 +110,9 @@ NeoBundle 'ntpeters/vim-better-whitespace'
 NeoBundle 'tpope/vim-rake'
 NeoBundle 'jgdavey/vim-blockle'
 NeoBundle 'majutsushi/tagbar'
+NeoBundle 'bkad/CamelCaseMotion'
+NeoBundle 'nono/vim-handlebars'
+"NeoBundle 'vim-scripts/vim-auto-save'
 "NeoBundle '0x0dea/vim-molasses'
 
 " You can specify revision/branch/tag.
@@ -143,6 +147,10 @@ let g:multi_cursor_next_key='<C-d>'
 let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
+
+map <S-W> <Plug>CamelCaseMotion_w
+map <S-B> <Plug>CamelCaseMotion_b
+map <S-E> <Plug>CamelCaseMotion_e
 
 map <Leader>gm :CtrlPModified<CR>
 map <Leader>gM :CtrlPBranch<CR>
@@ -191,8 +199,10 @@ autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd BufNewFile,BufRead *.coffee set filetype=coffee
 autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent
+autocmd BufWritePost *.rb,*.js,*.html,*.haml,*.css,*.sass,*.coffee silent! !ctags -R 2> /dev/null &
 autocmd VimResized * wincmd =
 au BufNewFile,BufRead *.ejs set filetype=html
+au BufReadPost * set bufhidden=delete
 
 if !exists('g:neocomplete#sources#omni#input_patterns')
   let g:neocomplete#sources#omni#input_patterns = {}
@@ -248,6 +258,9 @@ let g:ctrlp_dont_split = 'NERD'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = 'node_modules'
 let g:ctrlp_root_markers = ['.acignore', '.gitignore', '.git', '.floo', 'Gemfile']
+
+" Autosave
+"let g:auto_save = 1
 
 " On startup
 autocmd VimEnter * call StartUp()
