@@ -78,7 +78,7 @@ NeoBundle 'tpope/vim-rails'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'tpope/vim-vinegar'
-NeoBundle 'thoughtbot/vim-rspec'
+NeoBundle 'geekjuice/vim-spec'
 NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'rodjek/vim-puppet'
@@ -112,6 +112,7 @@ NeoBundle 'jgdavey/vim-blockle'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'bkad/CamelCaseMotion'
 NeoBundle 'nono/vim-handlebars'
+NeoBundle 'ain/vim-capistrano'
 "NeoBundle 'vim-scripts/vim-auto-save'
 "NeoBundle '0x0dea/vim-molasses'
 
@@ -229,6 +230,8 @@ let g:bookmark_sign = '₪'
 let g:bookmark_highlight_lines = 1
 
 "Vim Rspec
+let g:mocha_coffee_command = "!mocha -b --compilers coffee:coffee-script/register {spec}"
+
 map <Leader>w :call RunAllSpecs()<CR>
 map <Leader>e :call RunNearestSpec()<CR>
 map <Leader>t :call RunCurrentSpecFile()<CR>
