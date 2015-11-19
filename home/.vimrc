@@ -130,7 +130,6 @@ filetype plugin indent on
 NeoBundleCheck
 "End NeoBundle Scripts-------------------------
 
-
 syntax enable                           " Switch syntax highlighting on
 syntax on
 
@@ -247,7 +246,7 @@ let g:user_emmet_leader_key='<C-x>'
 
 "agprg
 "Remember install silver_searcher
-let g:agprg="ag --column"
+let g:ag_prg="ag --column"
 
 "NERDTREE + CTRLP integration
 source ~/.vim/config/ntfinder.vim

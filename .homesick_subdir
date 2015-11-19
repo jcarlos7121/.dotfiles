@@ -3,3 +3,5 @@
 .vim/config
 .config/terminator
 .config/tint2
+.vim/colors
+.vim/bundle/vim-airline/autoload/airline/themes

@@ -118,6 +118,7 @@ fi
 #let r=$r+2
 #fi
 
+export MSF_DATABASE_CONFIG="$HOME/.msf4/database.yml"
 export EDITOR='vi'
 PROMPT_COMMAND='CurDir=`pwd|sed -e "s!$HOME!~!"|sed -re "s!([^/])[^/]+/!\1/!g"`'
 PS1=" \[\033[0;"$r"m\][ \u \[\033[0;"$r"m\] \$CurDir] \$ \[\033[0m\]"
