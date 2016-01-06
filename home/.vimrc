@@ -199,7 +199,7 @@ autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd BufNewFile,BufRead *.coffee set filetype=coffee
 autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent
-autocmd BufWritePost *.rb,*.js,*.html,*.haml,*.css,*.sass,*.coffee silent! !ctags -R 2> /dev/null &
+autocmd BufWritePost *.rb,*.js,*.html,*.haml,*.css,*.sass,*.coffee silent! !ctags -R 2> /dev/null --exclude=.git --exclude=log --exclude=frontend --exclude=tmp &
 autocmd VimResized * wincmd =
 au BufNewFile,BufRead *.ejs set filetype=html
 au BufReadPost * set bufhidden=delete
@@ -229,6 +229,7 @@ let g:bookmark_sign = '₪'
 let g:bookmark_highlight_lines = 1
 
 "Vim Rspec
+let g:mocha_js_command = "!mocha --recursive --no-colors {spec}"
 let g:mocha_coffee_command = "!mocha -b --compilers coffee:coffee-script/register {spec}"
 
 map <Leader>w :call RunAllSpecs()<CR>
@@ -246,11 +247,13 @@ let g:user_emmet_leader_key='<C-x>'
 
 "agprg
 "Remember install silver_searcher
-let g:ag_prg="ag --column"
+"let g:ag_prg="ag --column"
+let g:ag_prg='ag -S --nocolor --nogroup --column --ignore tmp --ignore node_modules --ignore "./frontend/node_modules/*" --ignore "./frontend/tmp/*"'
 
 "NERDTREE + CTRLP integration
 source ~/.vim/config/ntfinder.vim
-source ~/.vim/config/startup.vim
+source ~/.vim/config/servers_ftp.vim
+source ~/.vim/config/envcommands.vim
 let NERDTreeQuitOnOpen=1
 let NERDTreeBookmarksFile=expand("$HOME/.vim-NERDTreeBookmarks")
 let NERDTreeShowBookmarks=1
@@ -264,6 +267,3 @@ let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden --ignore .git 
 
 " Autosave
 "let g:auto_save = 1
-
-" On startup
-autocmd VimEnter * call StartUp()
