@@ -30,6 +30,7 @@ set autochdir
 set foldmethod=indent
 set foldlevel=1
 set pastetoggle=<F2>
+set laststatus=2
 set tags+=gems.tags
 
 call plug#begin('~/.vim/plugged')
@@ -42,7 +43,6 @@ Plug 'edsono/vim-matchit'
 Plug 'elixir-lang/vim-elixir'
 Plug 'godlygeek/tabular'
 Plug 'junegunn/vim-easy-align'
-Plug 'honza/vim-snippets'
 Plug 'ivalkeen/vim-ctrlp-tjump'
 Plug 'jasoncodes/ctrlp-modified.vim'
 Plug 'justinmk/vim-gtfo'
@@ -100,7 +100,8 @@ Plug 'nono/vim-handlebars'
 Plug 'ain/vim-capistrano'
 Plug 'BjRo/vim-extest'
 Plug 'mattreduce/vim-mix'
-"Plug '0x0dea/vim-molasses'
+Plug 'jvirtanen/vim-octave'
+Plug '0x0dea/vim-molasses'
 
 Plug 'Shougo/vimshell'
 

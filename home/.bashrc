@@ -132,6 +132,7 @@ PATH=$PATH:$HOME/bin/the_silver_searcher
 PATH=$PATH:$HOME/bin/Popcorn-Time
 PATH=$PATH:$HOME/bin/streamio
 PATH=$PATH:$HOME/bin/wmname
+PATH=$PATH:$HOME/bin/prax.cr/bin
 PATH=$PATH:$HOME/.linuxbrew/bin
 PATH=$PATH:$HOME/.nodenv/bin
 PATH=$PATH:$HOME/.pyenv/bin
