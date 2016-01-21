@@ -35,7 +35,6 @@ set tags+=gems.tags
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'gmarik/vundle'
 Plug 'bling/vim-airline'
 Plug 'dag/vim-fish'
 Plug 'danro/rename.vim'
