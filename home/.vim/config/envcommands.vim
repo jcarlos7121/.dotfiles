@@ -22,9 +22,19 @@ fun! Pry( arg ) "{{{
   Start pry-remote
 endfunction "}}}
 
+fun! Rsb( arg ) "{{{
+  Rails s -b 0.0.0.0
+endfunction "}}}
+
+fun! Guard( arg ) "{{{
+  Start guard -P livereload
+endfunction "}}}
+
 command! -nargs=* Fs call Fs( '<args>' )"}}}"
 command! -nargs=* Pry call Pry( '<args>' )"}}}"
 command! -nargs=* Redis call Redis( '<args>' )"}}}"
 command! -nargs=* Exenv call Exenv( '<args>' )"}}}"
 command! -nargs=* Pyenv call Pyenv( '<args>' )"}}}"
 command! -nargs=* Nodenv call Nodenv( '<args>' )"}}}"
+command! -nargs=* Rsb call Rsb( '<args>' )"}}}"
+command! -nargs=* Guard call Guard( '<args>' )"}}}"

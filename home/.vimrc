@@ -33,82 +33,101 @@ set pastetoggle=<F2>
 set laststatus=2
 set tags+=gems.tags
 
-call plug#begin('~/.vim/plugged')
-
-Plug 'bling/vim-airline'
-Plug 'dag/vim-fish'
-Plug 'danro/rename.vim'
-Plug 'edsono/vim-matchit'
-Plug 'elixir-lang/vim-elixir'
-Plug 'godlygeek/tabular'
-Plug 'junegunn/vim-easy-align'
-Plug 'ivalkeen/vim-ctrlp-tjump'
-Plug 'jasoncodes/ctrlp-modified.vim'
-Plug 'justinmk/vim-gtfo'
-Plug 'justinmk/vim-sneak'
-Plug 'kana/vim-smartinput'
-Plug 'kchmck/vim-coffee-script'
-Plug 'kien/ctrlp.vim'
-Plug 'plasticboy/vim-markdown'
-Plug 'rking/ag.vim'
-Plug 'scrooloose/nerdcommenter'
-Plug 'sjl/gundo.vim'
-Plug 'tpope/vim-bundler'
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-ragtag'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-vinegar'
-Plug 'geekjuice/vim-spec'
-Plug 'vim-ruby/vim-ruby'
-Plug 'w0ng/vim-hybrid'
-Plug 'rodjek/vim-puppet'
-Plug 'Floobits/floobits-vim'
-Plug 'airblade/vim-gitgutter'
-Plug 'bling/vim-bufferline'
-Plug 'chriskempson/base16-vim'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'Shougo/neocomplete'
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
-Plug 'nanotech/jellybeans.vim'
-Plug 'tpope/vim-rbenv'
-Plug 'mattn/emmet-vim'
-Plug 'farseer90718/vim-colorpicker'
-Plug 'guicolorscheme.vim'
-Plug 'scrooloose/nerdtree'
-Plug 'flazz/vim-colorschemes'
-Plug 'airblade/vim-rooter'
-Plug 'pangloss/vim-javascript'
-Plug 'briancollins/vim-jst'
-Plug 'ngmy/vim-rubocop'
-Plug 'ap/vim-css-color'
-Plug 'MattesGroeger/vim-bookmarks'
-Plug 'chrisbra/NrrwRgn'
-Plug 'danchoi/ri.vim'
-Plug 'mtscout6/vim-cjsx'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'tpope/vim-rake'
-Plug 'jgdavey/vim-blockle'
-Plug 'majutsushi/tagbar'
-Plug 'bkad/CamelCaseMotion'
-Plug 'nono/vim-handlebars'
-Plug 'ain/vim-capistrano'
-Plug 'BjRo/vim-extest'
-Plug 'mattreduce/vim-mix'
-Plug 'jvirtanen/vim-octave'
-Plug '0x0dea/vim-molasses'
-
-Plug 'Shougo/vimshell'
+"NeoBundle Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
+endif
 
 " Required:
-call plug#end()
+set runtimepath^=/home/juancarlos/.vim/bundle/neobundle.vim/
+
+" Required:
+call neobundle#begin(expand('/home/juancarlos/.vim/bundle'))
+
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+" Add or remove your Bundles here:
+NeoBundle 'bling/vim-airline'
+NeoBundle 'dag/vim-fish'
+NeoBundle 'danro/rename.vim'
+NeoBundle 'edsono/vim-matchit'
+NeoBundle 'elixir-lang/vim-elixir'
+NeoBundle 'godlygeek/tabular'
+NeoBundle 'junegunn/vim-easy-align'
+NeoBundle 'ivalkeen/vim-ctrlp-tjump'
+NeoBundle 'jasoncodes/ctrlp-modified.vim'
+NeoBundle 'justinmk/vim-gtfo'
+NeoBundle 'justinmk/vim-sneak'
+NeoBundle 'kana/vim-smartinput'
+NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'plasticboy/vim-markdown'
+NeoBundle 'rking/ag.vim'
+NeoBundle 'honza/vim-snippets'
+NeoBundle 'scrooloose/nerdcommenter'
+NeoBundle 'sjl/gundo.vim'
+NeoBundle 'tpope/vim-bundler'
+NeoBundle 'tpope/vim-dispatch'
+NeoBundle 'tpope/vim-endwise'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-ragtag'
+NeoBundle 'tpope/vim-rails'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'tpope/vim-unimpaired'
+NeoBundle 'tpope/vim-vinegar'
+NeoBundle 'geekjuice/vim-spec'
+NeoBundle 'vim-ruby/vim-ruby'
+NeoBundle 'w0ng/vim-hybrid'
+NeoBundle 'rodjek/vim-puppet'
+NeoBundle 'Floobits/floobits-vim'
+NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'bling/vim-bufferline'
+NeoBundle 'chriskempson/base16-vim'
+NeoBundle 'terryma/vim-multiple-cursors'
+NeoBundle 'Shougo/neocomplete'
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'nanotech/jellybeans.vim'
+NeoBundle 'tpope/vim-rbenv'
+NeoBundle 'mattn/emmet-vim'
+NeoBundle 'farseer90718/vim-colorpicker'
+NeoBundle 'guicolorscheme.vim'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'flazz/vim-colorschemes'
+NeoBundle 'airblade/vim-rooter'
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'briancollins/vim-jst'
+NeoBundle 'ngmy/vim-rubocop'
+NeoBundle 'ap/vim-css-color'
+NeoBundle 'MattesGroeger/vim-bookmarks'
+NeoBundle 'chrisbra/NrrwRgn'
+NeoBundle 'danchoi/ri.vim'
+NeoBundle 'mtscout6/vim-cjsx'
+NeoBundle 'ntpeters/vim-better-whitespace'
+NeoBundle 'tpope/vim-rake'
+NeoBundle 'jgdavey/vim-blockle'
+NeoBundle 'majutsushi/tagbar'
+NeoBundle 'bkad/CamelCaseMotion'
+NeoBundle 'nono/vim-handlebars'
+NeoBundle 'ain/vim-capistrano'
+NeoBundle 'BjRo/vim-extest'
+NeoBundle 'mattreduce/vim-mix'
+NeoBundle 'jvirtanen/vim-octave'
+"NeoBundle '0x0dea/vim-molasses'
+NeoBundle 'Shougo/vimshell'
+
+" Required:
+call neobundle#end()
 
 " Required:
 filetype plugin indent on
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+"End NeoBundle Scripts-------------------------
 
 syntax enable                           " Switch syntax highlighting on
 syntax on
@@ -141,6 +160,11 @@ map <C-s> :NeoCompleteEnable<CR>
 map <F3> :!fish<CR>
 vmap <Tab> >
 
+" Convert Js to Coffee
+vmap <Leader>jc <esc>:'<,'>!js2coffeescript<CR>
+" " Convert Coffee to JS
+vmap <leader>cj <esc>:'<,'>!coffee -sbp<CR>"
+
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
@@ -148,6 +172,7 @@ nnoremap <C-H> <C-W><C-H>
 nnoremap <F5> :call NTFinderP()<CR>
 nnoremap <F6> :GundoToggle<CR>
 nnoremap <leader>. :CtrlPTag<cr>
+nnoremap <leader>m :!octave %<cr>
 nmap <F8> :TagbarToggle<CR>
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
