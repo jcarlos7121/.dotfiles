@@ -125,6 +125,7 @@ export ORACLE_BASE=/u01/app/oracle
 export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH
 export PATH=$ORACLE_HOME/bin:$PATH
 
+export TERM="xterm-256color"
 export MSF_DATABASE_CONFIG="$HOME/.msf4/database.yml"
 export PATH="$HOME/.exenv/bin:$PATH"
 export EDITOR='vi'
@@ -142,6 +143,7 @@ PATH=$PATH:$HOME/bin/prax.cr/bin
 PATH=$PATH:$HOME/.linuxbrew/bin
 PATH=$PATH:$HOME/.nodenv/bin
 PATH=$PATH:$HOME/.pyenv/bin
+PATH=$PATH:$HOME/bin
 PATH="/usr/local/heroku/bin:$PATH"
 #source /home/juancarlos/bin/pvm/pvm.sh
 wmname LG3D

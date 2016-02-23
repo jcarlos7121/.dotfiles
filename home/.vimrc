@@ -32,6 +32,7 @@ set foldlevel=1
 set pastetoggle=<F2>
 set laststatus=2
 set tags+=gems.tags
+set t_ut=
 
 "NeoBundle Scripts-----------------------------
 if &compatible
@@ -115,8 +116,8 @@ NeoBundle 'ain/vim-capistrano'
 NeoBundle 'BjRo/vim-extest'
 NeoBundle 'mattreduce/vim-mix'
 NeoBundle 'jvirtanen/vim-octave'
-"NeoBundle '0x0dea/vim-molasses'
 NeoBundle 'Shougo/vimshell'
+NeoBundle 'christoomey/vim-tmux-navigator'
 
 " Required:
 call neobundle#end()
@@ -155,7 +156,7 @@ map <Leader>gm :CtrlPModified<CR>
 map <Leader>gM :CtrlPBranch<CR>
 map <Leader>z :tab split<CR>
 map <Leader>q :tabclose<CR>
-map <C-a> :NeoCompleteDisable<CR>
+map <C-w> :NeoCompleteDisable<CR>
 map <C-s> :NeoCompleteEnable<CR>
 map <F3> :!fish<CR>
 vmap <Tab> >
@@ -234,8 +235,9 @@ let g:bookmark_sign = '₪'
 let g:bookmark_highlight_lines = 1
 
 "Vim Rspec
-let g:mocha_js_command = "!mocha --recursive --no-colors {spec}"
-let g:mocha_coffee_command = "!mocha -b --compilers coffee:coffee-script/register {spec}"
+let g:mocha_js_command = "Dispatch mocha --recursive --no-colors {spec}"
+let g:mocha_coffee_command = "Dispatch mocha -b --compilers coffee:coffee-script/register {spec}"
+let g:rspec_command = "Dispatch rspec {spec}"
 
 map <Leader>w :call RunAllSpecs()<CR>
 map <Leader>e :call RunNearestSpec()<CR>
