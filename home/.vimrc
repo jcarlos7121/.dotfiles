@@ -118,6 +118,7 @@ NeoBundle 'mattreduce/vim-mix'
 NeoBundle 'jvirtanen/vim-octave'
 NeoBundle 'Shougo/vimshell'
 NeoBundle 'christoomey/vim-tmux-navigator'
+NeoBundle 'Chiel92/vim-autoformat'
 
 " Required:
 call neobundle#end()
@@ -147,6 +148,7 @@ let g:multi_cursor_next_key='<C-d>'
 let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
+let g:autoformat_verbosemode=1
 
 map <S-W> <Plug>CamelCaseMotion_w
 map <S-B> <Plug>CamelCaseMotion_b
