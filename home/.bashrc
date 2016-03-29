@@ -143,13 +143,14 @@ PATH=$PATH:$HOME/bin/prax.cr/bin
 PATH=$PATH:$HOME/.linuxbrew/bin
 PATH=$PATH:$HOME/.nodenv/bin
 PATH=$PATH:$HOME/.pyenv/bin
+PATH=$PATH:$HOME/.rbenv/bin
 PATH=$PATH:$HOME/bin/matlab/bin
 PATH=$PATH:$HOME/bin
 PATH="/usr/local/heroku/bin:$PATH"
 #source /home/juancarlos/bin/pvm/pvm.sh
-wmname LG3D
-eval "$(pyenv init -)"
-eval "$(exenv init -)"
+#wmname LG3D
+#eval "$(pyenv init -)"
+#eval "$(exenv init -)"
 eval "$(rbenv init -)"
 eval "$(nodenv init -)"
 fish

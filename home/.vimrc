@@ -82,7 +82,6 @@ NeoBundle 'geekjuice/vim-spec'
 NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'rodjek/vim-puppet'
-NeoBundle 'Floobits/floobits-vim'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'bling/vim-bufferline'
 NeoBundle 'chriskempson/base16-vim'
@@ -261,7 +260,6 @@ let g:ag_prg='ag -S --nocolor --nogroup --column --ignore tmp --ignore node_modu
 
 "NERDTREE + CTRLP integration
 source ~/.vim/config/ntfinder.vim
-source ~/.vim/config/servers_ftp.vim
 source ~/.vim/config/envcommands.vim
 let NERDTreeQuitOnOpen=1
 let NERDTreeBookmarksFile=expand("$HOME/.vim-NERDTreeBookmarks")
