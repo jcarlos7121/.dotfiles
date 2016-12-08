@@ -12,4 +12,3 @@ function memcached-flush; echo 'flush_all' | nc localhost 11211; end
 function byte; sudo pm-hibernate; end
 function bayi; sudo pm-suspend-hybrid; end
 function pgc; sudo pg_ctlcluster 9.4 main $argv; end
-tmux

@@ -118,6 +118,7 @@ NeoBundle 'jvirtanen/vim-octave'
 NeoBundle 'Shougo/vimshell'
 NeoBundle 'christoomey/vim-tmux-navigator'
 NeoBundle 'Chiel92/vim-autoformat'
+NeoBundle 'tpope/vim-obsession'
 
 " Required:
 call neobundle#end()
@@ -268,9 +269,9 @@ let NERDTreeChDirMode=2
 let g:ctrlp_by_filename = 1
 let g:ctrlp_dont_split = 'NERD'
 let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_custom_ignore = 'node_modules'
+let g:ctrlp_custom_ignore = { 'dir':  '\node_modules$\|\tmp$' }
 let g:ctrlp_root_markers = ['.acignore', '.gitignore', '.git', '.floo', 'Gemfile']
-let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc" -g ""'
+let g:ctrlp_user_command = 'ag %s -i -U --nocolor --nogroup --hidden --ignore doc --ignore .yardoc --ignore tmp --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc" -g ""'
 
 " Autosave
 "let g:auto_save = 1
