@@ -139,6 +139,8 @@ PATH=$PATH:$HOME/.pyenv/bin
 PATH=$PATH:$HOME/.rbenv/bin
 PATH=$PATH:$HOME/bin/matlab/bin
 PATH=$PATH:$HOME/bin
+PATH=$PATH:$HOME/.anyenv/bin
+PATH=$PATH:$HOME/bin/phantomjs/bin
 PATH="/usr/local/heroku/bin:$PATH"
 #source /home/juancarlos/bin/pvm/pvm.sh
 #wmname LG3D
@@ -146,4 +148,5 @@ PATH="/usr/local/heroku/bin:$PATH"
 #eval "$(exenv init -)"
 eval "$(rbenv init -)"
 eval "$(nodenv init -)"
+eval "$(anyenv init -)"
 tmux
