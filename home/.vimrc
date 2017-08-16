@@ -125,6 +125,7 @@ NeoBundle 'isRuslan/vim-es6'
 NeoBundle 'ngmy/vim-rubocop'
 NeoBundle 'rizzatti/dash.vim'
 NeoBundle 'JarrodCTaylor/vim-js2coffee'
+NeoBundle 'tpope/vim-obsession'
 
 " Required:
 call neobundle#end()
