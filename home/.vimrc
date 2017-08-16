@@ -29,7 +29,7 @@ set expandtab
 set autochdir
 set foldmethod=indent
 set foldlevel=1
-set pastetoggle=<F2>
+set pastetoggle=<F6>
 set laststatus=2
 set tags+=gems.tags
 set t_ut=
@@ -40,10 +40,10 @@ if &compatible
 endif
 
 " Required:
-set runtimepath^=/home/juancarlos/.vim/bundle/neobundle.vim/
+set runtimepath^=/Users/juanhinojo/.vim/bundle/neobundle.vim/
 
 " Required:
-call neobundle#begin(expand('/home/juancarlos/.vim/bundle'))
+call neobundle#begin(expand('/Users/juanhinojo/.vim/bundle'))
 
 " Let NeoBundle manage NeoBundle
 " Required:
@@ -57,6 +57,7 @@ NeoBundle 'edsono/vim-matchit'
 NeoBundle 'elixir-lang/vim-elixir'
 NeoBundle 'godlygeek/tabular'
 NeoBundle 'junegunn/vim-easy-align'
+NeoBundle 'easymotion/vim-easymotion'
 NeoBundle 'ivalkeen/vim-ctrlp-tjump'
 NeoBundle 'jasoncodes/ctrlp-modified.vim'
 NeoBundle 'justinmk/vim-gtfo'
@@ -78,7 +79,8 @@ NeoBundle 'tpope/vim-rails'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'tpope/vim-vinegar'
-NeoBundle 'geekjuice/vim-spec'
+"NeoBundle 'geekjuice/vim-spec'
+NeoBundle 'thoughtbot/vim-rspec'
 NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'rodjek/vim-puppet'
@@ -101,7 +103,7 @@ NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'briancollins/vim-jst'
 NeoBundle 'ngmy/vim-rubocop'
 NeoBundle 'ap/vim-css-color'
-NeoBundle 'MattesGroeger/vim-bookmarks'
+"NeoBundle 'MattesGroeger/vim-bookmarks'
 NeoBundle 'chrisbra/NrrwRgn'
 NeoBundle 'danchoi/ri.vim'
 NeoBundle 'mtscout6/vim-cjsx'
@@ -118,6 +120,11 @@ NeoBundle 'jvirtanen/vim-octave'
 NeoBundle 'Shougo/vimshell'
 NeoBundle 'christoomey/vim-tmux-navigator'
 NeoBundle 'Chiel92/vim-autoformat'
+NeoBundle 'isRuslan/vim-es6'
+"NeoBundle '0x0dea/vim-molasses'
+NeoBundle 'ngmy/vim-rubocop'
+NeoBundle 'rizzatti/dash.vim'
+NeoBundle 'JarrodCTaylor/vim-js2coffee'
 
 " Required:
 call neobundle#end()
@@ -134,7 +141,11 @@ syntax enable                           " Switch syntax highlighting on
 syntax on
 
 ""Color"
-color distinguished
+"color distinguished
+color alduin
+"color apprentice
+"color seoul256-light
+"color Tomorrow-Night
 let g:airline_theme='thechosen'
 "let g:molasses_wait=5000
 let g:airline_powerline_fonts=1
@@ -159,11 +170,11 @@ map <Leader>z :tab split<CR>
 map <Leader>q :tabclose<CR>
 map <C-w> :NeoCompleteDisable<CR>
 map <C-s> :NeoCompleteEnable<CR>
-map <F3> :!fish<CR>
+map <Leader>3 :!fish<CR>
 vmap <Tab> >
 
 " Convert Js to Coffee
-vmap <Leader>jc <esc>:'<,'>!js2coffeescript<CR>
+vmap <Leader>jc <esc>:'<,'>!js2coffee<CR>
 " " Convert Coffee to JS
 vmap <leader>cj <esc>:'<,'>!coffee -sbp<CR>"
 
@@ -172,7 +183,7 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 nnoremap <F5> :call NTFinderP()<CR>
-nnoremap <F6> :GundoToggle<CR>
+"nnoremap <F6> :GundoToggle<CR>
 nnoremap <leader>. :CtrlPTag<cr>
 nnoremap <leader>m :!octave %<cr>
 nmap <F8> :TagbarToggle<CR>
@@ -268,9 +279,9 @@ let NERDTreeChDirMode=2
 let g:ctrlp_by_filename = 1
 let g:ctrlp_dont_split = 'NERD'
 let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_custom_ignore = 'node_modules'
+let g:ctrlp_custom_ignore = { 'dir':  '\node_modules$\|\tmp$' }
 let g:ctrlp_root_markers = ['.acignore', '.gitignore', '.git', '.floo', 'Gemfile']
-let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc" -g ""'
+let g:ctrlp_user_command = 'ag %s -i -U --nocolor --nogroup --hidden --ignore doc --ignore .yardoc --ignore tmp --ignore node_modules --ignore client/node_modules --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc" -g ""'
 
 " Autosave
 "let g:auto_save = 1

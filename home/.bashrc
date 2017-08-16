@@ -153,4 +153,4 @@ PATH="/usr/local/heroku/bin:$PATH"
 #eval "$(exenv init -)"
 eval "$(rbenv init -)"
 eval "$(nodenv init -)"
-fish
+tmux
