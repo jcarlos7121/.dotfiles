@@ -121,11 +121,13 @@ NeoBundle 'Shougo/vimshell'
 NeoBundle 'christoomey/vim-tmux-navigator'
 NeoBundle 'Chiel92/vim-autoformat'
 NeoBundle 'isRuslan/vim-es6'
-"NeoBundle '0x0dea/vim-molasses'
+NeoBundle '0x0dea/vim-molasses'
 NeoBundle 'ngmy/vim-rubocop'
 NeoBundle 'rizzatti/dash.vim'
 NeoBundle 'JarrodCTaylor/vim-js2coffee'
 NeoBundle 'tpope/vim-obsession'
+NeoBundle 'KabbAmine/vCoolor.vim'
+NeoBundle 'wakatime/vim-wakatime'
 
 " Required:
 call neobundle#end()
@@ -148,7 +150,7 @@ color alduin
 "color seoul256-light
 "color Tomorrow-Night
 let g:airline_theme='thechosen'
-"let g:molasses_wait=5000
+let g:molasses_wait=5000
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled = 1
 let g:hybrid_use_Xresources = 1
@@ -190,7 +192,7 @@ nnoremap <leader>m :!octave %<cr>
 nmap <F8> :TagbarToggle<CR>
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
-nmap <silent> <leader>c :!zenity --color-selection<CR>
+nmap <silent> <leader>c :VCoolor<CR>
 
 " " For snippet_complete marker.
 if has('conceal')
@@ -284,5 +286,6 @@ let g:ctrlp_custom_ignore = { 'dir':  '\node_modules$\|\tmp$' }
 let g:ctrlp_root_markers = ['.acignore', '.gitignore', '.git', '.floo', 'Gemfile']
 let g:ctrlp_user_command = 'ag %s -i -U --nocolor --nogroup --hidden --ignore doc --ignore .yardoc --ignore tmp --ignore node_modules --ignore client/node_modules --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc" -g ""'
 
+let g:airline_powerline_fonts = 1
 " Autosave
 "let g:auto_save = 1
