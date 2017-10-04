@@ -188,7 +188,6 @@ nnoremap <C-H> <C-W><C-H>
 nnoremap <F5> :call NTFinderP()<CR>
 "nnoremap <F6> :GundoToggle<CR>
 nnoremap <leader>. :CtrlPTag<cr>
-nnoremap <leader>m :!octave %<cr>
 nmap <F8> :TagbarToggle<CR>
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
