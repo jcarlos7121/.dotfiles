@@ -13,3 +13,4 @@ function byte; sudo pm-hibernate; end
 function bayi; sudo pm-suspend-hybrid; end
 function pgc; sudo pg_ctlcluster 9.4 main $argv; end
 function v; docker exec -ti eve /bin/bash; end
+function django; python manage.py $argv; end

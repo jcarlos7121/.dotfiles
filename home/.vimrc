@@ -33,6 +33,7 @@ set pastetoggle=<F6>
 set laststatus=2
 set tags+=gems.tags
 set t_ut=
+set background=dark
 
 "NeoBundle Scripts-----------------------------
 if &compatible
@@ -53,7 +54,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'dag/vim-fish'
 NeoBundle 'danro/rename.vim'
-NeoBundle 'edsono/vim-matchit'
+NeoBundle 'adelarsq/vim-matchit'
 NeoBundle 'elixir-lang/vim-elixir'
 NeoBundle 'godlygeek/tabular'
 NeoBundle 'junegunn/vim-easy-align'
@@ -87,13 +88,13 @@ NeoBundle 'rodjek/vim-puppet'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'bling/vim-bufferline'
 NeoBundle 'chriskempson/base16-vim'
-NeoBundle 'terryma/vim-multiple-cursors'
+NeoBundle 'terryma/vim-multiple-cursors', '13232e4b544775cf2b039571537b0e630406f801'
 NeoBundle 'Shougo/neocomplete'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'nanotech/jellybeans.vim'
 NeoBundle 'tpope/vim-rbenv'
-NeoBundle 'mattn/emmet-vim'
+"NeoBundle 'mattn/emmet-vim'
 NeoBundle 'farseer90718/vim-colorpicker'
 NeoBundle 'guicolorscheme.vim'
 NeoBundle 'scrooloose/nerdtree'
@@ -103,14 +104,14 @@ NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'briancollins/vim-jst'
 NeoBundle 'ngmy/vim-rubocop'
 NeoBundle 'ap/vim-css-color'
-"NeoBundle 'MattesGroeger/vim-bookmarks'
+NeoBundle 'MattesGroeger/vim-bookmarks'
 NeoBundle 'chrisbra/NrrwRgn'
 NeoBundle 'danchoi/ri.vim'
 NeoBundle 'mtscout6/vim-cjsx'
 NeoBundle 'ntpeters/vim-better-whitespace'
 NeoBundle 'tpope/vim-rake'
 NeoBundle 'jgdavey/vim-blockle'
-NeoBundle 'majutsushi/tagbar'
+"NeoBundle 'majutsushi/tagbar'
 NeoBundle 'bkad/CamelCaseMotion'
 NeoBundle 'nono/vim-handlebars'
 NeoBundle 'ain/vim-capistrano'
@@ -121,13 +122,18 @@ NeoBundle 'Shougo/vimshell'
 NeoBundle 'christoomey/vim-tmux-navigator'
 NeoBundle 'Chiel92/vim-autoformat'
 NeoBundle 'isRuslan/vim-es6'
-NeoBundle '0x0dea/vim-molasses'
+"NeoBundle '0x0dea/vim-molasses'
 NeoBundle 'ngmy/vim-rubocop'
 NeoBundle 'rizzatti/dash.vim'
 NeoBundle 'JarrodCTaylor/vim-js2coffee'
 NeoBundle 'tpope/vim-obsession'
 NeoBundle 'KabbAmine/vCoolor.vim'
 NeoBundle 'wakatime/vim-wakatime'
+NeoBundle 'NLKNguyen/papercolor-theme'
+NeoBundle 'mswift42/vim-themes'
+NeoBundle 'iurifq/ctrlp-rails.vim', {'depends' : 'kien/ctrlp.vim' }
+NeoBundle 'udalov/kotlin-vim'
+"NeoBundle 'arcticicestudio/nord-vim'
 
 " Required:
 call neobundle#end()
@@ -146,11 +152,11 @@ syntax on
 ""Color"
 "color distinguished
 color alduin
-"color apprentice
-"color seoul256-light
-"color Tomorrow-Night
+"color nord
+"color greymatters
+
 let g:airline_theme='thechosen'
-let g:molasses_wait=5000
+"let g:molasses_wait=5000
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled = 1
 let g:hybrid_use_Xresources = 1
@@ -219,7 +225,7 @@ autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd BufNewFile,BufRead *.coffee set filetype=coffee
 autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent
-autocmd BufWritePost *.rb,*.js,*.html,*.haml,*.css,*.sass,*.coffee silent! !ctags -R 2> /dev/null --exclude=.git --exclude=log --exclude=frontend --exclude=tmp &
+autocmd BufWritePost *.py,*.rb,*.js,*.html,*.haml,*.css,*.sass,*.coffee silent! !ctags -R 2> /dev/null --exclude=.git --exclude=log --exclude=frontend --exclude=tmp &
 autocmd VimResized * wincmd =
 au BufNewFile,BufRead *.ejs set filetype=html
 au BufReadPost * set bufhidden=delete
@@ -269,7 +275,7 @@ let g:user_emmet_leader_key='<C-x>'
 "agprg
 "Remember install silver_searcher
 "let g:ag_prg="ag --column"
-let g:ag_prg='ag -S --nocolor --nogroup --column --ignore tmp --ignore node_modules --ignore "./frontend/node_modules/*" --ignore "./frontend/tmp/*"'
+let g:ag_prg='ag -S --nocolor --nogroup --column --ignore tmp --ignore node_modules --ignore "./frontend/node_modules/*" --ignore "./frontend/tmp/*" --ignore "./app/build/*"'
 
 "NERDTREE + CTRLP integration
 source ~/.vim/config/ntfinder.vim
@@ -283,7 +289,7 @@ let g:ctrlp_dont_split = 'NERD'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = { 'dir':  '\node_modules$\|\tmp$' }
 let g:ctrlp_root_markers = ['.acignore', '.gitignore', '.git', '.floo', 'Gemfile']
-let g:ctrlp_user_command = 'ag %s -i -U --nocolor --nogroup --hidden --ignore doc --ignore .yardoc --ignore tmp --ignore node_modules --ignore client/node_modules --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc" -g ""'
+let g:ctrlp_user_command = 'ag %s -i -U --nocolor --nogroup --hidden --ignore doc --ignore .yardoc --ignore tmp --ignore node_modules --ignore deps --ignore client/node_modules --ignore app/build --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc" -g ""'
 
 let g:airline_powerline_fonts = 1
 " Autosave

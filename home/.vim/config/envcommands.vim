@@ -38,6 +38,10 @@ fun! Radpad( arg ) "{{{
   execute 'Start ./bin/docker/start.sh' . a:arg
 endfunction "}}}
 
+fun! Django( arg ) "{{{
+  execute 'Start python manage.py ' . a:arg
+endfunction "}}}
+
 command! -nargs=* Fs call Fs( '<args>' )"}}}"
 command! -nargs=* Pry call Pry( '<args>' )"}}}"
 command! -nargs=* Redis call Redis( '<args>' )"}}}"
@@ -48,3 +52,4 @@ command! -nargs=* Rsb call Rsb( '<args>' )"}}}"
 command! -nargs=* Guard call Guard( '<args>' )"}}}"
 command! -nargs=* Dock call Dock( '<args>' )"}}}"
 command! -nargs=* Radpad call Radpad( '<args>' )"}}}"
+command! -nargs=* Django call Django( '<args>' )"}}}"

@@ -117,36 +117,3 @@ fi
 #if [ $r == 31 ]; then
 #let r=$r+2
 #fi
-
-export TERM="xterm-256color"
-export MSF_DATABASE_CONFIG="$HOME/.msf4/database.yml"
-export PATH="$HOME/.exenv/bin:$PATH"
-export EDITOR='vi'
-PROMPT_COMMAND='CurDir=`pwd|sed -e "s!$HOME!~!"|sed -re "s!([^/])[^/]+/!\1/!g"`'
-PS1=" \[\033[0;"$r"m\][ \u \[\033[0;"$r"m\] \$CurDir] \$ \[\033[0m\]"
-PATH=$PATH:$HOME/bin/android-studio/bin
-PATH=$PATH:$HOME/Android/Sdk/platform-tools
-PATH=$PATH:$HOME/Android/Sdk/tools
-PATH=$PATH:$HOME/bin/phantomjs-1.9.7-linux-x86_64/bin
-PATH=$PATH:$HOME/bin/the_silver_searcher
-PATH=$PATH:$HOME/bin/Popcorn-Time
-PATH=$PATH:$HOME/bin/streamio
-PATH=$PATH:$HOME/bin/wmname
-PATH=$PATH:$HOME/bin/prax.cr/bin
-PATH=$PATH:$HOME/.linuxbrew/bin
-PATH=$PATH:$HOME/.nodenv/bin
-PATH=$PATH:$HOME/.pyenv/bin
-PATH=$PATH:$HOME/.rbenv/bin
-PATH=$PATH:$HOME/bin/matlab/bin
-PATH=$PATH:$HOME/bin
-PATH=$PATH:$HOME/.anyenv/bin
-PATH=$PATH:$HOME/bin/phantomjs/bin
-PATH="/usr/local/heroku/bin:$PATH"
-#source /home/juancarlos/bin/pvm/pvm.sh
-#wmname LG3D
-#eval "$(pyenv init -)"
-#eval "$(exenv init -)"
-eval "$(rbenv init -)"
-eval "$(nodenv init -)"
-eval "$(anyenv init -)"
-tmux
