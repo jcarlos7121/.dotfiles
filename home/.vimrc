@@ -192,7 +192,7 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 nnoremap <F5> :call NTFinderP()<CR>
-"nnoremap <F6> :GundoToggle<CR>
+nnoremap <F6> :GundoToggle<CR>
 nnoremap <leader>. :CtrlPTag<cr>
 nmap <F8> :TagbarToggle<CR>
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
@@ -206,8 +206,10 @@ endif"
 
 "Neosnippet config
 let g:acp_enableAtStartup = 0
+"let g:deoplete#enable_at_startup = 1
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
+
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 
 if !exists('g:neocomplete#keyword_patterns')
@@ -225,7 +227,7 @@ autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd BufNewFile,BufRead *.coffee set filetype=coffee
 autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent
-autocmd BufWritePost *.py,*.rb,*.js,*.html,*.haml,*.css,*.sass,*.coffee silent! !ctags -R 2> /dev/null --exclude=.git --exclude=log --exclude=frontend --exclude=tmp &
+autocmd BufWritePost *.py,*.rb,*.js,*.html,*.haml,*.css,*.sass,*.coffee silent! !ctags -R 2> /dev/null --exclude=.git --exclude=log --exclude=frontend --exclude=tmp --exclude=node_modules &
 autocmd VimResized * wincmd =
 au BufNewFile,BufRead *.ejs set filetype=html
 au BufReadPost * set bufhidden=delete
