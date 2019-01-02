@@ -89,7 +89,7 @@ NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'bling/vim-bufferline'
 NeoBundle 'chriskempson/base16-vim'
 NeoBundle 'terryma/vim-multiple-cursors', '13232e4b544775cf2b039571537b0e630406f801'
-NeoBundle 'Shougo/neocomplete'
+NeoBundle 'Valloric/YouCompleteMe'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'nanotech/jellybeans.vim'
@@ -133,7 +133,20 @@ NeoBundle 'NLKNguyen/papercolor-theme'
 NeoBundle 'mswift42/vim-themes'
 NeoBundle 'iurifq/ctrlp-rails.vim', {'depends' : 'kien/ctrlp.vim' }
 NeoBundle 'udalov/kotlin-vim'
-"NeoBundle 'arcticicestudio/nord-vim'
+NeoBundle 'arcticicestudio/nord-vim'
+NeoBundle 'SirVer/ultisnips'
+NeoBundle 'ervandew/supertab'
+NeoBundle 'szorfein/fantasy.vim'
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+"
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " Required:
 call neobundle#end()
@@ -152,6 +165,7 @@ syntax on
 ""Color"
 "color distinguished
 color alduin
+"color fantasy
 "color nord
 "color greymatters
 
@@ -177,8 +191,7 @@ map <Leader>gm :CtrlPModified<CR>
 map <Leader>gM :CtrlPBranch<CR>
 map <Leader>z :tab split<CR>
 map <Leader>q :tabclose<CR>
-map <C-w> :NeoCompleteDisable<CR>
-map <C-s> :NeoCompleteEnable<CR>
+
 map <Leader>3 :!fish<CR>
 vmap <Tab> >
 
@@ -206,19 +219,7 @@ endif"
 
 "Neosnippet config
 let g:acp_enableAtStartup = 0
-"let g:deoplete#enable_at_startup = 1
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
-
-if !exists('g:neocomplete#keyword_patterns')
-  let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
 
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
@@ -231,10 +232,6 @@ autocmd BufWritePost *.py,*.rb,*.js,*.html,*.haml,*.css,*.sass,*.coffee silent! 
 autocmd VimResized * wincmd =
 au BufNewFile,BufRead *.ejs set filetype=html
 au BufReadPost * set bufhidden=delete
-
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
 
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 match ErrorMsg '\s\+$'
@@ -291,7 +288,7 @@ let g:ctrlp_dont_split = 'NERD'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = { 'dir':  '\node_modules$\|\tmp$' }
 let g:ctrlp_root_markers = ['.acignore', '.gitignore', '.git', '.floo', 'Gemfile']
-let g:ctrlp_user_command = 'ag %s -i -U --nocolor --nogroup --hidden --ignore doc --ignore .yardoc --ignore tmp --ignore node_modules --ignore deps --ignore client/node_modules --ignore app/build --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc" -g ""'
+let g:ctrlp_user_command = 'ag %s -i -U --nocolor --nogroup --hidden --ignore doc --ignore .yardoc --ignore tmp --ignore node_modules --ignore deps --ignore client/node_modules --ignore app/build --ignore storage --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc" -g ""'
 
 let g:airline_powerline_fonts = 1
 " Autosave
