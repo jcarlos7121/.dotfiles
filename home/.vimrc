@@ -67,7 +67,8 @@ NeoBundle 'kana/vim-smartinput'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'plasticboy/vim-markdown'
-NeoBundle 'rking/ag.vim'
+"NeoBundle 'rking/ag.vim'
+NeoBundle 'mileszs/ack.vim'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'sjl/gundo.vim'
@@ -80,22 +81,17 @@ NeoBundle 'tpope/vim-rails'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'tpope/vim-vinegar'
-"NeoBundle 'geekjuice/vim-spec'
 NeoBundle 'thoughtbot/vim-rspec'
 NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'rodjek/vim-puppet'
-NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'airblade/vim-gitgutter', 'faa1e953deae2da2b0df45f71a8ce8d931766c28'
 NeoBundle 'bling/vim-bufferline'
-NeoBundle 'chriskempson/base16-vim'
 NeoBundle 'terryma/vim-multiple-cursors', '13232e4b544775cf2b039571537b0e630406f801'
 NeoBundle 'Valloric/YouCompleteMe'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'nanotech/jellybeans.vim'
 NeoBundle 'tpope/vim-rbenv'
-"NeoBundle 'mattn/emmet-vim'
-NeoBundle 'farseer90718/vim-colorpicker'
 NeoBundle 'guicolorscheme.vim'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'flazz/vim-colorschemes'
@@ -111,32 +107,18 @@ NeoBundle 'mtscout6/vim-cjsx'
 NeoBundle 'ntpeters/vim-better-whitespace'
 NeoBundle 'tpope/vim-rake'
 NeoBundle 'jgdavey/vim-blockle'
-"NeoBundle 'majutsushi/tagbar'
 NeoBundle 'bkad/CamelCaseMotion'
-NeoBundle 'nono/vim-handlebars'
 NeoBundle 'ain/vim-capistrano'
 NeoBundle 'BjRo/vim-extest'
 NeoBundle 'mattreduce/vim-mix'
-NeoBundle 'jvirtanen/vim-octave'
-NeoBundle 'Shougo/vimshell'
 NeoBundle 'christoomey/vim-tmux-navigator'
-NeoBundle 'Chiel92/vim-autoformat'
 NeoBundle 'isRuslan/vim-es6'
-"NeoBundle '0x0dea/vim-molasses'
-NeoBundle 'ngmy/vim-rubocop'
 NeoBundle 'rizzatti/dash.vim'
-NeoBundle 'JarrodCTaylor/vim-js2coffee'
-NeoBundle 'tpope/vim-obsession'
 NeoBundle 'KabbAmine/vCoolor.vim'
 NeoBundle 'wakatime/vim-wakatime'
-NeoBundle 'NLKNguyen/papercolor-theme'
-NeoBundle 'mswift42/vim-themes'
 NeoBundle 'iurifq/ctrlp-rails.vim', {'depends' : 'kien/ctrlp.vim' }
-NeoBundle 'udalov/kotlin-vim'
-NeoBundle 'arcticicestudio/nord-vim'
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'ervandew/supertab'
-NeoBundle 'szorfein/fantasy.vim'
 
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
@@ -165,12 +147,8 @@ syntax on
 ""Color"
 "color distinguished
 color alduin
-"color fantasy
-"color nord
-"color greymatters
 
 let g:airline_theme='thechosen'
-"let g:molasses_wait=5000
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled = 1
 let g:hybrid_use_Xresources = 1
@@ -221,6 +199,7 @@ endif"
 let g:acp_enableAtStartup = 0
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 
+" AfterSave and FileTypes
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
@@ -229,6 +208,7 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd BufNewFile,BufRead *.coffee set filetype=coffee
 autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent
 autocmd BufWritePost *.py,*.rb,*.js,*.html,*.haml,*.css,*.sass,*.coffee silent! !ctags -R 2> /dev/null --exclude=.git --exclude=log --exclude=frontend --exclude=tmp --exclude=node_modules &
+autocmd BufWritePost * GitGutter
 autocmd VimResized * wincmd =
 au BufNewFile,BufRead *.ejs set filetype=html
 au BufReadPost * set bufhidden=delete
@@ -274,7 +254,8 @@ let g:user_emmet_leader_key='<C-x>'
 "agprg
 "Remember install silver_searcher
 "let g:ag_prg="ag --column"
-let g:ag_prg='ag -S --nocolor --nogroup --column --ignore tmp --ignore node_modules --ignore "./frontend/node_modules/*" --ignore "./frontend/tmp/*" --ignore "./app/build/*"'
+"let g:ag_prg='ag -S --nocolor --nogroup --column --ignore tmp --ignore node_modules --ignore "./frontend/node_modules/*" --ignore "./frontend/tmp/*" --ignore "./app/build/*"'
+let g:ackprg='ag -S --nocolor --nogroup --column --ignore tmp --ignore node_modules --ignore "./frontend/node_modules/*" --ignore "./frontend/tmp/*" --ignore "./app/build/*"'
 
 "NERDTREE + CTRLP integration
 source ~/.vim/config/ntfinder.vim
@@ -291,5 +272,3 @@ let g:ctrlp_root_markers = ['.acignore', '.gitignore', '.git', '.floo', 'Gemfile
 let g:ctrlp_user_command = 'ag %s -i -U --nocolor --nogroup --hidden --ignore doc --ignore .yardoc --ignore tmp --ignore node_modules --ignore deps --ignore client/node_modules --ignore app/build --ignore storage --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc" -g ""'
 
 let g:airline_powerline_fonts = 1
-" Autosave
-"let g:auto_save = 1

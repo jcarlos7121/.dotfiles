@@ -15,3 +15,8 @@ function pgc; sudo pg_ctlcluster 9.4 main $argv; end
 function v; docker exec -ti eve /bin/bash; end
 function django; python manage.py $argv; end
 export EDITOR=vim
+status --is-interactive; and source (rbenv init -|psub)
+status --is-interactive; and source (pyenv init -|psub)
+status --is-interactive; and source (pyenv virtualenv-init -|psub)
+status --is-interactive; and source (exenv init -|psub)
+status --is-interactive; and source (nodenv init -|psub)
