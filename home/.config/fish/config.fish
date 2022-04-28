@@ -1,4 +1,4 @@
-set fish_greeting "" 
+set fish_greeting ""
 function datahub; ssh app@96.126.110.244; end
 function app; google-chrome --app=http://$argv; end
 function ares; killall xcompmgr; end

@@ -33,7 +33,7 @@ set pastetoggle=<F6>
 set laststatus=2
 set tags+=gems.tags
 set t_ut=
-set background=dark
+set t_Co=256
 
 "NeoBundle Scripts-----------------------------
 if &compatible
@@ -52,6 +52,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Add or remove your Bundles here:
 NeoBundle 'bling/vim-airline'
+NeoBundle 'vim-airline/vim-airline-themes'
 NeoBundle 'dag/vim-fish'
 NeoBundle 'danro/rename.vim'
 NeoBundle 'adelarsq/vim-matchit'
@@ -82,10 +83,11 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'tpope/vim-vinegar'
 NeoBundle 'thoughtbot/vim-rspec'
+"NeoBundle 'vim-test/vim-test'
 NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'rodjek/vim-puppet'
-NeoBundle 'airblade/vim-gitgutter', 'faa1e953deae2da2b0df45f71a8ce8d931766c28'
+NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'bling/vim-bufferline'
 NeoBundle 'terryma/vim-multiple-cursors', '13232e4b544775cf2b039571537b0e630406f801'
 NeoBundle 'Valloric/YouCompleteMe'
@@ -93,7 +95,7 @@ NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'tpope/vim-rbenv'
 NeoBundle 'guicolorscheme.vim'
-NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'scrooloose/nerdtree', '67fa9b3116948466234978aa6287649f98e666bd'
 NeoBundle 'flazz/vim-colorschemes'
 NeoBundle 'airblade/vim-rooter'
 NeoBundle 'pangloss/vim-javascript'
@@ -119,6 +121,8 @@ NeoBundle 'wakatime/vim-wakatime'
 NeoBundle 'iurifq/ctrlp-rails.vim', {'depends' : 'kien/ctrlp.vim' }
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'ervandew/supertab'
+NeoBundle 'stillwwater/vim-nebula'
+NeoBundle 'tomlion/vim-solidity'
 
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
@@ -145,10 +149,25 @@ syntax enable                           " Switch syntax highlighting on
 syntax on
 
 ""Color"
-"color distinguished
-color alduin
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
-let g:airline_theme='thechosen'
+if has('termguicolors')
+  set termguicolors
+endif
+
+"set background=light
+set background=dark
+colorscheme nebula
+"color distinguished
+"color alduin
+
+highlight GitGutterAdd    guifg=#009900 ctermfg=2 ctermbg=black
+highlight GitGutterChange guifg=#bbbb00 ctermfg=3 ctermbg=black
+highlight GitGutterDelete guifg=#ff2222 ctermfg=1 ctermbg=black
+
+"let g:airline_theme='thechosen'
+let g:airline_theme='deus'
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled = 1
 let g:hybrid_use_Xresources = 1
@@ -207,10 +226,12 @@ autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd BufNewFile,BufRead *.coffee set filetype=coffee
 autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent
-autocmd BufWritePost *.py,*.rb,*.js,*.html,*.haml,*.css,*.sass,*.coffee silent! !ctags -R 2> /dev/null --exclude=.git --exclude=log --exclude=frontend --exclude=tmp --exclude=node_modules &
+autocmd BufWritePost *.py,*.rb,*.js,*.html,*.haml,*.css,*.sass,*.coffee silent! !ctags -R 2> /dev/null --exclude=.git --exclude=log --exclude=frontend --exclude=tmp --exclude=node_modules --exclude=public --exclude=doc --exclude=coverage --exclude=spec &
 autocmd BufWritePost * GitGutter
 autocmd VimResized * wincmd =
+autocmd FileType * EnableStripWhitespaceOnSave
 au BufNewFile,BufRead *.ejs set filetype=html
+au BufNewFile,BufRead *.* set noro
 au BufReadPost * set bufhidden=delete
 
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
@@ -238,9 +259,23 @@ let g:mocha_js_command = "Dispatch mocha --recursive --no-colors {spec}"
 let g:mocha_coffee_command = "Dispatch mocha -b --compilers coffee:coffee-script/register {spec}"
 let g:rspec_command = "Dispatch rspec {spec}"
 
+"Vim Test
+"let test#strategy = "dispatch"
+"let g:dispatch_compilers = {'elixir': 'exunit'}
+"let test#elixir#exunit#executable = 'mix test'
+
 map <Leader>w :call RunAllSpecs()<CR>
 map <Leader>e :call RunNearestSpec()<CR>
 map <Leader>t :call RunCurrentSpecFile()<CR>
+
+" Vim Test
+"map <Leader>w :TestSuite<CR>
+"map <Leader>e :TestNearest<CR>
+"map <Leader>t :TestFile<CR>
+
+map oo <C-]>
+
+"let test#elixir#exunit#executable = 'iex -S mix test'
 
 " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
 " EasyAlign
@@ -254,8 +289,8 @@ let g:user_emmet_leader_key='<C-x>'
 "agprg
 "Remember install silver_searcher
 "let g:ag_prg="ag --column"
-"let g:ag_prg='ag -S --nocolor --nogroup --column --ignore tmp --ignore node_modules --ignore "./frontend/node_modules/*" --ignore "./frontend/tmp/*" --ignore "./app/build/*"'
-let g:ackprg='ag -S --nocolor --nogroup --column --ignore tmp --ignore node_modules --ignore "./frontend/node_modules/*" --ignore "./frontend/tmp/*" --ignore "./app/build/*"'
+"let g:ag_prg='ag -S --nocolor --nogroup --column --ignore tmp --ignore --ignore _build --ignore node_modules --ignore "./frontend/node_modules/*" --ignore "./frontend/tmp/*" --ignore "./app/build/*"'
+let g:ackprg='ag -S --nocolor --nogroup --column --ignore tmp --ignore _build --ignore node_modules --ignore "./frontend/node_modules/*" --ignore "./frontend/tmp/*" --ignore "./app/build/*"'
 
 "NERDTREE + CTRLP integration
 source ~/.vim/config/ntfinder.vim
@@ -269,6 +304,9 @@ let g:ctrlp_dont_split = 'NERD'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = { 'dir':  '\node_modules$\|\tmp$' }
 let g:ctrlp_root_markers = ['.acignore', '.gitignore', '.git', '.floo', 'Gemfile']
-let g:ctrlp_user_command = 'ag %s -i -U --nocolor --nogroup --hidden --ignore doc --ignore .yardoc --ignore tmp --ignore node_modules --ignore deps --ignore client/node_modules --ignore app/build --ignore storage --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc" -g ""'
-
+let g:ctrlp_user_command = 'ag %s -i -U --nocolor --nogroup --hidden --ignore _build --ignore doc --ignore log --ignore coverage --ignore .yardoc --ignore tmp --ignore node_modules --ignore deps --ignore client/node_modules --ignore app/build --ignore storage --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc" -g ""'
+let g:NERDTreeNodeDelimiter = "\u00a0"
 let g:airline_powerline_fonts = 1
+
+" Whitespace
+let g:strip_whitespace_confirm=0
