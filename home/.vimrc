@@ -63,7 +63,7 @@ NeoBundle 'easymotion/vim-easymotion'
 NeoBundle 'ivalkeen/vim-ctrlp-tjump'
 NeoBundle 'jasoncodes/ctrlp-modified.vim'
 NeoBundle 'justinmk/vim-gtfo'
-NeoBundle 'justinmk/vim-sneak'
+"NeoBundle 'justinmk/vim-sneak'
 NeoBundle 'kana/vim-smartinput'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'kien/ctrlp.vim'
@@ -189,6 +189,8 @@ map <Leader>gM :CtrlPBranch<CR>
 map <Leader>z :tab split<CR>
 map <Leader>q :tabclose<CR>
 
+nmap s <Plug>(easymotion-overwin-f2)
+
 map <Leader>3 :!fish<CR>
 vmap <Tab> >
 
@@ -213,6 +215,14 @@ nmap <silent> <leader>c :VCoolor<CR>
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif"
+
+" Move multiple lines
+noremap <A-Down> :m .+1<CR>==
+noremap <A-Up> :m .-2<CR>==
+noremap <A-Down> <Esc>:m .+1<CR>==gi
+noremap <A-Up> <Esc>:m .-2<CR>==gi
+noremap <A-Down> :m '>+1<CR>gv=gv
+vnoremap <A-Up> :m '<-2<CR>gv=gv
 
 "Neosnippet config
 let g:acp_enableAtStartup = 0
