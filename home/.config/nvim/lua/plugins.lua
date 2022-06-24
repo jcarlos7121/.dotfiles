@@ -69,6 +69,7 @@ return require('packer').startup(function()
   use 'ervandew/supertab'
   use 'stillwwater/vim-nebula'
   use 'grvcoelho/vim-javascript-snippets'
+  use 'neovim/nvim-lspconfig'
 
   use {"akinsho/toggleterm.nvim", tag = 'v1.*', config = function()
     require("toggleterm").setup()
