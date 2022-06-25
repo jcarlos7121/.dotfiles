@@ -1,0 +1,22 @@
+  -- Deactivated
+  -- Really... I went over them and I dont really think I need those, but will
+  -- archive them for now
+  --use 'honza/vim-snippets' -- Old vim spinnets engine
+  --use 'sjl/gundo.vim' -- Displays buffer history changes
+  --use 'tpope/vim-unimpaired' -- Some bracket mapping thing
+  --use 'vim-ruby/vim-ruby' -- Vim ruby already supported ruby syntax
+  --use 'rodjek/vim-puppet' -- Some puppet language thing
+  --use 'Valloric/YouCompleteMe' -- YouCompleteMe was replaced with nvim-cmp
+  --use 'Shougo/neosnippet' -- neosnippet was replaced with luasnip
+  --use 'Shougo/neosnippet-snippets'
+  --use 'pangloss/vim-javascript' -- Adds javascript syntax highlight
+  --use 'briancollins/vim-jst' -- Syntax highlight for EJS no longer using
+  --use 'ngmy/vim-rubocop' -- Never really used thing
+  --use 'danchoi/ri.vim' -- Using <leader>r and <leader>R opens Ruby documentation 
+  --use 'chrisbra/NrrwRgn' -- TOUSE: type :NR and it will focus visual selection
+  --use 'mtscout6/vim-cjsx' -- no longer using CJSX
+  --use 'BjRo/vim-extest' -- Executes Exilir tests, deprecated plugin though 
+  --use 'isRuslan/vim-es6' -- Old highlight syntax for JS
+  --use 'wakatime/vim-wakatime' -- Helps track code editing time
+  --use 'SirVer/ultisnips' -- replaced with luasnips
+  --use 'grvcoelho/vim-javascript-snippets' -- No longer needed snippets

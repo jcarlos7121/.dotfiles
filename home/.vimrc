@@ -320,3 +320,5 @@ let g:airline_powerline_fonts = 1
 
 " Whitespace
 let g:strip_whitespace_confirm=0
+
+source /Users/juanhinojo/lsp-examples/vimrc.generated
