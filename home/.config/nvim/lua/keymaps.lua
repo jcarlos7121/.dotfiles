@@ -39,6 +39,7 @@ nnoremap("<leader>.", ":CtrlPTag<cr>")
 -- For editing init.liat
 nmap("<leader>ev", ":e ~/.config/nvim/lua/options.lua<CR>", "silent")
 nmap("<leader>ep", ":e ~/.config/nvim/lua/plugins.lua<CR>", "silent")
+nmap("<leader>ek", ":e ~/.config/nvim/lua/keymaps.lua<CR>", "silent")
 
 -- Move multiple lines
 noremap("<A-Down>", ":m .+1<CR>==")
