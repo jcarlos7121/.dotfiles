@@ -79,6 +79,9 @@ vim.cmd[[
   let g:ctrlp_dont_split = 'NERD'
   let g:ctrlp_working_path_mode = 'ra'
   let g:ctrlp_custom_ignore = { 'dir':  '\node_modules$\|\tmp$' }
-  let g:ctrlp_root_markers = ['.acignore', '.gitignore', '.git', '.floo', 'Gemfile']
+  let g:ctrlp_root_markers = ['.acignore', '.git', '.root']
   let g:ctrlp_user_command = 'ag %s -i -U --nocolor --nogroup --hidden --ignore doc --ignore .yardoc --ignore tmp --ignore node_modules --ignore deps --ignore webclient/node_modules  --ignore client/node_modules --ignore app/build --ignore storage --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc" -g ""'
+
+  " Web devicons
+  let g:WebDevIconsUnicodeDecorateFolderNodes = 0 " Disable decoration of folder nodes
 ]]

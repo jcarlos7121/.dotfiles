@@ -26,7 +26,7 @@ return require('packer').startup(function()
   use 'adelarsq/vim-matchit' --TOUSE: % to match closing tag on xml/html
 
   -- File search
-  use 'kien/ctrlp.vim'
+  use 'ctrlpvim/ctrlp.vim'
   use 'tpope/vim-vinegar' -- Type - and go to nerdtree
   use 'ivalkeen/vim-ctrlp-tjump' -- TOUSE: Be able to jump to ctags declarations
   use 'jasoncodes/ctrlp-modified.vim' -- TOUSE: Use ctrl-p to display ONLY modified git-tracked files
@@ -50,12 +50,12 @@ return require('packer').startup(function()
   use 'bkad/CamelCaseMotion' -- Allows you to move word by word
 
   -- UI Utilities
-  --use 'bling/vim-airline'
-  --use 'vim-airline/vim-airline-themes'
   use 'bling/vim-bufferline'
   use 'yggdroot/indentline' -- displays identation lines
   use { 'airblade/vim-gitgutter', commit = "faa1e953deae2da2b0df45f71a8ce8d931766c28" } -- displays which lines where added, modified, deleted
   use { 'terryma/vim-multiple-cursors', commit = "13232e4b544775cf2b039571537b0e630406f801" } -- Allows to use multiple cursors, not working
+  use 'ryanoasis/vim-devicons'
+  use 'bryanmylee/vim-colorscheme-icons'
 
   -- Utilities
   use 'thoughtbot/vim-rspec' -- Adds leader commands for automatically running Rspec Tests
