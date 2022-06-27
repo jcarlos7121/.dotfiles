@@ -34,10 +34,6 @@ fun! Dock( arg ) "{{{
   execute 'Dispatch docker-compose run --rm web ' . a:arg
 endfunction "}}}
 
-fun! Radpad( arg ) "{{{
-  execute 'Start ./bin/docker/start.sh' . a:arg
-endfunction "}}}
-
 fun! Django( arg ) "{{{
   execute 'Start python manage.py ' . a:arg
 endfunction "}}}
@@ -51,5 +47,4 @@ command! -nargs=* Nodenv call Nodenv( '<args>' )"}}}"
 command! -nargs=* Rsb call Rsb( '<args>' )"}}}"
 command! -nargs=* Guard call Guard( '<args>' )"}}}"
 command! -nargs=* Dock call Dock( '<args>' )"}}}"
-command! -nargs=* Radpad call Radpad( '<args>' )"}}}"
 command! -nargs=* Django call Django( '<args>' )"}}}"

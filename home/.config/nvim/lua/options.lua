@@ -65,6 +65,7 @@ vim.cmd[[
   let g:ackprg='ag -S --nocolor --nogroup --column --ignore tmp --ignore "./_build" --ignore node_modules --ignore "./frontend/node_modules/*" --ignore "./frontend/tmp/*" --ignore "./app/build/*"'
 
   source ~/.vim/config/ntfinder.vim
+  source ~/.vim/config/envcommands.vim
 
   " NerdTree and Rooter configuration
   let NERDTreeQuitOnOpen=1
