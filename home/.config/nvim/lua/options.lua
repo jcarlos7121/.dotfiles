@@ -33,11 +33,13 @@ opt.foldmethod = "indent"
 opt.pastetoggle = "<F6>"
 opt.foldlevel = 1
 opt.laststatus = 2
+opt.showtabline = 0
 
 vim.cmd[[
-  highlight GitGutterAdd    guifg=#009900 ctermfg=2
-  highlight GitGutterChange guifg=#bbbb00 ctermfg=3
-  highlight GitGutterDelete guifg=#ff2222 ctermfg=1
+  highlight GitGutterAdd    guifg=#009900
+  highlight GitGutterChange guifg=#bbbb00
+  highlight GitGutterDelete guifg=#ff2222
+  hi Search guibg=#3466b7 guifg=White
 
   " Vim Airline
   "let g:airline_theme='deus'

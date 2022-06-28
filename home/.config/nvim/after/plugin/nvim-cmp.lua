@@ -50,16 +50,9 @@ cmp.setup({
 })
 
 vim.cmd [[
-highlight link CmpItemAbbr Normal
-highlight link CmpItemAbbrDeprecated Error
-highlight link CmpItemAbbrMatchFuzzy MatchParen
-highlight link CmpItemKind GruvBoxFg2
-highlight link CmpItemMenu Comment
-]]
-
-vim.cmd [[
-  imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'
-  inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>
-  snoremap <silent> <Tab> <cmd>lua require('luasnip').jump(1)<Cr>
-  snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>
+  highlight link CmpItemAbbr Normal
+  highlight link CmpItemAbbrDeprecated Error
+  highlight link CmpItemAbbrMatchFuzzy MatchParen
+  highlight link CmpItemKind GruvBoxFg2
+  highlight link CmpItemMenu Comment
 ]]

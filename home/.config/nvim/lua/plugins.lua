@@ -26,14 +26,14 @@ return require('packer').startup(function()
   use 'adelarsq/vim-matchit' --TOUSE: % to match closing tag on xml/html
 
   -- File search
-  use 'ctrlpvim/ctrlp.vim'
+  use 'ctrlpvim/ctrlp.vim' -- :CtrlP to search files
   use 'tpope/vim-vinegar' -- Type - and go to nerdtree
-  use 'ivalkeen/vim-ctrlp-tjump' -- TOUSE: Be able to jump to ctags declarations
-  use 'jasoncodes/ctrlp-modified.vim' -- TOUSE: Use ctrl-p to display ONLY modified git-tracked files
   use 'scrooloose/nerdtree' -- Filesearcher File tree
   use 'airblade/vim-rooter' -- Keeps the root of ctrl-p and nerdtree to the root .gitignore
   use 'justinmk/vim-gtfo' -- TOUSE: opens a file opener on the file opened on vim
-  use { 'iurifq/ctrlp-rails.vim', after = 'kien/ctrlp.vim' }
+  use { 'iurifq/ctrlp-rails.vim', after = 'kien/ctrlp.vim' } -- TOUSE: ctrl-p to jump to rails routes
+  use 'ivalkeen/vim-ctrlp-tjump' -- TOUSE: Be able to jump to ctags declarations
+  use 'jasoncodes/ctrlp-modified.vim' -- TOUSE: Use ctrl-p to display ONLY modified git-tracked files
 
   -- Code editing
   use 'junegunn/vim-easy-align' -- Press Enter and character to align multiple lines
@@ -50,23 +50,25 @@ return require('packer').startup(function()
   use 'bkad/CamelCaseMotion' -- Allows you to move word by word
 
   -- UI Utilities
-  use 'bling/vim-bufferline'
+  use 'bling/vim-bufferline' -- Displays the buffer in the status bar
   use 'yggdroot/indentline' -- displays identation lines
   use { 'airblade/vim-gitgutter', commit = "faa1e953deae2da2b0df45f71a8ce8d931766c28" } -- displays which lines where added, modified, deleted
-  use { 'terryma/vim-multiple-cursors', commit = "13232e4b544775cf2b039571537b0e630406f801" } -- Allows to use multiple cursors, not working
-  use 'ryanoasis/vim-devicons'
-  use 'bryanmylee/vim-colorscheme-icons'
+  use { 'terryma/vim-multiple-cursors', commit = "13232e4b544775cf2b039571537b0e630406f801" } -- Allows to use multiple cursors
+  use 'ryanoasis/vim-devicons' -- Adds icons to files
+  use 'bryanmylee/vim-colorscheme-icons' -- Adds icons color for devicons
 
   -- Utilities
   use 'thoughtbot/vim-rspec' -- Adds leader commands for automatically running Rspec Tests
   use 'christoomey/vim-tmux-navigator' -- For moving between vim and tmux panes
   use 'KabbAmine/vCoolor.vim' -- Adds color selector for CSS
   use 'ervandew/supertab' -- Use tab for all completion suggestions (USE WITH CAUTION)
+  use 'lewis6991/impatient.nvim' -- Impatient load for vim
+  use 'xiyaowong/nvim-transparent' -- Makes the vim transparent
 
   -- Terminal
   use {"akinsho/toggleterm.nvim", tag = 'v1.*', config = function()
     require("toggleterm").setup()
-  end}
+  end} -- Toggles between terminal and vim
 
   -- NEOVIM configuration
   use 'nvim-lua/plenary.nvim'
@@ -80,14 +82,14 @@ return require('packer').startup(function()
   use 'flazz/vim-colorschemes'
 
   -- Autocompletion
-  use 'neovim/nvim-lspconfig'
-  use 'tami5/lspsaga.nvim'
-  use 'hrsh7th/nvim-cmp'
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'hrsh7th/cmp-nvim-lua'
-  use 'hrsh7th/cmp-path'
-  use 'hrsh7th/cmp-buffer'
-  use 'onsails/lspkind-nvim'
+  use 'neovim/nvim-lspconfig' -- Adds LSP support for Neovim
+  use 'tami5/lspsaga.nvim' -- Adds LSP actions with lightweight UI
+  use 'hrsh7th/nvim-cmp' -- Adds completion for nvim
+  use 'hrsh7th/cmp-nvim-lsp' -- Adds LSP support to cmp
+  use 'hrsh7th/cmp-nvim-lua' -- Adds lua completion for cmp
+  use 'hrsh7th/cmp-path' -- Adds Paths automatically to cmp
+  use 'hrsh7th/cmp-buffer' -- Adds LSP autocompletion for buffers
+  use 'onsails/lspkind-nvim' -- Adds LSP pictograms like VSCode to autocomplete
 
   use {
     'nvim-treesitter/nvim-treesitter',
@@ -102,13 +104,12 @@ return require('packer').startup(function()
         end
       }
     },
-    -- Config in after/plugin/treesitter.lua
-  }
+  } -- Treesitter for syntax highlighting in neovim
 
   use {
     'L3MON4D3/LuaSnip',
     requires = { 'rafamadriz/friendly-snippets' }
-  }
+  } -- Snippets engine for Lua, compatible with VSCode
 
-  use { 'saadparwaiz1/cmp_luasnip' }
+  use { 'saadparwaiz1/cmp_luasnip' } -- Adds lua snippets to cmp
 end)
