@@ -34,6 +34,7 @@ opt.pastetoggle = "<F6>"
 opt.foldlevel = 1
 opt.laststatus = 2
 opt.showtabline = 0
+opt.mmp = 2000
 
 vim.cmd[[
   highlight GitGutterAdd    guifg=#009900

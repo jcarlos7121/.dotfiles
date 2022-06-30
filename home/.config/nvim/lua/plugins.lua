@@ -5,12 +5,6 @@ return require('packer').startup(function()
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
-  -- Programming languages
-  use 'dag/vim-fish'
-  use 'elixir-lang/vim-elixir'
-  use 'plasticboy/vim-markdown'
-  use 'kchmck/vim-coffee-script'
-
   -- Commands
   use 'danro/rename.vim' -- :Rename filename
   use 'mileszs/ack.vim' -- :Ack to find word appearances on project
@@ -45,15 +39,15 @@ return require('packer').startup(function()
   use 'tpope/vim-surround' -- Adds mechanigs for surrownding words for example: csw)
   use 'ap/vim-css-color' -- Previews color on CSS while editing
   use 'MattesGroeger/vim-bookmarks' -- Allows to bookmark lines to come back
-  use 'ntpeters/vim-better-whitespace' -- Displays whitespaces and strips them on save
+  use { 'ntpeters/vim-better-whitespace', commit = 'c5afbe91d29c5e3be81d5125ddcdc276fd1f1322'} -- Displays whitespaces and strips them on save
   use 'jgdavey/vim-blockle' -- Allows to toggle between do end and { }
   use 'bkad/CamelCaseMotion' -- Allows you to move word by word
 
   -- UI Utilities
   use 'bling/vim-bufferline' -- Displays the buffer in the status bar
   use 'yggdroot/indentline' -- displays identation lines
-  use { 'airblade/vim-gitgutter', commit = "faa1e953deae2da2b0df45f71a8ce8d931766c28" } -- displays which lines where added, modified, deleted
-  use { 'terryma/vim-multiple-cursors', commit = "13232e4b544775cf2b039571537b0e630406f801" } -- Allows to use multiple cursors
+  use { 'airblade/vim-gitgutter', commit = 'faa1e953deae2da2b0df45f71a8ce8d931766c28' } -- displays which lines where added, modified, deleted
+  use { 'terryma/vim-multiple-cursors', commit = '13232e4b544775cf2b039571537b0e630406f801' } -- Allows to use multiple cursors
   use 'ryanoasis/vim-devicons' -- Adds icons to files
   use 'bryanmylee/vim-colorscheme-icons' -- Adds icons color for devicons
 
@@ -66,8 +60,8 @@ return require('packer').startup(function()
   use 'xiyaowong/nvim-transparent' -- Makes the vim transparent
 
   -- Terminal
-  use {"akinsho/toggleterm.nvim", tag = 'v1.*', config = function()
-    require("toggleterm").setup()
+  use {'akinsho/toggleterm.nvim', tag = 'v1.*', config = function()
+    require('toggleterm').setup()
   end} -- Toggles between terminal and vim
 
   -- NEOVIM configuration
@@ -77,9 +71,6 @@ return require('packer').startup(function()
   -- Colorschemes
   use 'frenzyexists/aquarium-vim'
   use 'cocopon/iceberg.vim'
-  use 'stillwwater/vim-nebula'
-  use 'w0ng/vim-hybrid'
-  use 'flazz/vim-colorschemes'
 
   -- Autocompletion
   use 'neovim/nvim-lspconfig' -- Adds LSP support for Neovim
