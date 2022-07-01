@@ -34,7 +34,7 @@ opt.pastetoggle = "<F6>"
 opt.foldlevel = 1
 opt.laststatus = 2
 opt.showtabline = 0
-opt.mmp = 2000
+opt.mmp = 5000
 
 vim.cmd[[
   highlight GitGutterAdd    guifg=#009900
@@ -65,7 +65,7 @@ vim.cmd[[
   let g:rspec_command = "Dispatch rspec {spec}"
 
   " Silver searcher configuration
-  let g:ackprg='ag -S --nocolor --nogroup --column --ignore tmp --ignore "./_build" --ignore node_modules --ignore "./frontend/node_modules/*" --ignore "./frontend/tmp/*" --ignore "./app/build/*"'
+  let g:ackprg='ag -S --nocolor --nogroup --column --ignore tmp --ignore "./_build" --ignore node_modules --ignore webclient/node_modules --ignore "./frontend/node_modules/*" --ignore "./frontend/tmp/*" --ignore "./app/build/*" --ignore="*.png" --ignore="*.jpg" --ignore="*.svg"'
 
   source ~/.vim/config/ntfinder.vim
   source ~/.vim/config/envcommands.vim
@@ -75,6 +75,7 @@ vim.cmd[[
   let NERDTreeBookmarksFile=expand("$HOME/.vim-NERDTreeBookmarks")
   let NERDTreeShowBookmarks=1
   let NERDTreeChDirMode=2
+  let NERDTreeShowHidden = 1
   let g:NERDTreeWinSize=31
   let g:NERDTreeNodeDelimiter = "\u00a0"
 
@@ -82,9 +83,8 @@ vim.cmd[[
   let g:ctrlp_by_filename = 1
   let g:ctrlp_dont_split = 'NERD'
   let g:ctrlp_working_path_mode = 'ra'
-  let g:ctrlp_custom_ignore = { 'dir':  '\node_modules$\|\tmp$' }
-  let g:ctrlp_root_markers = ['.acignore', '.git', '.root']
-  let g:ctrlp_user_command = 'ag %s -i -U --nocolor --nogroup --hidden --ignore doc --ignore .yardoc --ignore tmp --ignore node_modules --ignore deps --ignore webclient/node_modules  --ignore client/node_modules --ignore app/build --ignore storage --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc" -g ""'
+  let g:ctrlp_root_markers = ['.acignore', '.git']
+  let g:ctrlp_user_command = 'ag %s -i -U --nocolor --nogroup --hidden --ignore doc --ignore .yardoc --ignore tmp --ignore node_modules --ignore deps --ignore webclient/node_modules --ignore client/node_modules --ignore app/build --ignore storage --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc" --ignore="*.png" --ignore="*.jpg" --ignore="*.jpeg" --ignore="*.svg"  -g ""'
 
   " Web devicons
   let g:WebDevIconsUnicodeDecorateFolderNodes = 0 " Disable decoration of folder nodes
