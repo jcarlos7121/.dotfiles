@@ -25,8 +25,7 @@ return require('packer').startup(function()
   use 'scrooloose/nerdtree' -- Filesearcher File tree
   use 'airblade/vim-rooter' -- Keeps the root of ctrl-p and nerdtree to the root .gitignore
   use 'justinmk/vim-gtfo' -- TOUSE: opens a file opener on the file opened on vim
-  use { 'iurifq/ctrlp-rails.vim', after = 'kien/ctrlp.vim' } -- TOUSE: ctrl-p to jump to rails routes
-  use 'ivalkeen/vim-ctrlp-tjump' -- TOUSE: Be able to jump to ctags declarations
+  use { 'iurifq/ctrlp-rails.vim', after = 'ctrlpvim/ctrlp.vim' } -- TOUSE: ctrl-p to jump to rails routes
   use 'jasoncodes/ctrlp-modified.vim' -- TOUSE: Use ctrl-p to display ONLY modified git-tracked files
 
   -- Code editing
@@ -37,8 +36,6 @@ return require('packer').startup(function()
   use 'tpope/vim-ragtag' -- Adds autoclose for things like <% %> and <%= %>
   use 'kana/vim-smartinput' -- Automatically closes ([{}])
   use 'tpope/vim-surround' -- Adds mechanigs for surrownding words for example: csw)
-  use 'ap/vim-css-color' -- Previews color on CSS while editing
-  use 'MattesGroeger/vim-bookmarks' -- Allows to bookmark lines to come back
   use { 'ntpeters/vim-better-whitespace', commit = 'c5afbe91d29c5e3be81d5125ddcdc276fd1f1322'} -- Displays whitespaces and strips them on save
   use 'jgdavey/vim-blockle' -- Allows to toggle between do end and { }
   use 'bkad/CamelCaseMotion' -- Allows you to move word by word
@@ -50,14 +47,16 @@ return require('packer').startup(function()
   use { 'terryma/vim-multiple-cursors', commit = '13232e4b544775cf2b039571537b0e630406f801' } -- Allows to use multiple cursors
   use 'ryanoasis/vim-devicons' -- Adds icons to files
   use 'bryanmylee/vim-colorscheme-icons' -- Adds icons color for devicons
+  use 'ap/vim-css-color' -- Previews color on CSS while editing
 
   -- Utilities
   use 'thoughtbot/vim-rspec' -- Adds leader commands for automatically running Rspec Tests
   use 'christoomey/vim-tmux-navigator' -- For moving between vim and tmux panes
   use 'KabbAmine/vCoolor.vim' -- Adds color selector for CSS
   use 'ervandew/supertab' -- Use tab for all completion suggestions (USE WITH CAUTION)
+  use 'MattesGroeger/vim-bookmarks' -- Allows to bookmark lines to come back
   use 'lewis6991/impatient.nvim' -- Impatient load for vim
-  use 'xiyaowong/nvim-transparent' -- Makes the vim transparent
+  use 'jceb/vim-orgmode' -- Adds ORG mode to nvim
 
   -- Terminal
   use {'akinsho/toggleterm.nvim', tag = 'v1.*', config = function()
