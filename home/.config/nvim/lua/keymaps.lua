@@ -37,6 +37,7 @@ nnoremap("<F5>", ":call NTFinderP()<CR>")
 nnoremap("<leader>.", ":CtrlPTag<cr>")
 
 -- For editing init.liat
+nmap("<leader>ei", ":e ~/.config/nvim/init.lua<CR>", "silent")
 nmap("<leader>ev", ":e ~/.config/nvim/lua/options.lua<CR>", "silent")
 nmap("<leader>ep", ":e ~/.config/nvim/lua/plugins.lua<CR>", "silent")
 nmap("<leader>ek", ":e ~/.config/nvim/lua/keymaps.lua<CR>", "silent")

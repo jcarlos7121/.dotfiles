@@ -55,7 +55,6 @@ return require('packer').startup(function()
   use 'KabbAmine/vCoolor.vim' -- Adds color selector for CSS
   use 'ervandew/supertab' -- Use tab for all completion suggestions (USE WITH CAUTION)
   use 'MattesGroeger/vim-bookmarks' -- Allows to bookmark lines to come back
-  use 'lewis6991/impatient.nvim' -- Impatient load for vim
   use 'jceb/vim-orgmode' -- Adds ORG mode to nvim
 
   -- Terminal
