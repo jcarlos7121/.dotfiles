@@ -88,4 +88,10 @@ vim.cmd[[
 
   " Web devicons
   let g:WebDevIconsUnicodeDecorateFolderNodes = 0 " Disable decoration of folder nodes
+
+  " Set ibeam on exit of vim
+  augroup RestoreCursorShapeOnExit
+    autocmd!
+    autocmd VimLeave * set guicursor=a:ver10-blinkoff0
+  augroup END
 ]]
