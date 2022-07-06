@@ -36,41 +36,57 @@ opt.laststatus = 2
 opt.showtabline = 0
 opt.mmp = 5000
 
+vim.highlight.create('GitGutterAdd', {guifg='#009900'}, false)
+vim.highlight.create('GitGutterChange', {guifg='#bbbb00'}, false)
+vim.highlight.create('GitGutterDelete', {guifg='#b73434' }, false)
+vim.highlight.create('Search', {guibg='#3466b7', guifg=white}, false)
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = { "*" },
+  command = "GitGutter",
+})
+-- autocmd FileType * EnableStripWhitespaceOnSave
+
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  pattern = { "*.*" },
+  command = "set noro",
+})
+
+vim.api.nvim_create_autocmd("BufReadPost", {
+  pattern = { "*" },
+  command = "set bufhidden=delete",
+})
+
+-- ctrlp configuration
+vim.g.ctrlp_by_filename = 1
+vim.g.ctrlp_dont_split = 'NERD'
+vim.g.ctrlp_working_path_mode = 'ra'
+vim.g.ctrlp_root_markers = {'.acignore', '.git'}
+vim.g.ctrlp_user_command = 'ag %s -i -U --nocolor --nogroup --hidden --ignore doc --ignore .yardoc --ignore tmp --ignore node_modules --ignore deps --ignore webclient/node_modules --ignore client/node_modules --ignore app/build --ignore storage --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc" --ignore="*.png" --ignore="*.jpg" --ignore="*.jpeg" --ignore="*.svg" --ignore="*.gz" -g ""'
+
+-- Web devicons
+-- Disable decorations from folder nodes
+vim.g.WebDevIconsUnicodeDecorateFolderNodes = 0
+
+-- Bookmarks configuration
+vim.g.bookmark_sign = '₪'
+vim.g.bookmark_highlight_lines = 1
+
+-- Vim rspec command
+vim.g.rspec_command = "Dispatch rspec {spec}"
+
+-- Silver searcher configuration
+vim.g.ackprg = 'ag -S --nocolor --nogroup --column --ignore tmp --ignore "./_build" --ignore node_modules --ignore webclient/node_modules --ignore "./frontend/node_modules/*" --ignore "./frontend/tmp/*" --ignore "./app/build/*" --ignore="*.png" --ignore="*.jpg" --ignore="*.svg" --ignore="*.gz"'
+
+-- Nerdtree configuration
 vim.cmd[[
-  highlight GitGutterAdd    guifg=#009900
-  highlight GitGutterChange guifg=#bbbb00
-  highlight GitGutterDelete guifg=#ff2222
-  hi Search guibg=#3466b7 guifg=White
-
-  " Vim Airline
-  "let g:airline_theme='deus'
-  "let g:airline_powerline_fonts=1
-  "let g:airline#extensions#tabline#enabled = 1
-  "let g:hybrid_use_Xresources = 1
-
-  autocmd BufWritePost * GitGutter
-  " autocmd FileType * EnableStripWhitespaceOnSave
-  au BufNewFile,BufRead *.* set noro
-  au BufReadPost * set bufhidden=delete
-
   match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
   match ErrorMsg '\s\+$'
-
-  " Bookmarks configuration
-  highlight BookmarkSign ctermbg=NONE ctermfg=23
-  highlight BookmarkLine ctermbg=0 ctermfg=NONE
-  let g:bookmark_sign = '₪'
-  let g:bookmark_highlight_lines = 1
-
-  let g:rspec_command = "Dispatch rspec {spec}"
-
-  " Silver searcher configuration
-  let g:ackprg='ag -S --nocolor --nogroup --column --ignore tmp --ignore "./_build" --ignore node_modules --ignore webclient/node_modules --ignore "./frontend/node_modules/*" --ignore "./frontend/tmp/*" --ignore "./app/build/*" --ignore="*.png" --ignore="*.jpg" --ignore="*.svg" --ignore="*.gz"'
 
   source ~/.vim/config/ntfinder.vim
   source ~/.vim/config/envcommands.vim
 
-  " NerdTree and Rooter configuration
+  " Nerdtree configuration
   let NERDTreeQuitOnOpen=1
   let NERDTreeBookmarksFile=expand("$HOME/.vim-NERDTreeBookmarks")
   let NERDTreeShowBookmarks=1
@@ -78,16 +94,6 @@ vim.cmd[[
   let NERDTreeShowHidden = 1
   let g:NERDTreeWinSize=31
   let g:NERDTreeNodeDelimiter = "\u00a0"
-
-  " ctrlp configuration
-  let g:ctrlp_by_filename = 1
-  let g:ctrlp_dont_split = 'NERD'
-  let g:ctrlp_working_path_mode = 'ra'
-  let g:ctrlp_root_markers = ['.acignore', '.git']
-  let g:ctrlp_user_command = 'ag %s -i -U --nocolor --nogroup --hidden --ignore doc --ignore .yardoc --ignore tmp --ignore node_modules --ignore deps --ignore webclient/node_modules --ignore client/node_modules --ignore app/build --ignore storage --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc" --ignore="*.png" --ignore="*.jpg" --ignore="*.jpeg" --ignore="*.svg" --ignore="*.gz" -g ""'
-
-  " Web devicons
-  let g:WebDevIconsUnicodeDecorateFolderNodes = 0 " Disable decoration of folder nodes
 
   " Set ibeam on exit of vim
   augroup RestoreCursorShapeOnExit
