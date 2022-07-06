@@ -49,7 +49,7 @@ vim.cmd[[
   "let g:hybrid_use_Xresources = 1
 
   autocmd BufWritePost * GitGutter
-  autocmd FileType * EnableStripWhitespaceOnSave
+  " autocmd FileType * EnableStripWhitespaceOnSave
   au BufNewFile,BufRead *.* set noro
   au BufReadPost * set bufhidden=delete
 
@@ -65,7 +65,7 @@ vim.cmd[[
   let g:rspec_command = "Dispatch rspec {spec}"
 
   " Silver searcher configuration
-  let g:ackprg='ag -S --nocolor --nogroup --column --ignore tmp --ignore "./_build" --ignore node_modules --ignore webclient/node_modules --ignore "./frontend/node_modules/*" --ignore "./frontend/tmp/*" --ignore "./app/build/*" --ignore="*.png" --ignore="*.jpg" --ignore="*.svg"'
+  let g:ackprg='ag -S --nocolor --nogroup --column --ignore tmp --ignore "./_build" --ignore node_modules --ignore webclient/node_modules --ignore "./frontend/node_modules/*" --ignore "./frontend/tmp/*" --ignore "./app/build/*" --ignore="*.png" --ignore="*.jpg" --ignore="*.svg" --ignore="*.gz"'
 
   source ~/.vim/config/ntfinder.vim
   source ~/.vim/config/envcommands.vim
@@ -84,7 +84,7 @@ vim.cmd[[
   let g:ctrlp_dont_split = 'NERD'
   let g:ctrlp_working_path_mode = 'ra'
   let g:ctrlp_root_markers = ['.acignore', '.git']
-  let g:ctrlp_user_command = 'ag %s -i -U --nocolor --nogroup --hidden --ignore doc --ignore .yardoc --ignore tmp --ignore node_modules --ignore deps --ignore webclient/node_modules --ignore client/node_modules --ignore app/build --ignore storage --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc" --ignore="*.png" --ignore="*.jpg" --ignore="*.jpeg" --ignore="*.svg"  -g ""'
+  let g:ctrlp_user_command = 'ag %s -i -U --nocolor --nogroup --hidden --ignore doc --ignore .yardoc --ignore tmp --ignore node_modules --ignore deps --ignore webclient/node_modules --ignore client/node_modules --ignore app/build --ignore storage --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc" --ignore="*.png" --ignore="*.jpg" --ignore="*.jpeg" --ignore="*.svg" --ignore="*.gz" -g ""'
 
   " Web devicons
   let g:WebDevIconsUnicodeDecorateFolderNodes = 0 " Disable decoration of folder nodes

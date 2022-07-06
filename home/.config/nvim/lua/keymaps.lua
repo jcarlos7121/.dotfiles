@@ -59,7 +59,11 @@ map("<Leader>t", ":call RunCurrentSpecFile()<CR>")
 vmap("<Enter>", "<Plug>(EasyAlign)")
 nmap("<Leader>a", "<Plug>(EasyAlign)")
 
+-- Removes search highlighting
 map("<esc>", ":noh <CR>", "silent")
+
+-- Git push with fugitive
+nnoremap("<Leader>gp", ":G push<CR>", "silent")
 
 vim.cmd[[
   " configuration for Toggleterm
