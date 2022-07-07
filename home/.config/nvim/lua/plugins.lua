@@ -10,7 +10,7 @@ return require('packer').startup(function()
   use 'mileszs/ack.vim' -- :Ack to find word appearances on project
   use 'tpope/vim-bundler' -- :Bundle command
   use 'tpope/vim-dispatch' -- :Dispatch command
-  use 'tpope/vim-fugitive' -- Adds git commits :Gbranch :Gblame, and others
+  use 'jcarlos7121/vim-fugitive' -- Adds git commits :Gbranch :Gblame, and others and my own reset commands
   use 'tpope/vim-rails' -- Adds :Rails command
   use 'tpope/vim-rbenv' -- Adds :Rbenv command
   use 'tpope/vim-rake' -- Adds :Rake command
@@ -68,7 +68,17 @@ return require('packer').startup(function()
 
   -- Colorschemes
   use 'frenzyexists/aquarium-vim'
-  use 'cocopon/iceberg.vim'
+  use 'jcarlos7121/iceberg.vim' -- My own modified iceberg color config
+  use 'w0ng/vim-hybrid' -- Adds colors to vim for better readability on light scheme
+  use 'arcticicestudio/nord-vim'
+
+  use {
+    "mcchrish/zenbones.nvim",
+    -- Optionally install Lush. Allows for more configuration or extending the colorscheme
+    -- If you don't want to install lush, make sure to set g:zenbones_compat = 1
+    -- In Vim, compat mode is turned on as Lush only works in Neovim.
+    requires = "rktjmp/lush.nvim"
+  } -- Adds zenbones colorscheme
 
   -- Autocompletion
   use 'neovim/nvim-lspconfig' -- Adds LSP support for Neovim

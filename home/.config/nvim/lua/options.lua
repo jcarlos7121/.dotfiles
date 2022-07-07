@@ -1,8 +1,8 @@
 local opt = vim.opt
 opt.termguicolors = true
 
---vim.cmd [[colorscheme iceberg]]
-vim.cmd [[colorscheme aquarium]]
+vim.cmd [[colorscheme iceberg]]
+--vim.cmd [[colorscheme aquarium]]
 
 opt.tabstop=2
 opt.shell = "/usr/local/bin/fish"
@@ -36,6 +36,14 @@ opt.laststatus = 2
 opt.showtabline = 0
 opt.mmp = 5000
 
+--vim.cmd [[colorscheme nord]]
+--vim.cmd [[colorscheme nordbones]]
+
+--vim.cmd [[
+  --colorscheme hybrid
+  --set background=light
+--]]
+
 vim.highlight.create('GitGutterAdd', {guifg='#009900'}, false)
 vim.highlight.create('GitGutterChange', {guifg='#bbbb00'}, false)
 vim.highlight.create('GitGutterDelete', {guifg='#b73434' }, false)
@@ -45,7 +53,11 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = { "*" },
   command = "GitGutter",
 })
--- autocmd FileType * EnableStripWhitespaceOnSave
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "*" },
+  command = "EnableStripWhitespaceOnSave",
+})
 
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   pattern = { "*.*" },

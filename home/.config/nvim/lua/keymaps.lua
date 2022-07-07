@@ -64,6 +64,8 @@ map("<esc>", ":noh <CR>", "silent")
 
 -- Git push with fugitive
 nnoremap("<Leader>gp", ":G push<CR>", "silent")
+nnoremap("<Leader>gi", ":Git<CR>", "silent")
+nnoremap("<Leader>gl", ":Git log<CR>", "silent")
 
 vim.cmd[[
   " configuration for Toggleterm
