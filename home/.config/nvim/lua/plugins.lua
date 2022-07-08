@@ -23,6 +23,7 @@ return require('packer').startup(function()
   use 'ctrlpvim/ctrlp.vim' -- :CtrlP to search files
   use 'tpope/vim-vinegar' -- Type - and go to nerdtree
   use 'scrooloose/nerdtree' -- Filesearcher File tree
+  use 'Xuyuanp/nerdtree-git-plugin' -- Filesearcher Git display for files
   use 'airblade/vim-rooter' -- Keeps the root of ctrl-p and nerdtree to the root .gitignore
   use 'justinmk/vim-gtfo' -- TOUSE: opens a file opener on the file opened on vim
   use { 'iurifq/ctrlp-rails.vim', after = 'ctrlpvim/ctrlp.vim' } -- TOUSE: ctrl-p to jump to rails routes
@@ -36,7 +37,7 @@ return require('packer').startup(function()
   use 'tpope/vim-ragtag' -- Adds autoclose for things like <% %> and <%= %>
   use 'kana/vim-smartinput' -- Automatically closes ([{}])
   use 'tpope/vim-surround' -- Adds mechanigs for surrownding words for example: csw)
-  use { 'ntpeters/vim-better-whitespace', commit = 'c5afbe91d29c5e3be81d5125ddcdc276fd1f1322'} -- Displays whitespaces and strips them on save
+  use { 'ntpeters/vim-better-whitespace', commit = 'c5afbe91d29c5e3be81d5125ddcdc276fd1f1322' } -- Displays whitespaces and strips them on save
   use 'jgdavey/vim-blockle' -- Allows to toggle between do end and { }
   use 'bkad/CamelCaseMotion' -- Allows you to move word by word
 
