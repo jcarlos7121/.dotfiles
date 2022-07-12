@@ -112,15 +112,4 @@ vim.cmd[[
     autocmd!
     autocmd VimLeave * set guicursor=a:ver10-blinkoff0
   augroup END
-
-  augroup lspsaga_filetypes
-    autocmd!
-    autocmd FileType LspsagaHover nnoremap <buffer><nowait><silent> <Esc> :q<cr>
-    autocmd FileType LspsagaDiagnostic nnoremap <buffer><nowait><silent> <Esc> :q<cr>
-    autocmd FileType LspsagaFinder nnoremap <buffer><nowait><silent> <Esc> :q<cr>
-    autocmd FileType LspsagaRename nnoremap <buffer><nowait><silent> <Esc> :q<cr>
-    autocmd FileType LspsagaFloaterm nnoremap <buffer><nowait><silent> <Esc> :q<cr>
-    autocmd FileType LspsagaSignatureHelp nnoremap <buffer><nowait><silent> <Esc> :q<cr>
-    autocmd FileType LspSagaFinderSelection nnoremap <buffer><nowait><silent> <Esc> :q<cr>
-  augroup END
 ]]
