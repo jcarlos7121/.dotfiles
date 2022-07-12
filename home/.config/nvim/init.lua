@@ -1,3 +1,5 @@
+pcall(require, "impatient")
+
 require "janos.globals"
 require "plugins"
 require "options"

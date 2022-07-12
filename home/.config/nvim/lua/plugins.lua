@@ -4,6 +4,7 @@ vim.cmd [[packadd packer.nvim]]
 return require('packer').startup(function()
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
+  use 'lewis6991/impatient.nvim' -- Speedup startup time of plugins
 
   -- Commands
   use 'danro/rename.vim' -- :Rename filename
@@ -14,7 +15,6 @@ return require('packer').startup(function()
   use 'tpope/vim-rails' -- Adds :Rails command
   use 'tpope/vim-rbenv' -- Adds :Rbenv command
   use 'tpope/vim-rake' -- Adds :Rake command
-  use 'ain/vim-capistrano' -- Adds :Cap command
   use 'mattreduce/vim-mix' -- Adds :Mix elixir command
   use 'rizzatti/dash.vim' -- Adds :Dash command to search on Dash docs
   use 'adelarsq/vim-matchit' --TOUSE: % to match closing tag on xml/html
@@ -58,6 +58,11 @@ return require('packer').startup(function()
   use 'MattesGroeger/vim-bookmarks' -- Allows to bookmark lines to come back
   use 'jceb/vim-orgmode' -- Adds ORG mode to nvim
 
+  use {
+    "folke/which-key.nvim",
+    config = function() require("which-key").setup{} end
+  } -- Displays which-key help
+
   -- Terminal
   use {'akinsho/toggleterm.nvim', tag = 'v1.*', config = function()
     require('toggleterm').setup()
@@ -90,6 +95,8 @@ return require('packer').startup(function()
   use 'hrsh7th/cmp-path' -- Adds Paths automatically to cmp
   use 'hrsh7th/cmp-buffer' -- Adds LSP autocompletion for buffers
   use 'onsails/lspkind-nvim' -- Adds LSP pictograms like VSCode to autocomplete
+
+  use { "williamboman/nvim-lsp-installer" }
 
   use {
     'nvim-treesitter/nvim-treesitter',

@@ -2,6 +2,8 @@ require'lspconfig'.solargraph.setup{}
 
 local nvim_lsp = require('lspconfig')
 
+require("nvim-lsp-installer").setup {}
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -19,12 +21,12 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
   buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
 
-  if client.server_capabilities.documentFormattingProvider then
-    vim.api.nvim_command [[augroup Format]]
-    vim.api.nvim_command [[autocmd! * <buffer>]]
-    vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
-    vim.api.nvim_command [[augroup END]]
-  end
+  -- if client.server_capabilities.documentFormattingProvider then
+  --   vim.api.nvim_command [[augroup Format]]
+  --   vim.api.nvim_command [[autocmd! * <buffer>]]
+  --   vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
+  --   vim.api.nvim_command [[augroup END]]
+  -- end
 end
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(

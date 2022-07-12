@@ -1,8 +1,8 @@
 local opt = vim.opt
 opt.termguicolors = true
 
-vim.cmd [[colorscheme iceberg]]
---vim.cmd [[colorscheme aquarium]]
+--vim.cmd [[colorscheme iceberg]]
+vim.cmd [[colorscheme aquarium]]
 
 opt.tabstop=2
 opt.shell = "/usr/local/bin/fish"
@@ -111,5 +111,16 @@ vim.cmd[[
   augroup RestoreCursorShapeOnExit
     autocmd!
     autocmd VimLeave * set guicursor=a:ver10-blinkoff0
+  augroup END
+
+  augroup lspsaga_filetypes
+    autocmd!
+    autocmd FileType LspsagaHover nnoremap <buffer><nowait><silent> <Esc> :q<cr>
+    autocmd FileType LspsagaDiagnostic nnoremap <buffer><nowait><silent> <Esc> :q<cr>
+    autocmd FileType LspsagaFinder nnoremap <buffer><nowait><silent> <Esc> :q<cr>
+    autocmd FileType LspsagaRename nnoremap <buffer><nowait><silent> <Esc> :q<cr>
+    autocmd FileType LspsagaFloaterm nnoremap <buffer><nowait><silent> <Esc> :q<cr>
+    autocmd FileType LspsagaSignatureHelp nnoremap <buffer><nowait><silent> <Esc> :q<cr>
+    autocmd FileType LspSagaFinderSelection nnoremap <buffer><nowait><silent> <Esc> :q<cr>
   augroup END
 ]]
