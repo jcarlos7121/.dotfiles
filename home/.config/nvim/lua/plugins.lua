@@ -61,6 +61,7 @@ return require('packer').startup(function()
     require('orgmode').setup{}
   end
   } -- Adds orgmode support
+  use 'sotte/presenting.vim' -- Adds presentations support
 
   use {
     "folke/which-key.nvim",

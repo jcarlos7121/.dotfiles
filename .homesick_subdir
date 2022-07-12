@@ -7,3 +7,4 @@
 .vim/bundle/vim-airline/autoload/airline/themes
 bin
 .config/nvim
+.config/kitty
