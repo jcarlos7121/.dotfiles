@@ -56,7 +56,11 @@ return require('packer').startup(function()
   use 'KabbAmine/vCoolor.vim' -- Adds color selector for CSS
   use 'ervandew/supertab' -- Use tab for all completion suggestions (USE WITH CAUTION)
   use 'MattesGroeger/vim-bookmarks' -- Allows to bookmark lines to come back
-  use 'jceb/vim-orgmode' -- Adds ORG mode to nvim
+  use 'dhruvasagar/vim-table-mode' -- Allows to edit tables with orgmode
+  use {'nvim-orgmode/orgmode', config = function()
+    require('orgmode').setup{}
+  end
+  } -- Adds orgmode support
 
   use {
     "folke/which-key.nvim",
@@ -96,7 +100,7 @@ return require('packer').startup(function()
   use 'hrsh7th/cmp-buffer' -- Adds LSP autocompletion for buffers
   use 'onsails/lspkind-nvim' -- Adds LSP pictograms like VSCode to autocomplete
 
-  use { "williamboman/nvim-lsp-installer" }
+  use { "williamboman/nvim-lsp-installer" } -- Adds LSP Installer to nvim
 
   use {
     'nvim-treesitter/nvim-treesitter',

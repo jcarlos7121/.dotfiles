@@ -9,10 +9,13 @@ list.sql = {
 }
 
 local _ = require("nvim-treesitter.configs").setup {
-  ensure_installed = { "ruby", "yaml", "sql", "go", "query", "html", "css", "lua", "vim", "bash", "javascript", "typescript", "pug" },
+  ensure_installed = { "ruby", "yaml", "sql", "go", "query", "html", "css", "lua", "vim", "bash", "javascript", "typescript", "pug", "org" },
 
   indent = { enable = true },
-  highlight = { enable = true },
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = {'org'}
+  },
   query_linter = {
     enable = true,
     use_virtual_text = true,

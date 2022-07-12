@@ -1,0 +1,20 @@
+* Dotfiles
+  This is collection of dotfiles that I use so far, Here you can see the configuration for the following Technologies
+
+** Technologies
+ - [X] Neovim
+ - [X] Kitty
+ - [X] Fish
+ - [X] Tmux
+
+** Neovim Configs
+   - Nvim CMP
+   - Nvim LSP for Ruby
+   - Treesitter
+   - Nerdtree
+   - Fugitive for Git integration
+   - Ctrlp (might change it to telescope soon)
+   - Presenting.vim -- for presentations
+
+*** TODO Technologies I might add in the future
+  - [ ] Telescope
