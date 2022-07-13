@@ -3,7 +3,8 @@
 export PATH="$HOME/.anyenv/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/bin/elasticsearch-6.0.1/bin:$PATH"
-export EDITOR=vim
+export PATH="$HOME/.emacs.d/bin:$PATH"
+export EDITOR=nvim
 export PYTHON_CONFIGURE_OPTS="--enable-framework"
 eval "$(anyenv init -)"
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"

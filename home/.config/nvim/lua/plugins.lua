@@ -54,7 +54,6 @@ return require('packer').startup(function()
   use 'thoughtbot/vim-rspec' -- Adds leader commands for automatically running Rspec Tests
   use 'christoomey/vim-tmux-navigator' -- For moving between vim and tmux panes
   use 'KabbAmine/vCoolor.vim' -- Adds color selector for CSS
-  use 'ervandew/supertab' -- Use tab for all completion suggestions (USE WITH CAUTION)
   use 'MattesGroeger/vim-bookmarks' -- Allows to bookmark lines to come back
   use 'dhruvasagar/vim-table-mode' -- Allows to edit tables with orgmode
   use {'nvim-orgmode/orgmode', config = function()
@@ -62,10 +61,11 @@ return require('packer').startup(function()
   end
   } -- Adds orgmode support
   use 'sotte/presenting.vim' -- Adds presentations support
+  use 'kristijanhusak/vim-carbon-now-sh'
 
   use {
-    "folke/which-key.nvim",
-    config = function() require("which-key").setup{} end
+    'folke/which-key.nvim',
+    config = function() require('which-key').setup{} end
   } -- Displays which-key help
 
   -- Terminal
@@ -84,11 +84,8 @@ return require('packer').startup(function()
   use 'arcticicestudio/nord-vim'
 
   use {
-    "mcchrish/zenbones.nvim",
-    -- Optionally install Lush. Allows for more configuration or extending the colorscheme
-    -- If you don't want to install lush, make sure to set g:zenbones_compat = 1
-    -- In Vim, compat mode is turned on as Lush only works in Neovim.
-    requires = "rktjmp/lush.nvim"
+    'mcchrish/zenbones.nvim',
+    requires = 'rktjmp/lush.nvim'
   } -- Adds zenbones colorscheme
 
   -- Autocompletion
@@ -100,8 +97,8 @@ return require('packer').startup(function()
   use 'hrsh7th/cmp-path' -- Adds Paths automatically to cmp
   use 'hrsh7th/cmp-buffer' -- Adds LSP autocompletion for buffers
   use 'onsails/lspkind-nvim' -- Adds LSP pictograms like VSCode to autocomplete
-
-  use { "williamboman/nvim-lsp-installer" } -- Adds LSP Installer to nvim
+  use 'williamboman/nvim-lsp-installer' -- Adds LSP Installer to nvim
+  use 'github/copilot.vim' -- Enables copilot for vim
 
   use {
     'nvim-treesitter/nvim-treesitter',

@@ -22,19 +22,23 @@ map("<Leader>q", ":tabclose<CR>")
 nmap("s", "<Plug>(easymotion-overwin-f2)")
 
 -- ToggleTerm
+map("<Leader>3", ":ToggleTerm size=15 direction=float<CR>", "silent")
+map("<Leader>4", ":ToggleTerm size=15 direction=horizontal<CR>", "silent")
 
-map("<Leader>3", ":ToggleTerm size=15 direction=float<CR>")
+-- Carbon.sh integration
+vnoremap("<F7>", ":CarbonNowSh<CR>", "silent")
+
 -- Vim mappings
-vmap("<Tab>", ":'<,'>><CR>")
+vmap("<Tab>", ":'<,'>><CR>", "silent")
 
+-- Mappings for switching between vim and tmux panes
 nnoremap("<C-J>", "<C-W><C-J>")
 nnoremap("<C-K>", "<C-W><C-K>")
 nnoremap("<C-L>", "<C-W><C-L>")
 nnoremap("<C-H>", "<C-W><C-H>")
 
 -- Nerdtree Finder and CtrlP
-nnoremap("<F5>", ":call NTFinderP()<CR>")
-nnoremap("<leader>.", ":CtrlPTag<cr>")
+nnoremap("<F5>", ":call NTFinderP()<CR>", "silent")
 
 -- For editing init.liat
 nmap("<leader>ei", ":e ~/.config/nvim/init.lua<CR>", "silent")
@@ -51,13 +55,12 @@ noremap("<A-Down>", ":m '>+1<CR>gv=gv")
 vnoremap("<A-Up>", " :m '<-2<CR>gv=gv")
 
 -- Vim Rspec
-map("<Leader>w", ":call RunAllSpecs()<CR>")
-map("<Leader>e", ":call RunNearestSpec()<CR>")
-map("<Leader>t", ":call RunCurrentSpecFile()<CR>")
+map("<Leader>w", ":call RunAllSpecs()<CR>", "silent")
+map("<Leader>e", ":call RunNearestSpec()<CR>", "silent")
+map("<Leader>t", ":call RunCurrentSpecFile()<CR>", "silent")
 
 -- Easyalign
-vmap("<Enter>", "<Plug>(EasyAlign)")
-nmap("<Leader>a", "<Plug>(EasyAlign)")
+vmap("<Enter>", "<Plug>(EasyAlign)", "silent")
 
 -- Removes search highlighting
 map("<esc>", ":noh <CR>", "silent")
