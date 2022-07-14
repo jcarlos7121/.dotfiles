@@ -100,25 +100,12 @@ return require('packer').startup(function()
   use 'williamboman/nvim-lsp-installer' -- Adds LSP Installer to nvim
   use 'github/copilot.vim' -- Enables copilot for vim
 
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate',
-    requires = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
-      'RRethy/nvim-treesitter-textsubjects',
-      {
-        'nvim-treesitter/playground',
-        config = function ()
-          vim.keymap.set('n', '<leader>tp', '<Cmd>TSPlaygroundToggle<CR>')
-        end
-      }
-    },
-  } -- Treesitter for syntax highlighting in neovim
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } -- Treesitter for syntax highlighting in neovim
 
-  use {
+   use {
     'L3MON4D3/LuaSnip',
     requires = { 'rafamadriz/friendly-snippets' }
   } -- Snippets engine for Lua, compatible with VSCode
 
-  use { 'saadparwaiz1/cmp_luasnip' } -- Adds lua snippets to cmp
+   use { 'saadparwaiz1/cmp_luasnip' } -- Adds lua snippets to cmp
 end)

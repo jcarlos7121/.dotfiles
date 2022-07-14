@@ -29,9 +29,7 @@ opt.swapfile = false
 opt.shiftwidth = 2
 opt.expandtab = true
 opt.autochdir = true
-opt.foldmethod = "indent"
-opt.pastetoggle = "<F6>"
-opt.foldlevel = 1
+opt.foldlevel = 2
 opt.laststatus = 2
 opt.showtabline = 0
 opt.mmp = 5000
@@ -74,7 +72,7 @@ vim.g.ctrlp_by_filename = 1
 vim.g.ctrlp_dont_split = 'NERD'
 vim.g.ctrlp_working_path_mode = 'ra'
 vim.g.ctrlp_root_markers = {'.acignore', '.git'}
-vim.g.ctrlp_user_command = 'ag %s -i -U --nocolor --nogroup --hidden --ignore doc --ignore .yardoc --ignore tmp --ignore node_modules --ignore deps --ignore webclient/node_modules --ignore client/node_modules --ignore app/build --ignore storage --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc" --ignore="*.png" --ignore="*.jpg" --ignore="*.jpeg" --ignore="*.svg" --ignore="*.gz" -g ""'
+vim.g.ctrlp_user_command = 'ag %s -i -U --nocolor --nogroup --hidden --ignore doc --ignore dist --ignore .yardoc --ignore tmp --ignore node_modules --ignore deps --ignore webclient/node_modules --ignore client/node_modules --ignore app/build --ignore storage --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc" --ignore="*.png" --ignore="*.jpg" --ignore="*.jpeg" --ignore="*.svg" --ignore="*.gz" -g ""'
 
 -- Web devicons
 -- Disable decorations from folder nodes
@@ -88,7 +86,7 @@ vim.g.bookmark_highlight_lines = 1
 vim.g.rspec_command = "Dispatch rspec {spec}"
 
 -- Silver searcher configuration
-vim.g.ackprg = 'ag -S --nocolor --nogroup --column --ignore tmp --ignore "./_build" --ignore node_modules --ignore webclient/node_modules --ignore "./frontend/node_modules/*" --ignore "./frontend/tmp/*" --ignore "./app/build/*" --ignore="*.png" --ignore="*.jpg" --ignore="*.svg" --ignore="*.gz"'
+vim.g.ackprg = 'ag -S --nocolor --nogroup --column --ignore dist --ignore tmp --ignore "./_build" --ignore node_modules --ignore webclient/node_modules --ignore "./frontend/node_modules/*" --ignore "./frontend/tmp/*" --ignore "./app/build/*" --ignore="*.png" --ignore="*.jpg" --ignore="*.svg" --ignore="*.gz"'
 
 -- Nerdtree configuration
 vim.cmd[[
@@ -106,6 +104,9 @@ vim.cmd[[
   let NERDTreeShowHidden = 1
   let g:NERDTreeWinSize=31
   let g:NERDTreeNodeDelimiter = "\u00a0"
+
+  set foldmethod=expr
+  set foldexpr=nvim_treesitter#foldexpr()
 
   " Set ibeam on exit of vim
   augroup RestoreCursorShapeOnExit

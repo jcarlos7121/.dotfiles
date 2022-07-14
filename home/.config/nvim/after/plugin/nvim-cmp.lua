@@ -26,10 +26,10 @@ cmp.setup({
     }),
   }),
   sources = cmp.config.sources({
+    { name = 'luasnip', option = { use_show_condition = false } },
     { name = 'orgmode' },
     { name = 'nvim_lsp' },
     { name = 'nvim_lua' },
-    { name = 'luasnip', option = { use_show_condition = false } },
     { name = 'path' },
     { name = 'treesitter' },
     { name = 'buffer', keyword_length = 6 },

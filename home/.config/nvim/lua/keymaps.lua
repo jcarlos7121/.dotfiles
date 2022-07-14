@@ -75,6 +75,10 @@ vim.cmd[[
   " configuration for Toggleterm
   tnoremap <Esc> <C-\><C-n>
 
+  " configuration for Ack Vim Plugin
+  cnoreabbrev Ack Ack!
+  nnoremap <Leader>a :Ack!<Space>
+
   " Luasnip
   imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'
   inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>
