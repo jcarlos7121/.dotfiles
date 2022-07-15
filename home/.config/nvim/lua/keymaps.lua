@@ -12,6 +12,9 @@ map("<S-W>", "<Plug>CamelCaseMotion_w")
 map("<S-B>", "<Plug>CamelCaseMotion_b")
 map("<S-E>", "<Plug>CamelCaseMotion_e")
 
+-- Preview Buffers
+map("<Leader>v", ":JABSOpen<CR>", "silent")
+
 -- CtrlP
 map("<Leader>gm", ":CtrlPModified<CR>")
 map("<Leader>gM", ":CtrlPBranch<CR>")

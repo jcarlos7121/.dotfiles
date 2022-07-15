@@ -6,6 +6,9 @@ return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
   use 'lewis6991/impatient.nvim' -- Speedup startup time of plugins
 
+  -- Languages
+  use 'slim-template/vim-slim'
+
   -- Commands
   use 'danro/rename.vim' -- :Rename filename
   use 'mileszs/ack.vim' -- :Ack to find word appearances on project
@@ -17,7 +20,7 @@ return require('packer').startup(function()
   use 'tpope/vim-rake' -- Adds :Rake command
   use 'mattreduce/vim-mix' -- Adds :Mix elixir command
   use 'rizzatti/dash.vim' -- Adds :Dash command to search on Dash docs
-  use 'adelarsq/vim-matchit' --TOUSE: % to match closing tag on xml/html
+  use 'adelarsq/vim-matchit' --% to match closing tag on xml/html
 
   -- File search
   use 'ctrlpvim/ctrlp.vim' -- :CtrlP to search files
@@ -27,6 +30,7 @@ return require('packer').startup(function()
   use 'airblade/vim-rooter' -- Keeps the root of ctrl-p and nerdtree to the root .gitignore
   use 'justinmk/vim-gtfo' -- TOUSE: opens a file opener on the file opened on vim
   use 'jasoncodes/ctrlp-modified.vim' -- TOUSE: Use ctrl-p to display ONLY modified git-tracked files
+  use 'matbme/JABS.nvim'  -- Browse between buffers
 
   -- Code editing
   use 'junegunn/vim-easy-align' -- Press Enter and character to align multiple lines
@@ -54,18 +58,7 @@ return require('packer').startup(function()
   use 'christoomey/vim-tmux-navigator' -- For moving between vim and tmux panes
   use 'KabbAmine/vCoolor.vim' -- Adds color selector for CSS
   use 'MattesGroeger/vim-bookmarks' -- Allows to bookmark lines to come back
-  use 'dhruvasagar/vim-table-mode' -- Allows to edit tables with orgmode
-  use {'nvim-orgmode/orgmode', config = function()
-    require('orgmode').setup{}
-  end
-  } -- Adds orgmode support
-  use 'sotte/presenting.vim' -- Adds presentations support
   use 'kristijanhusak/vim-carbon-now-sh'
-
-  use {
-    'folke/which-key.nvim',
-    config = function() require('which-key').setup{} end
-  } -- Displays which-key help
 
   -- Terminal
   use {'akinsho/toggleterm.nvim', tag = 'v1.*', config = function()
@@ -104,12 +97,7 @@ return require('packer').startup(function()
   use 'hrsh7th/cmp-buffer' -- Adds LSP autocompletion for buffers
   use 'onsails/lspkind-nvim' -- Adds LSP pictograms like VSCode to autocomplete
   use 'github/copilot.vim' -- Enables copilot for vim
-  use {
-    'williamboman/nvim-lsp-installer',
-    config = function()
-      require('nvim_lsp_installer').setup{}
-    end,
-  } -- Adds LSP Installer to nvim
+  use 'williamboman/nvim-lsp-installer' -- Adds LSP Installer to nvim
 
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } -- Treesitter for syntax highlighting in neovim
 
