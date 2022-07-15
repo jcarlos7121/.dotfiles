@@ -26,7 +26,6 @@ return require('packer').startup(function()
   use 'Xuyuanp/nerdtree-git-plugin' -- Filesearcher Git display for files
   use 'airblade/vim-rooter' -- Keeps the root of ctrl-p and nerdtree to the root .gitignore
   use 'justinmk/vim-gtfo' -- TOUSE: opens a file opener on the file opened on vim
-  use { 'iurifq/ctrlp-rails.vim', after = 'ctrlpvim/ctrlp.vim' } -- TOUSE: ctrl-p to jump to rails routes
   use 'jasoncodes/ctrlp-modified.vim' -- TOUSE: Use ctrl-p to display ONLY modified git-tracked files
 
   -- Code editing
@@ -76,6 +75,13 @@ return require('packer').startup(function()
   -- NEOVIM configuration
   use 'nvim-lua/plenary.nvim'
   use 'b0o/mapx.nvim' -- Better key mappings on LUA
+  use 'nathom/filetype.nvim' -- Filetype speedup support for neovim
+  use {
+    'nacro90/numb.nvim',
+    config = function()
+      require('numb').setup()
+    end,
+  } -- Quicker line search for neovim
 
   -- Colorschemes
   use 'frenzyexists/aquarium-vim'
@@ -97,12 +103,17 @@ return require('packer').startup(function()
   use 'hrsh7th/cmp-path' -- Adds Paths automatically to cmp
   use 'hrsh7th/cmp-buffer' -- Adds LSP autocompletion for buffers
   use 'onsails/lspkind-nvim' -- Adds LSP pictograms like VSCode to autocomplete
-  use 'williamboman/nvim-lsp-installer' -- Adds LSP Installer to nvim
   use 'github/copilot.vim' -- Enables copilot for vim
+  use {
+    'williamboman/nvim-lsp-installer',
+    config = function()
+      require('nvim_lsp_installer').setup{}
+    end,
+  } -- Adds LSP Installer to nvim
 
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } -- Treesitter for syntax highlighting in neovim
 
-   use {
+  use {
     'L3MON4D3/LuaSnip',
     requires = { 'rafamadriz/friendly-snippets' }
   } -- Snippets engine for Lua, compatible with VSCode
