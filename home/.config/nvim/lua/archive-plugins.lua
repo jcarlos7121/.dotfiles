@@ -23,3 +23,13 @@
   --use 'ivalkeen/vim-ctrlp-tjump' -- TOUSE: Be able to jump to ctags declarations
   --use 'ervandew/supertab' -- Use tab for all completion suggestions (USE WITH CAUTION)
   --use 'iurifq/ctrlp-rails.vim' -- TOUSE: ctrl-p to jump to rails routes
+  --use 'jasoncodes/ctrlp-modified.vim' -- TOUSE: Use ctrl-p to display ONLY modified git-tracked files
+  --use 'dhruvasagar/vim-table-mode' -- Allows to edit tables with orgmode
+  --use {'nvim-orgmode/orgmode', config = function()
+    --require('orgmode').setup{}
+  --end
+  --use {
+    --'folke/which-key.nvim',
+    --config = function() require('which-key').setup{} end
+  --} -- Displays which-key help
+  --use 'sotte/presenting.vim' -- Adds presentations support
