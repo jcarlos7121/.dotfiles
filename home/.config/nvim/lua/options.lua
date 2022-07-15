@@ -105,8 +105,8 @@ vim.cmd[[
   let g:NERDTreeWinSize=31
   let g:NERDTreeNodeDelimiter = "\u00a0"
 
-  set foldmethod=expr
-  set foldexpr=nvim_treesitter#foldexpr()
+  ""set foldmethod=expr
+  ""set foldexpr=nvim_treesitter#foldexpr()
 
   " Set ibeam on exit of vim
   augroup RestoreCursorShapeOnExit

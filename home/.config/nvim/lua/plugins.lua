@@ -7,7 +7,7 @@ return require('packer').startup(function()
   use 'lewis6991/impatient.nvim' -- Speedup startup time of plugins
 
   -- Languages
-  use 'slim-template/vim-slim'
+  --use 'slim-template/vim-slim'
 
   -- Commands
   use 'danro/rename.vim' -- :Rename filename
@@ -29,8 +29,8 @@ return require('packer').startup(function()
   use 'Xuyuanp/nerdtree-git-plugin' -- Filesearcher Git display for files
   use 'airblade/vim-rooter' -- Keeps the root of ctrl-p and nerdtree to the root .gitignore
   use 'justinmk/vim-gtfo' -- TOUSE: opens a file opener on the file opened on vim
-  use 'jasoncodes/ctrlp-modified.vim' -- TOUSE: Use ctrl-p to display ONLY modified git-tracked files
-  use 'matbme/JABS.nvim'  -- Browse between buffers
+  --use 'jasoncodes/ctrlp-modified.vim' -- TOUSE: Use ctrl-p to display ONLY modified git-tracked files
+  --use 'matbme/JABS.nvim'  -- Browse between buffers
 
   -- Code editing
   use 'junegunn/vim-easy-align' -- Press Enter and character to align multiple lines
@@ -58,23 +58,23 @@ return require('packer').startup(function()
   use 'christoomey/vim-tmux-navigator' -- For moving between vim and tmux panes
   use 'KabbAmine/vCoolor.vim' -- Adds color selector for CSS
   use 'MattesGroeger/vim-bookmarks' -- Allows to bookmark lines to come back
-  use 'kristijanhusak/vim-carbon-now-sh'
+  --use 'kristijanhusak/vim-carbon-now-sh'
 
   -- Terminal
-  use {'akinsho/toggleterm.nvim', tag = 'v1.*', config = function()
-    require('toggleterm').setup()
-  end} -- Toggles between terminal and vim
+  --use {'akinsho/toggleterm.nvim', tag = 'v1.*', config = function()
+    --require('toggleterm').setup()
+  --end} -- Toggles between terminal and vim
 
   -- NEOVIM configuration
   use 'nvim-lua/plenary.nvim'
   use 'b0o/mapx.nvim' -- Better key mappings on LUA
   use 'nathom/filetype.nvim' -- Filetype speedup support for neovim
-  use {
-    'nacro90/numb.nvim',
-    config = function()
-      require('numb').setup()
-    end,
-  } -- Quicker line search for neovim
+  --use {
+    --'nacro90/numb.nvim',
+    --config = function()
+      --require('numb').setup()
+    --end,
+  --} -- Quicker line search for neovim
 
   -- Colorschemes
   use 'frenzyexists/aquarium-vim'
@@ -96,8 +96,8 @@ return require('packer').startup(function()
   use 'hrsh7th/cmp-path' -- Adds Paths automatically to cmp
   use 'hrsh7th/cmp-buffer' -- Adds LSP autocompletion for buffers
   use 'onsails/lspkind-nvim' -- Adds LSP pictograms like VSCode to autocomplete
-  use 'github/copilot.vim' -- Enables copilot for vim
-  use 'williamboman/nvim-lsp-installer' -- Adds LSP Installer to nvim
+  --use 'github/copilot.vim' -- Enables copilot for vim
+  --use 'williamboman/nvim-lsp-installer' -- Adds LSP Installer to nvim
 
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } -- Treesitter for syntax highlighting in neovim
 
