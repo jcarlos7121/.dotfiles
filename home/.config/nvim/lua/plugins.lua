@@ -58,6 +58,11 @@ return require('packer').startup(function()
   use 'KabbAmine/vCoolor.vim' -- Adds color selector for CSS
   use 'MattesGroeger/vim-bookmarks' -- Allows to bookmark lines to come back
   use 'kristijanhusak/vim-carbon-now-sh'
+  use 'dhruvasagar/vim-table-mode' -- Allows to edit tables with orgmode
+  use {'nvim-orgmode/orgmode', config = function()
+    require('orgmode').setup{}
+  end
+  }
 
   -- Terminal
   use {'akinsho/toggleterm.nvim', tag = 'v1.*', config = function()
