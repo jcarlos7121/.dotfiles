@@ -34,6 +34,9 @@ opt.laststatus = 2
 opt.showtabline = 0
 opt.mmp = 5000
 
+vim.o.foldmethod = 'expr'
+vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
+
 --vim.cmd [[colorscheme nord]]
 --vim.cmd [[colorscheme nordbones]]
 
@@ -42,10 +45,16 @@ opt.mmp = 5000
   --set background=light
 --]]
 
+-- Highlight for GitGutter
 vim.highlight.create('GitGutterAdd', {guifg='#009900'}, false)
 vim.highlight.create('GitGutterChange', {guifg='#bbbb00'}, false)
 vim.highlight.create('GitGutterDelete', {guifg='#b73434' }, false)
+
+-- Highlight for search matches
 vim.highlight.create('Search', {guibg='#3466b7', guifg=white}, false)
+
+-- Highlight for rainbow brackets on treesitter
+vim.highlight.create('rainbowcol1', {guifg='#f73e7f'}, false)
 
 vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = { "*" },
@@ -72,7 +81,7 @@ vim.g.ctrlp_by_filename = 1
 vim.g.ctrlp_dont_split = 'NERD'
 vim.g.ctrlp_working_path_mode = 'ra'
 vim.g.ctrlp_root_markers = {'.acignore', '.git'}
-vim.g.ctrlp_user_command = 'ag %s -i -U --nocolor --nogroup --hidden --ignore doc --ignore dist --ignore .yardoc --ignore tmp --ignore node_modules --ignore deps --ignore webclient/node_modules --ignore client/node_modules --ignore app/build --ignore storage --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc" --ignore="*.png" --ignore="*.jpg" --ignore="*.jpeg" --ignore="*.svg" --ignore="*.gz" -g ""'
+vim.g.ctrlp_user_command = 'ag %s -i -U --nocolor --nogroup --hidden --ignore public/vite-test --ignore public/vite-dev --ignore public/packs-test --ignore public/assets --ignore public/packs --ignore doc --ignore dist --ignore .yardoc --ignore coverage --ignore tmp --ignore node_modules --ignore deps --ignore webclient/node_modules --ignore client/node_modules --ignore app/build --ignore storage --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc" --ignore="*.png" --ignore="*.jpg" --ignore="*.jpeg" --ignore="*.svg" --ignore="*.gz" -g ""'
 
 -- Web devicons
 -- Disable decorations from folder nodes
@@ -86,15 +95,15 @@ vim.g.bookmark_highlight_lines = 1
 vim.g.rspec_command = "Dispatch rspec {spec}"
 
 -- Silver searcher configuration
-vim.g.ackprg = 'ag -S --nocolor --nogroup --column --ignore dist --ignore tmp --ignore "./_build" --ignore node_modules --ignore webclient/node_modules --ignore "./frontend/node_modules/*" --ignore "./frontend/tmp/*" --ignore "./app/build/*" --ignore="*.png" --ignore="*.jpg" --ignore="*.svg" --ignore="*.gz"'
+vim.g.ackprg = 'ag -S --nocolor --nogroup --column --ignore dist --ignore public/vite-test --ignore public/vite-dev --ignore public/packs-test --ignore public/assets --ignore public/packs --ignore tmp --ignore "./_build" --ignore coverage --ignore node_modules --ignore webclient/node_modules --ignore "./frontend/node_modules/*" --ignore "./frontend/tmp/*" --ignore "./app/build/*" --ignore="*.png" --ignore="*.jpg" --ignore="*.svg" --ignore="*.gz"'
+
+vim.cmd [[source ~/.vim/config/ntfinder.vim]]
+vim.cmd [[source ~/.vim/config/envcommands.vim]]
 
 -- Nerdtree configuration
 vim.cmd[[
   match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
   match ErrorMsg '\s\+$'
-
-  source ~/.vim/config/ntfinder.vim
-  source ~/.vim/config/envcommands.vim
 
   " Nerdtree configuration
   let NERDTreeQuitOnOpen=1
@@ -104,9 +113,6 @@ vim.cmd[[
   let NERDTreeShowHidden = 1
   let g:NERDTreeWinSize=31
   let g:NERDTreeNodeDelimiter = "\u00a0"
-
-  set foldmethod=expr
-  set foldexpr=nvim_treesitter#foldexpr()
 
   " Set ibeam on exit of vim
   augroup RestoreCursorShapeOnExit

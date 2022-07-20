@@ -49,7 +49,7 @@ return require('packer').startup(function()
   use { 'airblade/vim-gitgutter', commit = 'faa1e953deae2da2b0df45f71a8ce8d931766c28' } -- displays which lines where added, modified, deleted
   use { 'terryma/vim-multiple-cursors', commit = '13232e4b544775cf2b039571537b0e630406f801' } -- Allows to use multiple cursors
   use 'ryanoasis/vim-devicons' -- Adds icons to files
-  use 'bryanmylee/vim-colorscheme-icons' -- Adds icons color for devicons
+  use 'jcarlos7121/vim-colorscheme-icons' -- Adds icons color for devicons
   use 'ap/vim-css-color' -- Previews color on CSS while editing
 
   -- Utilities
@@ -91,6 +91,13 @@ return require('packer').startup(function()
     requires = 'rktjmp/lush.nvim'
   } -- Adds zenbones colorscheme
 
+  -- Treesitter for better syntax highlighting
+  -- and navigating inside the syntax tree
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } -- Treesitter for syntax highlighting in neovim
+  use { 'nvim-treesitter/nvim-treesitter-textobjects' }
+  use { 'p00f/nvim-ts-rainbow' }
+  use { 'RRethy/nvim-treesitter-textsubjects' }
+
   -- Autocompletion
   use 'neovim/nvim-lspconfig' -- Adds LSP support for Neovim
   use 'tami5/lspsaga.nvim' -- Adds LSP actions with lightweight UI
@@ -102,8 +109,6 @@ return require('packer').startup(function()
   use 'onsails/lspkind-nvim' -- Adds LSP pictograms like VSCode to autocomplete
   use 'github/copilot.vim' -- Enables copilot for vim
   use 'williamboman/nvim-lsp-installer' -- Adds LSP Installer to nvim
-
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } -- Treesitter for syntax highlighting in neovim
 
   use {
     'L3MON4D3/LuaSnip',
