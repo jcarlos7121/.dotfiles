@@ -2,7 +2,11 @@ local opt = vim.opt
 opt.termguicolors = true
 
 --vim.cmd [[colorscheme iceberg]]
-vim.cmd [[colorscheme aquarium]]
+vim.cmd [[
+  colorscheme aquarium
+  hi Normal guibg=#111111
+  hi LineNr guibg=#111111
+]]
 
 opt.tabstop=2
 opt.shell = "/usr/local/bin/fish"
@@ -37,9 +41,7 @@ opt.mmp = 5000
 vim.o.foldmethod = 'expr'
 vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
 
---vim.cmd [[colorscheme nord]]
---vim.cmd [[colorscheme nordbones]]
-
+--Hybrid
 --vim.cmd [[
   --colorscheme hybrid
   --set background=light
@@ -77,11 +79,11 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 })
 
 -- ctrlp configuration
-vim.g.ctrlp_by_filename = 1
-vim.g.ctrlp_dont_split = 'NERD'
-vim.g.ctrlp_working_path_mode = 'ra'
-vim.g.ctrlp_root_markers = {'.acignore', '.git'}
-vim.g.ctrlp_user_command = 'ag %s -i -U --nocolor --nogroup --hidden --ignore public/vite-test --ignore public/vite-dev --ignore public/packs-test --ignore public/assets --ignore public/packs --ignore doc --ignore dist --ignore .yardoc --ignore coverage --ignore tmp --ignore node_modules --ignore deps --ignore webclient/node_modules --ignore client/node_modules --ignore app/build --ignore storage --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc" --ignore="*.png" --ignore="*.jpg" --ignore="*.jpeg" --ignore="*.svg" --ignore="*.gz" -g ""'
+--vim.g.ctrlp_by_filename = 1
+--vim.g.ctrlp_dont_split = 'NERD'
+--vim.g.ctrlp_working_path_mode = 'ra'
+--vim.g.ctrlp_root_markers = {'.acignore', '.git'}
+--vim.g.ctrlp_user_command = 'ag %s -i -U --nocolor --nogroup --hidden --ignore public/vite-test --ignore public/vite-dev --ignore public/packs-test --ignore public/assets --ignore public/packs --ignore doc --ignore dist --ignore .yardoc --ignore coverage --ignore tmp --ignore node_modules --ignore deps --ignore webclient/node_modules --ignore client/node_modules --ignore app/build --ignore storage --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc" --ignore="*.png" --ignore="*.jpg" --ignore="*.jpeg" --ignore="*.svg" --ignore="*.gz" -g ""'
 
 -- Web devicons
 -- Disable decorations from folder nodes
@@ -113,6 +115,8 @@ vim.cmd[[
   let NERDTreeShowHidden = 1
   let g:NERDTreeWinSize=31
   let g:NERDTreeNodeDelimiter = "\u00a0"
+  let g:NERDTreeMapOpenDirNode = 'L'
+  let g:NERDTreeMapCloseDirNode = 'H'
 
   " Set ibeam on exit of vim
   augroup RestoreCursorShapeOnExit

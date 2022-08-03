@@ -9,7 +9,7 @@ list.sql = {
 }
 
 local _ = require("nvim-treesitter.configs").setup {
-  ensure_installed = { "ruby", "yaml", "sql", "go", "query", "html", "css", "lua", "vim", "bash", "javascript", "typescript", "pug", "org", "solidity" },
+  ensure_installed = { "ruby", "yaml", "fish", "sql", "go", "query", "html", "css", "lua", "vim", "bash", "javascript", "typescript", "pug", "org", "solidity" },
 
   --indent = { enable = true },
   highlight = {
@@ -19,7 +19,7 @@ local _ = require("nvim-treesitter.configs").setup {
 
   rainbow = {
     enable = true,
-    disable = { "lua" },
+    disable = { "lua" },-- disable rainbow for lua files
     extended_mode = true,
     max_file_lines = nil,
   },
