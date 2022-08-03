@@ -40,7 +40,6 @@ telescope.setup({
     layout_config = { },
     border = {},
     borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-    --previewer = false,
     preview = false,
     color_devicons = true,
     set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
@@ -49,7 +48,7 @@ telescope.setup({
       i = {
         ["<Esc>"] = actions.close,
         ['<C-x>'] = actions.file_split,
-        ['<A-p>'] = action_layout.toggle_preview,
+        ['<Tab>'] = action_layout.toggle_preview,
         ['<C-y>'] = actions.preview_scrolling_up,
         ['<C-e>'] = actions.preview_scrolling_down,
         ['<PageUp>'] = actions.preview_scrolling_up,

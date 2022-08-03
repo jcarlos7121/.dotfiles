@@ -6,6 +6,7 @@ vim.cmd [[
   colorscheme aquarium
   hi Normal guibg=#111111
   hi LineNr guibg=#111111
+  hi VertSplit guibg=NONE guifg=#141414
 ]]
 
 opt.tabstop=2

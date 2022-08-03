@@ -33,3 +33,7 @@
     --config = function() require('which-key').setup{} end
   --} -- Displays which-key help
   --use 'sotte/presenting.vim' -- Adds presentations support
+  --use 'ryanoasis/vim-devicons' -- Adds icons to files
+  --use 'jcarlos7121/vim-colorscheme-icons' -- Adds icons color for devicons
+  --use 'ctrlpvim/ctrlp.vim' -- :CtrlP to search files
+
