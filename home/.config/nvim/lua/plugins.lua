@@ -24,20 +24,22 @@ return require('packer').startup(function()
   use 'adelarsq/vim-matchit' --% to match closing tag on xml/html
 
   -- File search
-  --use 'ctrlpvim/ctrlp.vim' -- :CtrlP to search files
-
   use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.0',
+    'nvim-telescope/telescope.nvim',
     requires = { {'nvim-lua/plenary.nvim'} }
   }
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
-
   use 'tpope/vim-vinegar' -- Type - and go to nerdtree
   use 'scrooloose/nerdtree' -- Filesearcher File tree
   use 'flw-cn/vim-nerdtree-l-open-h-close'
   use 'Xuyuanp/nerdtree-git-plugin' -- Filesearcher Git display for files
   use 'kyazdani42/nvim-web-devicons'
-  use 'kyazdani42/nvim-tree.lua'
+  use {
+    'kyazdani42/nvim-tree.lua',
+    config = function()
+      require("nvim-tree").setup()
+    end
+  }
 
   use 'airblade/vim-rooter' -- Keeps the root of ctrl-p and nerdtree to the root .gitignore
   use 'justinmk/vim-gtfo' -- TOUSE: opens a file opener on the file opened on vim
@@ -45,7 +47,12 @@ return require('packer').startup(function()
 
   -- Code editing
   use 'junegunn/vim-easy-align' -- Press Enter and character to align multiple lines
-  use 'phaazon/hop.nvim'
+  use {
+    'phaazon/hop.nvim',
+    config = function()
+      require'hop'.setup()
+    end
+  }
   use 'scrooloose/nerdcommenter' -- Comment and uncomment with <leader>ci
   use 'tpope/vim-endwise' -- Automatically adds end word whenever def, or each opens
   use 'tpope/vim-ragtag' -- Adds autoclose for things like <% %> and <%= %>
@@ -54,15 +61,24 @@ return require('packer').startup(function()
   use { 'ntpeters/vim-better-whitespace', commit = 'c5afbe91d29c5e3be81d5125ddcdc276fd1f1322' } -- Displays whitespaces and strips them on save
   use 'jgdavey/vim-blockle' -- Allows to toggle between do end and { }
   use 'bkad/CamelCaseMotion' -- Allows you to move word by word
+  use {
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+      require("todo-comments").setup { }
+    end
+  }
 
   -- UI Utilities
   use 'bling/vim-bufferline' -- Displays the buffer in the status bar
   use 'yggdroot/indentline' -- displays identation lines
   use { 'airblade/vim-gitgutter', commit = 'faa1e953deae2da2b0df45f71a8ce8d931766c28' } -- displays which lines where added, modified, deleted
   use { 'terryma/vim-multiple-cursors', commit = '13232e4b544775cf2b039571537b0e630406f801' } -- Allows to use multiple cursors
-  --use 'ryanoasis/vim-devicons' -- Adds icons to files
-  --use 'jcarlos7121/vim-colorscheme-icons' -- Adds icons color for devicons
   use 'ap/vim-css-color' -- Previews color on CSS while editing
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+  }
 
   -- Utilities
   use 'thoughtbot/vim-rspec' -- Adds leader commands for automatically running Rspec Tests
@@ -75,6 +91,12 @@ return require('packer').startup(function()
     require('orgmode').setup{}
   end
   }
+  use {
+    'nacro90/numb.nvim',
+    config = function()
+      require('numb').setup()
+    end,
+  } -- Quicker line search for neovim
 
   -- Terminal
   use {'akinsho/toggleterm.nvim', tag = 'v1.*', config = function()
@@ -85,23 +107,15 @@ return require('packer').startup(function()
   use 'nvim-lua/plenary.nvim'
   use 'b0o/mapx.nvim' -- Better key mappings on LUA
   use 'nathom/filetype.nvim' -- Filetype speedup support for neovim
-  use {
-    'nacro90/numb.nvim',
-    config = function()
-      require('numb').setup()
-    end,
-  } -- Quicker line search for neovim
 
   -- Colorschemes
-  use 'FrenzyExists/aquarium-vim'
+  use 'FrenzyExists/aquarium-vim' -- Aquarium colorscheme i mostly use
   use 'jcarlos7121/iceberg.vim' -- My own modified iceberg color config
   use 'w0ng/vim-hybrid' -- Adds colors to vim for better readability on light scheme
-  use {'shaunsingh/oxocarbon.nvim', run = './install.sh'}
-
   use {
     'mcchrish/zenbones.nvim',
     requires = 'rktjmp/lush.nvim'
-  } -- Adds zenbones colorscheme
+  }
 
   -- Treesitter for better syntax highlighting
   -- and navigating inside the syntax tree
@@ -121,11 +135,10 @@ return require('packer').startup(function()
   use 'onsails/lspkind-nvim' -- Adds LSP pictograms like VSCode to autocomplete
   use 'github/copilot.vim' -- Enables copilot for vim
   use 'williamboman/nvim-lsp-installer' -- Adds LSP Installer to nvim
-
   use {
     'L3MON4D3/LuaSnip',
     requires = { 'rafamadriz/friendly-snippets' }
   } -- Snippets engine for Lua, compatible with VSCode
 
-   use { 'saadparwaiz1/cmp_luasnip' } -- Adds lua snippets to cmp
+  use { 'saadparwaiz1/cmp_luasnip' } -- Adds lua snippets to cmp
 end)

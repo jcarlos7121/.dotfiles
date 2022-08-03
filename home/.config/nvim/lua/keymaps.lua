@@ -17,6 +17,7 @@ map("<Leader>v", ":JABSOpen<CR>", "silent")
 
 -- Telescope
 map("<C-P>", "<cmd>Telescope find_files<CR>")
+map("<C-S>", "<cmd>Telescope live_grep<CR>")
 map("<Leader>z", ":tab split<CR>")
 map("<Leader>q", ":tabclose<CR>")
 
