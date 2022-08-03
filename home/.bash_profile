@@ -10,6 +10,7 @@ eval "$(anyenv init -)"
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
 eval "$(pyenv virtualenv-init -)"
 eval "$(erlenv init -)"
+eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"
 tmux
 
 ##

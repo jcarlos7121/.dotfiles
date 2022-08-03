@@ -13,6 +13,7 @@ function byte; sudo pm-hibernate; end
 function bayi; sudo pm-suspend-hybrid; end
 function pgc; sudo pg_ctlcluster 9.4 main $argv; end
 function v; nvim $argv; end
+function cat; bat $argv; end
 function django; python manage.py $argv; end
 export EDITOR=vim
 status --is-interactive; and source (rbenv init -|psub)

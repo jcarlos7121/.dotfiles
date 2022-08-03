@@ -15,14 +15,24 @@ map("<S-E>", "<Plug>CamelCaseMotion_e")
 -- Preview Buffers
 map("<Leader>v", ":JABSOpen<CR>", "silent")
 
--- CtrlP
-map("<Leader>gm", ":CtrlPModified<CR>")
-map("<Leader>gM", ":CtrlPBranch<CR>")
+-- Telescope
+map("<C-P>", "<cmd>Telescope find_files<CR>")
 map("<Leader>z", ":tab split<CR>")
 map("<Leader>q", ":tabclose<CR>")
 
--- Easymotion
-nmap("s", "<Plug>(easymotion-overwin-f2)")
+-- VCoolor
+nmap("<leader>c", ":VCoolor<CR>")
+
+-- Yank filepath
+map("<Leader>p", ":let @+ = expand('%:p')<CR>", "silent")
+
+-- Hop
+map("s", "<cmd>HopChar2<CR>")
+map("S", "<cmd>HopPattern<CR>")
+map(",,w", "<cmd>HopWordAC<CR>")
+map(",,b", "<cmd>HopWordBC<CR>")
+map(",,k", "<cmd>HopLineBC<CR>")
+map(",,j", "<cmd>HopLineAC<CR>")
 
 -- ToggleTerm
 map("<Leader>3", ":ToggleTerm size=15 direction=float<CR>", "silent")
@@ -41,7 +51,7 @@ nnoremap("<C-L>", "<C-W><C-L>")
 nnoremap("<C-H>", "<C-W><C-H>")
 
 -- Nerdtree Finder and CtrlP
-nnoremap("<F5>", ":call NTFinderP()<CR>", "silent")
+nnoremap("<F5>", ":NvimTreeFindFileToggle<CR>", "silent")
 
 -- For editing init.liat
 nmap("<leader>ei", ":e ~/.config/nvim/init.lua<CR>", "silent")
