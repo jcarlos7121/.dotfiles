@@ -36,4 +36,6 @@
   --use 'ryanoasis/vim-devicons' -- Adds icons to files
   --use 'jcarlos7121/vim-colorscheme-icons' -- Adds icons color for devicons
   --use 'ctrlpvim/ctrlp.vim' -- :CtrlP to search files
-
+  --use 'scrooloose/nerdtree' -- Filesearcher File tree
+  --use 'flw-cn/vim-nerdtree-l-open-h-close'
+  --use 'Xuyuanp/nerdtree-git-plugin' -- Filesearcher Git display for files

@@ -27,21 +27,22 @@ return require('packer').startup(function()
   use {
     'nvim-telescope/telescope.nvim',
     requires = { {'nvim-lua/plenary.nvim'} }
-  }
+  } -- Adds :Telescope command replacement for ctrl-p
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
   use 'tpope/vim-vinegar' -- Type - and go to nerdtree
-  use 'scrooloose/nerdtree' -- Filesearcher File tree
-  use 'flw-cn/vim-nerdtree-l-open-h-close'
-  use 'Xuyuanp/nerdtree-git-plugin' -- Filesearcher Git display for files
   use 'kyazdani42/nvim-web-devicons'
-  use {
-    'kyazdani42/nvim-tree.lua',
-    config = function()
-      require("nvim-tree").setup()
-    end
-  }
+  use { 'kyazdani42/nvim-tree.lua' } -- File explorer
 
-  use 'airblade/vim-rooter' -- Keeps the root of ctrl-p and nerdtree to the root .gitignore
+  -- Lua
+  use {
+    "ahmedkhalf/project.nvim",
+    config = function()
+      require("project_nvim").setup {
+        show_hidden = true,
+        patterns = { ".git" }
+      }
+    end
+  } -- Project management and rooter
   use 'justinmk/vim-gtfo' -- TOUSE: opens a file opener on the file opened on vim
   use 'matbme/JABS.nvim'  -- Browse between buffers
 
@@ -67,7 +68,7 @@ return require('packer').startup(function()
     config = function()
       require("todo-comments").setup { }
     end
-  }
+  } -- Adds colors to todo comments
 
   -- UI Utilities
   use 'bling/vim-bufferline' -- Displays the buffer in the status bar
@@ -78,7 +79,7 @@ return require('packer').startup(function()
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-  }
+} -- Minimalistic status line
 
   -- Utilities
   use 'thoughtbot/vim-rspec' -- Adds leader commands for automatically running Rspec Tests

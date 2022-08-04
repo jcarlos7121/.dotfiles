@@ -16,8 +16,9 @@ map("<S-E>", "<Plug>CamelCaseMotion_e")
 map("<Leader>v", ":JABSOpen<CR>", "silent")
 
 -- Telescope
-map("<C-P>", "<cmd>Telescope find_files<CR>")
+map("<C-P>", "<cmd>Telescope find_files hidden=true<CR>")
 map("<C-S>", "<cmd>Telescope live_grep<CR>")
+map("<C-T>", "<cmd>Telescope projects hidden=true<CR>")
 map("<Leader>z", ":tab split<CR>")
 map("<Leader>q", ":tabclose<CR>")
 
@@ -28,8 +29,8 @@ nmap("<leader>c", ":VCoolor<CR>")
 map("<Leader>p", ":let @+ = expand('%:p')<CR>", "silent")
 
 -- Hop
-map("s", "<cmd>HopChar2<CR>")
-map("S", "<cmd>HopPattern<CR>")
+nmap("S", "<cmd>HopPattern<CR>")
+nmap("s", "<cmd>HopChar2<CR>")
 map(",,w", "<cmd>HopWordAC<CR>")
 map(",,b", "<cmd>HopWordBC<CR>")
 map(",,k", "<cmd>HopLineBC<CR>")

@@ -39,6 +39,7 @@ opt.laststatus = 2
 opt.showtabline = 0
 opt.mmp = 5000
 
+-- Treesitter folding
 vim.o.foldmethod = 'expr'
 vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
 
@@ -79,17 +80,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   command = "set bufhidden=delete",
 })
 
--- ctrlp configuration
---vim.g.ctrlp_by_filename = 1
---vim.g.ctrlp_dont_split = 'NERD'
---vim.g.ctrlp_working_path_mode = 'ra'
---vim.g.ctrlp_root_markers = {'.acignore', '.git'}
---vim.g.ctrlp_user_command = 'ag %s -i -U --nocolor --nogroup --hidden --ignore public/vite-test --ignore public/vite-dev --ignore public/packs-test --ignore public/assets --ignore public/packs --ignore doc --ignore dist --ignore .yardoc --ignore coverage --ignore tmp --ignore node_modules --ignore deps --ignore webclient/node_modules --ignore client/node_modules --ignore app/build --ignore storage --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc" --ignore="*.png" --ignore="*.jpg" --ignore="*.jpeg" --ignore="*.svg" --ignore="*.gz" -g ""'
-
--- Web devicons
--- Disable decorations from folder nodes
-vim.g.WebDevIconsUnicodeDecorateFolderNodes = 0
-
 -- Bookmarks configuration
 vim.g.bookmark_sign = '₪'
 vim.g.bookmark_highlight_lines = 1
@@ -103,21 +93,10 @@ vim.g.ackprg = 'ag -S --nocolor --nogroup --column --ignore dist --ignore public
 vim.cmd [[source ~/.vim/config/ntfinder.vim]]
 vim.cmd [[source ~/.vim/config/envcommands.vim]]
 
--- Nerdtree configuration
+-- Configuration
 vim.cmd[[
   match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
   match ErrorMsg '\s\+$'
-
-  " Nerdtree configuration
-  let NERDTreeQuitOnOpen=1
-  let NERDTreeBookmarksFile=expand("$HOME/.vim-NERDTreeBookmarks")
-  let NERDTreeShowBookmarks=1
-  let NERDTreeChDirMode=2
-  let NERDTreeShowHidden = 1
-  let g:NERDTreeWinSize=31
-  let g:NERDTreeNodeDelimiter = "\u00a0"
-  let g:NERDTreeMapOpenDirNode = 'L'
-  let g:NERDTreeMapCloseDirNode = 'H'
 
   " Set ibeam on exit of vim
   augroup RestoreCursorShapeOnExit
