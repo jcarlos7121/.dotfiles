@@ -2,6 +2,8 @@ local actions = require("telescope.actions")
 local action_layout = require("telescope.actions.layout")
 local telescope = require('telescope')
 
+telescope.load_extension('projects')
+
 -- ----------------------------------------------------------------------------
 -- Setup
 -- ----------------------------------------------------------------------------
@@ -55,6 +57,11 @@ telescope.setup({
         ['<PageDown>'] = actions.preview_scrolling_down,
       },
     },
+    pickers = {
+      find_files = {
+        hidden = true
+      }
+    }
   }
 })
 
