@@ -6,6 +6,8 @@ vim.cmd [[
   colorscheme aquarium
   hi Normal guibg=#111111
   hi LineNr guibg=#111111
+  hi PMenu guifg=#d0d0d0 guibg=#151515
+  hi NormalFloat guifg=#d0d0d0 guibg=#151515
   hi VertSplit guibg=NONE guifg=#141414
 ]]
 
@@ -42,6 +44,14 @@ opt.mmp = 5000
 -- Treesitter folding
 vim.o.foldmethod = 'expr'
 vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
+
+-- Disable nvim-tree folder icon
+vim.g.nvim_tree_show_icons = {
+  files = 1,
+  git = 1,
+  folder_arrows = 1,
+  folders = 0
+}
 
 --Hybrid
 --vim.cmd [[

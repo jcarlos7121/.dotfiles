@@ -6,15 +6,12 @@
  - [X] Kitty
  - [X] Fish
  - [X] Tmux
+ - [X] Fig
 
 ** Neovim Configs
    - Nvim CMP
    - Nvim LSP for Ruby
    - Treesitter
-   - Nerdtree
+   - Nvim-tree
    - Fugitive for Git integration
-   - Ctrlp (might change it to telescope soon)
-   - Presenting.vim -- for presentations
-
-*** TODO Technologies I might add in the future
-  - [ ] Telescope
+   - Telescope
