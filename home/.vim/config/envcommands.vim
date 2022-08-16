@@ -30,6 +30,10 @@ fun! Guard( arg ) "{{{
   Start guard -P livereload
 endfunction "}}}
 
+fun! Heroku( arg ) "{{{
+  execute 'TermExec cmd="heroku ' . a:arg . '" size=15 direction=float'
+endfunction "}}}
+
 fun! Dock( arg ) "{{{
   execute 'Dispatch docker-compose run --rm web ' . a:arg
 endfunction "}}}
@@ -53,3 +57,4 @@ command! -nargs=* Guard call Guard( '<args>' )"}}}"
 command! -nargs=* Dock call Dock( '<args>' )"}}}"
 command! -nargs=* Django call Django( '<args>' )"}}}"
 command! -nargs=* Cap call Cap( '<args>' )"}}}"
+command! -nargs=* Heroku call Heroku( '<args>' )"}}}"
