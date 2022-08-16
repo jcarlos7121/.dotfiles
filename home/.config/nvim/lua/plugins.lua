@@ -39,6 +39,7 @@ return require('packer').startup(function()
     config = function()
       require("project_nvim").setup {
         show_hidden = true,
+        detection_methods = { "pattern" },
         patterns = { ".git" }
       }
     end
@@ -107,7 +108,7 @@ return require('packer').startup(function()
   -- NEOVIM configuration
   use 'nvim-lua/plenary.nvim'
   use 'b0o/mapx.nvim' -- Better key mappings on LUA
-  use 'nathom/filetype.nvim' -- Filetype speedup support for neovim
+  --use 'nathom/filetype.nvim' -- Filetype speedup support for neovim
 
   -- Colorschemes
   use 'FrenzyExists/aquarium-vim' -- Aquarium colorscheme i mostly use

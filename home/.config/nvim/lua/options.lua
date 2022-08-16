@@ -12,7 +12,7 @@ vim.cmd [[
 ]]
 
 opt.tabstop=2
-opt.shell = "/usr/local/bin/fish"
+opt.shell = "/opt/homebrew/bin/fish"
 opt.wrap = false
 opt.number = true
 opt.showcmd = true

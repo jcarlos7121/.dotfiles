@@ -15,7 +15,7 @@ function pgc; sudo pg_ctlcluster 9.4 main $argv; end
 function v; nvim $argv; end
 function cat; bat $argv; end
 function django; python manage.py $argv; end
-export EDITOR=vim
+export EDITOR=nvim
 status --is-interactive; and source (rbenv init -|psub)
 status --is-interactive; and source (pyenv init -|psub)
 status --is-interactive; and source (pyenv virtualenv-init -|psub)
