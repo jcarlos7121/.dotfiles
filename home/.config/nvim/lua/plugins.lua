@@ -74,8 +74,13 @@ return require('packer').startup(function()
   -- UI Utilities
   use 'bling/vim-bufferline' -- Displays the buffer in the status bar
   use 'yggdroot/indentline' -- displays identation lines
-  use { 'airblade/vim-gitgutter', commit = 'faa1e953deae2da2b0df45f71a8ce8d931766c28' } -- displays which lines where added, modified, deleted
   use { 'terryma/vim-multiple-cursors', commit = '13232e4b544775cf2b039571537b0e630406f801' } -- Allows to use multiple cursors
+  use {
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      require('gitsigns').setup()
+    end
+  }
   use 'ap/vim-css-color' -- Previews color on CSS while editing
   use {
     'nvim-lualine/lualine.nvim',
