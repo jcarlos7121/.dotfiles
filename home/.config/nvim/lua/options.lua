@@ -6,6 +6,7 @@ vim.cmd [[
   colorscheme aquarium
   hi Normal guibg=#111111
   hi LineNr guibg=#111111
+  hi SignColumn guibg=#111111
   hi PMenu guifg=#d0d0d0 guibg=#151515
   hi NormalFloat guifg=#d0d0d0 guibg=#151515
   hi VertSplit guibg=NONE guifg=#141414
@@ -59,21 +60,11 @@ vim.g.nvim_tree_show_icons = {
   --set background=light
 --]]
 
--- Highlight for GitGutter
-vim.highlight.create('GitGutterAdd', {guifg='#009900'}, false)
-vim.highlight.create('GitGutterChange', {guifg='#bbbb00'}, false)
-vim.highlight.create('GitGutterDelete', {guifg='#b73434' }, false)
-
 -- Highlight for search matches
 vim.highlight.create('Search', {guibg='#3466b7', guifg=white}, false)
 
 -- Highlight for rainbow brackets on treesitter
 vim.highlight.create('rainbowcol1', {guifg='#f73e7f'}, false)
-
-vim.api.nvim_create_autocmd("BufWritePost", {
-  pattern = { "*" },
-  command = "GitGutter",
-})
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "*" },
