@@ -2,15 +2,23 @@ local opt = vim.opt
 opt.termguicolors = true
 
 --vim.cmd [[colorscheme iceberg]]
-vim.cmd [[
-  colorscheme aquarium
-  hi Normal guibg=#111111
-  hi LineNr guibg=#111111
-  hi SignColumn guibg=#111111
-  hi PMenu guifg=#d0d0d0 guibg=#151515
-  hi NormalFloat guifg=#d0d0d0 guibg=#151515
-  hi VertSplit guibg=NONE guifg=#141414
-]]
+vim.cmd [[ colorscheme aquarium ]]
+
+--vim.cmd [[
+  --colorscheme aquarium
+  --hi Normal guibg=#111111
+  --hi LineNr guibg=#111111
+  --hi SignColumn guibg=#111111
+  --hi PMenu guifg=#d0d0d0 guibg=#151515
+  --hi NormalFloat guifg=#d0d0d0 guibg=#151515
+  --hi VertSplit guibg=NONE guifg=#141414
+--]]
+
+--Hybrid
+--vim.cmd [[
+  --colorscheme hybrid
+  --set background=light
+--]]
 
 opt.tabstop=2
 opt.shell = "/opt/homebrew/bin/fish"
@@ -53,12 +61,6 @@ vim.g.nvim_tree_show_icons = {
   folder_arrows = 1,
   folders = 0
 }
-
---Hybrid
---vim.cmd [[
-  --colorscheme hybrid
-  --set background=light
---]]
 
 -- Highlight for search matches
 vim.highlight.create('Search', {guibg='#3466b7', guifg=white}, false)

@@ -4,10 +4,13 @@ export PATH="$HOME/.emacs.d/bin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
 export EDITOR=nvim
 export PYTHON_CONFIGURE_OPTS="--enable-framework"
-eval "$(anyenv init -)"
+export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
+
+eval "$(anyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 eval "$(erlenv init -)"
+source "$HOME/.cargo/env"
 tmux
 
 ##
