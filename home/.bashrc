@@ -117,3 +117,4 @@ fi
 #if [ $r == 31 ]; then
 #let r=$r+2
 #fi
+. "$HOME/.cargo/env"
