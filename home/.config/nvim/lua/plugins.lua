@@ -50,7 +50,8 @@ return require('packer').startup(function()
   -- Code editing
   use 'junegunn/vim-easy-align' -- Press Enter and character to align multiple lines
   use {
-    'phaazon/hop.nvim',
+    'aznhe21/hop.nvim',
+    branch = 'fix-some-bugs',
     config = function()
       require'hop'.setup()
     end
@@ -87,7 +88,7 @@ return require('packer').startup(function()
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
 } -- Minimalistic status line
 
-  -- Utilities
+-- Utilities
   use 'thoughtbot/vim-rspec' -- Adds leader commands for automatically running Rspec Tests
   use 'christoomey/vim-tmux-navigator' -- For moving between vim and tmux panes
   use 'KabbAmine/vCoolor.vim' -- Adds color selector for CSS
@@ -104,9 +105,21 @@ return require('packer').startup(function()
       require('numb').setup()
     end,
   } -- Quicker line search for neovim
+  use {
+    'pwntester/octo.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim',
+      'kyazdani42/nvim-web-devicons',
+    },
+    config = function ()
+      require"octo".setup({ssh_aliases = {["github.com-cratebind"] = "github.com"}}
+      )
+    end
+  }
 
   -- Terminal
-  use {'akinsho/toggleterm.nvim', tag = 'v1.*', config = function()
+  use {'akinsho/toggleterm.nvim', tag = '*', config = function()
     require('toggleterm').setup()
   end} -- Toggles between terminal and vim
 
