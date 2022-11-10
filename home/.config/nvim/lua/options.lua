@@ -1,18 +1,18 @@
 local opt = vim.opt
 opt.termguicolors = true
 
---vim.cmd [[colorscheme iceberg]]
-vim.cmd [[ colorscheme aquarium ]]
+vim.cmd [[colorscheme iceberg]]
+--vim.cmd [[ colorscheme aquarium ]]
 
---vim.cmd [[
-  --colorscheme aquarium
-  --hi Normal guibg=#111111
-  --hi LineNr guibg=#111111
-  --hi SignColumn guibg=#111111
-  --hi PMenu guifg=#d0d0d0 guibg=#151515
-  --hi NormalFloat guifg=#d0d0d0 guibg=#151515
-  --hi VertSplit guibg=NONE guifg=#141414
---]]
+vim.cmd [[
+  colorscheme aquarium
+  hi Normal guibg=#111111
+  hi LineNr guibg=#111111
+  hi SignColumn guibg=#111111
+  hi PMenu guifg=#d0d0d0 guibg=#151515
+  hi NormalFloat guifg=#d0d0d0 guibg=#151515
+  hi VertSplit guibg=NONE guifg=#141414
+]]
 
 --Hybrid
 --vim.cmd [[
@@ -62,12 +62,6 @@ vim.g.nvim_tree_show_icons = {
   folders = 0
 }
 
--- Highlight for search matches
-vim.highlight.create('Search', {guibg='#3466b7', guifg=white}, false)
-
--- Highlight for rainbow brackets on treesitter
-vim.highlight.create('rainbowcol1', {guifg='#f73e7f'}, false)
-
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "*" },
   command = "EnableStripWhitespaceOnSave",
@@ -98,6 +92,9 @@ vim.cmd [[source ~/.vim/config/envcommands.vim]]
 
 -- Configuration
 vim.cmd[[
+  highlight Search guibg=#3466b7 guifg=#ffffff
+  highlight rainbowcol1 guifg=#f73e7f
+
   match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
   match ErrorMsg '\s\+$'
 

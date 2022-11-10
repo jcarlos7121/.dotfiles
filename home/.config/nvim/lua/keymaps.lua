@@ -18,6 +18,7 @@ map("<Leader>v", ":JABSOpen<CR>", "silent")
 -- Telescope
 map("<C-P>", "<cmd>Telescope find_files hidden=true<CR>")
 map("<C-S>", "<cmd>Telescope live_grep<CR>")
+map("<C-C>", "<cmd>Telescope lsp_workspace_symbols<CR>")
 map("<C-T>", "<cmd>Telescope projects hidden=true<CR>")
 map("<Leader>z", ":tab split<CR>")
 map("<Leader>q", ":tabclose<CR>")

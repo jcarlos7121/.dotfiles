@@ -35,7 +35,11 @@ telescope.setup({
       ".jpeg",
       ".jpg",
       ".png",
-      ".svg"
+      ".svg",
+      ".keep",
+      ".woff2",
+      ".woff",
+      ".ttf"
     },
     layout_strategy = 'bottom_pane',
     sorting_strategy = 'ascending',
