@@ -1,23 +1,53 @@
 set fish_greeting ""
-function datahub; ssh app@96.126.110.244; end
-function app; google-chrome --app=http://$argv; end
-function ares; killall xcompmgr; end
-function res; nohup xcompmgr -cfF -t-9 -l-11 -r9 -o.95 -D6 &; end
-function proglabs; ssh dokku@proglabs.co $argv; end
-function ga; git add .; end
-function gc; git commit -m $argv; end
-function gp; git push $argv; end
-function gpp; git push proglabs master; end
-function memcached-flush; echo 'flush_all' | nc localhost 11211; end
-function byte; sudo pm-hibernate; end
-function bayi; sudo pm-suspend-hybrid; end
-function pgc; sudo pg_ctlcluster 9.4 main $argv; end
-function v; nvim $argv; end
-function cat; bat $argv; end
-function django; python manage.py $argv; end
-export EDITOR=nvim
-status --is-interactive; and source (rbenv init -|psub)
-status --is-interactive; and source (pyenv init -|psub)
-status --is-interactive; and source (pyenv virtualenv-init -|psub)
-status --is-interactive; and source (exenv init -|psub)
-status --is-interactive; and source (nodenv init -|psub)
+
+# REUSE ALIASES FROM ~/.bash_profile
+egrep "^alias " ~/.bash_profile | while read e
+        set var (echo $e | sed -E "s/^alias ([A-Za-z0-9_-]+)=(.*)\$/\1/")
+        set value (echo $e | sed -E "s/^alias ([A-Za-z0-9_-]+)=(.*)\$/\2/")
+
+        # remove surrounding quotes if existing
+        set value (echo $value | sed -E "s/^\"(.*)\"\$/\1/")
+
+    # evaluate variables. we can use eval because we most likely just used "$var"
+        set value (eval echo $value)
+
+    # set an alias
+    alias $var="$value"
+end
+
+# REUSE ENVIRONMENT VARIABLES FROM ~/.bash_profile
+egrep "^export " ~/.bash_profile | while read e
+    set var (echo $e | sed -E "s/^export ([A-Z0-9_]+)=(.*)\$/\1/")
+    set value (echo $e | sed -E "s/^export ([A-Z0-9_]+)=(.*)\$/\2/")
+
+    # remove surrounding quotes if existing
+    set value (echo $value | sed -E "s/^\"(.*)\"\$/\1/")
+
+    if test $var = "PATH"
+        # replace ":" by spaces. this is how PATH looks for Fish
+        set value (echo $value | sed -E "s/:/ /g")
+
+        # use eval because we need to expand the value
+        eval set -xg $var $value
+
+        continue
+    end
+
+    # evaluate variables. we can use eval because we most likely just used "$var"
+    set value (eval echo $value)
+
+    #echo "set -xg '$var' '$value' (via '$e')"
+
+    switch $value
+            case '`*`';
+            # executable
+            set NO_QUOTES (echo $value | sed -E "s/^\`(.*)\`\$/\1/")
+            set -x $var (eval $NO_QUOTES)
+        case '*'
+            # default
+            set -xg $var $value
+        end
+end
+
+
+source  ~/.config/fish/functions/commands.fish
