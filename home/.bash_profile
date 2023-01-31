@@ -19,8 +19,7 @@ alias ibrew='arch -x86_64 /usr/local/bin/brew'
 
 eval "$(anyenv init -)"
 eval "$(pyenv virtualenv-init -)"
-eval "$(erlenv init -)"
-tmux
 
+tmux
 # Fig post block. Keep at the bottom of this file.
 [[ -f "$HOME/.fig/shell/bash_profile.post.bash" ]] && builtin source "$HOME/.fig/shell/bash_profile.post.bash"
