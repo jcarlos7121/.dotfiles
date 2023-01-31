@@ -83,13 +83,13 @@ return require('packer').startup(function()
     end
   }
   use 'ap/vim-css-color' -- Previews color on CSS while editing
-  use {
-    'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-} -- Minimalistic status line
+  --use {
+    --'nvim-lualine/lualine.nvim',
+    --requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+  --} -- Minimalistic status line
 
 -- Utilities
-  use 'thoughtbot/vim-rspec' -- Adds leader commands for automatically running Rspec Tests
+  use 'vim-test/vim-test'-- Adds leader commands for automatically running Rspec Tests
   use 'christoomey/vim-tmux-navigator' -- For moving between vim and tmux panes
   use 'KabbAmine/vCoolor.vim' -- Adds color selector for CSS
   use 'MattesGroeger/vim-bookmarks' -- Allows to bookmark lines to come back
@@ -117,6 +117,7 @@ return require('packer').startup(function()
       )
     end
   }
+  use 'ThePrimeagen/harpoon'
 
   -- Terminal
   use {'akinsho/toggleterm.nvim', tag = '*', config = function()

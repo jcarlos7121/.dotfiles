@@ -1,23 +1,29 @@
 local opt = vim.opt
 opt.termguicolors = true
 
-vim.cmd [[colorscheme iceberg]]
---vim.cmd [[ colorscheme aquarium ]]
+--vim.cmd [[colorscheme iceberg]]
+vim.cmd [[ colorscheme aquarium ]]
 
-vim.cmd [[
-  colorscheme aquarium
-  hi Normal guibg=#111111
-  hi LineNr guibg=#111111
-  hi SignColumn guibg=#111111
-  hi PMenu guifg=#d0d0d0 guibg=#151515
-  hi NormalFloat guifg=#d0d0d0 guibg=#151515
-  hi VertSplit guibg=NONE guifg=#141414
-]]
+--vim.cmd [[
+  --colorscheme aquarium
+  --hi Normal guibg=#111111
+  --hi LineNr guibg=#111111
+  --hi SignColumn guibg=#111111
+  --hi PMenu guifg=#d0d0d0 guibg=#151515
+  --hi NormalFloat guifg=#d0d0d0 guibg=#151515
+  --hi VertSplit guibg=NONE guifg=#141414
+--]]
 
 --Hybrid
 --vim.cmd [[
   --colorscheme hybrid
   --set background=light
+--]]
+
+-- Zenbones
+--vim.cmd [[
+  --colorscheme zenbones
+  --set background=dark
 --]]
 
 opt.tabstop=2
@@ -81,9 +87,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 vim.g.bookmark_sign = '₪'
 vim.g.bookmark_highlight_lines = 1
 
--- Vim rspec command
-vim.g.rspec_command = "Dispatch rspec {spec}"
-
 -- Silver searcher configuration
 vim.g.ackprg = 'ag -S --nocolor --nogroup --column --ignore dist --ignore public/vite-test --ignore public/vite-dev --ignore public/packs-test --ignore public/assets --ignore public/packs --ignore tmp --ignore "./_build" --ignore coverage --ignore node_modules --ignore webclient/node_modules --ignore "./frontend/node_modules/*" --ignore "./frontend/tmp/*" --ignore "./app/build/*" --ignore="*.png" --ignore="*.jpg" --ignore="*.svg" --ignore="*.gz"'
 
@@ -103,4 +106,6 @@ vim.cmd[[
     autocmd!
     autocmd VimLeave * set guicursor=a:ver10-blinkoff0
   augroup END
+
+  let test#strategy = "dispatch"
 ]]

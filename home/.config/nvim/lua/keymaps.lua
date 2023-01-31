@@ -17,9 +17,12 @@ map("<Leader>v", ":JABSOpen<CR>", "silent")
 
 -- Telescope
 map("<C-P>", "<cmd>Telescope find_files hidden=true<CR>")
+map("<C-Q>", "<cmd>Telescope harpoon marks<CR>")
 map("<C-S>", "<cmd>Telescope live_grep<CR>")
-map("<C-C>", "<cmd>Telescope lsp_workspace_symbols<CR>")
+map("<C-C>", "<cmd>Telescope lsp_dynamic_workspace_symbols symbols=class<CR>")
 map("<C-T>", "<cmd>Telescope projects hidden=true<CR>")
+map("<Leader>j", ':lua require("harpoon.mark").add_file()<CR>', 'silent')
+map("<Leader>k", ':lua require("harpoon.mark").rm_file()<CR>', 'silent')
 map("<Leader>z", ":tab split<CR>")
 map("<Leader>q", ":tabclose<CR>")
 
@@ -71,9 +74,9 @@ noremap("<A-Down>", ":m '>+1<CR>gv=gv")
 vnoremap("<A-Up>", " :m '<-2<CR>gv=gv")
 
 -- Vim Rspec
-map("<Leader>w", ":call RunAllSpecs()<CR>", "silent")
-map("<Leader>e", ":call RunNearestSpec()<CR>", "silent")
-map("<Leader>t", ":call RunCurrentSpecFile()<CR>", "silent")
+map("<Leader>w", ":TestSuite<CR>", "silent")
+map("<Leader>e", ":TestNearest<CR>", "silent")
+map("<Leader>t", ":TestFile<CR>", "silent")
 
 -- Easyalign
 vmap("<Enter>", "<Plug>(EasyAlign)", "silent")
