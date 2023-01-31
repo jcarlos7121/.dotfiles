@@ -3,6 +3,7 @@ local action_layout = require("telescope.actions.layout")
 local telescope = require('telescope')
 
 telescope.load_extension('projects')
+telescope.load_extension('harpoon')
 
 -- ----------------------------------------------------------------------------
 -- Setup
@@ -46,7 +47,9 @@ telescope.setup({
     layout_config = { },
     border = {},
     borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-    preview = false,
+    preview = {
+      hide_on_startup = true -- hide previewer when picker starts
+    },
     color_devicons = true,
     set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
     winblend = 10,
