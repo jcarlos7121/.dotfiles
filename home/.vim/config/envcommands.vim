@@ -42,10 +42,6 @@ fun! Django( arg ) "{{{
   execute 'Start python manage.py ' . a:arg
 endfunction "}}}
 
-fun! Cap( arg ) "{{{
-  execute 'TermExec cmd="cap ' . a:arg . '" size=15 direction=float'
-endfunction "}}}
-
 command! -nargs=* Fs call Fs( '<args>' )"}}}"
 command! -nargs=* Pry call Pry( '<args>' )"}}}"
 command! -nargs=* Redis call Redis( '<args>' )"}}}"
@@ -56,5 +52,4 @@ command! -nargs=* Rsb call Rsb( '<args>' )"}}}"
 command! -nargs=* Guard call Guard( '<args>' )"}}}"
 command! -nargs=* Dock call Dock( '<args>' )"}}}"
 command! -nargs=* Django call Django( '<args>' )"}}}"
-command! -nargs=* Cap call Cap( '<args>' )"}}}"
 command! -nargs=* Heroku call Heroku( '<args>' )"}}}"
