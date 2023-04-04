@@ -71,6 +71,11 @@ return require('packer').startup(function()
       require("todo-comments").setup { }
     end
   } -- Adds colors to todo comments
+  use {
+    'creativenull/diagnosticls-configs-nvim',
+    tag = 'v0.1.8', -- `tag` is optional
+    requires = 'neovim/nvim-lspconfig',
+  }
 
   -- UI Utilities
   use 'bling/vim-bufferline' -- Displays the buffer in the status bar
@@ -143,7 +148,7 @@ return require('packer').startup(function()
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } -- Treesitter for syntax highlighting in neovim
   use { 'nvim-treesitter/nvim-treesitter-textobjects' }
   use { 'p00f/nvim-ts-rainbow' }
-  use { 'RRethy/nvim-treesitter-textsubjects' }
+  -- use { 'RRethy/nvim-treesitter-textsubjects' }
 
   -- Autocompletion
   use 'neovim/nvim-lspconfig' -- Adds LSP support for Neovim
