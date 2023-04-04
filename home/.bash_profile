@@ -1,3 +1,5 @@
+# Fig pre block. Keep at the top of this file.
+[[ -f "$HOME/.fig/shell/bash_profile.pre.bash" ]] && builtin source "$HOME/.fig/shell/bash_profile.pre.bash"
 export PATH="$HOME/.anyenv/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.emacs.d/bin:$PATH"
@@ -17,3 +19,6 @@ alias ibrew='arch -x86_64 /usr/local/bin/brew'
 eval "$(anyenv init -)"
 
 tmux
+
+# Fig post block. Keep at the bottom of this file.
+[[ -f "$HOME/.fig/shell/bash_profile.post.bash" ]] && builtin source "$HOME/.fig/shell/bash_profile.post.bash"

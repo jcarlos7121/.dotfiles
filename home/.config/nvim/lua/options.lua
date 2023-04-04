@@ -2,17 +2,17 @@ local opt = vim.opt
 opt.termguicolors = true
 
 --vim.cmd [[colorscheme iceberg]]
-vim.cmd [[ colorscheme aquarium ]]
+--vim.cmd [[ colorscheme aquarium ]]
 
---vim.cmd [[
-  --colorscheme aquarium
-  --hi Normal guibg=#111111
-  --hi LineNr guibg=#111111
-  --hi SignColumn guibg=#111111
-  --hi PMenu guifg=#d0d0d0 guibg=#151515
-  --hi NormalFloat guifg=#d0d0d0 guibg=#151515
-  --hi VertSplit guibg=NONE guifg=#141414
---]]
+vim.cmd [[
+  colorscheme aquarium
+  hi Normal guibg=#111111
+  hi LineNr guibg=#111111
+  hi SignColumn guibg=#111111
+  hi PMenu guifg=#d0d0d0 guibg=#151515
+  hi NormalFloat guifg=#d0d0d0 guibg=#151515
+  hi VertSplit guibg=NONE guifg=#141414
+]]
 
 --Hybrid
 --vim.cmd [[
@@ -20,7 +20,7 @@ vim.cmd [[ colorscheme aquarium ]]
   --set background=light
 --]]
 
--- Zenbones
+ --Zenbones
 --vim.cmd [[
   --colorscheme zenbones
   --set background=dark
