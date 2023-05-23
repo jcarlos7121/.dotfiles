@@ -2,28 +2,25 @@ local opt = vim.opt
 opt.termguicolors = true
 
 --vim.cmd [[colorscheme iceberg]]
---vim.cmd [[ colorscheme aquarium ]]
-
-vim.cmd [[
-  colorscheme aquarium
-  hi Normal guibg=#111111
-  hi LineNr guibg=#111111
-  hi SignColumn guibg=#111111
-  hi PMenu guifg=#d0d0d0 guibg=#151515
-  hi NormalFloat guifg=#d0d0d0 guibg=#151515
-  hi VertSplit guibg=NONE guifg=#141414
-]]
-
---Hybrid
+--vim.cmd('colorscheme rose-pine')
 --vim.cmd [[
   --colorscheme hybrid
   --set background=light
 --]]
-
- --Zenbones
 --vim.cmd [[
   --colorscheme zenbones
   --set background=dark
+--]]
+vim.cmd [[ colorscheme aquarium ]]
+
+--vim.cmd [[
+  --colorscheme aquarium
+  --hi Normal guibg=#111111
+  --hi LineNr guibg=#111111
+  --hi SignColumn guibg=#111111
+  --hi PMenu guifg=#d0d0d0 guibg=#151515
+  --hi NormalFloat guifg=#d0d0d0 guibg=#151515
+  --hi VertSplit guibg=NONE guifg=#141414
 --]]
 
 opt.tabstop=2

@@ -88,10 +88,10 @@ return require('packer').startup(function()
     end
   }
   use 'ap/vim-css-color' -- Previews color on CSS while editing
-  --use {
-    --'nvim-lualine/lualine.nvim',
-    --requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-  --} -- Minimalistic status line
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+  } -- Minimalistic status line
 
 -- Utilities
   use 'vim-test/vim-test'-- Adds leader commands for automatically running Rspec Tests
@@ -126,7 +126,9 @@ return require('packer').startup(function()
 
   -- Terminal
   use {'akinsho/toggleterm.nvim', tag = '*', config = function()
-    require('toggleterm').setup()
+    require('toggleterm').setup {
+      shell = '/Users/juanhinojo/.fig/bin/figterm -- fish'
+    }
   end} -- Toggles between terminal and vim
 
   -- NEOVIM configuration
@@ -142,13 +144,14 @@ return require('packer').startup(function()
     'mcchrish/zenbones.nvim',
     requires = 'rktjmp/lush.nvim'
   }
+  use({ 'rose-pine/neovim', as = 'rose-pine' })
 
   -- Treesitter for better syntax highlighting
   -- and navigating inside the syntax tree
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } -- Treesitter for syntax highlighting in neovim
   use { 'nvim-treesitter/nvim-treesitter-textobjects' }
   use { 'p00f/nvim-ts-rainbow' }
-  -- use { 'RRethy/nvim-treesitter-textsubjects' }
+  use { 'RRethy/nvim-treesitter-textsubjects' }
 
   -- Autocompletion
   use 'neovim/nvim-lspconfig' -- Adds LSP support for Neovim
@@ -165,6 +168,5 @@ return require('packer').startup(function()
     'L3MON4D3/LuaSnip',
     requires = { 'rafamadriz/friendly-snippets' }
   } -- Snippets engine for Lua, compatible with VSCode
-
   use { 'saadparwaiz1/cmp_luasnip' } -- Adds lua snippets to cmp
 end)
