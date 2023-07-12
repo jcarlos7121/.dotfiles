@@ -9,7 +9,26 @@ list.sql = {
 }
 
 local _ = require("nvim-treesitter.configs").setup {
-  ensure_installed = { "ruby", "yaml", "fish", "sql", "go", "query", "html", "css", "lua", "vim", "bash", "javascript", "typescript", "pug", "org", "solidity" },
+  ensure_installed = {
+    "heex",
+    "ruby",
+    "yaml",
+    "fish",
+    "sql",
+    "go",
+    "query",
+    "html",
+    "css",
+    "lua",
+    "vim",
+    "bash",
+    "javascript",
+    "typescript",
+    "pug",
+    "org",
+    "solidity",
+    "elixir"
+  },
 
   --indent = { enable = true },
   highlight = {

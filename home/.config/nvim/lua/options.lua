@@ -75,6 +75,12 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   command = "set noro",
 })
 
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+  callback = function()
+    require("lint").try_lint()
+  end,
+})
+
 vim.api.nvim_create_autocmd("BufReadPost", {
   pattern = { "*" },
   command = "set bufhidden=delete",
