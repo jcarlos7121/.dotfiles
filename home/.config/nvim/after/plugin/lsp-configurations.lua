@@ -1,9 +1,6 @@
-
 local nvim_lsp = require('lspconfig')
 
-require("nvim-lsp-installer").setup {}
-
-local dlsconfig = require 'diagnosticls-configs'
+require("mason").setup()
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -39,44 +36,29 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities(
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { "solargraph", "tsserver" }
+local servers = { "solargraph", "tsserver", "elixirls" }
 
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
+  local setup_params = {
     on_attach = on_attach,
     capabilities = capabilities,
     flags = {
       debounce_text_changes = 150,
-    }
+    },
   }
+
+  if lsp == "elixirls" then
+    setup_params.cmd = { "elixir-ls" }
+  end
+
+  nvim_lsp[lsp].setup(setup_params)
 end
 
-local rubocop = require 'diagnosticls-configs.linters.rubocop'
-local eslint = require 'diagnosticls-configs.linters.eslint'
-local eslint_fmt = require 'diagnosticls-configs.formatters.eslint_fmt'
-
-dlsconfig.init {
-  on_attach = on_attach,
-}
-
-dlsconfig.setup {
-  ['ruby'] = {
-    linter = rubocop,
-  },
-  ['typescript'] = {
-    linter = eslint,
-    formatter = eslint_fmt,
-  },
-  ['typescriptreact'] = {
-    linter = eslint,
-    formatter = eslint_fmt,
-  },
-  ['javascript'] = {
-    linter = eslint,
-    formatter = eslint_fmt,
-  },
-  ['javascriptreact'] = {
-    linter = eslint,
-    formatter = eslint_fmt,
-  }
+require('lint').linters_by_ft = {
+  ruby = {'rubocop'},
+  elixir = {'credo'},
+  typescript = {'eslint_d'},
+  javascript = {'eslint_d'},
+  javascriptreact = {'eslint_d'},
+  typescriptreact = {'eslint_d'}
 }

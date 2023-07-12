@@ -30,8 +30,8 @@ return require('packer').startup(function()
   } -- Adds :Telescope command replacement for ctrl-p
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
   use 'tpope/vim-vinegar' -- Type - and go to nerdtree
-  use 'kyazdani42/nvim-web-devicons'
-  use { 'kyazdani42/nvim-tree.lua' } -- File explorer
+  use 'kyazdani42/nvim-web-devicons' -- Adds icons to nvim-tree
+  use 'kyazdani42/nvim-tree.lua' -- File explorer
 
   -- Lua
   use {
@@ -44,7 +44,7 @@ return require('packer').startup(function()
       }
     end
   } -- Project management and rooter
-  use 'justinmk/vim-gtfo' -- TOUSE: opens a file opener on the file opened on vim
+  use 'justinmk/vim-gtfo' -- TOUSE: opens a file opener on the file opened on vim typing 'gof'
   use 'matbme/JABS.nvim'  -- Browse between buffers
 
   -- Code editing
@@ -71,11 +71,6 @@ return require('packer').startup(function()
       require("todo-comments").setup { }
     end
   } -- Adds colors to todo comments
-  use {
-    'creativenull/diagnosticls-configs-nvim',
-    tag = 'v0.1.8', -- `tag` is optional
-    requires = 'neovim/nvim-lspconfig',
-  }
 
   -- UI Utilities
   use 'bling/vim-bufferline' -- Displays the buffer in the status bar
@@ -98,7 +93,7 @@ return require('packer').startup(function()
   use 'christoomey/vim-tmux-navigator' -- For moving between vim and tmux panes
   use 'KabbAmine/vCoolor.vim' -- Adds color selector for CSS
   use 'MattesGroeger/vim-bookmarks' -- Allows to bookmark lines to come back
-  use 'kristijanhusak/vim-carbon-now-sh'
+  use 'kristijanhusak/vim-carbon-now-sh' -- create snipper of code
   use 'dhruvasagar/vim-table-mode' -- Allows to edit tables with orgmode
   use {'nvim-orgmode/orgmode', config = function()
     require('orgmode').setup{}
@@ -155,6 +150,7 @@ return require('packer').startup(function()
 
   -- Autocompletion
   use 'neovim/nvim-lspconfig' -- Adds LSP support for Neovim
+  use 'mfussenegger/nvim-lint' -- Adds linting support for neovim
   use 'tami5/lspsaga.nvim' -- Adds LSP actions with lightweight UI
   use 'hrsh7th/nvim-cmp' -- Adds completion for nvim
   use 'hrsh7th/cmp-nvim-lsp' -- Adds LSP support to cmp
@@ -163,7 +159,10 @@ return require('packer').startup(function()
   use 'hrsh7th/cmp-buffer' -- Adds LSP autocompletion for buffers
   use 'onsails/lspkind-nvim' -- Adds LSP pictograms like VSCode to autocomplete
   use 'github/copilot.vim' -- Enables copilot for vim
-  use 'williamboman/nvim-lsp-installer' -- Adds LSP Installer to nvim
+  use {
+    "williamboman/mason.nvim",
+    run = ":MasonUpdate" -- :MasonUpdate updates registry contents
+  } -- Adds lsp installer for neovim
   use {
     'L3MON4D3/LuaSnip',
     requires = { 'rafamadriz/friendly-snippets' }
