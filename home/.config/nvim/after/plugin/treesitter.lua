@@ -26,6 +26,7 @@ local _ = require("nvim-treesitter.configs").setup {
     "typescript",
     "pug",
     "org",
+    "jsdoc",
     "solidity",
     "elixir"
   },
