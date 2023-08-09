@@ -82,7 +82,12 @@ return require('packer').startup(function()
       require('gitsigns').setup()
     end
   }
-  use 'ap/vim-css-color' -- Previews color on CSS while editing
+  use {
+    'NvChad/nvim-colorizer.lua',
+    config = function()
+      require('colorizer').setup()
+    end
+  }
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
@@ -168,4 +173,15 @@ return require('packer').startup(function()
     requires = { 'rafamadriz/friendly-snippets' }
   } -- Snippets engine for Lua, compatible with VSCode
   use { 'saadparwaiz1/cmp_luasnip' } -- Adds lua snippets to cmp
+  use({
+  "jackMort/ChatGPT.nvim",
+    config = function()
+      require("chatgpt").setup()
+    end,
+    requires = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim"
+    } -- Integrate ChatGPT
+  })
 end)

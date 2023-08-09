@@ -2,7 +2,7 @@ local opt = vim.opt
 opt.termguicolors = true
 
 --vim.cmd [[colorscheme iceberg]]
---vim.cmd('colorscheme rose-pine')
+vim.cmd('colorscheme rose-pine')
 --vim.cmd [[
   --colorscheme hybrid
   --set background=light
@@ -11,7 +11,7 @@ opt.termguicolors = true
   --colorscheme zenbones
   --set background=dark
 --]]
-vim.cmd [[ colorscheme aquarium ]]
+--vim.cmd [[ colorscheme aquarium ]]
 
 --vim.cmd [[
   --colorscheme aquarium
