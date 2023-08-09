@@ -26,6 +26,11 @@ map("<Leader>k", ':lua require("harpoon.mark").rm_file()<CR>', 'silent')
 map("<Leader>z", ":tab split<CR>")
 map("<Leader>q", ":tabclose<CR>")
 
+-- AI
+map("<Leader>9", ":ChatGPT<CR>")
+map("<Leader>8", ":ChatGPTActAs<CR>")
+map("<Leader>7", ":ChatGPTEditWithInstructions<CR>")
+
 -- VCoolor
 nmap("<leader>c", ":VCoolor<CR>")
 
