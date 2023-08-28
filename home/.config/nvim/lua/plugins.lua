@@ -156,7 +156,10 @@ return require('packer').startup(function()
   -- Autocompletion
   use 'neovim/nvim-lspconfig' -- Adds LSP support for Neovim
   use 'mfussenegger/nvim-lint' -- Adds linting support for neovim
-  use 'tami5/lspsaga.nvim' -- Adds LSP actions with lightweight UI
+  use ({
+    'nvimdev/lspsaga.nvim',
+    after = 'nvim-lspconfig'
+  })
   use 'hrsh7th/nvim-cmp' -- Adds completion for nvim
   use 'hrsh7th/cmp-nvim-lsp' -- Adds LSP support to cmp
   use 'hrsh7th/cmp-nvim-lua' -- Adds lua completion for cmp
