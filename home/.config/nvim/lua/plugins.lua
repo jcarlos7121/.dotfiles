@@ -178,9 +178,6 @@ return require('packer').startup(function()
   use { 'saadparwaiz1/cmp_luasnip' } -- Adds lua snippets to cmp
   use({
   "jackMort/ChatGPT.nvim",
-    config = function()
-      require("chatgpt").setup()
-    end,
     requires = {
       "MunifTanjim/nui.nvim",
       "nvim-lua/plenary.nvim",

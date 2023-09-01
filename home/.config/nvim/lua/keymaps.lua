@@ -17,19 +17,24 @@ map("<Leader>v", ":JABSOpen<CR>", "silent")
 
 -- Telescope
 map("<C-P>", "<cmd>Telescope find_files hidden=true<CR>")
-map("<C-Q>", "<cmd>Telescope harpoon marks<CR>")
 map("<C-S>", "<cmd>Telescope live_grep<CR>")
 map("<C-C>", "<cmd>Telescope lsp_dynamic_workspace_symbols symbols=class<CR>")
 map("<C-T>", "<cmd>Telescope projects hidden=true<CR>")
-map("<Leader>j", ':lua require("harpoon.mark").add_file()<CR>', 'silent')
-map("<Leader>k", ':lua require("harpoon.mark").rm_file()<CR>', 'silent')
+
+-- Harpoon
+map("<C-Q>", ':lua require("harpoon.ui").toggle_quick_menu()<CR>', 'silent')
+map("<Leader>k", ':lua require("harpoon.ui").nav_next()<CR>', 'silent')
+map("<Leader>j", ':lua require("harpoon.ui").nav_prev()<CR>', 'silent')
+
+-- Tabs
 map("<Leader>z", ":tab split<CR>")
 map("<Leader>q", ":tabclose<CR>")
 
 -- AI
-map("<Leader>9", ":ChatGPT<CR>")
-map("<Leader>8", ":ChatGPTActAs<CR>")
-map("<Leader>7", ":ChatGPTEditWithInstructions<CR>")
+map("<Leader>0", ":ChatGPT<CR>", 'silent')
+map("<Leader>9", ":ChatGPTEditWithInstructions<CR>", 'silent')
+map("<Leader>8", ":ChatGPTRun<Space>")
+map("<Leader>7", ":ChatGPTActAs<Space>")
 
 -- VCoolor
 nmap("<leader>c", ":VCoolor<CR>")
