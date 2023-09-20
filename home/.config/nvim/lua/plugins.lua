@@ -127,7 +127,7 @@ return require('packer').startup(function()
   -- Terminal
   use {'akinsho/toggleterm.nvim', tag = '*', config = function()
     require('toggleterm').setup {
-      shell = '/Users/juanhinojo/.fig/bin/figterm -- fish'
+      shell = '/Users/juanhinojo/.fig/bin/figterm -- fish',
     }
   end} -- Toggles between terminal and vim
 
@@ -150,8 +150,8 @@ return require('packer').startup(function()
   -- and navigating inside the syntax tree
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } -- Treesitter for syntax highlighting in neovim
   use { 'nvim-treesitter/nvim-treesitter-textobjects' }
-  use { 'p00f/nvim-ts-rainbow' }
   use { 'RRethy/nvim-treesitter-textsubjects' }
+  use { 'HiPhish/rainbow-delimiters.nvim' }
 
   -- Autocompletion
   use 'neovim/nvim-lspconfig' -- Adds LSP support for Neovim

@@ -1,6 +1,9 @@
 require'mapx'.setup { global = "force" }
 
 require('lspsaga').setup({
+  ui = {
+    code_action = ''
+  },
   symbol_in_winbar = {
     enable = false,
   },
