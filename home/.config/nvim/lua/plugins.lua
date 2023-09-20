@@ -7,8 +7,8 @@ return require('packer').startup(function()
   use 'lewis6991/impatient.nvim' -- Speedup startup time of plugins
 
   -- Languages
-  use 'slim-template/vim-slim'
-  use 'bfontaine/Brewfile.vim'
+  use 'slim-template/vim-slim' -- Adds syntax highlighting for slim
+  use 'bfontaine/Brewfile.vim' -- Adds syntax highlighting for Brewfile
 
   -- Commands
   use 'danro/rename.vim' -- :Rename filename
@@ -28,7 +28,7 @@ return require('packer').startup(function()
     'nvim-telescope/telescope.nvim',
     requires = { {'nvim-lua/plenary.nvim'} }
   } -- Adds :Telescope command replacement for ctrl-p
-  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' } -- Faster telescope fuzzy search
   use 'tpope/vim-vinegar' -- Type - and go to nerdtree
   use 'kyazdani42/nvim-web-devicons' -- Adds icons to nvim-tree
   use 'kyazdani42/nvim-tree.lua' -- File explorer
@@ -55,13 +55,22 @@ return require('packer').startup(function()
     config = function()
       require'hop'.setup()
     end
-  }
+  } -- Adds hop motion for jumping between words
   use 'scrooloose/nerdcommenter' -- Comment and uncomment with <leader>ci
-  use 'tpope/vim-endwise' -- Automatically adds end word whenever def, or each opens
+  use 'RRethy/nvim-treesitter-endwise' -- Adds automatic end for if, do, class in Ruby, Elixir
   use 'tpope/vim-ragtag' -- Adds autoclose for things like <% %> and <%= %>
   use 'kana/vim-smartinput' -- Automatically closes ([{}])
   use 'tpope/vim-surround' -- Adds mechanigs for surrownding words for example: csw)
-  use { 'ntpeters/vim-better-whitespace', commit = 'c5afbe91d29c5e3be81d5125ddcdc276fd1f1322' } -- Displays whitespaces and strips them on save
+  use({
+    "cappyzawa/trim.nvim",
+    config = function()
+      require("trim").setup({
+        patterns = {
+          [[%s/\(\n\n\)\n\+/\1/]]
+        }
+      })
+    end
+  }) -- replace multiple blank lines with a single line
   use 'jgdavey/vim-blockle' -- Allows to toggle between do end and { }
   use 'bkad/CamelCaseMotion' -- Allows you to move word by word
   use {
@@ -137,21 +146,16 @@ return require('packer').startup(function()
   --use 'nathom/filetype.nvim' -- Filetype speedup support for neovim
 
   -- Colorschemes
+  use 'zaldih/themery.nvim' -- Theme toggler
   use 'FrenzyExists/aquarium-vim' -- Aquarium colorscheme i mostly use
-  use 'jcarlos7121/iceberg.vim' -- My own modified iceberg color config
-  use 'w0ng/vim-hybrid' -- Adds colors to vim for better readability on light scheme
-  use {
-    'mcchrish/zenbones.nvim',
-    requires = 'rktjmp/lush.nvim'
-  }
   use({ 'rose-pine/neovim', as = 'rose-pine' })
 
   -- Treesitter for better syntax highlighting
   -- and navigating inside the syntax tree
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } -- Treesitter for syntax highlighting in neovim
-  use { 'nvim-treesitter/nvim-treesitter-textobjects' }
-  use { 'RRethy/nvim-treesitter-textsubjects' }
-  use { 'HiPhish/rainbow-delimiters.nvim' }
+  use { 'nvim-treesitter/nvim-treesitter-textobjects' } -- Allows to cic (change around class) cam (change around method)
+  use { 'RRethy/nvim-treesitter-textsubjects' } -- Select context visually with , ; and i;
+  use { 'HiPhish/rainbow-delimiters.nvim' } -- Adds rainbow colors to delimiters
 
   -- Autocompletion
   use 'neovim/nvim-lspconfig' -- Adds LSP support for Neovim
@@ -159,14 +163,13 @@ return require('packer').startup(function()
   use ({
     'nvimdev/lspsaga.nvim',
     after = 'nvim-lspconfig'
-  })
+  }) -- Adds LSP displays UI for LSP actions
   use 'hrsh7th/nvim-cmp' -- Adds completion for nvim
   use 'hrsh7th/cmp-nvim-lsp' -- Adds LSP support to cmp
   use 'hrsh7th/cmp-nvim-lua' -- Adds lua completion for cmp
   use 'hrsh7th/cmp-path' -- Adds Paths automatically to cmp
   use 'hrsh7th/cmp-buffer' -- Adds LSP autocompletion for buffers
   use 'onsails/lspkind-nvim' -- Adds LSP pictograms like VSCode to autocomplete
-  use 'github/copilot.vim' -- Enables copilot for vim
   use {
     "williamboman/mason.nvim",
     run = ":MasonUpdate" -- :MasonUpdate updates registry contents
@@ -176,6 +179,8 @@ return require('packer').startup(function()
     requires = { 'rafamadriz/friendly-snippets' }
   } -- Snippets engine for Lua, compatible with VSCode
   use { 'saadparwaiz1/cmp_luasnip' } -- Adds lua snippets to cmp
+
+  -- AI
   use({
   "jackMort/ChatGPT.nvim",
     requires = {
@@ -184,4 +189,5 @@ return require('packer').startup(function()
       "nvim-telescope/telescope.nvim"
     } -- Integrate ChatGPT
   })
+  use 'github/copilot.vim' -- Enables copilot for vim
 end)

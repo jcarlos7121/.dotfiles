@@ -43,6 +43,10 @@ local _ = require("nvim-treesitter.configs").setup {
     max_file_lines = nil,
   },
 
+  endwise = {
+    enable = true,
+  },
+
   textsubjects = {
     enable = true,
     prev_selection = ',',

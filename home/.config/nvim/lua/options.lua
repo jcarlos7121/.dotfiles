@@ -1,27 +1,7 @@
 local opt = vim.opt
 opt.termguicolors = true
 
---vim.cmd [[colorscheme iceberg]]
-vim.cmd('colorscheme rose-pine')
---vim.cmd [[
-  --colorscheme hybrid
-  --set background=light
---]]
---vim.cmd [[
-  --colorscheme zenbones
-  --set background=dark
---]]
---vim.cmd [[ colorscheme aquarium ]]
-
---vim.cmd [[
-  --colorscheme aquarium
-  --hi Normal guibg=#111111
-  --hi LineNr guibg=#111111
-  --hi SignColumn guibg=#111111
-  --hi PMenu guifg=#d0d0d0 guibg=#151515
-  --hi NormalFloat guifg=#d0d0d0 guibg=#151515
-  --hi VertSplit guibg=NONE guifg=#141414
---]]
+require("theme")
 
 opt.tabstop=2
 opt.shell = "/opt/homebrew/bin/fish"
@@ -64,11 +44,6 @@ vim.g.nvim_tree_show_icons = {
   folder_arrows = 1,
   folders = 0
 }
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "*" },
-  command = "EnableStripWhitespaceOnSave",
-})
 
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   pattern = { "*.*" },
