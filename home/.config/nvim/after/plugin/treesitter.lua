@@ -10,7 +10,10 @@ list.sql = {
 
 local _ = require("nvim-treesitter.configs").setup {
   ensure_installed = {
+    "markdown",
+    "markdown_inline",
     "heex",
+    "eex",
     "ruby",
     "yaml",
     "fish",

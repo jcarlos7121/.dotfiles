@@ -102,7 +102,7 @@ return require('packer').startup(function()
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   } -- Minimalistic status line
 
--- Utilities
+  -- Utilities
   use 'vim-test/vim-test'-- Adds leader commands for automatically running Rspec Tests
   use 'christoomey/vim-tmux-navigator' -- For moving between vim and tmux panes
   use 'KabbAmine/vCoolor.vim' -- Adds color selector for CSS

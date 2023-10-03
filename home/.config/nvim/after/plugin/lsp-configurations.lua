@@ -21,7 +21,6 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
 
-
   -- if client.server_capabilities.documentFormattingProvider then
   --   vim.api.nvim_command [[augroup Format]]
   --   vim.api.nvim_command [[autocmd! * <buffer>]]
@@ -45,6 +44,20 @@ for _, lsp in ipairs(servers) do
     flags = {
       debounce_text_changes = 150,
     },
+    settings = {
+      completions = {
+        completeFunctionCalls = true
+      },
+      solargraph = {
+        autoformat = true,
+        completion = true,
+        diagnostic = true,
+        folding = true,
+        references = true,
+        rename = true,
+        symbols = true
+      }
+    }
   }
 
   if lsp == "elixirls" then
