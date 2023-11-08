@@ -53,7 +53,6 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   callback = function()
     require("lint").try_lint()
-    require("harpoon.mark").add_file()
   end,
 })
 
@@ -69,13 +68,11 @@ vim.g.bookmark_highlight_lines = 1
 -- Silver searcher configuration
 vim.g.ackprg = 'ag -S --nocolor --nogroup --column --ignore dist --ignore public/vite-test --ignore public/vite-dev --ignore public/packs-test --ignore public/assets --ignore public/packs --ignore tmp --ignore "./_build" --ignore coverage --ignore node_modules --ignore webclient/node_modules --ignore "./frontend/node_modules/*" --ignore "./frontend/tmp/*" --ignore "./app/build/*" --ignore="*.png" --ignore="*.jpg" --ignore="*.svg" --ignore="*.gz"'
 
-vim.cmd [[source ~/.vim/config/ntfinder.vim]]
 vim.cmd [[source ~/.vim/config/envcommands.vim]]
 
 -- Configuration
 vim.cmd[[
   highlight Search guibg=#3466b7 guifg=#ffffff
-  highlight rainbowcol1 guifg=#f73e7f
 
   match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
   match ErrorMsg '\s\+$'

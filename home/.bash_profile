@@ -14,6 +14,9 @@ export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 export EDITOR=nvim
 export PYTHON_CONFIGURE_OPTS="--enable-framework"
 
+export BUN_INSTALL="$HOME/.bun"
+export PATH=$BUN_INSTALL/bin:$PATH
+
 alias ibrew='arch -x86_64 /usr/local/bin/brew'
 
 eval "$(anyenv init -)"
