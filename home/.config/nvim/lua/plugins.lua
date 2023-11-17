@@ -131,7 +131,7 @@ return require('packer').startup(function()
       )
     end
   }
-  use 'ThePrimeagen/harpoon'
+  use 'ThePrimeagen/harpoon' -- Allows to save most used files and jump between them
 
   -- Terminal
   use {'akinsho/toggleterm.nvim', tag = '*', config = function()
@@ -164,6 +164,7 @@ return require('packer').startup(function()
     'nvimdev/lspsaga.nvim',
     after = 'nvim-lspconfig'
   }) -- Adds LSP displays UI for LSP actions
+  use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
   use 'hrsh7th/nvim-cmp' -- Adds completion for nvim
   use 'hrsh7th/cmp-nvim-lsp' -- Adds LSP support to cmp
   use 'hrsh7th/cmp-nvim-lua' -- Adds lua completion for cmp

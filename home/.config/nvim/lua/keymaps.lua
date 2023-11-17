@@ -12,6 +12,9 @@ map("<S-W>", "<Plug>CamelCaseMotion_w")
 map("<S-B>", "<Plug>CamelCaseMotion_b")
 map("<S-E>", "<Plug>CamelCaseMotion_e")
 
+-- Preview closed folds
+nmap("<Tab>", ':lua require("ufo.preview"):peekFoldedLinesUnderCursor()<CR>', "silent")
+
 -- Preview Buffers
 map("<Leader>v", ":JABSOpen<CR>", "silent")
 
@@ -102,7 +105,7 @@ nnoremap("<Leader>gi", ":Git<CR>", "silent")
 nnoremap("<Leader>gl", ":Git log<CR>", "silent")
 
 vim.cmd[[
-  " configuration for Toggleterm
+  " configuration for to exit Toggleterm
   tnoremap <Esc> <C-\><C-n>
 
   " configuration for Ack Vim Plugin
