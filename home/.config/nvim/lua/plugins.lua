@@ -49,6 +49,9 @@ return require('packer').startup(function()
 
   -- Code editing
   use 'junegunn/vim-easy-align' -- Press Enter and character to align multiple lines
+  use {'akinsho/git-conflict.nvim', tag = "*", config = function()
+    require('git-conflict').setup()
+  end}
   use {
     'aznhe21/hop.nvim',
     branch = 'fix-some-bugs',
@@ -149,11 +152,13 @@ return require('packer').startup(function()
   use 'zaldih/themery.nvim' -- Theme toggler
   use 'FrenzyExists/aquarium-vim' -- Aquarium colorscheme i mostly use
   use({ 'rose-pine/neovim', as = 'rose-pine' })
+  use 'shaunsingh/nord.nvim'
 
   -- Treesitter for better syntax highlighting
   -- and navigating inside the syntax tree
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } -- Treesitter for syntax highlighting in neovim
   use { 'nvim-treesitter/nvim-treesitter-textobjects' } -- Allows to cic (change around class) cam (change around method)
+  use { 'nvim-treesitter/nvim-treesitter-context' } -- Set sticky scrolling context
   use { 'RRethy/nvim-treesitter-textsubjects' } -- Select context visually with , ; and i;
   use { 'HiPhish/rainbow-delimiters.nvim' } -- Adds rainbow colors to delimiters
 
@@ -164,7 +169,7 @@ return require('packer').startup(function()
     'nvimdev/lspsaga.nvim',
     after = 'nvim-lspconfig'
   }) -- Adds LSP displays UI for LSP actions
-  use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
+  use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'} -- for vim folding
   use 'hrsh7th/nvim-cmp' -- Adds completion for nvim
   use 'hrsh7th/cmp-nvim-lsp' -- Adds LSP support to cmp
   use 'hrsh7th/cmp-nvim-lua' -- Adds lua completion for cmp

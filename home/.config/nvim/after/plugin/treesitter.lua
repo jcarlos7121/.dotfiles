@@ -17,7 +17,6 @@ local _ = require("nvim-treesitter.configs").setup {
     "ruby",
     "yaml",
     "fish",
-    "sql",
     "go",
     "query",
     "html",
@@ -31,7 +30,8 @@ local _ = require("nvim-treesitter.configs").setup {
     "org",
     "jsdoc",
     "solidity",
-    "elixir"
+    "elixir",
+    "terraform"
   },
 
   --indent = { enable = true },
