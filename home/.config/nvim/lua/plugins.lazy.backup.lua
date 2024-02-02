@@ -164,6 +164,7 @@ require("lazy").setup({
   -- and navigating inside the syntax tree
   { 'nvim-treesitter/nvim-treesitter' }, -- Treesitter for syntax highlighting in neovim
   { 'nvim-treesitter/nvim-treesitter-textobjects' }, -- Allows to cic (change around class) cam (change around method)
+  { 'nvim-treesitter/nvim-treesitter-context' }, -- Set sticky scrolling context
   { 'RRethy/nvim-treesitter-textsubjects' }, -- Select context visually with , ; and i;
   { 'HiPhish/rainbow-delimiters.nvim' }, -- Adds rainbow colors to delimiters
 
@@ -174,6 +175,10 @@ require("lazy").setup({
     'nvimdev/lspsaga.nvim',
     dependencies = { 'nvim-lspconfig' }
   }, -- Adds LSP displays UI for LSP actions
+  {
+    'kevinhwang91/nvim-ufo', 
+    dependencies = 'kevinhwang91/promise-async'
+  },
   'hrsh7th/nvim-cmp', -- Adds completion for nvim
   'hrsh7th/cmp-nvim-lsp', -- Adds LSP support to cmp
   'hrsh7th/cmp-nvim-lua', -- Adds lua completion for cmp
