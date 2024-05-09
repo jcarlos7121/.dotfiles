@@ -4,7 +4,7 @@ opt.termguicolors = true
 require("theme")
 
 opt.tabstop=2
-opt.shell = "/opt/homebrew/bin/fish"
+opt.shell = "/Users/juanhinojo/.local/bin/qterm -- fish"
 opt.wrap = false
 opt.number = true
 opt.showcmd = true
@@ -91,4 +91,6 @@ vim.cmd[[
   autocmd Filetype typescript setlocal ts=4 sw=4 sts=4 et
 
   let test#strategy = "dispatch"
+  let g:NERDSpaceDelims = 2
+  let g:NERDDefaultAlign = 'left'
 ]]

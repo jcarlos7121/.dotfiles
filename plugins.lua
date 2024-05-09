@@ -11,7 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({
+ local plugins = {
   -- Commands
   'danro/rename.vim', -- :Rename filename
   'mileszs/ack.vim', -- :Ack to find word appearances on project
@@ -204,4 +204,8 @@ require("lazy").setup({
     } -- Integrate ChatGPT
   },
   'github/copilot.vim' -- Enables copilot for vim
-})
+}
+
+local opts = {}
+
+require("lazy").setup(plugins, opts)

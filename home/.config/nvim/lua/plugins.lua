@@ -112,10 +112,10 @@ return require('packer').startup(function()
   use 'MattesGroeger/vim-bookmarks' -- Allows to bookmark lines to come back
   use 'kristijanhusak/vim-carbon-now-sh' -- create snipper of code
   use 'dhruvasagar/vim-table-mode' -- Allows to edit tables with orgmode
-  use {'nvim-orgmode/orgmode', config = function()
-    require('orgmode').setup{}
-  end
-  }
+  -- use {'nvim-orgmode/orgmode', config = function()
+  --   require('orgmode').setup{}
+  -- end
+  -- }
   use {
     'nacro90/numb.nvim',
     config = function()
@@ -139,7 +139,7 @@ return require('packer').startup(function()
   -- Terminal
   use {'akinsho/toggleterm.nvim', tag = '*', config = function()
     require('toggleterm').setup {
-      shell = '/Users/juanhinojo/.fig/bin/figterm -- fish',
+      shell = '/Users/juanhinojo/.local/bin/qterm -- fish',
     }
   end} -- Toggles between terminal and vim
 
