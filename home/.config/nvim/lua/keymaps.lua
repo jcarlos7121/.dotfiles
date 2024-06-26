@@ -104,6 +104,10 @@ nnoremap("<Leader>gf", ":G push --force<CR>", "silent")
 nnoremap("<Leader>gi", ":Git<CR>", "silent")
 nnoremap("<Leader>gl", ":Git log<CR>", "silent")
 
+-- Resize
+nnoremap("<Leader>+", ':exe "resize " . (winheight(0) * 3/2)<CR>', "silent")
+nnoremap("<Leader>-", ':exe "resize " . (winheight(0) * 2/3)<CR>', "silent")
+
 vim.cmd[[
   " configuration for to exit Toggleterm
   tnoremap <Esc> <C-\><C-n>

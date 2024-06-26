@@ -130,8 +130,12 @@ return require('packer').startup(function()
       'kyazdani42/nvim-web-devicons',
     },
     config = function ()
-      require"octo".setup({ssh_aliases = {["github.com-cratebind"] = "github.com"}}
-      )
+      require"octo".setup({
+        ssh_aliases = {["github.com-cratebind"] = "github.com"},
+        suppress_missing_scope = {
+          projects_v2 = true,
+        }
+      })
     end
   }
   use 'ThePrimeagen/harpoon' -- Allows to save most used files and jump between them
@@ -139,7 +143,7 @@ return require('packer').startup(function()
   -- Terminal
   use {'akinsho/toggleterm.nvim', tag = '*', config = function()
     require('toggleterm').setup {
-      shell = '/Users/juanhinojo/.local/bin/qterm -- fish',
+      shell = '/Users/juanhinojo/.local/bin/qterm -- fish'
     }
   end} -- Toggles between terminal and vim
 
