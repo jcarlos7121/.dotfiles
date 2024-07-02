@@ -4,7 +4,6 @@ opt.termguicolors = true
 require("theme")
 
 opt.tabstop=2
-opt.shell = "/Users/juanhinojo/.local/bin/qterm -- fish"
 opt.wrap = false
 opt.number = true
 opt.showcmd = true

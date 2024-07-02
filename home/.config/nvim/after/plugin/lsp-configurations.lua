@@ -1,4 +1,5 @@
 local nvim_lsp = require('lspconfig')
+local mason_lspconfig = require('mason-lspconfig')
 
 require("mason").setup()
 
@@ -27,20 +28,13 @@ capabilities.textDocument.foldingRange = {
   lineFoldingOnly = true
 }
 
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-local servers = { "solargraph", "tsserver", "elixirls" }
-
-for _, lsp in ipairs(servers) do
-  local setup_params = {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    flags = {
-      debounce_text_changes = 150,
-    },
-    settings = {
-      completions = {
-        completeFunctionCalls = true
+mason_lspconfig.setup_handlers {
+  function(server_name)
+    local setup_params = {
+      on_attach = on_attach,
+      capabilities = capabilities,
+      flags = {
+        debounce_text_changes = 150,
       },
       solargraph = {
         autoformat = true,
@@ -50,16 +44,21 @@ for _, lsp in ipairs(servers) do
         references = true,
         rename = true,
         symbols = true
+      },
+      settings = {
+        completions = {
+          completeFunctionCalls = true
+        }
       }
     }
-  }
 
-  if lsp == "elixirls" then
-    setup_params.cmd = { "elixir-ls" }
+    if server_name == "elixirls" then
+      setup_params.cmd = { "elixir-ls" }
+    end
+
+    nvim_lsp[server_name].setup(setup_params)
   end
-
-  nvim_lsp[lsp].setup(setup_params)
-end
+}
 
 require('ufo').setup()
 

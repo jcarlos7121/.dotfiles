@@ -182,6 +182,7 @@ return require('packer').startup(function()
   use 'onsails/lspkind-nvim' -- Adds LSP pictograms like VSCode to autocomplete
   use {
     "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
     run = ":MasonUpdate" -- :MasonUpdate updates registry contents
   } -- Adds lsp installer for neovim
   use {
