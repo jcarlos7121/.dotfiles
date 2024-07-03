@@ -24,7 +24,6 @@ mason_lspconfig.setup_handlers {
 require('ufo').setup()
 
 require('lint').linters_by_ft = {
-  ruby = {'rubocop'},
   elixir = {'credo'},
   typescript = {'eslint_d'},
   javascript = {'eslint_d'},

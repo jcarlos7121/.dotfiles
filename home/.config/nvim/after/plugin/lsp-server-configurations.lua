@@ -32,7 +32,6 @@ local default_config = {
 local lsp_server_configurations = {
   solargraph = {
     solargraph = {
-      commandPath = '/Users/juanhinojo/.asdf/shims/solargraph',
       autoformat = true,
       completion = true,
       diagnostics = true,
@@ -42,6 +41,9 @@ local lsp_server_configurations = {
       symbols = true
     },
     cmd = { "asdf", "exec", "solargraph", "stdio" },
+  },
+  ruby_lsp = {
+    cmd = { "asdf", "exec", "ruby-lsp" },
   },
   elixirls = {
     cmd = { "elixir-ls" },
