@@ -90,6 +90,8 @@ vim.cmd[[
   autocmd Filetype typescript setlocal ts=4 sw=4 sts=4 et
 
   let test#strategy = "dispatch"
+
+  " NERDCommenter configuration"
   let g:NERDSpaceDelims = 2
   let g:NERDDefaultAlign = 'left'
 ]]
