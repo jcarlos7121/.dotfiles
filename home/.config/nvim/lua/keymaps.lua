@@ -18,6 +18,18 @@ nmap("<Tab>", ':lua require("ufo.preview"):peekFoldedLinesUnderCursor()<CR>', "s
 -- Preview Buffers
 map("<Leader>v", ":JABSOpen<CR>", "silent")
 
+-- Debugging
+map("mb", ":lua require('dap').toggle_breakpoint()<CR>", "silent")
+map("mc", ":lua require('dap').continue()<CR>", "silent")
+map("md", ":lua require('dap').step_over()<CR>", "silent")
+map("mi", ":lua require('dap').step_into()<CR>", "silent")
+
+-- Octo mappings
+map("<Leader>op", ":Octo pr list<CR>", "silent")
+map("<Leader>oc", ":Octo pr create<CR>", "silent")
+map("<Leader>od", ":Octo pr diff<CR>", "silent")
+map("<Leader>os", ":Octo review submit<CR>", "silent")
+
 -- Telescope
 map("<C-P>", "<cmd>Telescope find_files hidden=true<CR>")
 map("<C-S>", "<cmd>Telescope live_grep<CR>")

@@ -191,6 +191,23 @@ return require('packer').startup(function()
   } -- Snippets engine for Lua, compatible with VSCode
   use { 'saadparwaiz1/cmp_luasnip' } -- Adds lua snippets to cmp
 
+  -- Debuggers
+  use {
+    "mfussenegger/nvim-dap",
+    requires = "jcarlos7121/nvim-dap-ruby-minitest",
+    config = function()
+      require("dap-ruby").setup()
+    end
+  }
+  use { "mxsdev/nvim-dap-vscode-js", requires = {"mfussenegger/nvim-dap"} }
+  use {
+    "rcarriga/nvim-dap-ui",
+    requires = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"},
+    config = function()
+      require("dapui").setup()
+    end
+  }
+
   -- AI
   use({
   "jackMort/ChatGPT.nvim",

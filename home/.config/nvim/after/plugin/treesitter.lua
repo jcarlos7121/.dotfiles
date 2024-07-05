@@ -32,7 +32,8 @@ local _ = require("nvim-treesitter.configs").setup {
     "solidity",
     "elixir",
     "terraform",
-    "graphql"
+    "graphql",
+    "tsx"
   },
 
   --indent = { enable = true },
