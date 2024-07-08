@@ -64,7 +64,7 @@ require("lazy").setup({
   }, -- replace multiple blank lines with a single line
   'jgdavey/vim-blockle', -- Allows to toggle between do end and { }
   'bkad/CamelCaseMotion', -- Allows you to move word by word
-  { 'terryma/vim-multiple-cursors', commit = '13232e4b544775cf2b039571537b0e630406f801' }, -- Allows to use multiple cursors
+  'mg979/vim-visual-multi', -- Allows to select multiple lines with Ctrl + N
   {
     "folke/todo-comments.nvim",
     dependencies = "nvim-lua/plenary.nvim",
@@ -139,7 +139,7 @@ require("lazy").setup({
     'akinsho/toggleterm.nvim',
     config = function()
       require('toggleterm').setup {
-        shell = '/Users/juanhinojo/.fig/bin/figterm -- fish',
+        shell = '/Users/juanhinojo/.local/bin/qterm -- fish',
       }
     end
   }, -- Toggles between terminal and vim
