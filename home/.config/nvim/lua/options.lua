@@ -89,6 +89,7 @@ vim.cmd[[
 
   autocmd Filetype typescript setlocal ts=4 sw=4 sts=4 et
 
+  " Set the strategy for test#run to dispatch
   let test#strategy = "dispatch"
 
   " NERDCommenter configuration"

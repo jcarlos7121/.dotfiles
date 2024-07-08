@@ -53,7 +53,7 @@ map("<Leader>8", ":ChatGPTRun<Space>")
 map("<Leader>7", ":ChatGPTActAs<Space>")
 
 -- VCoolor
-nmap("<leader>c", ":VCoolor<CR>")
+-- nmap("<leader>c", ":VCoolor<CR>")
 
 -- Yank filepath
 map("<Leader>p", ":let @+ = expand('%:p')<CR>", "silent")

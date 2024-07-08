@@ -1,70 +1,58 @@
--- Only required if you have packer configured as `opt`
-vim.cmd [[packadd packer.nvim]]
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
-return require('packer').startup(function()
-  -- Packer can manage itself
-  use 'wbthomason/packer.nvim'
-  use 'lewis6991/impatient.nvim' -- Speedup startup time of plugins
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
-  -- Languages
-  use 'slim-template/vim-slim' -- Adds syntax highlighting for slim
-  use 'bfontaine/Brewfile.vim' -- Adds syntax highlighting for Brewfile
+require("lazy").setup({
+  -- Colorschemes
+  'zaldih/themery.nvim', -- Theme toggler
+  'FrenzyExists/aquarium-vim', -- Aquarium colorscheme i mostly use
+  { 'rose-pine/neovim', name = 'rose-pine' }, -- Rose pine colorscheme
 
   -- Commands
-  use 'danro/rename.vim' -- :Rename filename
-  use 'mileszs/ack.vim' -- :Ack to find word appearances on project
-  use 'tpope/vim-bundler' -- :Bundle command
-  use 'tpope/vim-dispatch' -- :Dispatch command
-  use 'jcarlos7121/vim-fugitive' -- Adds git commits :Gbranch :Gblame, and others and my own reset commands
-  use 'tpope/vim-rails' -- Adds :Rails command
-  use 'tpope/vim-rbenv' -- Adds :Rbenv command
-  use 'tpope/vim-rake' -- Adds :Rake command
-  use 'mattreduce/vim-mix' -- Adds :Mix elixir command
-  use 'rizzatti/dash.vim' -- Adds :Dash command to search on Dash docs
-  use 'adelarsq/vim-matchit' --% to match closing tag on xml/html
+  'danro/rename.vim', -- :Rename filename
+  'mileszs/ack.vim', -- :Ack to find word appearances on project
+  'tpope/vim-bundler', -- :Bundle command
+  'tpope/vim-dispatch', -- :Dispatch command
+  'jcarlos7121/vim-fugitive', -- Adds git commits :Gbranch :Gblame, and others and my own reset commands
+  'tpope/vim-rails', -- Adds :Rails command
+  'tpope/vim-rbenv', -- Adds :Rbenv command
+  'tpope/vim-rake', -- Adds :Rake command
+  'mattreduce/vim-mix', -- Adds :Mix elixir command
+  'rizzatti/dash.vim', -- Adds :Dash command to search on Dash docs
+  'adelarsq/vim-matchit', --% to match closing tag on xml/html
 
-  -- File search
-  use {
-    'nvim-telescope/telescope.nvim',
-    requires = { {'nvim-lua/plenary.nvim'} }
-  } -- Adds :Telescope command replacement for ctrl-p
-  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' } -- Faster telescope fuzzy search
-  use 'tpope/vim-vinegar' -- Type - and go to nerdtree
-  use 'kyazdani42/nvim-web-devicons' -- Adds icons to nvim-tree
-  use 'kyazdani42/nvim-tree.lua' -- File explorer
-
-  -- Lua
-  use {
-    "ahmedkhalf/project.nvim",
-    config = function()
-      require("project_nvim").setup {
-        show_hidden = true,
-        detection_methods = { "pattern" },
-        patterns = { ".git" }
-      }
-    end
-  } -- Project management and rooter
-  use 'justinmk/vim-gtfo' -- TOUSE: opens a file opener on the file opened on vim typing 'gof'
-  use 'matbme/JABS.nvim'  -- Browse between buffers
+  -- FileSearch
+  'tpope/vim-vinegar', -- Type - and go to folder up
+  'kyazdani42/nvim-web-devicons', -- Adds icons to nvim-tree
+  'kyazdani42/nvim-tree.lua', -- File explorer
+  'justinmk/vim-gtfo', -- TOUSE: opens a file opener on the file opened on vim typing 'gof'
+  require 'plugins.telescope',
 
   -- Code editing
-  use 'junegunn/vim-easy-align' -- Press Enter and character to align multiple lines
-  use {'akinsho/git-conflict.nvim', tag = "*", config = function()
-    require('git-conflict').setup()
-  end}
-  use {
+  'junegunn/vim-easy-align', -- Press Enter and character to align multiple lines
+  { 'akinsho/git-conflict.nvim', version = "*", config = true }, -- Resolve git conflicts from within nvim
+  {
     'aznhe21/hop.nvim',
     branch = 'fix-some-bugs',
     config = function()
       require'hop'.setup()
     end
-  } -- Adds hop motion for jumping between words
-  use 'scrooloose/nerdcommenter' -- Comment and uncomment with <leader>ci
-  use 'RRethy/nvim-treesitter-endwise' -- Adds automatic end for if, do, class in Ruby, Elixir
-  use 'tpope/vim-ragtag' -- Adds autoclose for things like <% %> and <%= %>
-  use 'kana/vim-smartinput' -- Automatically closes ([{}])
-  use 'tpope/vim-surround' -- Adds mechanigs for surrownding words for example: csw)
-  use({
+  }, -- Adds hop motion for jumping between words
+  { 'numToStr/Comment.nvim' }, -- Comment and uncomment with <leader>ci
+  'tpope/vim-ragtag', -- Adds autoclose for things like <% %> and <%= %>
+  'kana/vim-smartinput', -- Automatically closes ([{}])
+  'tpope/vim-surround', -- Adds mechanigs for surrownding words for example: csw)
+  {
     "cappyzawa/trim.nvim",
     config = function()
       require("trim").setup({
@@ -73,150 +61,176 @@ return require('packer').startup(function()
         }
       })
     end
-  }) -- replace multiple blank lines with a single line
-  use 'jgdavey/vim-blockle' -- Allows to toggle between do end and { }
-  use 'bkad/CamelCaseMotion' -- Allows you to move word by word
-  use {
+  }, -- replace multiple blank lines with a single line
+  'jgdavey/vim-blockle', -- Allows to toggle between do end and { }
+  'bkad/CamelCaseMotion', -- Allows you to move word by word
+  { 'terryma/vim-multiple-cursors', commit = '13232e4b544775cf2b039571537b0e630406f801' }, -- Allows to use multiple cursors
+  {
     "folke/todo-comments.nvim",
-    requires = "nvim-lua/plenary.nvim",
+    dependencies = "nvim-lua/plenary.nvim",
     config = function()
       require("todo-comments").setup { }
     end
-  } -- Adds colors to todo comments
+  }, -- Adds colors to todo comments
 
   -- UI Utilities
-  use 'bling/vim-bufferline' -- Displays the buffer in the status bar
-  use 'yggdroot/indentline' -- displays identation lines
-  use { 'terryma/vim-multiple-cursors', commit = '13232e4b544775cf2b039571537b0e630406f801' } -- Allows to use multiple cursors
-  use {
+  'bling/vim-bufferline', -- Displays the buffer in the status bar
+  'yggdroot/indentline', -- displays identation lines
+  {
     'lewis6991/gitsigns.nvim',
     config = function()
       require('gitsigns').setup()
     end
-  }
-  use {
+  }, -- Add Git visual symbols for changes in the file
+  {
     'NvChad/nvim-colorizer.lua',
     config = function()
       require('colorizer').setup()
     end
-  }
-  use {
+  },
+  {
     'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-  } -- Minimalistic status line
+    dependencies = { 'kyazdani42/nvim-web-devicons', opt = true }
+  }, -- Minimalistic status line
+  'stevearc/dressing.nvim', -- Gives a better UI for nvim select and inputs
 
   -- Utilities
-  use 'vim-test/vim-test'-- Adds leader commands for automatically running Rspec Tests
-  use 'christoomey/vim-tmux-navigator' -- For moving between vim and tmux panes
-  use 'KabbAmine/vCoolor.vim' -- Adds color selector for CSS
-  use 'MattesGroeger/vim-bookmarks' -- Allows to bookmark lines to come back
-  use 'kristijanhusak/vim-carbon-now-sh' -- create snipper of code
-  use 'dhruvasagar/vim-table-mode' -- Allows to edit tables with orgmode
-  -- use {'nvim-orgmode/orgmode', config = function()
-  --   require('orgmode').setup{}
-  -- end
-  -- }
-  use {
+  'vim-test/vim-test', -- Adds leader commands for automatically running Rspec Tests
+  'christoomey/vim-tmux-navigator', -- For moving between vim and tmux panes
+  'KabbAmine/vCoolor.vim', -- Adds color selector for CSS
+  'MattesGroeger/vim-bookmarks', -- Allows to bookmark lines to come back
+  'kristijanhusak/vim-carbon-now-sh', -- create snipper of code
+  'dhruvasagar/vim-table-mode', -- Allows to edit tables with orgmode
+  {
+    'nvim-orgmode/orgmode',
+    config = function()
+      require('orgmode').setup{}
+    end
+  }, -- Add org mode for nvim
+  {
     'nacro90/numb.nvim',
     config = function()
       require('numb').setup()
     end,
-  } -- Quicker line search for neovim
-  use {
+  }, -- Quicker line search for neovim
+  {
     'pwntester/octo.nvim',
-    requires = {
+    event = "VeryLazy",
+    dependencies = {
       'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope.nvim',
       'kyazdani42/nvim-web-devicons',
     },
     config = function ()
-      require"octo".setup({
-        ssh_aliases = {["github.com-cratebind"] = "github.com"},
-        suppress_missing_scope = {
-          projects_v2 = true,
+      require"octo".setup(
+        {
+          ssh_aliases = {["github.com-cratebind"] = "github.com"},
+          suppress_missing_scope = {
+            projects_v2 = true
+          }
         }
-      })
+      )
     end
-  }
-  use 'ThePrimeagen/harpoon' -- Allows to save most used files and jump between them
-  use 'xiyaowong/telescope-emoji.nvim' -- Adds emoji search to telescope
+  }, -- Github UI for nvim
+  'matbme/JABS.nvim',  -- Browse between buffers
+  'ThePrimeagen/harpoon', -- Move between most used files
 
-  -- Terminal
-  use {'akinsho/toggleterm.nvim', tag = '*', config = function()
-    require('toggleterm').setup {
-      shell = '/Users/juanhinojo/.local/bin/qterm -- fish'
-    }
-  end} -- Toggles between terminal and vim
+   -- Terminal
+  {
+    'akinsho/toggleterm.nvim',
+    config = function()
+      require('toggleterm').setup {
+        shell = '/Users/juanhinojo/.fig/bin/figterm -- fish',
+      }
+    end
+  }, -- Toggles between terminal and vim
 
   -- NEOVIM configuration
-  use 'nvim-lua/plenary.nvim'
-  use 'b0o/mapx.nvim' -- Better key mappings on LUA
-  --use 'nathom/filetype.nvim' -- Filetype speedup support for neovim
-
-  -- Colorschemes
-  use 'zaldih/themery.nvim' -- Theme toggler
-  use 'FrenzyExists/aquarium-vim' -- Aquarium colorscheme i mostly use
-  use({ 'rose-pine/neovim', as = 'rose-pine' })
-  use 'shaunsingh/nord.nvim'
+  'nvim-lua/plenary.nvim',
+  'b0o/mapx.nvim', -- Better key mappings on LUA
 
   -- Treesitter for better syntax highlighting
   -- and navigating inside the syntax tree
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } -- Treesitter for syntax highlighting in neovim
-  use { 'nvim-treesitter/nvim-treesitter-textobjects' } -- Allows to cic (change around class) cam (change around method)
-  use { 'nvim-treesitter/nvim-treesitter-context' } -- Set sticky scrolling context
-  use { 'RRethy/nvim-treesitter-textsubjects' } -- Select context visually with , ; and i;
-  use { 'HiPhish/rainbow-delimiters.nvim' } -- Adds rainbow colors to delimiters
+  { 'nvim-treesitter/nvim-treesitter' }, -- Treesitter for syntax highlighting in neovim
+  { 'nvim-treesitter/nvim-treesitter-textobjects' }, -- Allows to cic (change around class) cam (change around method)
+  { 'nvim-treesitter/nvim-treesitter-context' }, -- Set sticky scrolling context
+  { 'RRethy/nvim-treesitter-textsubjects' }, -- Select context visually with , ; and i;
+  { 'HiPhish/rainbow-delimiters.nvim' }, -- Adds rainbow colors to delimiters
+  'RRethy/nvim-treesitter-endwise', -- Adds automatic end for if, do, class in Ruby, Elixir
 
-  -- Autocompletion
-  use 'neovim/nvim-lspconfig' -- Adds LSP support for Neovim
-  use 'mfussenegger/nvim-lint' -- Adds linting support for neovim
-  use ({
+  -- Autocompletion and LSP
+  'neovim/nvim-lspconfig', -- Adds LSP support for Neovim
+  'mfussenegger/nvim-lint', -- Adds linting support for neovim
+  {
     'nvimdev/lspsaga.nvim',
-    after = 'nvim-lspconfig'
-  }) -- Adds LSP displays UI for LSP actions
-  use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'} -- for vim folding
-  use 'hrsh7th/nvim-cmp' -- Adds completion for nvim
-  use 'hrsh7th/cmp-nvim-lsp' -- Adds LSP support to cmp
-  use 'hrsh7th/cmp-nvim-lua' -- Adds lua completion for cmp
-  use 'hrsh7th/cmp-path' -- Adds Paths automatically to cmp
-  use 'hrsh7th/cmp-buffer' -- Adds LSP autocompletion for buffers
-  use 'onsails/lspkind-nvim' -- Adds LSP pictograms like VSCode to autocomplete
-  use {
+    dependencies = { 'nvim-lspconfig' }
+  }, -- Adds LSP displays UI for LSP actions
+  {
+    'kevinhwang91/nvim-ufo',
+    dependencies = 'kevinhwang91/promise-async'
+  },
+  'hrsh7th/nvim-cmp', -- Adds completion for nvim
+  'hrsh7th/cmp-nvim-lsp', -- Adds LSP support to cmp
+  'hrsh7th/cmp-nvim-lua', -- Adds lua completion for cmp
+  'hrsh7th/cmp-path', -- Adds Paths automatically to cmp
+  'hrsh7th/cmp-buffer', -- Adds LSP autocompletion for buffers
+  'onsails/lspkind-nvim', -- Adds LSP pictograms like VSCode to autocomplete
+  {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
-    run = ":MasonUpdate" -- :MasonUpdate updates registry contents
-  } -- Adds lsp installer for neovim
-  use {
+  }, -- Adds lsp installer for neovim
+  {
     'L3MON4D3/LuaSnip',
-    requires = { 'rafamadriz/friendly-snippets' }
-  } -- Snippets engine for Lua, compatible with VSCode
-  use { 'saadparwaiz1/cmp_luasnip' } -- Adds lua snippets to cmp
+    dependencies = { 'rafamadriz/friendly-snippets' }
+  }, -- Snippets engine for Lua, compatible with VSCode
+  'saadparwaiz1/cmp_luasnip', -- Adds lua snippets to cmp
 
   -- Debuggers
-  use {
+  {
     "mfussenegger/nvim-dap",
-    requires = "jcarlos7121/nvim-dap-ruby-minitest",
+    dependencies = { "jcarlos7121/nvim-dap-ruby-minitest" },
     config = function()
-      require("dap-ruby").setup()
+      require('dap-ruby').setup()
     end
-  }
-  use { "mxsdev/nvim-dap-vscode-js", requires = {"mfussenegger/nvim-dap"} }
-  use {
+  },
+  {
+    "mxsdev/nvim-dap-vscode-js",
+    dependencies = {"mfussenegger/nvim-dap"}
+  },
+  {
     "rcarriga/nvim-dap-ui",
-    requires = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"},
+    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
     config = function()
       require("dapui").setup()
     end
-  }
+  },
 
   -- AI
-  use({
-  "jackMort/ChatGPT.nvim",
-    requires = {
+  {
+    "jackMort/ChatGPT.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("chatgpt").setup({
+        edit_with_instructions = {
+          keymaps = {
+            close = "<ESC>",
+          },
+        },
+        chat = {
+          keymaps = {
+            close = "<ESC>",
+          },
+        },
+        openai_params = {
+          model = "gpt-4o",
+        }
+      })
+    end,
+    dependencies = {
       "MunifTanjim/nui.nvim",
       "nvim-lua/plenary.nvim",
+      "folke/trouble.nvim",
       "nvim-telescope/telescope.nvim"
-    } -- Integrate ChatGPT
-  })
-  use 'github/copilot.vim' -- Enables copilot for vim
-end)
+    }
+  },
+  'github/copilot.vim' -- Enables copilot for vim
+})

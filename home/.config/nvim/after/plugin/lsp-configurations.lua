@@ -1,6 +1,6 @@
 local nvim_lsp = require('lspconfig')
 local mason_lspconfig = require('mason-lspconfig')
-local configurations = require('lsp-server-configurations')
+local configurations = require('lsp-server-defaults')
 
 -- Setup Mason and links to LSP servers to nvim-cmp
 require('mason').setup()
