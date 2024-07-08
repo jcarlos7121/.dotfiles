@@ -72,27 +72,4 @@ vim.g.bookmark_highlight_lines = 1
 -- Silver searcher configuration
 vim.g.ackprg = 'ag -S --nocolor --nogroup --column --ignore dist --ignore public/vite-test --ignore public/vite-dev --ignore public/packs-test --ignore public/assets --ignore public/packs --ignore tmp --ignore "./_build" --ignore coverage --ignore node_modules --ignore webclient/node_modules --ignore "./frontend/node_modules/*" --ignore "./frontend/tmp/*" --ignore "./app/build/*" --ignore="*.png" --ignore="*.jpg" --ignore="*.svg" --ignore="*.gz"'
 
-vim.cmd [[source ~/.vim/config/envcommands.vim]]
-
--- Configuration
-vim.cmd[[
-  highlight Search guibg=#3466b7 guifg=#ffffff
-
-  match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-  match ErrorMsg '\s\+$'
-
-  " Set ibeam on exit of vim
-  augroup RestoreCursorShapeOnExit
-    autocmd!
-    autocmd VimLeave * set guicursor=a:ver10-blinkoff0
-  augroup END
-
-  autocmd Filetype typescript setlocal ts=4 sw=4 sts=4 et
-
-  " Set the strategy for test#run to dispatch
-  let test#strategy = "dispatch"
-
-  " NERDCommenter configuration"
-  let g:NERDSpaceDelims = 2
-  let g:NERDDefaultAlign = 'left'
-]]
+vim.cmd [[source ~/.config/nvim/vimscript/envcommands.vim]]

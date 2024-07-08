@@ -8,3 +8,4 @@
 bin
 .config/nvim
 .config/kitty
+.config/nvim/vimscript
