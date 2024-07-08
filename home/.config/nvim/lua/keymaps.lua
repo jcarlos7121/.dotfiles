@@ -35,6 +35,7 @@ map("<C-P>", "<cmd>Telescope find_files hidden=true<CR>")
 map("<C-S>", "<cmd>Telescope live_grep<CR>")
 map("<C-C>", "<cmd>Telescope lsp_dynamic_workspace_symbols symbols=class<CR>")
 map("<C-T>", "<cmd>Telescope projects hidden=true<CR>")
+map("<C-E>", "<cmd>Telescope emoji<CR>")
 
 -- Harpoon
 map("<C-Q>", ':lua require("harpoon.ui").toggle_quick_menu()<CR>', 'silent')

@@ -139,6 +139,7 @@ return require('packer').startup(function()
     end
   }
   use 'ThePrimeagen/harpoon' -- Allows to save most used files and jump between them
+  use 'xiyaowong/telescope-emoji.nvim' -- Adds emoji search to telescope
 
   -- Terminal
   use {'akinsho/toggleterm.nvim', tag = '*', config = function()
