@@ -28,7 +28,10 @@ require("lazy").setup({
   -- FileSearch
   {
     'nvim-telescope/telescope.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' }
+    event = 'VimEnter',
+    branch = '0.1.x',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    lazy = false
   }, -- Adds :Telescope command replacement for ctrl-p
   {
     'nvim-telescope/telescope-fzf-native.nvim',
@@ -47,7 +50,8 @@ require("lazy").setup({
         detection_methods = { "pattern" },
         patterns = { ".git" }
       }
-    end
+    end,
+    lazy = false
   }, -- Project management and rooter
   'justinmk/vim-gtfo', -- TOUSE: opens a file opener on the file opened on vim typing 'gof'
   'matbme/JABS.nvim',  -- Browse between buffers
@@ -187,12 +191,33 @@ require("lazy").setup({
   'onsails/lspkind-nvim', -- Adds LSP pictograms like VSCode to autocomplete
   {
     "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
   }, -- Adds lsp installer for neovim
   {
     'L3MON4D3/LuaSnip',
     dependencies = { 'rafamadriz/friendly-snippets' }
   }, -- Snippets engine for Lua, compatible with VSCode
   'saadparwaiz1/cmp_luasnip', -- Adds lua snippets to cmp
+
+  -- Debuggers
+  {
+    "mfussenegger/nvim-dap",
+    dependencies = { "jcarlos7121/nvim-dap-ruby-minitest" },
+    config = function()
+      require('dap-ruby').setup()
+    end
+  },
+  {
+    "mxsdev/nvim-dap-vscode-js",
+    dependencies = {"mfussenegger/nvim-dap"}
+  },
+  {
+    "rcarriga/nvim-dap-ui",
+    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+    config = function()
+      require("dapui").setup()
+    end
+  },
 
    -- AI
   {

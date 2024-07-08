@@ -112,10 +112,10 @@ return require('packer').startup(function()
   use 'MattesGroeger/vim-bookmarks' -- Allows to bookmark lines to come back
   use 'kristijanhusak/vim-carbon-now-sh' -- create snipper of code
   use 'dhruvasagar/vim-table-mode' -- Allows to edit tables with orgmode
-  use {'nvim-orgmode/orgmode', config = function()
-    require('orgmode').setup{}
-  end
-  }
+  -- use {'nvim-orgmode/orgmode', config = function()
+  --   require('orgmode').setup{}
+  -- end
+  -- }
   use {
     'nacro90/numb.nvim',
     config = function()
@@ -130,16 +130,21 @@ return require('packer').startup(function()
       'kyazdani42/nvim-web-devicons',
     },
     config = function ()
-      require"octo".setup({ssh_aliases = {["github.com-cratebind"] = "github.com"}}
-      )
+      require"octo".setup({
+        ssh_aliases = {["github.com-cratebind"] = "github.com"},
+        suppress_missing_scope = {
+          projects_v2 = true,
+        }
+      })
     end
   }
   use 'ThePrimeagen/harpoon' -- Allows to save most used files and jump between them
+  use 'xiyaowong/telescope-emoji.nvim' -- Adds emoji search to telescope
 
   -- Terminal
   use {'akinsho/toggleterm.nvim', tag = '*', config = function()
     require('toggleterm').setup {
-      shell = '/Users/juanhinojo/.fig/bin/figterm -- fish',
+      shell = '/Users/juanhinojo/.local/bin/qterm -- fish'
     }
   end} -- Toggles between terminal and vim
 
@@ -178,6 +183,7 @@ return require('packer').startup(function()
   use 'onsails/lspkind-nvim' -- Adds LSP pictograms like VSCode to autocomplete
   use {
     "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
     run = ":MasonUpdate" -- :MasonUpdate updates registry contents
   } -- Adds lsp installer for neovim
   use {
@@ -185,6 +191,23 @@ return require('packer').startup(function()
     requires = { 'rafamadriz/friendly-snippets' }
   } -- Snippets engine for Lua, compatible with VSCode
   use { 'saadparwaiz1/cmp_luasnip' } -- Adds lua snippets to cmp
+
+  -- Debuggers
+  use {
+    "mfussenegger/nvim-dap",
+    requires = "jcarlos7121/nvim-dap-ruby-minitest",
+    config = function()
+      require("dap-ruby").setup()
+    end
+  }
+  use { "mxsdev/nvim-dap-vscode-js", requires = {"mfussenegger/nvim-dap"} }
+  use {
+    "rcarriga/nvim-dap-ui",
+    requires = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"},
+    config = function()
+      require("dapui").setup()
+    end
+  }
 
   -- AI
   use({
