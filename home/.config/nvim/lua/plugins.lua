@@ -16,6 +16,21 @@ require("lazy").setup({
   -- Colorschemes
   'zaldih/themery.nvim', -- Theme toggler
   'FrenzyExists/aquarium-vim', -- Aquarium colorscheme i mostly use
+  {
+    'AlexvZyl/nordic.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require 'nordic' .load()
+      require 'nordic'.setup {
+        swap_backgrounds = true
+      }
+    end
+  },
+  {
+    "zenbones-theme/zenbones.nvim",
+    dependencies = "rktjmp/lush.nvim"
+  },
   { 'rose-pine/neovim', name = 'rose-pine' }, -- Rose pine colorscheme
 
   -- Commands

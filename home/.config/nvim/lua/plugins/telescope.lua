@@ -14,6 +14,7 @@ return {
         }
       end,
     },
+    "xiyaowong/telescope-emoji.nvim",
     {
       "https://github.com/nvim-telescope/telescope-fzf-native.nvim",
       build = "make",

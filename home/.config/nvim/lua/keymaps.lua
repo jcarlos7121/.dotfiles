@@ -26,7 +26,7 @@ map("mi", ":lua require('dap').step_into()<CR>", "silent")
 
 -- Octo mappings
 map("<Leader>op", ":Octo pr list<CR>", "silent")
-map("<Leader>oc", ":Octo pr create<CR>", "silent")
+map("<Leader>on", ":Octo pr create<CR>", "silent")
 map("<Leader>od", ":Octo pr diff<CR>", "silent")
 map("<Leader>os", ":Octo review submit<CR>", "silent")
 
