@@ -34,13 +34,18 @@ require("lazy").setup({
   -- FileSearch
   'tpope/vim-vinegar', -- Type - and go to folder up
   'kyazdani42/nvim-web-devicons', -- Adds icons to nvim-tree
-  'kyazdani42/nvim-tree.lua', -- File explorer
   'justinmk/vim-gtfo', -- TOUSE: opens a file opener on the file opened on vim typing 'gof'
+  require 'plugins.nvim-tree', -- Adds nvim-tree for file navigation
   require 'plugins.telescope',
 
   -- Code editing
   'junegunn/vim-easy-align', -- Press Enter and character to align multiple lines
-  { 'akinsho/git-conflict.nvim', version = "*", config = true }, -- Resolve git conflicts from within nvim
+  {
+    'akinsho/git-conflict.nvim',
+    event = "VeryLazy",
+    version = "*",
+    config = true
+  }, -- Resolve git conflicts from within nvim
   {
     'aznhe21/hop.nvim',
     branch = 'fix-some-bugs',
@@ -78,6 +83,7 @@ require("lazy").setup({
   'yggdroot/indentline', -- displays identation lines
   {
     'lewis6991/gitsigns.nvim',
+    event = "VeryLazy",
     config = function()
       require('gitsigns').setup()
     end

@@ -6,11 +6,14 @@
  - [X] Kitty
  - [X] Fish
  - [X] Tmux
- - [X] Fig
+ - [X] Amazon Q
 
 ** Neovim Configs
    - Nvim CMP
    - Nvim LSP for Ruby
+   - Nvim LSP for Elixir
+   - Nvim LSP for Typescript
+   - Nvim DAPs
    - Treesitter
    - Nvim-tree
    - Fugitive for Git integration
