@@ -303,8 +303,8 @@ let g:user_emmet_leader_key='<C-x>'
 let g:ackprg='ag -S --nocolor --nogroup --column --ignore tmp --ignore _build --ignore node_modules --ignore "./frontend/node_modules/*" --ignore "./frontend/tmp/*" --ignore "./app/build/*"'
 
 "NERDTREE + CTRLP integration
-source ~/.vim/config/ntfinder.vim
-source ~/.vim/config/envcommands.vim
+"source ~/.vim/config/ntfinder.vim
+"source ~/.vim/config/envcommands.vim
 let NERDTreeQuitOnOpen=1
 let NERDTreeBookmarksFile=expand("$HOME/.vim-NERDTreeBookmarks")
 let NERDTreeShowBookmarks=1
@@ -320,5 +320,3 @@ let g:airline_powerline_fonts = 1
 
 " Whitespace
 let g:strip_whitespace_confirm=0
-
-source /Users/juanhinojo/lsp-examples/vimrc.generated
