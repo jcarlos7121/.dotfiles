@@ -2,11 +2,6 @@ require'mapx'.setup { global = "force" }
 
 vim.g.mapleader = ","
 
-vim.g.multi_cursor_next_key = '<C-d>'
-vim.g.multi_cursor_prev_key = '<C-p>'
-vim.g.multi_cursor_skip_key = '<C-x>'
-vim.g.multi_cursor_quit_key = '<Esc>'
-
 -- Camel Case
 map("<S-W>", "<Plug>CamelCaseMotion_w")
 map("<S-B>", "<Plug>CamelCaseMotion_b")
@@ -38,9 +33,9 @@ map("<C-T>", "<cmd>Telescope projects hidden=true<CR>")
 map("<C-E>", "<cmd>Telescope emoji<CR>")
 
 -- Harpoon
-map("<C-Q>", ':lua require("harpoon.ui").toggle_quick_menu()<CR>', 'silent')
-map("<Leader>k", ':lua require("harpoon.ui").nav_next()<CR>', 'silent')
-map("<Leader>j", ':lua require("harpoon.ui").nav_prev()<CR>', 'silent')
+nmap("<C-q>", ":lua require('harpoon').ui:toggle_quick_menu(require('harpoon'):list())<CR>", "silent")
+nmap("<Leader>k", ":lua require('harpoon'):list():prev()<CR>", "silent")
+nmap("<Leader>j", ":lua require('harpoon'):list():next()<CR>", "silent")
 
 -- Tabs
 map("<Leader>z", ":tab split<CR>")
@@ -51,9 +46,6 @@ map("<Leader>0", ":ChatGPT<CR>", 'silent')
 map("<Leader>9", ":ChatGPTEditWithInstructions<CR>", 'silent')
 map("<Leader>8", ":ChatGPTRun<Space>")
 map("<Leader>7", ":ChatGPTActAs<Space>")
-
--- VCoolor
--- nmap("<leader>c", ":VCoolor<CR>")
 
 -- Yank filepath
 map("<Leader>p", ":let @+ = expand('%:p')<CR>", "silent")
@@ -90,6 +82,7 @@ nmap("<leader>ei", ":e ~/.config/nvim/init.lua<CR>", "silent")
 nmap("<leader>ev", ":e ~/.config/nvim/lua/options.lua<CR>", "silent")
 nmap("<leader>ep", ":e ~/.config/nvim/lua/plugins.lua<CR>", "silent")
 nmap("<leader>ek", ":e ~/.config/nvim/lua/keymaps.lua<CR>", "silent")
+nmap("<leader>eo", ":e ~/.config/nvim/lua/overrides.lua<CR>", "silent")
 
 -- Move multiple lines
 noremap("<A-Down>", ":m .+1<CR>==")

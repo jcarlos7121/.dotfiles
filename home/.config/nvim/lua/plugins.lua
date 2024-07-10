@@ -153,7 +153,14 @@ require("lazy").setup({
     end
   }, -- Github UI for nvim
   'matbme/JABS.nvim',  -- Browse between buffers
-  'ThePrimeagen/harpoon', -- Move between most used files
+  {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("harpoon").setup()
+    end
+  }, -- Move between most used files
 
    -- Terminal
   {
