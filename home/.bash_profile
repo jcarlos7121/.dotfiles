@@ -1,10 +1,7 @@
 # Amazon Q pre block. Keep at the top of this file.
 [[ -f "${HOME}/Library/Application Support/amazon-q/shell/bash_profile.pre.bash" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/bash_profile.pre.bash"
-export PATH="$HOME/.anyenv/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
-export PATH="$HOME/.emacs.d/bin:$PATH"
 export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
-export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
 export PATH="/Users/juanhinojo/Library/Python/3.9/bin:$PATH"
 
 # MacPorts Installer addition on 2019-02-28_at_09:39:43: adding an appropriate PATH variable for use with MacPorts.
@@ -18,8 +15,6 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH=$BUN_INSTALL/bin:$PATH
 
 alias ibrew='arch -x86_64 /usr/local/bin/brew'
-
-eval "$(anyenv init -)"
 
 tmux
 
