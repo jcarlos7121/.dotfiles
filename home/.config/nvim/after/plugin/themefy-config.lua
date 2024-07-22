@@ -1,6 +1,5 @@
 -- Set custom name to the list
 require("themery").setup({
-  themeConfigFile = "/Users/juanhinojo/.config/nvim/lua/theme.lua",
   themes = {
     {
       name = "Rosepine",

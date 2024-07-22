@@ -13,8 +13,13 @@ export PYTHON_CONFIGURE_OPTS="--enable-framework"
 
 export BUN_INSTALL="$HOME/.bun"
 export PATH=$BUN_INSTALL/bin:$PATH
+export DYLD_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_LIBRARY_PATH"
 
 alias ibrew='arch -x86_64 /usr/local/bin/brew'
+
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --bash)"
+eval "$(zoxide init bash)"
 
 tmux
 

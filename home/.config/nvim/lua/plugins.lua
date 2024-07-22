@@ -50,8 +50,16 @@ require("lazy").setup({
   'tpope/vim-vinegar', -- Type - and go to folder up
   'kyazdani42/nvim-web-devicons', -- Adds icons to nvim-tree
   'justinmk/vim-gtfo', -- TOUSE: opens a file opener on the file opened on vim typing 'gof'
+  {
+    "vhyrro/luarocks.nvim",
+    priority = 1001, -- this plugin needs to run before anything else
+    opts = {
+      rocks = { "magick" },
+    },
+  },
   require 'plugins.nvim-tree', -- Adds nvim-tree for file navigation
   require 'plugins.telescope',
+  require 'plugins.image-preview',
 
   -- Code editing
   'junegunn/vim-easy-align', -- Press Enter and character to align multiple lines

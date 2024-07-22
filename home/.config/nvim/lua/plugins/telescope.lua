@@ -21,18 +21,31 @@ return {
       cond = function()
         return vim.fn.executable("make") == 1
       end,
+    },
+    {
+      'SichangHe/nvim-telescope--telescope-media-files.nvim',
+      branch = 'kitty-workaround'
     }
   },
   config = function()
     pcall(require("telescope").load_extension, "fzf")
     pcall(require("telescope").load_extension, "projects")
     pcall(require("telescope").load_extension, "harpoon")
+    pcall(require("telescope").load_extension, "media_files")
 
     local actions = require("telescope.actions")
     local action_layout = require("telescope.actions.layout")
     local telescope = require('telescope')
 
     telescope.setup({
+      extensions = {
+        media_files = {
+          -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
+          filetypes = { "png", "webp", "jpg", "jpeg" },
+          -- find command (defaults to `fd`)
+          find_cmd = "rg"
+        },
+      },
       defaults = {
         prompt_prefix = " ",
         selection_caret = " ",
@@ -57,9 +70,8 @@ return {
           ".git/*",
           ".svn/*",
           ".hg/*",
-          ".jpeg",
-          ".jpg",
-          ".png",
+          ".mp4",
+          ".gif",
           ".svg",
           ".keep",
           ".woff2",

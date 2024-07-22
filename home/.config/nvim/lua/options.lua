@@ -1,8 +1,6 @@
 local opt = vim.opt
 opt.termguicolors = true
 
-require("theme")
-
 opt.tabstop=2
 opt.wrap = false
 opt.number = true
