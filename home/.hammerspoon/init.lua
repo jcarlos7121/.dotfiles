@@ -41,3 +41,44 @@ hs.hotkey.bind({"ctrl", "shift"}, "N", function()
   ]]
   hs.osascript.applescript(script)
 end)
+
+local function moveWindow(offsetX, offsetY)
+    local win = hs.window.focusedWindow()
+    if win then
+        local frame = win:frame()
+        frame.x = frame.x + offsetX
+        frame.y = frame.y + offsetY
+        win:setFrame(frame)
+    else
+        hs.alert.show("No focused window")
+    end
+end
+
+hs.hotkey.bind({"ctrl", "alt"}, "right", function() moveWindow(50, 0) end)
+hs.hotkey.bind({"ctrl", "alt"}, "left", function() moveWindow(-50, 0) end)
+hs.hotkey.bind({"ctrl", "alt"}, "up", function() moveWindow(0, -50) end)
+hs.hotkey.bind({"ctrl", "alt"}, "down", function() moveWindow(0, 50) end)
+
+local function resizeWindow(direction, change)
+    local win = hs.window.focusedWindow()
+    if win then
+        local frame = win:frame()
+        if direction == "right" then
+            frame.w = frame.w + change
+        elseif direction == "left" then
+            frame.w = frame.w - change
+        elseif direction == "up" then
+            frame.h = frame.h - change
+        elseif direction == "down" then
+            frame.h = frame.h + change
+        end
+        win:setFrame(frame)
+    else
+        hs.alert.show("No focused window")
+    end
+end
+
+hs.hotkey.bind({"ctrl", "alt", "shift"}, "right", function() resizeWindow("right", 50) end)
+hs.hotkey.bind({"ctrl", "alt", "shift"}, "left", function() resizeWindow("left", 50) end)
+hs.hotkey.bind({"ctrl", "alt", "shift"}, "up", function() resizeWindow("up", 50) end)
+hs.hotkey.bind({"ctrl", "alt", "shift"}, "down", function() resizeWindow("down", 50) end)
