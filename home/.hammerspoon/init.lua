@@ -54,10 +54,10 @@ local function moveWindow(offsetX, offsetY)
     end
 end
 
-hs.hotkey.bind({"ctrl", "alt"}, "right", function() moveWindow(50, 0) end)
-hs.hotkey.bind({"ctrl", "alt"}, "left", function() moveWindow(-50, 0) end)
-hs.hotkey.bind({"ctrl", "alt"}, "up", function() moveWindow(0, -50) end)
-hs.hotkey.bind({"ctrl", "alt"}, "down", function() moveWindow(0, 50) end)
+hs.hotkey.bind({"ctrl", "alt"}, "L", function() moveWindow(50, 0) end)
+hs.hotkey.bind({"ctrl", "alt"}, "H", function() moveWindow(-50, 0) end)
+hs.hotkey.bind({"ctrl", "alt"}, "K", function() moveWindow(0, -50) end)
+hs.hotkey.bind({"ctrl", "alt"}, "J", function() moveWindow(0, 50) end)
 
 local function resizeWindow(direction, change)
     local win = hs.window.focusedWindow()
@@ -78,7 +78,7 @@ local function resizeWindow(direction, change)
     end
 end
 
-hs.hotkey.bind({"ctrl", "alt", "shift"}, "right", function() resizeWindow("right", 50) end)
-hs.hotkey.bind({"ctrl", "alt", "shift"}, "left", function() resizeWindow("left", 50) end)
-hs.hotkey.bind({"ctrl", "alt", "shift"}, "up", function() resizeWindow("up", 50) end)
-hs.hotkey.bind({"ctrl", "alt", "shift"}, "down", function() resizeWindow("down", 50) end)
+hs.hotkey.bind({"ctrl", "alt", "shift"}, "L", function() resizeWindow("right", 50) end)
+hs.hotkey.bind({"ctrl", "alt", "shift"}, "H", function() resizeWindow("left", 50) end)
+hs.hotkey.bind({"ctrl", "alt", "shift"}, "K", function() resizeWindow("up", 50) end)
+hs.hotkey.bind({"ctrl", "alt", "shift"}, "J", function() resizeWindow("down", 50) end)
