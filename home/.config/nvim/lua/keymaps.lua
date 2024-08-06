@@ -16,7 +16,7 @@ map("<Leader>v", ":JABSOpen<CR>", "silent")
 -- Debugging
 map("mb", ":lua require('dap').toggle_breakpoint()<CR>", "silent")
 map("mc", ":lua require('dap').continue()<CR>", "silent")
-map("md", ":lua require('dap').step_over()<CR>", "silent")
+map("mo", ":lua require('dap').step_over()<CR>", "silent")
 map("mi", ":lua require('dap').step_into()<CR>", "silent")
 
 -- Octo mappings

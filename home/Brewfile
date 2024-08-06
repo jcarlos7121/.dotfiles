@@ -37,4 +37,5 @@ brew "heroku/brew/heroku"
 brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD"]
 cask "aptible"
 cask "chromedriver"
-cask "fig"
+cask "amethyst"
+cask "hammerspoon"

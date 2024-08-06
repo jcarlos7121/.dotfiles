@@ -60,6 +60,7 @@ require("lazy").setup({
   require 'plugins.nvim-tree', -- Adds nvim-tree for file navigation
   require 'plugins.telescope',
   require 'plugins.image-preview',
+  require 'plugins.yazi',
 
   -- Code editing
   'junegunn/vim-easy-align', -- Press Enter and character to align multiple lines
