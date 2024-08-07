@@ -47,7 +47,7 @@ function expandNotifications()
     local screen = hs.screen.mainScreen()
     local screenFrame = screen:frame()
 
-    local clickArea = hs.geometry.rect(screenFrame.w - 100, (screenFrame.h / 2) - 400, 1, 1)
+    local clickArea = hs.geometry.rect(screenFrame.w - 100, 65, 1, 1)
     -- Move the mouse to the click area and click
     hs.mouse.setAbsolutePosition(clickArea.center)
     -- hs.eventtap.leftClick(clickArea.center)
@@ -130,10 +130,10 @@ function scrollUp()
     hs.eventtap.scrollWheel({0, -10}, {}, "line")
 end
 -- Bind the function to a hotkey (e.g., Ctrl + Alt + U)
-hs.hotkey.bind({"ctrl", "cmd"}, "U", scrollUp, nil, scrollUp)
+hs.hotkey.bind({"ctrl", "cmd"}, "Y", scrollUp, nil, scrollUp)
 
 function scrollDown()
     -- Simulate a scroll down event
     hs.eventtap.scrollWheel({0, 10}, {}, "line")
 end
-hs.hotkey.bind({"ctrl", "cmd"}, "Y", scrollDown, nil, scrollDown)
+hs.hotkey.bind({"ctrl", "cmd"}, "U", scrollDown, nil, scrollDown)
