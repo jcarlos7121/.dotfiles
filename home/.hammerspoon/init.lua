@@ -54,10 +54,10 @@ local function moveWindow(offsetX, offsetY)
     end
 end
 
-hs.hotkey.bind({"ctrl", "shift"}, "L", function() moveWindow(30, 0) end)
-hs.hotkey.bind({"ctrl", "shift"}, "H", function() moveWindow(-30, 0) end)
-hs.hotkey.bind({"ctrl", "shift"}, "K", function() moveWindow(0, -30) end)
-hs.hotkey.bind({"ctrl", "shift"}, "J", function() moveWindow(0, 30) end)
+hs.hotkey.bind({"ctrl", "shift"}, "L", function() moveWindow(50, 0) end)
+hs.hotkey.bind({"ctrl", "shift"}, "H", function() moveWindow(-50, 0) end)
+hs.hotkey.bind({"ctrl", "shift"}, "K", function() moveWindow(0, -50) end)
+hs.hotkey.bind({"ctrl", "shift"}, "J", function() moveWindow(0, 50) end)
 
 local function resizeWindow(direction, change)
     local win = hs.window.focusedWindow()
@@ -97,10 +97,10 @@ local function moveMouse(direction, value)
     hs.mouse.setAbsolutePosition(currentPos)
 end
 
-hs.hotkey.bind({"ctrl", "cmd"}, "L", function() moveMouse("right", 50) end, nil , function() moveMouse("right", 50) end)
-hs.hotkey.bind({"ctrl", "cmd"}, "H", function() moveMouse("left", 50) end, nil , function() moveMouse("left", 50) end)
-hs.hotkey.bind({"ctrl", "cmd"}, "K", function() moveMouse("up", 50) end, nil , function() moveMouse("up", 50) end)
-hs.hotkey.bind({"ctrl", "cmd"}, "J", function() moveMouse("down", 50) end, nil , function() moveMouse("down", 50) end)
+hs.hotkey.bind({"ctrl", "cmd"}, "L", function() moveMouse("right", 20) end, nil , function() moveMouse("right", 20) end)
+hs.hotkey.bind({"ctrl", "cmd"}, "H", function() moveMouse("left", 20) end, nil , function() moveMouse("left", 20) end)
+hs.hotkey.bind({"ctrl", "cmd"}, "K", function() moveMouse("up", 20) end, nil , function() moveMouse("up", 20) end)
+hs.hotkey.bind({"ctrl", "cmd"}, "J", function() moveMouse("down", 20) end, nil , function() moveMouse("down", 20) end)
 
 -- triggers a click
 local function clickMouse()
