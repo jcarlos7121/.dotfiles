@@ -123,3 +123,17 @@ local function clickMouse()
     hs.eventtap.leftClick(hs.mouse.getAbsolutePosition())
 end
 hs.hotkey.bind({"ctrl", "cmd"}, "N", clickMouse, nil, clickMouse)
+
+-- Function to scroll up
+function scrollUp()
+    -- Simulate a scroll up event
+    hs.eventtap.scrollWheel({0, -10}, {}, "line")
+end
+-- Bind the function to a hotkey (e.g., Ctrl + Alt + U)
+hs.hotkey.bind({"ctrl", "cmd"}, "U", scrollUp, nil, scrollUp)
+
+function scrollDown()
+    -- Simulate a scroll down event
+    hs.eventtap.scrollWheel({0, 10}, {}, "line")
+end
+hs.hotkey.bind({"ctrl", "cmd"}, "Y", scrollDown, nil, scrollDown)
