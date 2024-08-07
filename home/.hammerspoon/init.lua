@@ -54,10 +54,10 @@ local function moveWindow(offsetX, offsetY)
     end
 end
 
-hs.hotkey.bind({"ctrl", "shift"}, "L", function() moveWindow(50, 0) end)
-hs.hotkey.bind({"ctrl", "shift"}, "H", function() moveWindow(-50, 0) end)
-hs.hotkey.bind({"ctrl", "shift"}, "K", function() moveWindow(0, -50) end)
-hs.hotkey.bind({"ctrl", "shift"}, "J", function() moveWindow(0, 50) end)
+hs.hotkey.bind({"ctrl", "shift"}, "L", function() moveWindow(30, 0) end)
+hs.hotkey.bind({"ctrl", "shift"}, "H", function() moveWindow(-30, 0) end)
+hs.hotkey.bind({"ctrl", "shift"}, "K", function() moveWindow(0, -30) end)
+hs.hotkey.bind({"ctrl", "shift"}, "J", function() moveWindow(0, 30) end)
 
 local function resizeWindow(direction, change)
     local win = hs.window.focusedWindow()
