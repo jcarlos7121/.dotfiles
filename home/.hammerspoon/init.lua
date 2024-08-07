@@ -42,6 +42,22 @@ hs.hotkey.bind({"ctrl", "shift"}, "N", function()
   hs.osascript.applescript(script)
 end)
 
+function expandNotifications()
+    -- Get the screen size
+    local screen = hs.screen.mainScreen()
+    local screenFrame = screen:frame()
+
+    local clickArea = hs.geometry.rect(screenFrame.w - 100, (screenFrame.h / 2) - 400, 1, 1)
+    -- Move the mouse to the click area and click
+    hs.mouse.setAbsolutePosition(clickArea.center)
+    -- hs.eventtap.leftClick(clickArea.center)
+    -- Optionally, you can add more clicks or scrolls to ensure all notifications are expanded
+    -- For example, you can scroll down to reveal more notifications
+    hs.eventtap.scrollWheel({0, -10}, {}, "line") -- Scroll up
+end
+
+hs.hotkey.bind({"ctrl", "shift"}, "B", expandNotifications)
+
 local function moveWindow(offsetX, offsetY)
     local win = hs.window.focusedWindow()
     if win then
