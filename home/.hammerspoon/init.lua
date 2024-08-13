@@ -22,7 +22,6 @@ hs.hotkey.bind({"alt", "shift"}, "N", function()
   end
 end)
 
-local log = hs.logger.new('spaceSwapper', 'debug')
 -- Function to move all windows from one space to another
 function moveWindowsBetweenSpaces(space1, space2)
     -- Get all windows in the first space
@@ -52,13 +51,10 @@ function getAllSpaces()
     local allSpaces = hs.spaces.spacesForScreen(currentScreen)
     local nonFullScreenSpaces = {}
     for _, space in ipairs(allSpaces) do
-        log.i(hs.spaces.spaceType(space))
         if hs.spaces.spaceType(space) == "user" then
-            log.i("Adding space")
             table.insert(nonFullScreenSpaces, space)
         end
     end
-    log.i(nonFullScreenSpaces)
     return nonFullScreenSpaces
 end
 -- Move all windows to the previous space
