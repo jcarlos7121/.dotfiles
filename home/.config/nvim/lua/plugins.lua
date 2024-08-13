@@ -212,6 +212,16 @@ require("lazy").setup({
   'hrsh7th/cmp-buffer', -- Adds LSP autocompletion for buffers
   'onsails/lspkind-nvim', -- Adds LSP pictograms like VSCode to autocomplete
   {
+    "petertriho/cmp-git",
+    dependencies = { 'hrsh7th/nvim-cmp' },
+    opts = {
+        -- options go here
+    },
+    init = function()
+        table.insert(require("cmp").get_config().sources, { name = "git" })
+    end
+  }, -- Adds git completion to nvim-cmp
+  {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
   }, -- Adds lsp installer for neovim

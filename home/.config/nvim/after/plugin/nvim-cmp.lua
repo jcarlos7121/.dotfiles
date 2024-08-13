@@ -28,6 +28,7 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = 'luasnip', option = { use_show_condition = false } },
     { name = 'orgmode' },
+    { name = 'git' },
     { name = 'nvim_lsp' },
     { name = 'nvim_lua' },
     { name = 'path' },

@@ -50,6 +50,9 @@ function expandNotifications()
     local clickArea = hs.geometry.rect(screenFrame.w - 100, 65, 1, 1)
     -- Move the mouse to the click area and click
     hs.mouse.setAbsolutePosition(clickArea.center)
+
+    -- Simulate a click event
+    hs.eventtap.leftClick(clickArea.center)
     -- hs.eventtap.leftClick(clickArea.center)
     -- Optionally, you can add more clicks or scrolls to ensure all notifications are expanded
     -- For example, you can scroll down to reveal more notifications
@@ -57,6 +60,26 @@ function expandNotifications()
 end
 
 hs.hotkey.bind({"ctrl", "shift"}, "B", expandNotifications)
+
+function copyScreenshot()
+    -- Get the screen size
+    local screen = hs.screen.mainScreen()
+    local screenFrame = screen:frame()
+
+    local clickArea = hs.geometry.rect(220, screenFrame.h - 60, 1, 1)
+    -- Move the mouse to the click area and click
+    hs.mouse.setAbsolutePosition(clickArea.center)
+
+    -- Simulate a click event
+    hs.eventtap.leftClick(clickArea.center)
+    -- hs.eventtap.leftClick(clickArea.center)
+    -- hs.eventtap.leftClick(clickArea.center)
+    -- Optionally, you can add more clicks or scrolls to ensure all notifications are expanded
+    -- For example, you can scroll down to reveal more notifications
+    hs.eventtap.scrollWheel({0, -10}, {}, "line") -- Scroll up
+end
+
+hs.hotkey.bind({"ctrl", "shift"}, "S", copyScreenshot)
 
 local function moveWindow(offsetX, offsetY)
     local win = hs.window.focusedWindow()
