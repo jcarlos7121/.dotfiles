@@ -1,7 +1,9 @@
+-- Add space to screen
 hs.hotkey.bind({"alt", "shift"}, "M", function()
   hs.spaces.addSpaceToScreen()
 end)
 
+-- Remove space from screen
 hs.hotkey.bind({"alt", "shift"}, "N", function()
   local allSpaces = hs.spaces.allSpaces()
   -- Get the current screen
@@ -20,7 +22,71 @@ hs.hotkey.bind({"alt", "shift"}, "N", function()
   end
 end)
 
--- Bind the function to a key combination, e.g., ctrl + alt + N
+local log = hs.logger.new('spaceSwapper', 'debug')
+-- Function to move all windows from one space to another
+function moveWindowsBetweenSpaces(space1, space2)
+    -- Get all windows in the first space
+    local windows1 = hs.spaces.windowsForSpace(space1)
+    -- Get all windows in the second space
+    local windows2 = hs.spaces.windowsForSpace(space2)
+    -- Move each window from the first space to the second space
+    for _, win in ipairs(windows1) do
+        hs.spaces.moveWindowToSpace(win, space2)
+    end
+    -- Move each window from the second space to the first space
+    for _, win in ipairs(windows2) do
+        hs.spaces.moveWindowToSpace(win, space1)
+    end
+    -- Move to the second space
+    hs.spaces.gotoSpace(space2)
+end
+-- Function to get the current space
+function getCurrentSpace()
+    local currentScreen = hs.screen.mainScreen()
+    local currentSpace = hs.spaces.activeSpaceOnScreen(currentScreen)
+    return currentSpace
+end
+-- Function to get all spaces
+function getAllSpaces()
+    local currentScreen = hs.screen.mainScreen()
+    local allSpaces = hs.spaces.spacesForScreen(currentScreen)
+    local nonFullScreenSpaces = {}
+    for _, space in ipairs(allSpaces) do
+        log.i(hs.spaces.spaceType(space))
+        if hs.spaces.spaceType(space) == "user" then
+            log.i("Adding space")
+            table.insert(nonFullScreenSpaces, space)
+        end
+    end
+    log.i(nonFullScreenSpaces)
+    return nonFullScreenSpaces
+end
+-- Move all windows to the previous space
+hs.hotkey.bind({"ctrl", "shift"}, "U", function()
+  local allSpaces = getAllSpaces()
+  local currentSpace = getCurrentSpace()
+  local currentIndex = hs.fnutils.indexOf(allSpaces, currentSpace)
+  if currentIndex and currentIndex < #allSpaces then
+    local nextSpace = allSpaces[currentIndex + 1]
+    moveWindowsBetweenSpaces(currentSpace, nextSpace)
+  else
+    hs.alert.show("No next space available")
+  end
+end)
+-- Move all windows to the previous space
+hs.hotkey.bind({"ctrl", "shift"}, "Y", function()
+  local allSpaces = getAllSpaces()
+  local currentSpace = getCurrentSpace()
+  local currentIndex = hs.fnutils.indexOf(allSpaces, currentSpace)
+  if currentIndex and currentIndex > 1 then
+    local previousSpace = allSpaces[currentIndex - 1]
+    moveWindowsBetweenSpaces(currentSpace, previousSpace)
+  else
+    hs.alert.show("No previous space available")
+  end
+end)
+
+-- Dismiss notifications
 hs.hotkey.bind({"ctrl", "shift"}, "N", function()
   local script = [[
       tell application "System Events"
@@ -42,6 +108,7 @@ hs.hotkey.bind({"ctrl", "shift"}, "N", function()
   hs.osascript.applescript(script)
 end)
 
+-- Expand notifications
 function expandNotifications()
     -- Get the screen size
     local screen = hs.screen.mainScreen()
@@ -61,6 +128,7 @@ end
 
 hs.hotkey.bind({"ctrl", "shift"}, "B", expandNotifications)
 
+-- Copy screenshot
 function copyScreenshot()
     -- Get the screen size
     local screen = hs.screen.mainScreen()
@@ -81,6 +149,7 @@ end
 
 hs.hotkey.bind({"ctrl", "shift"}, "S", copyScreenshot)
 
+-- Move Window
 local function moveWindow(offsetX, offsetY)
     local win = hs.window.focusedWindow()
     if win then
@@ -98,6 +167,7 @@ hs.hotkey.bind({"ctrl", "shift"}, "H", function() moveWindow(-50, 0) end)
 hs.hotkey.bind({"ctrl", "shift"}, "K", function() moveWindow(0, -50) end)
 hs.hotkey.bind({"ctrl", "shift"}, "J", function() moveWindow(0, 50) end)
 
+-- Resize Window
 local function resizeWindow(direction, change)
     local win = hs.window.focusedWindow()
     if win then
@@ -122,6 +192,7 @@ hs.hotkey.bind({"ctrl", "shift", "cmd"}, "H", function() resizeWindow("left", 50
 hs.hotkey.bind({"ctrl", "shift", "cmd"}, "K", function() resizeWindow("up", 50) end)
 hs.hotkey.bind({"ctrl", "shift", "cmd"}, "J", function() resizeWindow("down", 50) end)
 
+-- Move the mouse
 local function moveMouse(direction, value)
     local currentPos = hs.mouse.getAbsolutePosition()
     if direction == "right" then
@@ -141,20 +212,20 @@ hs.hotkey.bind({"ctrl", "cmd"}, "H", function() moveMouse("left", 20) end, nil ,
 hs.hotkey.bind({"ctrl", "cmd"}, "K", function() moveMouse("up", 20) end, nil , function() moveMouse("up", 20) end)
 hs.hotkey.bind({"ctrl", "cmd"}, "J", function() moveMouse("down", 20) end, nil , function() moveMouse("down", 20) end)
 
--- triggers a click
+-- Triggers a click
 local function clickMouse()
     hs.eventtap.leftClick(hs.mouse.getAbsolutePosition())
 end
 hs.hotkey.bind({"ctrl", "cmd"}, "N", clickMouse, nil, clickMouse)
 
--- Function to scroll up
+-- Scroll up
 function scrollUp()
     -- Simulate a scroll up event
     hs.eventtap.scrollWheel({0, -10}, {}, "line")
 end
--- Bind the function to a hotkey (e.g., Ctrl + Alt + U)
 hs.hotkey.bind({"ctrl", "cmd"}, "Y", scrollUp, nil, scrollUp)
 
+-- Scroll down
 function scrollDown()
     -- Simulate a scroll down event
     hs.eventtap.scrollWheel({0, 10}, {}, "line")
