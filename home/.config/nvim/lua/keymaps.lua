@@ -1,4 +1,5 @@
 require'mapx'.setup { global = "force" }
+require('nvim-tmux-navigation')
 
 vim.g.mapleader = ","
 
@@ -70,10 +71,10 @@ vnoremap("<F7>", ":CarbonNowSh<CR>", "silent")
 vmap("<Tab>", ":'<,'>><CR>", "silent")
 
 -- Mappings for switching between vim and tmux panes
-nnoremap("<C-J>", "<C-W><C-J>")
-nnoremap("<C-K>", "<C-W><C-K>")
-nnoremap("<C-L>", "<C-W><C-L>")
-nnoremap("<C-H>", "<C-W><C-H>")
+nnoremap("<C-h>", "<Cmd>NvimTmuxNavigateLeft<CR>")
+nnoremap("<C-j>", "<Cmd>NvimTmuxNavigateDown<CR>")
+nnoremap("<C-k>", "<Cmd>NvimTmuxNavigateUp<CR>")
+nnoremap("<C-l>", "<Cmd>NvimTmuxNavigateRight<CR>")
 
 -- Nerdtree Finder and CtrlP
 nnoremap("<F5>", ":NvimTreeFindFileToggle<CR>", "silent")

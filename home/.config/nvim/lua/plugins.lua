@@ -126,7 +126,7 @@ require("lazy").setup({
 
   -- Utilities
   'vim-test/vim-test', -- Adds leader commands for automatically running Rspec Tests
-  'christoomey/vim-tmux-navigator', -- For moving between vim and tmux panes
+  { "alexghergh/nvim-tmux-navigation" }, -- Allows to navigate between tmux panes
   'KabbAmine/vCoolor.vim', -- Adds color selector for CSS
   'MattesGroeger/vim-bookmarks', -- Allows to bookmark lines to come back
   'kristijanhusak/vim-carbon-now-sh', -- create snipper of code
@@ -269,6 +269,7 @@ require("lazy").setup({
         },
         openai_params = {
           model = "gpt-4o",
+          max_tokens = 3000
         }
       })
     end,
