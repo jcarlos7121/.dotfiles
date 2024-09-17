@@ -58,9 +58,9 @@ require("lazy").setup({
     },
   },
   require 'plugins.nvim-tree', -- Adds nvim-tree for file navigation
-  require 'plugins.telescope',
-  require 'plugins.image-preview',
-  require 'plugins.yazi',
+  require 'plugins.telescope', -- Adds telescope for file search
+  require 'plugins.image-preview', -- Adds image preview for nvim
+  require 'plugins.yazi', -- Adds yazi for fuzzy search
 
   -- Code editing
   'junegunn/vim-easy-align', -- Press Enter and character to align multiple lines
