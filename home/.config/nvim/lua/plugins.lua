@@ -46,6 +46,9 @@ require("lazy").setup({
   'rizzatti/dash.vim', -- Adds :Dash command to search on Dash docs
   'adelarsq/vim-matchit', --% to match closing tag on xml/html
 
+  -- Java
+  'nvim-java/nvim-java',
+
   -- FileSearch
   'tpope/vim-vinegar', -- Type - and go to folder up
   'kyazdani42/nvim-web-devicons', -- Adds icons to nvim-tree
@@ -229,6 +232,19 @@ require("lazy").setup({
     'L3MON4D3/LuaSnip',
     dependencies = { 'rafamadriz/friendly-snippets' }
   }, -- Snippets engine for Lua, compatible with VSCode
+  {
+    "pmizio/typescript-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    opts = {},
+    config = function()
+      require("typescript-tools").setup {
+        settings = {
+          complete_function_calls = true,
+          include_completions_with_insert_text = true
+        }
+      }
+    end
+  }, -- Adds typescript tools for nvim
   'saadparwaiz1/cmp_luasnip', -- Adds lua snippets to cmp
 
   -- Debuggers

@@ -20,6 +20,7 @@ alias ibrew='arch -x86_64 /usr/local/bin/brew'
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --bash)"
 eval "$(zoxide init bash)"
+eval "$(jump shell)"
 
 tmux
 

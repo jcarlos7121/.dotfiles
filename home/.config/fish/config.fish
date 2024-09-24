@@ -8,3 +8,6 @@ source ~/.config/fish/conf.d/fzf.fish
 
 # Set up fzf key bindings
 fzf --fish | source
+
+# Set up jump
+jump shell fish | source
