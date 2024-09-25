@@ -22,6 +22,7 @@ hs.hotkey.bind({"alt", "shift"}, "N", function()
   end
 end)
 
+-- TODO: not working on Sequoia
 -- Function to move all windows from one space to another
 function moveWindowsBetweenSpaces(space1, space2)
     -- Get all windows in the first space
@@ -92,14 +93,6 @@ hs.hotkey.bind({"ctrl", "shift"}, "N", function()
         perform (actions of UI elements of UI element 1 of scroll area 1 of group 1 of group 1 of window "Notification Center" of application process "NotificationCenter" of application "System Events" whose name starts with "Name:Close" or name starts with "Name:Clear All")
       end try
     end tell
-  ]]
-  hs.osascript.applescript(script)
-end)
-
--- Generates an apple system test notification
-hs.hotkey.bind({"ctrl", "shift"}, "G", function()
-  local script = [[
-    display notification "Hello World" with title "Hello"
   ]]
   hs.osascript.applescript(script)
 end)

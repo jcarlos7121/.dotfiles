@@ -10,3 +10,6 @@ bin
 .config/kitty
 .config/nvim/vimscript
 .hammerspoon
+.config/amethyst
+.config/skhd
+.config/yabai

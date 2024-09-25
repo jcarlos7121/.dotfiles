@@ -1,0 +1,39 @@
+# Makes a window fullscreen
+# alt + shift - d : /opt/homebrew/bin/yabai -m window --toggle zoom-fullscreen
+
+# Switch in Y-axis orientation
+# alt + shift - a : yabai -m space --mirror y-axis
+
+# Makes toggle a window to float
+# alt + shift - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
+
+# Minimizes a window
+# alt - z : /opt/homebrew/bin/yabai -m window --minimize
+
+# Switch focus clockwise or counterclockwise
+# alt - j : if [ "$(yabai -m query --spaces --space | jq -r '.type')" = "stack" ]; then (yabai -m window --focus stack.next || yabai -m window --focus stack.first); else yabai -m window --focus next || yabai -m window --focus first; fi
+# alt - k : if [ "$(yabai -m query --spaces --space | jq -r '.type')" = "stack" ]; then (yabai -m window --focus stack.prev || yabai -m window --focus stack.last); else yabai -m window --focus prev || yabai -m window --focus last; fi
+
+# Swap windows clockwise or counterclockwise
+# alt + shift + ctrl - j : if [ "$(yabai -m query --spaces --space | jq -r '.type')" = "stack" ]; then (yabai -m window --swap stack.next || yabai -m window --swap stack.first); else yabai -m window --swap next || yabai -m window --swap first; fi
+# alt + shift + ctrl - k : if [ "$(yabai -m query --spaces --space | jq -r '.type')" = "stack" ]; then (yabai -m window --swap stack.prev || yabai -m window --swap stack.last); else yabai -m window --swap prev || yabai -m window --swap last; fi
+
+# Swap spaces
+ctrl - 1 : yabai -m space --focus 1
+ctrl - 2 : yabai -m space --focus 2
+ctrl - 3 : yabai -m space --focus 3
+ctrl - 4 : yabai -m space --focus 4
+ctrl - 5 : yabai -m space --focus 5
+ctrl - 6 : yabai -m space --focus 6
+
+# Send window to space
+alt + shift - 1 : yabai -m window --space 1
+alt + shift - 2 : yabai -m window --space 2
+alt + shift - 3 : yabai -m window --space 3
+alt + shift - 4 : yabai -m window --space 4
+alt + shift - 5 : yabai -m window --space 5
+alt + shift - 6 : yabai -m window --space 6
+
+# Move space
+alt + shift + ctrl - n : yabai -m space --move prev
+alt + shift + ctrl - m : yabai -m space --move next
