@@ -1,22 +1,22 @@
 # Makes a window fullscreen
-# alt + shift - d : /opt/homebrew/bin/yabai -m window --toggle zoom-fullscreen
+alt + shift - d : /opt/homebrew/bin/yabai -m window --toggle zoom-fullscreen
 
 # Switch in Y-axis orientation
-# alt + shift - a : yabai -m space --mirror y-axis
+alt + shift - a : yabai -m space --mirror y-axis
 
 # Makes toggle a window to float
-# alt + shift - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
+alt + shift - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
 
 # Minimizes a window
-# alt - z : /opt/homebrew/bin/yabai -m window --minimize
+alt - z : /opt/homebrew/bin/yabai -m window --minimize
 
 # Switch focus clockwise or counterclockwise
-# alt - j : if [ "$(yabai -m query --spaces --space | jq -r '.type')" = "stack" ]; then (yabai -m window --focus stack.next || yabai -m window --focus stack.first); else yabai -m window --focus next || yabai -m window --focus first; fi
-# alt - k : if [ "$(yabai -m query --spaces --space | jq -r '.type')" = "stack" ]; then (yabai -m window --focus stack.prev || yabai -m window --focus stack.last); else yabai -m window --focus prev || yabai -m window --focus last; fi
+alt - j : if [ "$(yabai -m query --spaces --space | jq -r '.type')" = "stack" ]; then (yabai -m window --focus stack.next || yabai -m window --focus stack.first); else yabai -m window --focus next || yabai -m window --focus first; fi
+alt - k : if [ "$(yabai -m query --spaces --space | jq -r '.type')" = "stack" ]; then (yabai -m window --focus stack.prev || yabai -m window --focus stack.last); else yabai -m window --focus prev || yabai -m window --focus last; fi
 
 # Swap windows clockwise or counterclockwise
-# alt + shift + ctrl - j : if [ "$(yabai -m query --spaces --space | jq -r '.type')" = "stack" ]; then (yabai -m window --swap stack.next || yabai -m window --swap stack.first); else yabai -m window --swap next || yabai -m window --swap first; fi
-# alt + shift + ctrl - k : if [ "$(yabai -m query --spaces --space | jq -r '.type')" = "stack" ]; then (yabai -m window --swap stack.prev || yabai -m window --swap stack.last); else yabai -m window --swap prev || yabai -m window --swap last; fi
+alt + shift + ctrl - j : if [ "$(yabai -m query --spaces --space | jq -r '.type')" = "stack" ]; then (yabai -m window --swap stack.next || yabai -m window --swap stack.first); else yabai -m window --swap next || yabai -m window --swap first; fi
+alt + shift + ctrl - k : if [ "$(yabai -m query --spaces --space | jq -r '.type')" = "stack" ]; then (yabai -m window --swap stack.prev || yabai -m window --swap stack.last); else yabai -m window --swap prev || yabai -m window --swap last; fi
 
 # Swap spaces
 ctrl - 1 : yabai -m space --focus 1
