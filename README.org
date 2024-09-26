@@ -7,7 +7,7 @@
  - [X] Fish
  - [X] Tmux
  - [X] Amazon Q
- - [X] Amethyst
+ - [X] Yabai
  - [X] Hammerspoon
 
 ** Neovim Configs

@@ -10,13 +10,22 @@ alt + shift - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
 # Minimizes a window
 alt - z : /opt/homebrew/bin/yabai -m window --minimize
 
+# Splits a focused window so that they can stack on top of each other
+alt - x : /opt/homebrew/bin/yabai -m window --toggle split
+
 # Switch focus clockwise or counterclockwise
-alt - j : if [ "$(yabai -m query --spaces --space | jq -r '.type')" = "stack" ]; then (yabai -m window --focus stack.next || yabai -m window --focus stack.first); else yabai -m window --focus next || yabai -m window --focus first; fi
-alt - k : if [ "$(yabai -m query --spaces --space | jq -r '.type')" = "stack" ]; then (yabai -m window --focus stack.prev || yabai -m window --focus stack.last); else yabai -m window --focus prev || yabai -m window --focus last; fi
+alt - j : yabai -m window --focus $(yabai -m query --windows --space | jq 'sort_by(.id) | .[(to_entries | .[] | select(.value."has-focus") | .key + 1) % length] | .id')
+alt - k : yabai -m window --focus $(yabai -m query --windows --space | jq 'sort_by(.id) | .[(to_entries | .[] | select(.value."has-focus") | .key - 1) % length] | .id')
 
 # Swap windows clockwise or counterclockwise
 alt + shift + ctrl - j : if [ "$(yabai -m query --spaces --space | jq -r '.type')" = "stack" ]; then (yabai -m window --swap stack.next || yabai -m window --swap stack.first); else yabai -m window --swap next || yabai -m window --swap first; fi
 alt + shift + ctrl - k : if [ "$(yabai -m query --spaces --space | jq -r '.type')" = "stack" ]; then (yabai -m window --swap stack.prev || yabai -m window --swap stack.last); else yabai -m window --swap prev || yabai -m window --swap last; fi
+
+# Resize windows
+alt + shift - h : yabai -m window --resize right:-20:0 2> /dev/null || yabai -m window --resize left:-20:0 2> /dev/null
+alt + shift - j : yabai -m window --resize bottom:0:20 2> /dev/null || yabai -m window --resize top:0:20 2> /dev/null
+alt + shift - k : yabai -m window --resize bottom:0:-20 2> /dev/null || yabai -m window --resize top:0:-20 2> /dev/null
+alt + shift - l : yabai -m window --resize right:20:0 2> /dev/null || yabai -m window --resize left:20:0 2> /dev/null
 
 # Swap spaces
 ctrl - 1 : yabai -m space --focus 1
