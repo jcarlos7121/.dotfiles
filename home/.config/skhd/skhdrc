@@ -1,5 +1,7 @@
 # Makes a window fullscreen
-alt + shift - d : /opt/homebrew/bin/yabai -m window --toggle zoom-fullscreen
+alt + shift - d : /Users/juanhinojo/.config/skhd/toggle_fullscreen.sh
+
+alt - d : yabai -m window --toggle zoom-fullscreen
 
 # Switch in Y-axis orientation
 alt + shift - a : yabai -m space --mirror y-axis
@@ -13,13 +15,20 @@ alt - z : /opt/homebrew/bin/yabai -m window --minimize
 # Splits a focused window so that they can stack on top of each other
 alt - x : /opt/homebrew/bin/yabai -m window --toggle split
 
+# Rebalance windows size
+alt - c : /opt/homebrew/bin/yabai -m space --balance
+
 # Switch focus clockwise or counterclockwise
-alt - j : yabai -m window --focus $(yabai -m query --windows --space | jq 'sort_by(.id) | .[(to_entries | .[] | select(.value."has-focus") | .key + 1) % length] | .id')
-alt - k : yabai -m window --focus $(yabai -m query --windows --space | jq 'sort_by(.id) | .[(to_entries | .[] | select(.value."has-focus") | .key - 1) % length] | .id')
+alt - h : yabai -m window --focus west
+alt - j : yabai -m window --focus south
+alt - k : yabai -m window --focus north
+alt - l : yabai -m window --focus east
 
 # Swap windows clockwise or counterclockwise
-alt + shift + ctrl - j : if [ "$(yabai -m query --spaces --space | jq -r '.type')" = "stack" ]; then (yabai -m window --swap stack.next || yabai -m window --swap stack.first); else yabai -m window --swap next || yabai -m window --swap first; fi
-alt + shift + ctrl - k : if [ "$(yabai -m query --spaces --space | jq -r '.type')" = "stack" ]; then (yabai -m window --swap stack.prev || yabai -m window --swap stack.last); else yabai -m window --swap prev || yabai -m window --swap last; fi
+alt + shift + ctrl - h : yabai -m window --swap west
+alt + shift + ctrl - j : yabai -m window --swap south
+alt + shift + ctrl - k : yabai -m window --swap north
+alt + shift + ctrl - l : yabai -m window --swap east
 
 # Resize windows
 alt + shift - h : yabai -m window --resize right:-20:0 2> /dev/null || yabai -m window --resize left:-20:0 2> /dev/null
