@@ -25,7 +25,7 @@ opt.swapfile = false
 opt.shiftwidth = 2
 opt.expandtab = true
 opt.autochdir = true
-opt.laststatus = 2
+opt.laststatus = 3
 opt.showtabline = 0
 opt.mmp = 5000
 

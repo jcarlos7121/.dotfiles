@@ -16,8 +16,4 @@ vim.cmd[[
 
   " Set the strategy for test#run to dispatch
   let test#strategy = "dispatch"
-
-  " NERDCommenter configuration"
-  let g:NERDSpaceDelims = 2
-  let g:NERDDefaultAlign = 'left'
 ]]
