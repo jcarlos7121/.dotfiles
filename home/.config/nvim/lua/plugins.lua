@@ -28,6 +28,18 @@ require("lazy").setup({
     end
   },
   {
+    'olivercederborg/poimandres.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require('poimandres').setup {
+        -- leave this setup function empty for default config
+        -- or refer to the configuration section
+        -- for configuration options
+      }
+    end,
+  }, -- Poimandres
+  {
     "zenbones-theme/zenbones.nvim",
     dependencies = "rktjmp/lush.nvim"
   },
@@ -61,8 +73,8 @@ require("lazy").setup({
     },
   },
   require 'plugins.nvim-tree', -- Adds nvim-tree for file navigation
-  require 'plugins.telescope', -- Adds telescope for file search
   require 'plugins.image-preview', -- Adds image preview for nvim
+  require 'plugins.telescope', -- Adds telescope for file search
   require 'plugins.yazi', -- Adds yazi for fuzzy search
 
   -- Code editing
@@ -207,7 +219,7 @@ require("lazy").setup({
   {
     'kevinhwang91/nvim-ufo',
     dependencies = 'kevinhwang91/promise-async'
-  },
+  }, -- Adds UFO for folding
   'hrsh7th/nvim-cmp', -- Adds completion for nvim
   'hrsh7th/cmp-nvim-lsp', -- Adds LSP support to cmp
   'hrsh7th/cmp-nvim-lua', -- Adds lua completion for cmp
@@ -351,6 +363,17 @@ require("lazy").setup({
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
     },
-    config = true
+    config = true,
+    opts = {
+      strategies = {
+        -- Change the default chat adapter
+        chat = {
+          adapter = "anthropic",
+        },
+        inline = {
+          adapter = "anthropic",
+        }
+      }
+    }
   }
 })

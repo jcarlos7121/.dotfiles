@@ -10,6 +10,10 @@ require("themery").setup({
       colorscheme = "aquarium",
     },
     {
+      name = "Poimandres",
+      colorscheme = "poimandres",
+    },
+    {
       name = "Rosebones",
       colorscheme = "rosebones",
       after = [[

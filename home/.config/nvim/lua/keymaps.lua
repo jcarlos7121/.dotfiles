@@ -49,8 +49,7 @@ map("<Leader>0", ":ChatGPT<CR>", 'silent')
 map("<Leader>9", ":ChatGPTEditWithInstructions<CR>", 'silent')
 map("<Leader>8", ":ChatGPTRun<Space>")
 map("<Leader>7", ":ChatGPTActAs<Space>")
-map("<Leader>6", ":CodeCompanionChat Toggle<CR>", 'silent')
-map("<Leader>5", ":AvanteChat<CR>", 'silent')
+map("<Leader>5", ":CodeCompanionChat Toggle<CR>", 'silent')
 
 -- Yank filepath
 map("<Leader>p", ":let @+ = expand('%:p')<CR>", "silent")
@@ -71,7 +70,8 @@ map("<Leader>4", ":ToggleTerm size=15 direction=horizontal<CR>", "silent")
 vnoremap("<F7>", ":CarbonNowSh<CR>", "silent")
 
 -- Vim mappings
-vmap("<Tab>", ":'<,'>><CR>", "silent")
+vim.api.nvim_set_keymap('v', '<Tab>', '>gv', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<S-Tab>', '<gv', { noremap = true, silent = true })
 
 -- Mappings for switching between vim and tmux panes
 nnoremap("<C-h>", "<Cmd>NvimTmuxNavigateLeft<CR>")

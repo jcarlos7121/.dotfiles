@@ -33,11 +33,11 @@ opt.mmp = 5000
 vim.o.foldcolumn = '0' -- '0' is not bad
 vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
 vim.o.foldlevelstart = 2
-vim.o.foldenable = false
+vim.o.foldenable = true
 
 -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
-vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
-vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+vim.keymap.set('n', 'zr', require('ufo').openAllFolds)
+vim.keymap.set('n', 'zm', require('ufo').closeFoldsWith)
 
 -- Disable nvim-tree folder icon
 vim.g.nvim_tree_show_icons = {
@@ -62,6 +62,11 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 vim.api.nvim_create_autocmd("BufReadPost", {
   pattern = { "*" },
   command = "set bufhidden=delete",
+})
+
+vim.api.nvim_create_autocmd("VimResized", {
+  pattern = "*",
+  command = "wincmd =",
 })
 
 -- Bookmarks configuration
