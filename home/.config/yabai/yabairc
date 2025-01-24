@@ -2,9 +2,9 @@ yabai -m config layout bsp
 yabai -m config window_placement first_child
 yabai -m config mouse_follows_focus on
 
-yabai -m rule --add app="^System Settings$" manage=off
+yabai -m rule --add app="^(Software Update|Dictionary|VLC|System Preferences|System Settings|zoom.us|Photo Booth|Archive Utility|App Store|Activity Monitor)$" manage=off
 yabai -m rule --add app="^Calculator$" manage=off
-yabai -m rule --add app="^Activity Monitor$" manage=off
+yabai -m rule --add app="^Archetype Plini X$" manage=off
 yabai -m rule --add app="^ExpressVPN$" manage=off
 yabai -m rule --add app="^1Password$" manage=off
 yabai -m rule --add app="^Print Center$" manage=off
