@@ -6,7 +6,7 @@ local lualine = require('lualine')
 -- Color table for highlights
 -- stylua: ignore
 local colors = {
-  bg       = '#202328',
+  bg       = 'none',
   fg       = '#bbc2cf',
   yellow   = '#ECBE7B',
   cyan     = '#008080',
@@ -80,7 +80,7 @@ end
 
 ins_left {
   function()
-    return '▊'
+    return ' '
   end,
   color = { fg = colors.bg },
   padding = { left = 0, right = 1 }, -- We don't need space before this
@@ -126,10 +126,6 @@ ins_left {
   color = { fg = colors.magenta, gui = 'bold' },
 }
 
-ins_left { 'location' }
-
-ins_left { 'progress', color = { fg = colors.fg, gui = 'bold' } }
-
 ins_left {
   'diagnostics',
   sources = { 'nvim_diagnostic' },
@@ -170,21 +166,6 @@ ins_left {
   color = { fg = '#ffffff', gui = 'bold' },
 }
 
--- Add components to right sections
-ins_right {
-  'o:encoding', -- option component same as &encoding in viml
-  fmt = string.upper, -- I'm not sure why it's upper case either ;)
-  cond = conditions.hide_in_width,
-  color = { fg = colors.green, gui = 'bold' },
-}
-
-ins_right {
-  'fileformat',
-  fmt = string.upper,
-  icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
-  color = { fg = colors.green, gui = 'bold' },
-}
-
 ins_right {
   'branch',
   icon = '',
@@ -205,7 +186,7 @@ ins_right {
 
 ins_right {
   function()
-    return '▊'
+    return ' '
   end,
   color = { fg = colors.bg },
   padding = { left = 1 },
