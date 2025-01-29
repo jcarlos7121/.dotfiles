@@ -64,8 +64,6 @@ return {
           ".svn/*",
           ".hg/*",
           ".mp4",
-          ".gif",
-          ".svg",
           ".keep",
           ".woff2",
           ".woff",
