@@ -66,9 +66,6 @@ map(",,j", "<cmd>HopLineAC<CR>")
 map("<Leader>3", ":ToggleTerm size=15 direction=float<CR>", "silent")
 map("<Leader>4", ":ToggleTerm size=15 direction=horizontal<CR>", "silent")
 
--- Carbon.sh integration
-vnoremap("<F7>", ":CarbonNowSh<CR>", "silent")
-
 -- Vim mappings
 vim.api.nvim_set_keymap('v', '<Tab>', '>gv', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<S-Tab>', '<gv', { noremap = true, silent = true })

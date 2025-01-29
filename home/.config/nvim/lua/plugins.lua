@@ -58,9 +58,6 @@ require("lazy").setup({
   'rizzatti/dash.vim', -- Adds :Dash command to search on Dash docs
   'adelarsq/vim-matchit', --% to match closing tag on xml/html
 
-  -- Java
-  'nvim-java/nvim-java',
-
   -- FileSearch
   'tpope/vim-vinegar', -- Type - and go to folder up
   'kyazdani42/nvim-web-devicons', -- Adds icons to nvim-tree
@@ -92,7 +89,7 @@ require("lazy").setup({
       require'hop'.setup()
     end
   }, -- Adds hop motion for jumping between words
-  { 'numToStr/Comment.nvim' }, -- Comment and uncomment with <leader>ci
+  { 'numToStr/Comment.nvim' }, -- Comment and uncomment with gc
   'tpope/vim-ragtag', -- Adds autoclose for things like <% %> and <%= %>
   'kana/vim-smartinput', -- Automatically closes ([{}])
   'tpope/vim-surround', -- Adds mechanigs for surrownding words for example: csw)
@@ -142,16 +139,7 @@ require("lazy").setup({
   -- Utilities
   'vim-test/vim-test', -- Adds leader commands for automatically running Rspec Tests
   { "alexghergh/nvim-tmux-navigation" }, -- Allows to navigate between tmux panes
-  'KabbAmine/vCoolor.vim', -- Adds color selector for CSS
   'MattesGroeger/vim-bookmarks', -- Allows to bookmark lines to come back
-  'kristijanhusak/vim-carbon-now-sh', -- create snipper of code
-  'dhruvasagar/vim-table-mode', -- Allows to edit tables with orgmode
-  {
-    'nvim-orgmode/orgmode',
-    config = function()
-      require('orgmode').setup{}
-    end
-  }, -- Add org mode for nvim
   {
     'nacro90/numb.nvim',
     config = function()
@@ -313,6 +301,15 @@ require("lazy").setup({
     "yetone/avante.nvim",
     event = "VeryLazy",
     opts = {
+      provider = "claude",
+      vendors = {
+        deepseek = {
+          __inherited_from = 'openai',
+          endpoint = 'https://api.deepseek.com',
+          model = 'deepseek-coder',
+          api_key_name = 'DEEPSEEK_API_KEY',
+        },
+      },
       mappings = {
         ask = "<leader>4", -- ask
         edit = "<leader>3", -- edit
