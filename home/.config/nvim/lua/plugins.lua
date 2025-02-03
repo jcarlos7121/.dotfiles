@@ -204,10 +204,10 @@ require("lazy").setup({
     'nvimdev/lspsaga.nvim',
     dependencies = { 'nvim-lspconfig' }
   }, -- Adds LSP displays UI for LSP actions
-  {
-    'kevinhwang91/nvim-ufo',
-    dependencies = 'kevinhwang91/promise-async'
-  }, -- Adds UFO for folding
+  -- {
+  --   'kevinhwang91/nvim-ufo',
+  --   dependencies = 'kevinhwang91/promise-async'
+  -- }, -- Adds UFO for folding
   'hrsh7th/nvim-cmp', -- Adds completion for nvim
   'hrsh7th/cmp-nvim-lsp', -- Adds LSP support to cmp
   'hrsh7th/cmp-nvim-lua', -- Adds lua completion for cmp
