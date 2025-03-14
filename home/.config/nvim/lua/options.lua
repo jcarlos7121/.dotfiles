@@ -15,7 +15,6 @@ opt.formatoptions = "qcrn1"
 opt.clipboard = { 'unnamed' }
 opt.visualbell = false
 opt.errorbells = false
-opt.lazyredraw = true
 opt.autoread = true
 opt.autowrite = true
 opt.ruler = true

@@ -115,7 +115,6 @@ require("lazy").setup({
   }, -- Adds colors to todo comments
 
   -- UI Utilities
-  'bling/vim-bufferline', -- Displays the buffer in the status bar
   'yggdroot/indentline', -- displays identation lines
   {
     'lewis6991/gitsigns.nvim',
@@ -134,7 +133,7 @@ require("lazy").setup({
     'nvim-lualine/lualine.nvim',
     dependencies = { 'kyazdani42/nvim-web-devicons', opt = true }
   }, -- Minimalistic status line
-  'stevearc/dressing.nvim', -- Gives a better UI for nvim select and inputs
+  require 'plugins.noice', -- Adds noice for notifications
 
   -- Utilities
   'vim-test/vim-test', -- Adds leader commands for automatically running Rspec Tests
@@ -302,12 +301,23 @@ require("lazy").setup({
     event = "VeryLazy",
     opts = {
       provider = "claude",
+      cursor_applying_provider = 'groq',
+      behaviour = {
+        enable_cursor_planning_mode = false
+      },
       vendors = {
         deepseek = {
           __inherited_from = 'openai',
           endpoint = 'https://api.deepseek.com',
           model = 'deepseek-coder',
           api_key_name = 'DEEPSEEK_API_KEY',
+        },
+        groq = { -- define groq provider
+            __inherited_from = 'openai',
+            api_key_name = 'GROQ_API_KEY',
+            endpoint = 'https://api.groq.com/openai/v1/',
+            model = 'llama-3.3-70b-versatile',
+            max_tokens = 32768, -- remember to increase this value, otherwise it will stop generating halfway
         },
       },
       mappings = {
@@ -353,24 +363,5 @@ require("lazy").setup({
         ft = { "markdown", "Avante" },
       },
     },
-  },
-  {
-    "olimorris/codecompanion.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-    },
-    config = true,
-    opts = {
-      strategies = {
-        -- Change the default chat adapter
-        chat = {
-          adapter = "anthropic",
-        },
-        inline = {
-          adapter = "anthropic",
-        }
-      }
-    }
   }
 })
