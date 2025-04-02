@@ -129,11 +129,8 @@ require("lazy").setup({
       require('colorizer').setup()
     end
   },
-  {
-    'nvim-lualine/lualine.nvim',
-    dependencies = { 'kyazdani42/nvim-web-devicons', opt = true }
-  }, -- Minimalistic status line
-  require 'plugins.noice', -- Adds noice for notifications
+  require 'plugins.lualine', -- Adds lualine for status line
+  require 'plugins.noice', -- Adds noice for notifications and better UI
 
   -- Utilities
   'vim-test/vim-test', -- Adds leader commands for automatically running Rspec Tests
@@ -296,5 +293,34 @@ require("lazy").setup({
     }
   },
   'github/copilot.vim', -- Enables copilot for vim
-  require 'plugins.avante' -- Adds Avante for vim
+  require 'plugins.avante', -- Adds Avante for vim
+  -- {
+  --   "ravitemer/mcphub.nvim",
+  --   dependencies = {
+  --       "nvim-lua/plenary.nvim",  -- Required for Job and HTTP requests
+  --   },
+  --   -- cmd = "MCPHub", -- lazily start the hub when `MCPHub` is called
+  --   build = "npm install -g mcp-hub@latest", -- Installs required mcp-hub npm module
+  --   config = function()
+  --       require("mcphub").setup({
+  --           -- Required options
+  --           port = 3000,  -- Port for MCP Hub server
+  --           config = vim.fn.expand("~/mcpservers.json"),  -- Absolute path to config file
+  --
+  --           -- Optional options
+  --           on_ready = function(hub)
+  --               -- Called when hub is ready
+  --           end,
+  --           on_error = function(err)
+  --               -- Called on errors
+  --           end,
+  --           log = {
+  --               level = vim.log.levels.WARN,
+  --               to_file = false,
+  --               file_path = nil,
+  --               prefix = "MCPHub"
+  --           },
+  --       })
+  --   end
+  -- }
 })

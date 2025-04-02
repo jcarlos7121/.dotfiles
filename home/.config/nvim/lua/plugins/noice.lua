@@ -35,6 +35,20 @@ return {
       {
         filter = {
           event = "msg_show",
+          find = "E481: No range allowed",
+        },
+        opts = { skip = true },
+      },
+      {
+        filter = {
+          event = "msg_show",
+          find = "Content is not an image",
+        },
+        opts = { skip = true },
+      },
+      {
+        filter = {
+          event = "msg_show",
           any = {
             { find = "%d+L, %d+B" },
             { find = "; after #%d+" },

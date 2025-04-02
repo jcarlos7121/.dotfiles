@@ -10,7 +10,7 @@ map("<S-B>", "<Plug>CamelCaseMotion_b")
 map("<S-E>", "<Plug>CamelCaseMotion_e")
 
 -- Preview closed folds
-nmap("<Tab>", ':lua require("ufo.preview"):peekFoldedLinesUnderCursor()<CR>', "silent")
+-- nmap("<Tab>", ':lua require("ufo.preview"):peekFoldedLinesUnderCursor()<CR>', "silent")
 
 -- Preview Buffers
 map("<Leader>v", ":JABSOpen<CR>", "silent")
@@ -49,6 +49,7 @@ map("<Leader>0", ":ChatGPT<CR>", 'silent')
 map("<Leader>9", ":ChatGPTEditWithInstructions<CR>", 'silent')
 map("<Leader>8", ":ChatGPTRun<Space>")
 map("<Leader>7", ":ChatGPTActAs<Space>")
+map("<Leader>5", ":AvanteChat<CR>", 'silent')
 
 -- Yank filepath
 map("<Leader>p", ":let @+ = expand('%:p')<CR>", "silent")
@@ -63,7 +64,7 @@ map(",,j", "<cmd>HopLineAC<CR>")
 
 -- ToggleTerm
 map("<Leader>3", ":ToggleTerm size=15 direction=float<CR>", "silent")
-map("<Leader>4", ":ToggleTerm size=15 direction=horizontal<CR>", "silent")
+-- map("<Leader>4", ":ToggleTerm size=15 direction=horizontal<CR>", "silent")
 
 -- Vim mappings
 vim.api.nvim_set_keymap('v', '<Tab>', '>gv', { noremap = true, silent = true })
