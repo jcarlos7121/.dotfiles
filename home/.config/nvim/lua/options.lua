@@ -53,8 +53,15 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   callback = function()
-    require("harpoon"):list():add()
-    require("lint").try_lint()
+    local ok_harpoon, harpoon = pcall(require, "harpoon")
+    if ok_harpoon then
+      harpoon:list():add()
+    end
+
+    local ok_lint, lint = pcall(require, "lint")
+    if ok_lint then
+      lint.try_lint()
+    end
   end,
 })
 

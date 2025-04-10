@@ -14,7 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   -- Colorschemes
-  'zaldih/themery.nvim', -- Theme toggler
+  require 'plugins.themery', -- Themery for colorschemes
   'FrenzyExists/aquarium-vim', -- Aquarium colorscheme i mostly use
   {
     'AlexvZyl/nordic.nvim',
@@ -43,8 +43,8 @@ require("lazy").setup({
     "zenbones-theme/zenbones.nvim",
     dependencies = "rktjmp/lush.nvim"
   },
-  { 'rose-pine/neovim', name = 'rose-pine' }, -- Rose pine colorscheme
-
+  require 'plugins.rosepine', -- Rosepine colorscheme
+  
   -- Commands
   'danro/rename.vim', -- :Rename filename
   'mileszs/ack.vim', -- :Ack to find word appearances on project
@@ -57,7 +57,7 @@ require("lazy").setup({
   'mattreduce/vim-mix', -- Adds :Mix elixir command
   'rizzatti/dash.vim', -- Adds :Dash command to search on Dash docs
   'adelarsq/vim-matchit', --% to match closing tag on xml/html
-
+  
   -- FileSearch
   'tpope/vim-vinegar', -- Type - and go to folder up
   'kyazdani42/nvim-web-devicons', -- Adds icons to nvim-tree
@@ -73,7 +73,7 @@ require("lazy").setup({
   require 'plugins.image-preview', -- Adds image preview for nvim
   require 'plugins.telescope', -- Adds telescope for file search
   require 'plugins.yazi', -- Adds yazi for fuzzy search
-
+  
   -- Code editing
   'junegunn/vim-easy-align', -- Press Enter and character to align multiple lines
   {
@@ -113,7 +113,7 @@ require("lazy").setup({
       require("todo-comments").setup { }
     end
   }, -- Adds colors to todo comments
-
+  
   -- UI Utilities
   'yggdroot/indentline', -- displays identation lines
   {
@@ -131,7 +131,7 @@ require("lazy").setup({
   },
   require 'plugins.lualine', -- Adds lualine for status line
   require 'plugins.noice', -- Adds noice for notifications and better UI
-
+  
   -- Utilities
   'vim-test/vim-test', -- Adds leader commands for automatically running Rspec Tests
   { "alexghergh/nvim-tmux-navigation" }, -- Allows to navigate between tmux panes
@@ -160,7 +160,24 @@ require("lazy").setup({
       )
     end
   }, -- Github UI for nvim
-  'matbme/JABS.nvim',  -- Browse between buffers
+  {
+    'matbme/JABS.nvim',  -- Browse between buffers
+    config = function()
+      require 'jabs'.setup {
+        position = 'center',
+        border = 'single', -- none, single, double, rounded, solid, shadow, (or an array or chars). Default shadow
+  
+        preview = {
+          border = 'single' -- none, single, double, rounded, solid, shadow, (or an array or chars). Default double
+        },
+  
+        keymap = {
+          preview = "p", -- Jump to buffer. Default <cr>
+          jump = "o" -- Jump to buffer. Default <cr>
+        }
+      }
+    end
+  },
   {
     "ThePrimeagen/harpoon",
     branch = "harpoon2",
@@ -169,7 +186,7 @@ require("lazy").setup({
       require("harpoon").setup()
     end
   }, -- Move between most used files
-
+  
    -- Terminal
   {
     'akinsho/toggleterm.nvim',
@@ -179,90 +196,47 @@ require("lazy").setup({
       }
     end
   }, -- Toggles between terminal and vim
-
+  
   -- NEOVIM configuration
   'nvim-lua/plenary.nvim',
   'b0o/mapx.nvim', -- Better key mappings on LUA
-
-  -- Treesitter for better syntax highlighting
-  -- and navigating inside the syntax tree
-  { 'nvim-treesitter/nvim-treesitter' }, -- Treesitter for syntax highlighting in neovim
-  { 'nvim-treesitter/nvim-treesitter-textobjects' }, -- Allows to cic (change around class) cam (change around method)
-  { 'nvim-treesitter/nvim-treesitter-context' }, -- Set sticky scrolling context
-  { 'RRethy/nvim-treesitter-textsubjects' }, -- Select context visually with , ; and i;
-  { 'HiPhish/rainbow-delimiters.nvim' }, -- Adds rainbow colors to delimiters
-  'RRethy/nvim-treesitter-endwise', -- Adds automatic end for if, do, class in Ruby, Elixir
-
-  -- Autocompletion and LSP
-  'neovim/nvim-lspconfig', -- Adds LSP support for Neovim
-  'mfussenegger/nvim-lint', -- Adds linting support for neovim
+  
+  require 'plugins.treesitter', -- Treesitter configurations
   {
-    'nvimdev/lspsaga.nvim',
-    dependencies = { 'nvim-lspconfig' }
-  }, -- Adds LSP displays UI for LSP actions
-  -- {
-  --   'kevinhwang91/nvim-ufo',
-  --   dependencies = 'kevinhwang91/promise-async'
-  -- }, -- Adds UFO for folding
-  'hrsh7th/nvim-cmp', -- Adds completion for nvim
-  'hrsh7th/cmp-nvim-lsp', -- Adds LSP support to cmp
-  'hrsh7th/cmp-nvim-lua', -- Adds lua completion for cmp
-  'hrsh7th/cmp-path', -- Adds Paths automatically to cmp
-  'hrsh7th/cmp-buffer', -- Adds LSP autocompletion for buffers
-  'onsails/lspkind-nvim', -- Adds LSP pictograms like VSCode to autocomplete
-  {
-    "petertriho/cmp-git",
-    dependencies = { 'hrsh7th/nvim-cmp' },
-    opts = {
-        -- options go here
-    },
-    init = function()
-        table.insert(require("cmp").get_config().sources, { name = "git" })
-    end
-  }, -- Adds git completion to nvim-cmp
-  {
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-  }, -- Adds lsp installer for neovim
-  {
-    'L3MON4D3/LuaSnip',
-    dependencies = { 'rafamadriz/friendly-snippets' }
-  }, -- Snippets engine for Lua, compatible with VSCode
-  {
-    "pmizio/typescript-tools.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-    opts = {},
+    'HiPhish/rainbow-delimiters.nvim',
     config = function()
-      require("typescript-tools").setup {
-        settings = {
-          complete_function_calls = true,
-          include_completions_with_insert_text = true
-        }
+      -- This module contains a number of default definitions
+      local rainbow_delimiters = require 'rainbow-delimiters'
+  
+      vim.g.rainbow_delimiters = {
+          strategy = {
+              [''] = rainbow_delimiters.strategy['global'],
+              vim = rainbow_delimiters.strategy['local'],
+          },
+          query = {
+              [''] = 'rainbow-delimiters',
+              lua = 'rainbow-blocks',
+          },
+          highlight = {
+              'RainbowDelimiterOrange',
+              'RainbowDelimiterBlue',
+              'RainbowDelimiterRed',
+              'RainbowDelimiterViolet',
+              'RainbowDelimiterYellow',
+              'RainbowDelimiterGreen',
+              'RainbowDelimiterCyan',
+          },
       }
     end
-  }, -- Adds typescript tools for nvim
-  'saadparwaiz1/cmp_luasnip', -- Adds lua snippets to cmp
-
+  }, -- Adds rainbow colors to delimiters
+  'RRethy/nvim-treesitter-endwise', -- Adds automatic end for if, do, class in Ruby, Elixir
+  
+  -- Autocompletion and LSP
+  require 'plugins.lsp_configurations',
+  
   -- Debuggers
-  {
-    "mfussenegger/nvim-dap",
-    dependencies = { "jcarlos7121/nvim-dap-ruby-minitest" },
-    config = function()
-      require('dap-ruby').setup()
-    end
-  },
-  {
-    "mxsdev/nvim-dap-vscode-js",
-    dependencies = {"mfussenegger/nvim-dap"}
-  },
-  {
-    "rcarriga/nvim-dap-ui",
-    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
-    config = function()
-      require("dapui").setup()
-    end
-  },
-
+  require 'plugins.dap-debuggers',
+  
   -- AI
   {
     "jackMort/ChatGPT.nvim",
@@ -307,7 +281,7 @@ require("lazy").setup({
             -- Required options
             port = 3000,  -- Port for MCP Hub server
             config = vim.fn.expand("~/mcpservers.json"),  -- Absolute path to config file
-
+  
             -- Optional options
             on_ready = function(hub)
                 -- Called when hub is ready

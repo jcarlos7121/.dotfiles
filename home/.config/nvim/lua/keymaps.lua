@@ -1,3 +1,16 @@
+-- Attempt to require 'mapx' and 'nvim-tmux-navigation'
+local status_mapx, mapx = pcall(require, 'mapx')
+local status_tmux_nav, tmux_nav = pcall(require, 'nvim-tmux-navigation')
+-- Check if both libraries are successfully loaded
+if not status_mapx then
+  print("Error: 'mapx' library is not installed.")
+  return
+end
+if not status_tmux_nav then
+  print("Error: 'nvim-tmux-navigation' library is not installed.")
+  return
+end
+
 require'mapx'.setup { global = "force" }
 require('nvim-tmux-navigation')
 
