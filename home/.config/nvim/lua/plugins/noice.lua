@@ -41,7 +41,7 @@ return {
       },
       {
         filter = {
-          event = "msg_show",
+          event = "notify",
           find = "Content is not an image",
         },
         opts = { skip = true },

@@ -1,14 +1,37 @@
 return {
   "yetone/avante.nvim",
   event = "VeryLazy",
+  version = false,
   opts = {
     provider = 'claude',
     cursor_applying_provider = 'groq',
     behaviour = {
       enable_cursor_planning_mode = true,
       enable_token_counting = false,
-      enable_claude_text_editor_tool_mode = true
+      enable_claude_text_editor_tool_mode = false
     },
+    disabled_tools = {
+        "list_files",    -- Built-in file operations
+        "search_files",
+        "read_file",
+        "create_file",
+        "rename_file",
+        "delete_file",
+        "create_dir",
+        "rename_dir",
+        "delete_dir",
+        "bash",
+    },
+    system_prompt = function()
+        local hub = require("mcphub").get_hub_instance()
+        return hub:get_active_servers_prompt()
+    end,
+    -- Using function prevents requiring mcphub before it's loaded
+    custom_tools = function()
+        return {
+            require("mcphub.extensions.avante").mcp_tool(),
+        }
+    end,
     vendors = {
       ["claude-haiku"] = {
         __inherited_from = "claude",
