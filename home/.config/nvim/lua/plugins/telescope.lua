@@ -3,6 +3,7 @@ return {
   branch = "0.1.x",
   event = 'VeryLazy',
   dependencies = {
+    '3rd/image.nvim',
     "https://github.com/nvim-lua/plenary.nvim",
     {
       "https://github.com/ahmedkhalf/project.nvim",

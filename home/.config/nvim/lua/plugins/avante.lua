@@ -8,7 +8,7 @@ return {
     behaviour = {
       enable_cursor_planning_mode = true,
       enable_token_counting = false,
-      enable_claude_text_editor_tool_mode = false
+      enable_claude_text_editor_tool_mode = true
     },
     disabled_tools = {
         "list_files",    -- Built-in file operations
