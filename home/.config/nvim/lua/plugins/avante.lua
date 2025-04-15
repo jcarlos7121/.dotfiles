@@ -3,10 +3,10 @@ return {
   event = "VeryLazy",
   version = false,
   opts = {
-    provider = 'claude',
+    provider = 'claude-3-5',
     cursor_applying_provider = 'groq',
     behaviour = {
-      auto_suggestions = true,
+      auto_suggestions = false,
       auto_focus_on_diff_view = false,
       enable_cursor_planning_mode = false,
       enable_token_counting = false,
@@ -35,6 +35,13 @@ return {
         }
     end,
     vendors = {
+      ["claude-3-5"] = {
+        __inherited_from = "claude",
+        model = "claude-3-5-sonnet-20241022",
+        timeout = 30000, -- Timeout in milliseconds
+        temperature = 0,
+        max_tokens = 8192,
+      },
       ["claude-haiku"] = {
         __inherited_from = "claude",
         model = "claude-3-5-haiku-20241022",
@@ -56,18 +63,7 @@ return {
         model = 'llama-3.3-70b-versatile',
         max_tokens = 32768, -- remember to increase this value, otherwise it will stop generating halfway
       },
-    },
-    mappings = {
-      diff = {
-        ours = "co",
-        theirs = "ct",
-        all_theirs = "ca",
-        both = "cb",
-        cursor = "cc",
-        next = "]q",
-        prev = "[q",
-      }
-    },
+    }
   },
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
   build = "make",
