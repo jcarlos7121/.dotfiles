@@ -1,12 +1,14 @@
 return {
-  "yetone/avante.nvim",
+  "jcarlos7121/avante.nvim",
   event = "VeryLazy",
   version = false,
   opts = {
     provider = 'claude',
     cursor_applying_provider = 'groq',
     behaviour = {
-      enable_cursor_planning_mode = true,
+      auto_suggestions = true,
+      auto_focus_on_diff_view = false,
+      enable_cursor_planning_mode = false,
       enable_token_counting = false,
       enable_claude_text_editor_tool_mode = true
     },
@@ -91,7 +93,7 @@ return {
             insert_mode = true,
           },
           -- required for Windows users
-          use_absolute_path = true,
+          -- use_absolute_path = true,
         },
       },
     },
