@@ -35,7 +35,6 @@ return {
         "javascript",
         "typescript",
         "pug",
-        "org",
         "jsdoc",
         "solidity",
         "elixir",

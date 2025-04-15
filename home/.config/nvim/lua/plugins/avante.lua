@@ -1,14 +1,19 @@
 return {
-  "yetone/avante.nvim",
+  'jcarlos7121/avante.nvim',
+  branch = 'claude-3.5-enable-text-editor',
   event = "VeryLazy",
   version = false,
   opts = {
-    provider = 'claude',
+    provider = 'claude-3-5',
     cursor_applying_provider = 'groq',
     behaviour = {
-      enable_cursor_planning_mode = true,
+      auto_suggestions = false,
+      auto_apply_diff_after_generation = false,
+      auto_focus_on_diff_view = false,
+      enable_cursor_planning_mode = false,
       enable_token_counting = false,
-      enable_claude_text_editor_tool_mode = false
+      enable_claude_text_editor_tool_mode = false,
+      use_cwd_as_project_root = true
     },
     disabled_tools = {
         "list_files",    -- Built-in file operations
@@ -33,6 +38,13 @@ return {
         }
     end,
     vendors = {
+      ["claude-3-5"] = {
+        __inherited_from = "claude",
+        model = "claude-3-5-sonnet-20241022",
+        timeout = 30000, -- Timeout in milliseconds
+        temperature = 0,
+        max_tokens = 8192,
+      },
       ["claude-haiku"] = {
         __inherited_from = "claude",
         model = "claude-3-5-haiku-20241022",
@@ -54,18 +66,7 @@ return {
         model = 'llama-3.3-70b-versatile',
         max_tokens = 32768, -- remember to increase this value, otherwise it will stop generating halfway
       },
-    },
-    mappings = {
-      diff = {
-        ours = "co",
-        theirs = "ct",
-        all_theirs = "ca",
-        both = "cb",
-        cursor = "cc",
-        next = "]q",
-        prev = "[q",
-      }
-    },
+    }
   },
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
   build = "make",
@@ -91,7 +92,7 @@ return {
             insert_mode = true,
           },
           -- required for Windows users
-          use_absolute_path = true,
+          -- use_absolute_path = true,
         },
       },
     },

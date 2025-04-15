@@ -5,6 +5,14 @@ return {
     require("themery").setup({
       themes = {
         {
+          name = "Default",
+          colorscheme = "default"
+        },
+        {
+          name = "Habamax",
+          colorscheme = "habamax"
+        },
+        {
           name = "Rosepine",
           colorscheme = "rose-pine"
         },
