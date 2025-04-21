@@ -202,33 +202,7 @@ require("lazy").setup({
   'b0o/mapx.nvim', -- Better key mappings on LUA
 
   require 'plugins.treesitter', -- Treesitter configurations
-  {
-    'HiPhish/rainbow-delimiters.nvim',
-    config = function()
-      -- This module contains a number of default definitions
-      local rainbow_delimiters = require 'rainbow-delimiters'
-
-      vim.g.rainbow_delimiters = {
-          strategy = {
-              [''] = rainbow_delimiters.strategy['global'],
-              vim = rainbow_delimiters.strategy['local'],
-          },
-          query = {
-              [''] = 'rainbow-delimiters',
-              lua = 'rainbow-blocks',
-          },
-          highlight = {
-              'RainbowDelimiterOrange',
-              'RainbowDelimiterBlue',
-              'RainbowDelimiterRed',
-              'RainbowDelimiterViolet',
-              'RainbowDelimiterYellow',
-              'RainbowDelimiterGreen',
-              'RainbowDelimiterCyan',
-          },
-      }
-    end
-  }, -- Adds rainbow colors to delimiters
+  'HiPhish/rainbow-delimiters.nvim', -- Adds rainbow colors to delimiters
   'RRethy/nvim-treesitter-endwise', -- Adds automatic end for if, do, class in Ruby, Elixir
 
   -- Autocompletion and LSP
@@ -238,64 +212,8 @@ require("lazy").setup({
   require 'plugins.dap-debuggers',
 
   -- AI
-  {
-    "jackMort/ChatGPT.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("chatgpt").setup({
-        edit_with_instructions = {
-          keymaps = {
-            close = "<ESC>",
-          },
-        },
-        chat = {
-          keymaps = {
-            close = "<ESC>",
-          },
-        },
-        openai_params = {
-          model = "gpt-4o",
-          max_tokens = 3000
-        }
-      })
-    end,
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "folke/trouble.nvim",
-      "nvim-telescope/telescope.nvim"
-    }
-  },
+  require 'plugins.chatgpt', -- Adds chatgpt for vim
   'github/copilot.vim', -- Enables copilot for vim
   require 'plugins.avante', -- Adds Avante for vim
-  {
-    "ravitemer/mcphub.nvim",
-    dependencies = {
-        "nvim-lua/plenary.nvim",  -- Required for Job and HTTP requests
-    },
-    -- cmd = "MCPHub", -- lazily start the hub when `MCPHub` is called
-    build = "npm install -g mcp-hub@latest", -- Installs required mcp-hub npm module
-    config = function()
-        require("mcphub").setup({
-            auto_approve = false,  -- Automatically approve all requests
-            -- Required options
-            port = 3000,  -- Port for MCP Hub server
-            config = vim.fn.expand("~/mcpservers.json"),  -- Absolute path to config file
-
-            -- Optional options
-            on_ready = function(hub)
-                -- Called when hub is ready
-            end,
-            on_error = function(err)
-                -- Called on errors
-            end,
-            log = {
-                level = vim.log.levels.WARN,
-                to_file = false,
-                file_path = nil,
-                prefix = "MCPHub"
-            },
-        })
-    end
-  }
+  require 'plugins.mcphub' -- Adds MCPHub for vim
 })

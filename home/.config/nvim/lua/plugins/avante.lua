@@ -32,7 +32,7 @@ return {
       enabled = true, -- Enables the RAG service
       host_mount = "/Users/juanhinojo",
       provider = "ollama", -- The provider to use for RAG service (e.g. openai or ollama)
-      llm_model = "llama3", -- The LLM model to use for RAG service
+      llm_model = "llama3.2", -- The LLM model to use for RAG service
       embed_model = "nomic-embed-text", -- The embedding model to use for RAG service
       endpoint = "http://host.docker.internal:11434", -- The API endpoint for RAG service
     },
