@@ -3,8 +3,9 @@ return {
   event = "VeryLazy",
   version = false,
   opts = {
-    provider = 'claude-3-5',
+    provider = 'copilot-claude-3.5',
     cursor_applying_provider = 'groq',
+    auto_suggestions_provider = 'anthropic-claude-haiku',
     behaviour = {
       auto_suggestions = false,
       auto_apply_diff_after_generation = false,
@@ -26,6 +27,7 @@ return {
         "delete_dir",
         "bash",
     },
+    hints = { enabled = false },
     rag_service = {
       enabled = true, -- Enables the RAG service
       host_mount = "/Users/juanhinojo",
@@ -45,33 +47,34 @@ return {
         }
     end,
     vendors = {
-      ["claude-3-5"] = {
+      ["anthropic-claude-3-5"] = {
         __inherited_from = "claude",
         model = "claude-3-5-sonnet-20241022",
         timeout = 30000, -- Timeout in milliseconds
         temperature = 0,
         max_tokens = 8192,
       },
-      ["claude-haiku"] = {
+      ["anthropic-claude-haiku"] = {
         __inherited_from = "claude",
         model = "claude-3-5-haiku-20241022",
         timeout = 30000, -- Timeout in milliseconds
         temperature = 0,
         max_tokens = 8192,
       },
-      deepseek = {
-        __inherited_from = 'openai',
-        endpoint = 'https://api.deepseek.com',
-        model = 'deepseek-coder',
-        api_key_name = 'DEEPSEEK_API_KEY',
-        max_tokens = 8192,
+      ["copilot-claude-3.5"] = {
+        __inherited_from = "copilot",
+        model = "claude-3.5-sonnet",
       },
-      groq = { -- define groq provider
+      ["copilot-claude-3.7"] = {
+        __inherited_from = "copilot",
+        model = "claude-3.7-sonnet",
+      },
+      groq = {
         __inherited_from = 'openai',
         api_key_name = 'GROQ_API_KEY',
         endpoint = 'https://api.groq.com/openai/v1/',
         model = 'llama-3.3-70b-versatile',
-        max_tokens = 32768, -- remember to increase this value, otherwise it will stop generating halfway
+        max_tokens = 32768,
       },
     }
   },
