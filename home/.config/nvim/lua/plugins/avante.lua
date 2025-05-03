@@ -4,6 +4,7 @@ return {
   version = false,
   opts = {
     provider = 'copilot-claude-3.5',
+    mode = 'agentic',
     cursor_applying_provider = 'groq',
     auto_suggestions_provider = 'anthropic-claude-haiku',
     behaviour = {
