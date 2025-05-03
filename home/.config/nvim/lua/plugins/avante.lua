@@ -70,6 +70,10 @@ return {
         __inherited_from = "copilot",
         model = "claude-3.7-sonnet",
       },
+      ["copilot-gemini-2.5"] = {
+        __inherited_from = "copilot",
+        model = "gemini-2.5-pro",
+      },
       groq = {
         __inherited_from = 'openai',
         api_key_name = 'GROQ_API_KEY',
