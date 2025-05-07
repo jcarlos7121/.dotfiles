@@ -3,6 +3,7 @@ return {
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',
     'nvim-treesitter/nvim-treesitter-context',
+    'RRethy/nvim-treesitter-endwise', -- Adds automatic end for if, do, class in Ruby, Elixir
     'RRethy/nvim-treesitter-textsubjects',
   },
   config = function()

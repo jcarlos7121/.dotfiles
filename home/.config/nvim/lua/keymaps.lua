@@ -121,11 +121,13 @@ vmap("<Enter>", "<Plug>(EasyAlign)", "silent")
 map("<esc>", ":noh <CR>", "silent")
 
 -- Git push with fugitive
-nnoremap("<Leader>gp", ":G push<CR>", "silent")
-nnoremap("<Leader>gu", ":G pull<CR>", "silent")
-nnoremap("<Leader>gf", ":G push --force<CR>", "silent")
-nnoremap("<Leader>gi", ":Git<CR>", "silent")
-nnoremap("<Leader>gl", ":Git log<CR>", "silent")
+nnoremap("<Leader>gp", ":Neogit push<CR>", "silent")
+nnoremap("<Leader>gu", ":Neogit pull<CR>", "silent")
+nnoremap("<Leader>gf", ":Neogit push --force<CR>", "silent")
+nnoremap("<Leader>gi", ":Neogit kind=split<CR>", "silent")
+nnoremap("<Leader>gl", ":Neogit log<CR>", "silent")
+nnoremap("<Leader>gd", ":DiffviewOpen<CR>", "silent")
+nnoremap("<Leader>gq", ":DiffviewClose<CR>", "silent")
 
 -- Resize
 nnoremap("<Leader>+", ':exe "resize " . (winheight(0) * 3/2)<CR>', "silent")

@@ -28,6 +28,10 @@ return {
         "delete_dir",
         "bash",
     },
+    mappings = {
+      ask = "<leader>4", -- ask
+      edit = "<leader>6", -- edit
+    },
     hints = { enabled = false },
     rag_service = {
       enabled = true, -- Enables the RAG service

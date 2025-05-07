@@ -50,7 +50,14 @@ require("lazy").setup({
   'mileszs/ack.vim', -- :Ack to find word appearances on project
   'tpope/vim-bundler', -- :Bundle command
   'tpope/vim-dispatch', -- :Dispatch command
-  'jcarlos7121/vim-fugitive', -- Adds git commits :Gbranch :Gblame, and others and my own reset commands
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",         -- required
+      "sindrets/diffview.nvim",        -- optional - Diff integration
+      "nvim-telescope/telescope.nvim", -- optional
+    },
+  }, -- Adds :Neogit command
   'tpope/vim-rails', -- Adds :Rails command
   'tpope/vim-rbenv', -- Adds :Rbenv command
   'tpope/vim-rake', -- Adds :Rake command
@@ -201,9 +208,9 @@ require("lazy").setup({
   'nvim-lua/plenary.nvim',
   'b0o/mapx.nvim', -- Better key mappings on LUA
 
-  require 'plugins.treesitter', -- Treesitter configurations
   'HiPhish/rainbow-delimiters.nvim', -- Adds rainbow colors to delimiters
-  'RRethy/nvim-treesitter-endwise', -- Adds automatic end for if, do, class in Ruby, Elixir
+
+  require 'plugins.treesitter', -- Treesitter configurations
 
   -- Autocompletion and LSP
   require 'plugins.lsp_configurations',
