@@ -32,6 +32,48 @@ return {
           ]]
         },
         {
+          name = "Nordbones",
+          colorscheme = "nordbones",
+          after = [[
+          vim.opt.background = "dark" -- set this to dark or light
+          ]]
+        },
+        {
+          name = "Forestbones",
+          colorscheme = "forestbones",
+          after = [[
+          vim.opt.background = "dark" -- set this to dark or light
+          ]]
+        },
+        {
+          name = "Neobones",
+          colorscheme = "neobones",
+          after = [[
+          vim.opt.background = "dark" -- set this to dark or light
+          ]]
+        },
+        {
+          name = "Tokyobones",
+          colorscheme = "tokyobones",
+          after = [[
+          vim.opt.background = "dark" -- set this to dark or light
+          ]]
+        },
+        {
+          name = "Duckbones",
+          colorscheme = "duckbones",
+          after = [[
+          vim.opt.background = "dark" -- set this to dark or light
+          ]]
+        },
+        {
+          name = "Zenburned",
+          colorscheme = "zenburned",
+          after = [[
+          vim.opt.background = "dark" -- set this to dark or light
+          ]]
+        },
+        {
           name = "Nordic",
           colorscheme = "nordic"
         },

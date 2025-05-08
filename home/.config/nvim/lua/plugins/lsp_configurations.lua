@@ -2,8 +2,8 @@ return {
     'neovim/nvim-lspconfig', -- Adds LSP support for Neovim
     dependencies = {
       'b0o/mapx.nvim',
-      'williamboman/mason.nvim',
-      'williamboman/mason-lspconfig.nvim',
+      { "mason-org/mason.nvim", version = "^1.0.0" },
+      { "mason-org/mason-lspconfig.nvim", version = "^1.0.0" },
       'hrsh7th/nvim-cmp',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-nvim-lua',
