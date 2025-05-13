@@ -3,17 +3,17 @@ return {
   event = "VeryLazy",
   version = false,
   opts = {
-    provider = 'copilot-claude-3.5',
+    provider = 'copilot-gemini-2.5',
     mode = 'agentic',
     cursor_applying_provider = 'groq',
-    auto_suggestions_provider = 'anthropic-claude-haiku',
+    auto_suggestions_provider = 'copilot-gemini-2.5',
     behaviour = {
       auto_suggestions = false,
       auto_apply_diff_after_generation = false,
       auto_focus_on_diff_view = false,
       enable_cursor_planning_mode = false,
       enable_token_counting = false,
-      enable_claude_text_editor_tool_mode = true,
+      enable_claude_text_editor_tool_mode = false,
       use_cwd_as_project_root = true
     },
     disabled_tools = {

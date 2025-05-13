@@ -240,6 +240,12 @@ local function clickMouse()
 end
 hs.hotkey.bind({"ctrl", "cmd"}, "N", clickMouse, nil, clickMouse)
 
+-- Triggers a right click
+local function rightClickMouse()
+    hs.eventtap.rightClick(hs.mouse.getAbsolutePosition())
+end
+hs.hotkey.bind({"ctrl", "cmd"}, "R", rightClickMouse, nil, rightClickMouse)
+
 -- Scroll up
 function scrollUp()
     -- Simulate a scroll up event

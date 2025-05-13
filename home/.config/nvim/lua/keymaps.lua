@@ -127,6 +127,7 @@ nnoremap("<Leader>gf", ":Neogit push --force<CR>", "silent")
 nnoremap("<Leader>gi", ":Neogit kind=split<CR>", "silent")
 nnoremap("<Leader>gl", ":Neogit log<CR>", "silent")
 nnoremap("<Leader>gd", ":DiffviewOpen<CR>", "silent")
+nnoremap("<Leader>gb", ":BlameToggle<CR>", "silent")
 nnoremap("<Leader>gq", ":DiffviewClose<CR>", "silent")
 
 -- Resize

@@ -64,6 +64,18 @@ require("lazy").setup({
       }
     end
   }, -- Adds :Neogit command
+  {
+    {
+      "FabijanZulj/blame.nvim",
+      lazy = false,
+      config = function()
+        require('blame').setup {}
+      end,
+      opts = {
+        blame_options = { '-w' },
+      },
+    },
+  }, -- Adds :Blame command
   'tpope/vim-rails', -- Adds :Rails command
   'tpope/vim-rbenv', -- Adds :Rbenv command
   'tpope/vim-rake', -- Adds :Rake command
