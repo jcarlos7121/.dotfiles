@@ -13,7 +13,8 @@ return {
       auto_focus_on_diff_view = false,
       enable_cursor_planning_mode = false,
       enable_token_counting = false,
-      use_cwd_as_project_root = true
+      use_cwd_as_project_root = true,
+      support_paste_from_clipboard = true
     },
     disabled_tools = {
         "list_files",    -- Built-in file operations
