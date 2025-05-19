@@ -8,6 +8,7 @@ yabai -m rule --add app="^Archetype Plini X$" manage=off
 yabai -m rule --add app="^ExpressVPN$" manage=off
 yabai -m rule --add app="^1Password$" manage=off
 yabai -m rule --add app="^Print Center$" manage=off
+yabai -m rule --add app="^CoScreen$" manage=off
 yabai -m rule --add app="^Finder$" manage=off
 yabai -m rule --add app="Arc.LittleBrowserWindow$" manage=off
 yabai -m rule --add app="Arc" title="Developer Tools" manage=off
