@@ -3,7 +3,7 @@ return {
   event = "VeryLazy",
   version = false,
   opts = {
-    provider = 'copilot-gemini-2.5',
+    provider = 'copilot-claude-4',
     mode = 'agentic',
     cursor_applying_provider = 'groq',
     auto_suggestions_provider = 'copilot-gemini-2.5',
@@ -65,6 +65,10 @@ return {
         timeout = 30000, -- Timeout in milliseconds
         temperature = 0,
         max_tokens = 8192,
+      },
+      ["copilot-claude-4"] = {
+        __inherited_from = "copilot",
+        model = "claude-sonnet-4",
       },
       ["copilot-claude-3.5"] = {
         __inherited_from = "copilot",
