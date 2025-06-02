@@ -9,7 +9,7 @@ return {
       require("mcphub").setup({
           auto_approve = false,  -- Automatically approve all requests
           -- Required options
-          port = 3000,  -- Port for MCP Hub server
+          port = 6000,  -- Port for MCP Hub server
           config = vim.fn.expand("~/mcpservers.json"),  -- Absolute path to config file
 
           -- Optional options

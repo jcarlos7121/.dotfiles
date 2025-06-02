@@ -22,11 +22,13 @@ eval "$(fzf --bash)"
 eval "$(zoxide init bash)"
 eval "$(jump shell)"
 
-tmux
-
 # Amazon Q post block. Keep at the bottom of this file.
 [[ -f "${HOME}/Library/Application Support/amazon-q/shell/bash_profile.post.bash" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/bash_profile.post.bash"
 
-# Added by OrbStack: command-line tools and integration
-# This won't be added again if you remove it.
-source ~/.orbstack/shell/init.bash 2>/dev/null || :
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/juanhinojo/bin/google-cloud-sdk/path.bash.inc' ]; then . '/Users/juanhinojo/bin/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/juanhinojo/bin/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/juanhinojo/bin/google-cloud-sdk/completion.bash.inc'; fi
+
+tmux
