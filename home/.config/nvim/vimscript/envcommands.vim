@@ -42,6 +42,10 @@ fun! Django( arg ) "{{{
   execute 'Start python manage.py ' . a:arg
 endfunction "}}}
 
+fun! Bundle( arg ) "{{{
+  execute 'Dispatch bundle ' . a:arg
+endfunction "}}}
+
 command! -nargs=* Fs call Fs( '<args>' )"}}}"
 command! -nargs=* Pry call Pry( '<args>' )"}}}"
 command! -nargs=* Redis call Redis( '<args>' )"}}}"
@@ -53,3 +57,4 @@ command! -nargs=* Guard call Guard( '<args>' )"}}}"
 command! -nargs=* Dock call Dock( '<args>' )"}}}"
 command! -nargs=* Django call Django( '<args>' )"}}}"
 command! -nargs=* Heroku call Heroku( '<args>' )"}}}"
+command! -nargs=* Bundle call Bundle( '<args>' )"}}}"

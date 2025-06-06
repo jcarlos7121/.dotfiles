@@ -48,7 +48,6 @@ require("lazy").setup({
   -- Commands
   'danro/rename.vim', -- :Rename filename
   'mileszs/ack.vim', -- :Ack to find word appearances on project
-  'tpope/vim-bundler', -- :Bundle command
   'tpope/vim-dispatch', -- :Dispatch command
   {
     "NeogitOrg/neogit",

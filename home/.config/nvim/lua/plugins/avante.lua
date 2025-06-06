@@ -51,20 +51,24 @@ return {
             require("mcphub.extensions.avante").mcp_tool(),
         }
     end,
-    vendors = {
+    providers = {
       ["anthropic-claude-3-5"] = {
         __inherited_from = "claude",
         model = "claude-3-5-sonnet-20241022",
         timeout = 30000, -- Timeout in milliseconds
-        temperature = 0,
-        max_tokens = 8192,
+        extra_request_body = {
+          temperature = 0,
+          max_tokens = 8192,
+        }
       },
       ["anthropic-claude-haiku"] = {
         __inherited_from = "claude",
         model = "claude-3-5-haiku-20241022",
         timeout = 30000, -- Timeout in milliseconds
-        temperature = 0,
-        max_tokens = 8192,
+        extra_request_body = {
+          temperature = 0,
+          max_tokens = 8192,
+        }
       },
       ["copilot-claude-4"] = {
         __inherited_from = "copilot",
@@ -87,7 +91,9 @@ return {
         api_key_name = 'GROQ_API_KEY',
         endpoint = 'https://api.groq.com/openai/v1/',
         model = 'llama-3.3-70b-versatile',
-        max_tokens = 32768,
+        extra_request_body = {
+          max_tokens = 32768
+        },
       },
     }
   },
