@@ -36,10 +36,24 @@ return {
     rag_service = {
       enabled = true, -- Enables the RAG service
       host_mount = "/Users/juanhinojo",
-      provider = "ollama", -- The provider to use for RAG service (e.g. openai or ollama)
-      llm_model = "llama3", -- The LLM model to use for RAG service
-      embed_model = "nomic-embed-text", -- The embedding model to use for RAG service
-      endpoint = "http://host.docker.internal:11434", -- The API endpoint for RAG service
+      runner = "docker", -- Runner for the RAG service (e.g., docker, podman)
+      llm = { -- Language Model (LLM) configuration for RAG service
+        provider = "ollama", -- LLM provider
+        api_key = "",
+        endpoint = "http://host.docker.internal:11434", -- The API endpoint for RAG service
+        model = "llama3", -- LLM model name
+        extra = nil
+      },
+      embed = { -- Embedding model configuration for RAG service
+        provider = "ollama", -- Embedding provider
+        endpoint = "http://host.docker.internal:11434", -- The API endpoint for RAG service
+        api_key = "",
+        model = "nomic-embed-text", -- Embedding model name
+        extra = { -- Extra configuration options for the Embedding model (optional)
+          embed_batch_size = 10
+        }
+      },
+      docker_extra_args = "", -- Extra arguments to pass to the docker command
     },
     system_prompt = function()
         local hub = require("mcphub").get_hub_instance()
