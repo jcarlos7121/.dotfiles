@@ -36,8 +36,9 @@ map("mi", ":lua require('dap').step_into()<CR>", "silent")
 
 -- Octo mappings
 map("<Leader>op", ":Octo pr ")
-map("<Leader>ol", ":Octo pr list<CR>", "silent")
-map("<Leader>on", ":Octo pr create<CR>", "silent")
+map("<Leader>ol", ":Octo pr search draft:false is:open review:required -author:jcarlos7121<CR>", "silent")
+map("<Leader>om", ":Octo pr search is:open author:jcarlos7121<CR>", "silent")
+map("<Leader>on", ":Octo pr create draft<CR>", "silent")
 map("<Leader>ov", ":Octo pr checks<CR>", "silent")
 map("<Leader>os", ":Octo review submit<CR>", "silent")
 

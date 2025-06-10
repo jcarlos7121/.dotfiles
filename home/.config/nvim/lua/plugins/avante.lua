@@ -3,7 +3,7 @@ return {
   event = "VeryLazy",
   version = false,
   opts = {
-    provider = 'copilot-claude-4',
+    provider = 'copilot-gemini-2.5',
     mode = 'agentic',
     cursor_applying_provider = 'groq',
     auto_suggestions_provider = 'copilot-gemini-2.5',
@@ -99,6 +99,15 @@ return {
       ["copilot-gemini-2.5"] = {
         __inherited_from = "copilot",
         model = "gemini-2.5-pro",
+      },
+      ["ollama-devstral-24b"] = {
+        __inherited_from = 'ollama',
+        model = 'devstral:24b',
+        endpoint = 'http://localhost:11434',
+        extra_request_body = {
+          max_tokens = 32768,
+          temperature = 0.1
+        }
       },
       groq = {
         __inherited_from = 'openai',
