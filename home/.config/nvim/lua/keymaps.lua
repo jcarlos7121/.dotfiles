@@ -40,6 +40,8 @@ map("<Leader>ol", ":Octo pr search draft:false is:open review:required -author:j
 map("<Leader>om", ":Octo pr search is:open author:jcarlos7121<CR>", "silent")
 map("<Leader>on", ":Octo pr create draft<CR>", "silent")
 map("<Leader>ov", ":Octo pr checks<CR>", "silent")
+map("<Leader>or", ":Octo run list<CR>", "silent")
+map("<Leader>oi", ":Octo issue search state:open assignee:jcarlos7121<CR>", "silent")
 map("<Leader>os", ":Octo review submit<CR>", "silent")
 
 -- Telescope
@@ -63,6 +65,7 @@ map("<Leader>0", ":ChatGPT<CR>", 'silent')
 map("<Leader>9", ":ChatGPTEditWithInstructions<CR>", 'silent')
 map("<Leader>8", ":ChatGPTRun<Space>")
 map("<Leader>7", ":ChatGPTActAs<Space>")
+map("<Leader>6", ":AvanteHistory<CR>", 'silent')
 map("<Leader>5", ":AvanteChat<CR>", 'silent')
 map("<Leader>4", ":AvanteAsk<CR>", 'silent')
 

@@ -3,7 +3,7 @@ return {
   event = "VeryLazy",
   version = false,
   opts = {
-    provider = 'copilot-gemini-2.5',
+    provider = 'copilot-claude-4',
     mode = 'agentic',
     cursor_applying_provider = 'groq',
     auto_suggestions_provider = 'copilot-gemini-2.5',
