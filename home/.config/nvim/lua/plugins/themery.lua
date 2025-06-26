@@ -9,6 +9,10 @@ return {
           colorscheme = "default"
         },
         {
+          name = "At the Beach",
+          colorscheme = "grey",
+        },
+        {
           name = "Habamax",
           colorscheme = "habamax"
         },

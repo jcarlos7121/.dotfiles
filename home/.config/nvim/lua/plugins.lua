@@ -44,7 +44,8 @@ require("lazy").setup({
     dependencies = "rktjmp/lush.nvim"
   },
   require 'plugins.rosepine', -- Rosepine colorscheme
-  
+  { 'yorickpeterse/nvim-grey' }, -- Github colorscheme
+
   -- Commands
   'danro/rename.vim', -- :Rename filename
   'mileszs/ack.vim', -- :Ack to find word appearances on project
@@ -81,7 +82,7 @@ require("lazy").setup({
   'mattreduce/vim-mix', -- Adds :Mix elixir command
   'rizzatti/dash.vim', -- Adds :Dash command to search on Dash docs
   'adelarsq/vim-matchit', --% to match closing tag on xml/html
-  
+
   -- FileSearch
   'tpope/vim-vinegar', -- Type - and go to folder up
   'kyazdani42/nvim-web-devicons', -- Adds icons to nvim-tree
@@ -96,7 +97,7 @@ require("lazy").setup({
   require 'plugins.nvim-tree', -- Adds nvim-tree for file navigation
   require 'plugins.image-preview', -- Adds image preview for nvim
   require 'plugins.telescope', -- Adds telescope for file search
-  
+
   -- Code editing
   'junegunn/vim-easy-align', -- Press Enter and character to align multiple lines
   {
@@ -136,7 +137,7 @@ require("lazy").setup({
       require("todo-comments").setup { }
     end
   }, -- Adds colors to todo comments
-  
+
   -- UI Utilities
   'yggdroot/indentline', -- displays identation lines
   {
@@ -154,7 +155,7 @@ require("lazy").setup({
   },
   require 'plugins.lualine', -- Adds lualine for status line
   require 'plugins.noice', -- Adds noice for notifications and better UI
-  
+
   -- Utilities
   'vim-test/vim-test', -- Adds leader commands for automatically running Rspec Tests
   { "alexghergh/nvim-tmux-navigation" }, -- Allows to navigate between tmux panes
@@ -189,11 +190,11 @@ require("lazy").setup({
       require 'jabs'.setup {
         position = 'center',
         border = 'single', -- none, single, double, rounded, solid, shadow, (or an array or chars). Default shadow
-  
+
         preview = {
           border = 'single' -- none, single, double, rounded, solid, shadow, (or an array or chars). Default double
         },
-  
+
         keymap = {
           preview = "p", -- Jump to buffer. Default <cr>
           jump = "o" -- Jump to buffer. Default <cr>
@@ -209,7 +210,7 @@ require("lazy").setup({
       require("harpoon").setup()
     end
   }, -- Move between most used files
-  
+
    -- Terminal
   {
     'akinsho/toggleterm.nvim',
@@ -219,21 +220,21 @@ require("lazy").setup({
       }
     end
   }, -- Toggles between terminal and vim
-  
+
   -- NEOVIM configuration
   'nvim-lua/plenary.nvim',
   'b0o/mapx.nvim', -- Better key mappings on LUA
-  
+
   'HiPhish/rainbow-delimiters.nvim', -- Adds rainbow colors to delimiters
-  
+
   require 'plugins.treesitter', -- Treesitter configurations
-  
+
   -- Autocompletion and LSP
   require 'plugins.lsp_configurations',
-  
+
   -- Debuggers
   require 'plugins.dap-debuggers',
-  
+
   -- AI
   require 'plugins.chatgpt', -- Adds chatgpt for vim
   'github/copilot.vim', -- Enables copilot for vim

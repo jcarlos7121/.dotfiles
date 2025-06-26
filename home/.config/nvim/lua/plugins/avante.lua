@@ -2,6 +2,26 @@ return {
   'jcarlos7121/avante.nvim',
   event = "VeryLazy",
   version = false,
+  keys = {
+    {
+      "<leader>a+",
+      function()
+        local tree_ext = require("avante.extensions.nvim_tree")
+        tree_ext.add_file()
+      end,
+      desc = "Select file in NvimTree",
+      ft = "NvimTree",
+    },
+    {
+      "<leader>a-",
+      function()
+        local tree_ext = require("avante.extensions.nvim_tree")
+        tree_ext.remove_file()
+      end,
+      desc = "Deselect file in NvimTree",
+      ft = "NvimTree",
+    },
+  },
   opts = {
     provider = 'copilot-claude-4',
     mode = 'agentic',
@@ -54,6 +74,9 @@ return {
         }
       },
       docker_extra_args = "", -- Extra arguments to pass to the docker command
+    },
+    selector = {
+      exclude_auto_select = { "NvimTree" },
     },
     system_prompt = function()
         local hub = require("mcphub").get_hub_instance()

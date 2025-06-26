@@ -46,6 +46,10 @@ fun! Bundle( arg ) "{{{
   execute 'Dispatch bundle ' . a:arg
 endfunction "}}}
 
+fun! Av( cmd ) "{{{
+  execute '!av ' . a:cmd
+endfunction "}}}
+
 command! -nargs=* Fs call Fs( '<args>' )"}}}"
 command! -nargs=* Pry call Pry( '<args>' )"}}}"
 command! -nargs=* Redis call Redis( '<args>' )"}}}"
@@ -58,3 +62,4 @@ command! -nargs=* Dock call Dock( '<args>' )"}}}"
 command! -nargs=* Django call Django( '<args>' )"}}}"
 command! -nargs=* Heroku call Heroku( '<args>' )"}}}"
 command! -nargs=* Bundle call Bundle( '<args>' )"}}}"
+command! -nargs=* Av call Av( '<args>' )"}}}"
