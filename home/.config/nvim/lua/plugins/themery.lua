@@ -23,6 +23,17 @@ return {
         {
           name = "Aquarium",
           colorscheme = "aquarium",
+          after = [[
+            -- No vertical line
+            vim.api.nvim_set_hl(0, "VertSplit", { fg = "none", bg = "none" })
+
+            -- Inactive windows slightly lighter (NormalNC)
+            vim.api.nvim_set_hl(0, "NormalNC", { bg = "#20202A" })
+
+            -- Optionally: make borderless floating windows blend better
+            vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none", fg = "#2C2E3E" })
+            vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#2C2E3E" })  -- match Normal
+          ]]
         },
         {
           name = "Poimandres",

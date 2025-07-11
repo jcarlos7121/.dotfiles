@@ -96,6 +96,13 @@ return {
         },
         ruby_lsp = {
           cmd = { "asdf", "exec", "ruby-lsp" },
+          init_options = {
+            addonSettings = {
+              ["Ruby LSP Rails"] = {
+                enablePendingMigrationsPrompt = false,
+              },
+            },
+          }
         },
         elixirls = {
           cmd = { "elixir-ls" },

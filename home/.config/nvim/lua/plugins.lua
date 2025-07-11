@@ -60,10 +60,18 @@ require("lazy").setup({
       require('neogit').setup {
         integrations = {
           diffview = false
-        }
+        },
+        auto_close_console = true
       }
     end
   }, -- Adds :Neogit command
+  {
+    "ruifm/gitlinker.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+      require("gitlinker").setup()
+    end,
+  },
   {
     {
       "FabijanZulj/blame.nvim",
@@ -167,7 +175,7 @@ require("lazy").setup({
     end,
   }, -- Quicker line search for neovim
   {
-    'pwntester/octo.nvim',
+    'jcarlos7121/octo.nvim',
     event = "VeryLazy",
     dependencies = {
       'nvim-lua/plenary.nvim',

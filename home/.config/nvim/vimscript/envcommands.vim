@@ -47,7 +47,7 @@ fun! Bundle( arg ) "{{{
 endfunction "}}}
 
 fun! Av( cmd ) "{{{
-  execute '!av ' . a:cmd
+  execute 'Dispatch av ' . a:cmd
 endfunction "}}}
 
 command! -nargs=* Fs call Fs( '<args>' )"}}}"
