@@ -33,6 +33,11 @@ return {
             -- Optionally: make borderless floating windows blend better
             vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none", fg = "#2C2E3E" })
             vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#2C2E3E" })  -- match Normal
+
+            -- Progress bar with visible foreground
+            vim.cmd("highlight LazyProgressTodo guibg=#2C2E3E ctermbg=NONE")
+            vim.cmd("highlight LazyProgressDone guibg=#2C2E3E guifg=#e3aed9 ctermbg=NONE")
+            vim.cmd("highlight LazyProgress guibg=#2C2E3E guifg=#e3aed9 ctermbg=NONE")
           ]]
         },
         {

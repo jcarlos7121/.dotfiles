@@ -37,6 +37,7 @@ return {
       support_paste_from_clipboard = true
     },
     disabled_tools = {
+        "run_python",    -- Built-in code search
         "list_files",    -- Built-in file operations
         "search_files",
         "read_file",

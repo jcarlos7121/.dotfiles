@@ -175,7 +175,7 @@ require("lazy").setup({
     end,
   }, -- Quicker line search for neovim
   {
-    'jcarlos7121/octo.nvim',
+    'pwntester/octo.nvim',
     event = "VeryLazy",
     dependencies = {
       'nvim-lua/plenary.nvim',
