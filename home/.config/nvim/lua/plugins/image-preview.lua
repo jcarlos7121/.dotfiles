@@ -20,7 +20,10 @@ return {
           filetypes = { "norg" },
         },
         html = {
-          enabled = false,
+          enabled = true,
+          filetypes = { "html", "xhtml", "htm", "markdown" },
+          only_render_image_at_cursor = true,
+          only_render_image_at_cursor_mode = "inline",
         },
         css = {
           enabled = false,
