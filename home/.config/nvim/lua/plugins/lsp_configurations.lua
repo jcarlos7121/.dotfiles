@@ -140,7 +140,8 @@ return {
         typescript = {'eslint_d'},
         javascript = {'eslint_d'},
         javascriptreact = {'eslint_d'},
-        typescriptreact = {'eslint_d'}
+        typescriptreact = {'eslint_d'},
+        eruby = {'erb_lint'}
       }
 
       -- LSP Saga configuration

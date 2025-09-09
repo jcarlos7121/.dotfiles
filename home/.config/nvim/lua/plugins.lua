@@ -247,5 +247,11 @@ require("lazy").setup({
   require 'plugins.chatgpt', -- Adds chatgpt for vim
   'github/copilot.vim', -- Enables copilot for vim
   require 'plugins.avante', -- Adds Avante for vim
-  require 'plugins.mcphub' -- Adds MCPHub for vim
+  require 'plugins.mcphub', -- Adds MCPHub for vim
+  {
+    "coder/claudecode.nvim",
+    dependencies = { "folke/snacks.nvim" },
+    lazy = false,
+    config = true
+  }
 })

@@ -66,7 +66,7 @@ map("<Leader>9", ":ChatGPTEditWithInstructions<CR>", 'silent')
 map("<Leader>8", ":ChatGPTRun<Space>")
 map("<Leader>7", ":ChatGPTActAs<Space>")
 map("<Leader>6", ":AvanteHistory<CR>", 'silent')
-map("<Leader>5", ":AvanteChat<CR>", 'silent')
+map("<Leader>5", ":ClaudeCode<CR>", 'silent')
 map("<Leader>4", ":AvanteAsk<CR>", 'silent')
 
 -- Yank filepath

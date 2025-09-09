@@ -28,6 +28,7 @@ return {
     cursor_applying_provider = 'groq',
     auto_suggestions_provider = 'copilot-gemini-2.5',
     behaviour = {
+      enable_fastapply = true, -- Enables fast apply mode
       auto_suggestions = false,
       auto_apply_diff_after_generation = false,
       auto_focus_on_diff_view = false,
@@ -90,6 +91,9 @@ return {
         }
     end,
     providers = {
+      morph = {
+        model = "morph-v3-large",
+      },
       ["anthropic-claude-3-5"] = {
         __inherited_from = "claude",
         model = "claude-3-5-sonnet-20241022",
@@ -124,9 +128,9 @@ return {
         __inherited_from = "copilot",
         model = "gemini-2.5-pro",
       },
-      ["ollama-devstral-24b"] = {
+      ["ollama-gemma3-12b"] = {
         __inherited_from = 'ollama',
-        model = 'devstral:24b',
+        model = 'gemma3:12b',
         endpoint = 'http://localhost:11434',
         extra_request_body = {
           max_tokens = 32768,
