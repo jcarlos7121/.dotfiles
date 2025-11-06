@@ -115,8 +115,7 @@ require("lazy").setup({
     config = true
   }, -- Resolve git conflicts from within nvim
   {
-    'aznhe21/hop.nvim',
-    branch = 'fix-some-bugs',
+    'smoka7/hop.nvim',
     config = function()
       require'hop'.setup()
     end

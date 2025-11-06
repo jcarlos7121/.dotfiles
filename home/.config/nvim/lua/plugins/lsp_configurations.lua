@@ -42,7 +42,7 @@ return {
       }, -- Snippets engine for Lua, compatible with VSCode
     },
     config = function()
-      local nvim_lsp = require('lspconfig')
+      local nvim_lsp = vim.lsp
       local mason_lspconfig = require('mason-lspconfig')
 
       local on_attach = function(client, bufnr)
@@ -129,7 +129,10 @@ return {
             )
           end
 
-          nvim_lsp[server_name].setup(setup_params)
+          -- nvim_lsp[server_name].setup(setup_params)
+
+          nvim_lsp.config(server_name, setup_params)
+          nvim_lsp.enable({server_name})
         end
       }
 

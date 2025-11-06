@@ -18,6 +18,15 @@ alt - x : /opt/homebrew/bin/yabai -m window --toggle split
 # Rebalance windows size
 alt - c : /opt/homebrew/bin/yabai -m space --balance
 
+# Send to another display
+cmd + ctrl + shift - o : /Users/juanhinojo/.config/skhd/cycle_display.sh
+
+# move focus to next display
+cmd + shift - k : yabai -m display --focus next
+
+# move focus to previous display
+cmd + shift - j : yabai -m display --focus prev
+
 # Switch focus clockwise or counterclockwise
 alt - h : yabai -m window --focus west
 alt - j : yabai -m window --focus south
@@ -43,6 +52,7 @@ ctrl - 3 : yabai -m space --focus 3
 ctrl - 4 : yabai -m space --focus 4
 ctrl - 5 : yabai -m space --focus 5
 ctrl - 6 : yabai -m space --focus 6
+ctrl - 7 : yabai -m space --focus 7
 
 # Send window to space
 alt + shift - 1 : yabai -m window --space 1
