@@ -32,7 +32,7 @@ return {
     local actions = require("telescope.actions")
     local action_layout = require("telescope.actions.layout")
     local telescope = require('telescope')
-    local image_preview = require("custom.telescope-preview").setup()
+    local image_preview = require("utils.telescope-preview").setup()
 
     telescope.setup({
       extensions = {

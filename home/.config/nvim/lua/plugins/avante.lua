@@ -23,6 +23,7 @@ return {
     },
   },
   opts = {
+    provider = 'copilot-claude',
     mode = 'agentic',
     cursor_applying_provider = 'groq',
     behaviour = {
@@ -91,6 +92,10 @@ return {
     providers = {
       morph = {
         model = "morph-v3-fast",
+      },
+      ["copilot-claude"] = {
+        __inherited_from = 'copilot',
+        model = 'claude-sonnet-4.5',
       },
       ["ollama-gemma3-12b"] = {
         __inherited_from = 'ollama',

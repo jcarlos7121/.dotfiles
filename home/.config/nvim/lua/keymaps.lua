@@ -33,6 +33,9 @@ map("mb", ":lua require('dap').toggle_breakpoint()<CR>", "silent")
 map("mc", ":lua require('dap').continue()<CR>", "silent")
 map("mo", ":lua require('dap').step_over()<CR>", "silent")
 map("mi", ":lua require('dap').step_into()<CR>", "silent")
+map("mu", ":lua require('dap').step_out()<CR>", "silent")
+map("mq", ":lua require('dap').terminate()<CR>", "silent")
+map("mv", ":lua require('utils.dapui').toggle_maximize()<CR>", "silent")
 
 -- Octo mappings
 map("<Leader>op", ":Octo pr ")
