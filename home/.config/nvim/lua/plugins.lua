@@ -223,7 +223,7 @@ require("lazy").setup({
     'akinsho/toggleterm.nvim',
     config = function()
       require('toggleterm').setup {
-        shell = '/Users/juanhinojo/.local/bin/qterm -- fish',
+        shell = '/Users/juanhinojo/.local/bin/kiro-cli-term -- fish',
       }
     end
   }, -- Toggles between terminal and vim

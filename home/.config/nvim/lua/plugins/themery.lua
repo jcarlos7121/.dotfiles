@@ -9,6 +9,13 @@ return {
           colorscheme = "default"
         },
         {
+          name = "Doom One",
+          colorscheme = "doom-one",
+          after = [[
+            vim.opt.background = "dark"
+          ]]
+        },
+        {
           name = "At the Beach",
           colorscheme = "grey",
         },
