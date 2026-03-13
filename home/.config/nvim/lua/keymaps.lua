@@ -64,13 +64,12 @@ map("<Leader>z", ":tab split<CR>")
 map("<Leader>q", ":tabclose<CR>")
 
 -- AI
-map("<Leader>0", ":ChatGPT<CR>", 'silent')
-map("<Leader>9", ":ChatGPTEditWithInstructions<CR>", 'silent')
-map("<Leader>8", ":ChatGPTRun<Space>")
-map("<Leader>7", ":ChatGPTActAs<Space>")
-map("<Leader>6", ":AvanteHistory<CR>", 'silent')
-map("<Leader>5", ":ClaudeCode<CR>", 'silent')
-map("<Leader>4", ":AvanteAsk<CR>", 'silent')
+map("<Leader>4", ":ClaudeCode<CR>", 'silent')
+map("<Leader>5", ":ClaudeCodeSend<cr>")
+map("<Leader>6", ":ClaudeCodeTreeAdd %<cr>", 'silent')
+map("<Leader>7", ":Codex<cr><CR>", 'silent')
+map("<Leader>8", ":<C-u>CodexSend<cr><CR>", 'silent')
+map("<Leader>9", "<cmd>CodexSendFile<cr>", 'silent')
 
 -- Yank filepath
 map("<Leader>p", ":let @+ = expand('%:p')<CR>", "silent")
@@ -88,6 +87,7 @@ map("<Leader>3", ":ToggleTerm size=15 direction=float<CR>", "silent")
 -- map("<Leader>4", ":ToggleTerm size=15 direction=horizontal<CR>", "silent")
 
 -- Vim mappings
+vim.api.nvim_set_keymap('t', '<C-q>', [[<C-\><C-n>]], { silent = true })
 vim.api.nvim_set_keymap('v', '<Tab>', '>gv', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<S-Tab>', '<gv', { noremap = true, silent = true })
 

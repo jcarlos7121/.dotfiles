@@ -9,11 +9,8 @@ return {
           colorscheme = "default"
         },
         {
-          name = "Doom One",
-          colorscheme = "doom-one",
-          after = [[
-            vim.opt.background = "dark"
-          ]]
+          name = "Koda",
+          colorscheme = "koda",
         },
         {
           name = "At the Beach",

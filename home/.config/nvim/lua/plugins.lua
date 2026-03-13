@@ -14,6 +14,11 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   -- Colorschemes
+  {
+    "oskarnurm/koda.nvim",
+    lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    priority = 1000, -- make sure to load this before all the other start plugins
+  },
   require 'plugins.themery', -- Themery for colorschemes
   'FrenzyExists/aquarium-vim', -- Aquarium colorscheme i mostly use
   {
@@ -183,7 +188,6 @@ require("lazy").setup({
     config = function ()
       require"octo".setup(
         {
-          ssh_aliases = {["github.com-cratebind"] = "github.com"},
           suppress_missing_scope = {
             projects_v2 = true
           }
@@ -243,14 +247,18 @@ require("lazy").setup({
   require 'plugins.dap-debuggers',
 
   -- AI
-  require 'plugins.chatgpt', -- Adds chatgpt for vim
   'github/copilot.vim', -- Enables copilot for vim
-  require 'plugins.avante', -- Adds Avante for vim
-  require 'plugins.mcphub', -- Adds MCPHub for vim
   {
     "coder/claudecode.nvim",
     dependencies = { "folke/snacks.nvim" },
     lazy = false,
-    config = true
+    config = true,
+  },
+
+  {
+    "jcarlos7121/codex.nvim",
+    config = function()
+      require("codex").setup()
+    end
   }
 })

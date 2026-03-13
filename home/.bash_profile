@@ -20,13 +20,14 @@ alias ibrew='arch -x86_64 /usr/local/bin/brew'
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --bash)"
 eval "$(zoxide init bash)"
-eval "$(jump shell)"# The next line updates PATH for the Google Cloud SDK.
+eval "$(jump shell bash)"# The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/juanhinojo/bin/google-cloud-sdk/path.bash.inc' ]; then . '/Users/juanhinojo/bin/google-cloud-sdk/path.bash.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/juanhinojo/bin/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/juanhinojo/bin/google-cloud-sdk/completion.bash.inc'; fi
 
-tmux
+# tmux
 
 # Kiro CLI post block. Keep at the bottom of this file.
 [[ -f "${HOME}/Library/Application Support/kiro-cli/shell/bash_profile.post.bash" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/bash_profile.post.bash"
+export PATH="$PATH:$HOME/flutter/bin"

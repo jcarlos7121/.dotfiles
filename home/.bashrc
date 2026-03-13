@@ -131,3 +131,10 @@ alias taskmaster='task-master'
 
 # Kiro CLI post block. Keep at the bottom of this file.
 [[ -f "${HOME}/Library/Application Support/kiro-cli/shell/bashrc.post.bash" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/bashrc.post.bash"
+
+
+
+alias claude-mem='bun "/Users/juanhinojo/.claude/plugins/marketplaces/thedotmack/plugin/scripts/worker-service.cjs"'
+
+# opencode
+export PATH=/Users/juanhinojo/.opencode/bin:$PATH

@@ -61,6 +61,7 @@ alt + shift - 3 : yabai -m window --space 3
 alt + shift - 4 : yabai -m window --space 4
 alt + shift - 5 : yabai -m window --space 5
 alt + shift - 6 : yabai -m window --space 6
+alt + shift - 7 : yabai -m window --space 7
 
 # Move space
 alt + shift + ctrl - n : yabai -m space --move prev
