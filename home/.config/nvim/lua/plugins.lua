@@ -100,13 +100,13 @@ require("lazy").setup({
   'tpope/vim-vinegar', -- Type - and go to folder up
   'kyazdani42/nvim-web-devicons', -- Adds icons to nvim-tree
   'justinmk/vim-gtfo', -- TOUSE: opens a file opener on the file opened on vim typing 'gof'
-  {
-    "vhyrro/luarocks.nvim",
-    priority = 1001, -- this plugin needs to run before anything else
-    opts = {
-      rocks = { "magick" },
-    },
-  },
+  -- {
+  --   "vhyrro/luarocks.nvim",
+  --   priority = 1001, -- this plugin needs to run before anything else
+  --   opts = {
+  --     rocks = { "magick" },
+  --   },
+  -- },
   require 'plugins.nvim-tree', -- Adds nvim-tree for file navigation
   require 'plugins.image-preview', -- Adds image preview for nvim
   require 'plugins.telescope', -- Adds telescope for file search
@@ -171,6 +171,7 @@ require("lazy").setup({
   -- Utilities
   'vim-test/vim-test', -- Adds leader commands for automatically running Rspec Tests
   { "alexghergh/nvim-tmux-navigation" }, -- Allows to navigate between tmux panes
+  { 'mrjones2014/smart-splits.nvim' },
   'MattesGroeger/vim-bookmarks', -- Allows to bookmark lines to come back
   {
     'nacro90/numb.nvim',
@@ -222,15 +223,7 @@ require("lazy").setup({
     end
   }, -- Move between most used files
 
-   -- Terminal
-  {
-    'akinsho/toggleterm.nvim',
-    config = function()
-      require('toggleterm').setup {
-        shell = '/Users/juanhinojo/.local/bin/kiro-cli-term -- fish',
-      }
-    end
-  }, -- Toggles between terminal and vim
+   -- Terminal (using snacks.nvim)
 
   -- NEOVIM configuration
   'nvim-lua/plenary.nvim',
@@ -248,6 +241,13 @@ require("lazy").setup({
 
   -- AI
   'github/copilot.vim', -- Enables copilot for vim
+
+  {
+    "folke/snacks.nvim",
+    lazy = false,
+    opts = {},
+  },
+
   {
     "coder/claudecode.nvim",
     dependencies = { "folke/snacks.nvim" },

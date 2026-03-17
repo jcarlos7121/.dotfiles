@@ -3,99 +3,68 @@ return {
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',
     'nvim-treesitter/nvim-treesitter-context',
-    'RRethy/nvim-treesitter-endwise', -- Adds automatic end for if, do, class in Ruby, Elixir
-    'RRethy/nvim-treesitter-textsubjects',
+    'RRethy/nvim-treesitter-endwise',
   },
   config = function()
-    local list = require("nvim-treesitter.parsers").get_parser_configs()
+    -- Install parsers
+    require("nvim-treesitter").install({
+      "sql",
+      "markdown",
+      "markdown_inline",
+      "heex",
+      "eex",
+      "ruby",
+      "yaml",
+      "fish",
+      "go",
+      "query",
+      "html",
+      "css",
+      "lua",
+      "vim",
+      "bash",
+      "javascript",
+      "typescript",
+      "pug",
+      "jsdoc",
+      "solidity",
+      "elixir",
+      "terraform",
+      "graphql",
+      "tsx",
+      "luadoc",
+      "vimdoc",
+    })
 
-    list.sql = {
-      install_info = {
-        url = "https://github.com/DerekStride/tree-sitter-sql",
-        files = { "src/parser.c" },
-        branch = "main",
+    -- Treesitter highlight is now enabled by default in Neovim.
+    -- To enable additional vim regex highlighting for org:
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = "org",
+      callback = function()
+        vim.bo.syntax = "on"
+      end,
+    })
+
+    -- Textobjects setup (new standalone API)
+    require("nvim-treesitter-textobjects").setup({
+      select = {
+        lookahead = true,
       },
-    }
-
-    local _ = require("nvim-treesitter.configs").setup {
-      ensure_installed = {
-        "markdown",
-        "markdown_inline",
-        "heex",
-        "eex",
-        "ruby",
-        "yaml",
-        "fish",
-        "go",
-        "query",
-        "html",
-        "css",
-        "lua",
-        "vim",
-        "bash",
-        "javascript",
-        "typescript",
-        "pug",
-        "jsdoc",
-        "solidity",
-        "elixir",
-        "terraform",
-        "graphql",
-        "tsx",
-        "luadoc",
-        "vimdoc"
+      move = {
+        set_jumps = true,
       },
+    })
 
-      --indent = { enable = true },
-      highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = {'org'}
-      },
+    -- Textobjects keymaps
+    local move = require("nvim-treesitter-textobjects.move")
+    local select = require("nvim-treesitter-textobjects.select")
 
-      rainbow = {
-        enable = true,
-        extended_mode = true,
-        max_file_lines = nil,
-      },
+    vim.keymap.set({"x", "o"}, "af", function() select.select_textobject("@function.outer", "textobjects") end)
+    vim.keymap.set({"x", "o"}, "if", function() select.select_textobject("@function.inner", "textobjects") end)
+    vim.keymap.set({"x", "o"}, "ac", function() select.select_textobject("@class.outer", "textobjects") end)
+    vim.keymap.set({"x", "o"}, "ic", function() select.select_textobject("@class.inner", "textobjects") end)
 
-      endwise = {
-        enable = true,
-      },
-
-      textsubjects = {
-        enable = true,
-        prev_selection = ',',
-        keymaps = {
-          ['.'] = 'textsubjects-smart',
-          [';'] = 'textsubjects-container-inner',
-          ['o;'] = 'textsubjects-container-outer',
-        },
-      },
-
-      textobjects = {
-        select = {
-          enable = true,
-          -- Automatically jump forward to textobj, similar to targets.vim
-          lookahead = true,
-          keymaps = {
-            -- You can use the capture groups defined in textobjects.scm
-            ["af"] = "@function.outer",
-            ["if"] = "@function.inner",
-            ["ac"] = "@class.outer",
-            ["ic"] = "@class.inner"
-          }
-        },
-        move = {
-          enable = true,
-          set_jumps = true,
-          goto_next_start = {
-            [']]'] = '@function.outer'
-          },
-          goto_previous_start = {
-            ['[['] = '@function.outer'
-          },
-        }
-      }
-    }
+    vim.keymap.set({"n", "x", "o"}, "]]", function() move.goto_next_start("@function.outer", "textobjects") end)
+    vim.keymap.set({"n", "x", "o"}, "[[", function() move.goto_previous_start("@function.outer", "textobjects") end)
   end
 }

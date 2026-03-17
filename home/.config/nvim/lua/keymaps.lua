@@ -1,18 +1,12 @@
 -- Attempt to require 'mapx' and 'nvim-tmux-navigation'
 local status_mapx, mapx = pcall(require, 'mapx')
-local status_tmux_nav, tmux_nav = pcall(require, 'nvim-tmux-navigation')
 -- Check if both libraries are successfully loaded
 if not status_mapx then
   print("Error: 'mapx' library is not installed.")
   return
 end
-if not status_tmux_nav then
-  print("Error: 'nvim-tmux-navigation' library is not installed.")
-  return
-end
 
 require'mapx'.setup { global = "force" }
-require('nvim-tmux-navigation')
 
 vim.g.mapleader = ","
 vim.g.maplocalleader = " "
@@ -55,7 +49,7 @@ map("<C-T>", "<cmd>Telescope projects hidden=true<CR>")
 map("<C-E>", "<cmd>Telescope emoji<CR>")
 
 -- Harpoon
-nmap("<C-q>", ":lua require('harpoon').ui:toggle_quick_menu(require('harpoon'):list())<CR>", "silent")
+-- nmap("<C-q>", ":lua require('harpoon').ui:toggle_quick_menu(require('harpoon'):list())<CR>", "silent")
 nmap("<Leader>k", ":lua require('harpoon'):list():prev()<CR>", "silent")
 nmap("<Leader>j", ":lua require('harpoon'):list():next()<CR>", "silent")
 
@@ -82,20 +76,28 @@ map(",,b", "<cmd>HopWordBC<CR>")
 map(",,k", "<cmd>HopLineBC<CR>")
 map(",,j", "<cmd>HopLineAC<CR>")
 
--- ToggleTerm
-map("<Leader>3", ":ToggleTerm size=15 direction=float<CR>", "silent")
--- map("<Leader>4", ":ToggleTerm size=15 direction=horizontal<CR>", "silent")
+-- Snacks Terminal
+vim.keymap.set({"n", "t"}, "<Leader>3", function()
+  Snacks.terminal.toggle("fish", {
+    win = {
+      position = "float",
+      width = 0.95,
+      height = 0.95,
+    },
+  })
+end, { silent = true })
 
--- Vim mappings
-vim.api.nvim_set_keymap('t', '<C-q>', [[<C-\><C-n>]], { silent = true })
+-- Terminal mode keymaps
+vim.keymap.set('t', '<Esc><Esc>', [[<C-\><C-n>]], { silent = true })
+vim.keymap.set('t', '<C-q>', [[<C-\><C-n>]], { silent = true })
 vim.api.nvim_set_keymap('v', '<Tab>', '>gv', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<S-Tab>', '<gv', { noremap = true, silent = true })
 
 -- Mappings for switching between vim and tmux panes
-nnoremap("<C-h>", "<Cmd>NvimTmuxNavigateLeft<CR>")
-nnoremap("<C-j>", "<Cmd>NvimTmuxNavigateDown<CR>")
-nnoremap("<C-k>", "<Cmd>NvimTmuxNavigateUp<CR>")
-nnoremap("<C-l>", "<Cmd>NvimTmuxNavigateRight<CR>")
+vim.keymap.set('n', '<C-h>', require('smart-splits').move_cursor_left)
+vim.keymap.set('n', '<C-j>', require('smart-splits').move_cursor_down)
+vim.keymap.set('n', '<C-k>', require('smart-splits').move_cursor_up)
+vim.keymap.set('n', '<C-l>', require('smart-splits').move_cursor_right)
 
 -- Nerdtree Finder and CtrlP
 nnoremap("<F5>", ":NvimTreeFindFileToggle<CR>", "silent")
@@ -125,7 +127,7 @@ map("<Leader>t", ":TestFile<CR>", "silent")
 vmap("<Enter>", "<Plug>(EasyAlign)", "silent")
 
 -- Removes search highlighting
-map("<esc>", ":noh <CR>", "silent")
+nnoremap("<esc>", ":noh <CR>", "silent")
 
 -- Git push with fugitive
 nnoremap("<Leader>gp", ":Neogit push<CR>", "silent")
@@ -142,8 +144,6 @@ nnoremap("<Leader>+", ':exe "resize " . (winheight(0) * 3/2)<CR>', "silent")
 nnoremap("<Leader>-", ':exe "resize " . (winheight(0) * 2/3)<CR>', "silent")
 
 vim.cmd[[
-  " configuration for to exit Toggleterm
-  tnoremap <Esc> <C-\><C-n>
 
   " configuration for Ack Vim Plugin
   cnoreabbrev Ack Ack!
