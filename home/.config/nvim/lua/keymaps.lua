@@ -78,7 +78,7 @@ map(",,j", "<cmd>HopLineAC<CR>")
 
 -- Snacks Terminal
 vim.keymap.set({"n", "t"}, "<Leader>3", function()
-  Snacks.terminal.toggle("fish", {
+  Snacks.terminal.toggle("/Users/juanhinojo/.local/bin/kiro-cli-term -- fish", {
     win = {
       position = "float",
       width = 0.95,

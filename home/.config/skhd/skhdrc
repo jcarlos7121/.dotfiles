@@ -1,49 +1,49 @@
 # Makes a window fullscreen
-alt + shift - d : /Users/juanhinojo/.config/skhd/toggle_fullscreen.sh
+# alt + shift - d : /Users/juanhinojo/.config/skhd/toggle_fullscreen.sh
 
-alt - d : yabai -m window --toggle zoom-fullscreen
+# alt - d : yabai -m window --toggle zoom-fullscreen
 
 # Switch in Y-axis orientation
-alt + shift - a : yabai -m space --mirror y-axis
+# alt + shift - a : yabai -m space --mirror y-axis
 
 # Makes toggle a window to float
-alt + shift - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
+# alt + shift - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
 
 # Minimizes a window
-alt - z : /opt/homebrew/bin/yabai -m window --minimize
+# alt - z : /opt/homebrew/bin/yabai -m window --minimize
 
 # Splits a focused window so that they can stack on top of each other
-alt - x : /opt/homebrew/bin/yabai -m window --toggle split
+# alt - x : /opt/homebrew/bin/yabai -m window --toggle split
 
 # Rebalance windows size
-alt - c : /opt/homebrew/bin/yabai -m space --balance
+# alt - c : /opt/homebrew/bin/yabai -m space --balance
 
 # Send to another display
-cmd + ctrl + shift - o : /Users/juanhinojo/.config/skhd/cycle_display.sh
+# cmd + ctrl + shift - o : /Users/juanhinojo/.config/skhd/cycle_display.sh
 
 # move focus to next display
-cmd + shift - k : yabai -m display --focus next
+# cmd + shift - k : yabai -m display --focus next
 
 # move focus to previous display
-cmd + shift - j : yabai -m display --focus prev
+# cmd + shift - j : yabai -m display --focus prev
 
 # Switch focus clockwise or counterclockwise
-alt - h : yabai -m window --focus west
-alt - j : yabai -m window --focus south
-alt - k : yabai -m window --focus north
-alt - l : yabai -m window --focus east
+# alt - h : yabai -m window --focus west
+# alt - j : yabai -m window --focus south
+# alt - k : yabai -m window --focus north
+# alt - l : yabai -m window --focus east
 
 # Swap windows clockwise or counterclockwise
-alt + shift + ctrl - h : yabai -m window --swap west
-alt + shift + ctrl - j : yabai -m window --swap south
-alt + shift + ctrl - k : yabai -m window --swap north
-alt + shift + ctrl - l : yabai -m window --swap east
+# alt + shift + ctrl - h : yabai -m window --swap west
+# alt + shift + ctrl - j : yabai -m window --swap south
+# alt + shift + ctrl - k : yabai -m window --swap north
+# alt + shift + ctrl - l : yabai -m window --swap east
 
 # Resize windows
-alt + shift - h : yabai -m window --resize right:-20:0 2> /dev/null || yabai -m window --resize left:-20:0 2> /dev/null
-alt + shift - j : yabai -m window --resize bottom:0:20 2> /dev/null || yabai -m window --resize top:0:20 2> /dev/null
-alt + shift - k : yabai -m window --resize bottom:0:-20 2> /dev/null || yabai -m window --resize top:0:-20 2> /dev/null
-alt + shift - l : yabai -m window --resize right:20:0 2> /dev/null || yabai -m window --resize left:20:0 2> /dev/null
+# alt + shift - h : yabai -m window --resize right:-20:0 2> /dev/null || yabai -m window --resize left:-20:0 2> /dev/null
+# alt + shift - j : yabai -m window --resize bottom:0:20 2> /dev/null || yabai -m window --resize top:0:20 2> /dev/null
+# alt + shift - k : yabai -m window --resize bottom:0:-20 2> /dev/null || yabai -m window --resize top:0:-20 2> /dev/null
+# alt + shift - l : yabai -m window --resize right:20:0 2> /dev/null || yabai -m window --resize left:20:0 2> /dev/null
 
 # Swap spaces
 ctrl - 1 : yabai -m space --focus 1

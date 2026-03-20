@@ -14,6 +14,8 @@ vim.cmd[[
 
   autocmd Filetype typescript setlocal ts=4 sw=4 sts=4 et
 
-  " Set the strategy for test#run to dispatch
+  " Use /bin/sh for dispatch (fish startup adds ~2.5s)
   let test#strategy = "dispatch"
+  set shell=/bin/sh
+  set shellcmdflag=-c
 ]]
