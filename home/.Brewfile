@@ -66,6 +66,7 @@ brew "anomalyco/tap/opencode"
 brew "gemini-cli"
 brew "ollama"
 cask "copilot-cli"
+cask "kiro-cli"
 
 # Cloud & infra
 brew "hashicorp/tap/vault"
@@ -76,16 +77,21 @@ cask "chromedriver"
 
 # Docker / containers
 brew "jesseduffield/lazydocker/lazydocker"
+cask "docker-desktop"
 
 # macOS utilities
 brew "blueutil"
 brew "mkcert"
 cask "1password-cli"
 cask "alfred"
+cask "bartender"
 cask "contexts"
 
-# Text / file utilities
-brew "dos2unix"
+# Productivity apps
+cask "expressvpn"
+cask "obsidian"
+cask "superhuman"
+cask "zen"
 
 # Fun / toys
 brew "cmatrix"
