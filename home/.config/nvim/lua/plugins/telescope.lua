@@ -28,6 +28,7 @@ return {
     pcall(require("telescope").load_extension, "fzf")
     pcall(require("telescope").load_extension, "projects")
     pcall(require("telescope").load_extension, "harpoon")
+    pcall(require("telescope").load_extension, "git_worktree")
 
     local actions = require("telescope.actions")
     local action_layout = require("telescope.actions.layout")

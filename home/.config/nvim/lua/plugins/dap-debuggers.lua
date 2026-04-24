@@ -138,6 +138,14 @@ return {
     end
 
     require('dap-ruby').setup()
+
+    for _, cfg in ipairs(dap.configurations.ruby) do
+      if cfg.command == 'bundle' and cfg.args and cfg.args[1] == 'exec' then
+        local inner = { unpack(cfg.args, 2) }
+        cfg.args = vim.list_extend({ 'exec', 'rdbg', '--open', '-c', '--', 'bundle', 'exec' }, inner)
+      end
+    end
+
     require("dapui").setup()
 
     local dap, dapui = require("dap"), require("dapui")

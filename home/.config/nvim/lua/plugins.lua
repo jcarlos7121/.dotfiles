@@ -55,6 +55,7 @@ require("lazy").setup({
   'danro/rename.vim', -- :Rename filename
   'mileszs/ack.vim', -- :Ack to find word appearances on project
   'tpope/vim-dispatch', -- :Dispatch command
+  'ThePrimeagen/git-worktree.nvim',
   {
     "NeogitOrg/neogit",
     dependencies = {
@@ -244,7 +245,15 @@ require("lazy").setup({
     end
   }, -- Move between most used files
 
-   -- Terminal (using snacks.nvim)
+  -- Terminal
+  {
+    'akinsho/toggleterm.nvim',
+    config = function()
+      require('toggleterm').setup {
+        shell = '/Users/juanhinojo/.local/bin/kiro-cli-term -- fish',
+      }
+    end
+  },
 
   -- NEOVIM configuration
   'nvim-lua/plenary.nvim',
@@ -274,6 +283,9 @@ require("lazy").setup({
     dependencies = { "folke/snacks.nvim" },
     lazy = false,
     config = true,
+    opts = {
+      terminal_cmd = "claude --enable-auto-mode --continue",
+    }
   },
 
   {

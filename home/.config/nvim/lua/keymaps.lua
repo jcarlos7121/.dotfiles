@@ -47,6 +47,7 @@ map("<C-S>", "<cmd>Telescope live_grep<CR>")
 map("<C-C>", "<cmd>Telescope lsp_dynamic_workspace_symbols symbols=class<CR>")
 map("<C-T>", "<cmd>Telescope projects hidden=true<CR>")
 map("<C-E>", "<cmd>Telescope emoji<CR>")
+map("<C-W>", "<cmd>Telescope git_worktree<CR>")
 
 -- Harpoon
 -- nmap("<C-q>", ":lua require('harpoon').ui:toggle_quick_menu(require('harpoon'):list())<CR>", "silent")
@@ -77,15 +78,7 @@ map(",,k", "<cmd>HopLineBC<CR>")
 map(",,j", "<cmd>HopLineAC<CR>")
 
 -- Snacks Terminal
-vim.keymap.set({"n", "t"}, "<Leader>3", function()
-  Snacks.terminal.toggle("/Users/juanhinojo/.local/bin/kiro-cli-term -- fish", {
-    win = {
-      position = "float",
-      width = 0.95,
-      height = 0.95,
-    },
-  })
-end, { silent = true })
+map("<Leader>3", ":ToggleTerm size=15 direction=float<CR>", "silent")
 
 -- Terminal mode keymaps
 vim.keymap.set('t', '<Esc><Esc>', [[<C-\><C-n>]], { silent = true })
