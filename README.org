@@ -1,6 +1,28 @@
 * Dotfiles
   This is collection of dotfiles that I use so far, Here you can see the configuration for the following Technologies
 
+  Managed with [[https://www.gnu.org/software/stow/][GNU Stow]]. All configs live under =home/= and mirror =$HOME=.
+
+** Usage
+
+*** Bootstrap on a new machine
+  #+begin_src fish
+    git clone git@github.com:jcarlos7121/.dotfiles.git ~/.dotfiles
+    cd ~/.dotfiles && stow -t ~ home
+  #+end_src
+
+*** Add a new file to dotfiles
+  Move the file into the matching path under =home/=, then re-stow:
+  #+begin_src fish
+    mv ~/some/new/file ~/.dotfiles/home/some/new/file
+    stow -R -t ~ -d ~/.dotfiles home
+  #+end_src
+
+*** Uninstall (remove all symlinks)
+  #+begin_src fish
+    cd ~/.dotfiles && stow -D -t ~ home
+  #+end_src
+
 ** Technologies
  - [X] Neovim
  - [X] Kitty
