@@ -140,7 +140,11 @@ require("lazy").setup({
       })
     end
   }, -- replace multiple blank lines with a single line
-  'jgdavey/vim-blockle', -- Allows to toggle between do end and { }
+  {
+    'jcarlos7121/blockle.nvim',
+    ft = 'ruby',
+    opts = {},
+  }, -- Toggle Ruby blocks between do/end and { } with <Leader>b
   'bkad/CamelCaseMotion', -- Allows you to move word by word
   'mg979/vim-visual-multi', -- Allows to select multiple lines with Ctrl + N
   {
@@ -170,7 +174,8 @@ require("lazy").setup({
   require 'plugins.noice', -- Adds noice for notifications and better UI
 
   -- Utilities
-  'vim-test/vim-test', -- Adds leader commands for automatically running Rspec Tests
+  require 'plugins.neotest', -- Adds neotest for testing
+
   { "alexghergh/nvim-tmux-navigation" }, -- Allows to navigate between tmux panes
   { 'mrjones2014/smart-splits.nvim' },
   'MattesGroeger/vim-bookmarks', -- Allows to bookmark lines to come back

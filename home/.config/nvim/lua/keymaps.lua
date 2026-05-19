@@ -111,10 +111,11 @@ noremap("<A-Up>", "<Esc>:m .-2<CR>==gi")
 noremap("<A-Down>", ":m '>+1<CR>gv=gv")
 vnoremap("<A-Up>", " :m '<-2<CR>gv=gv")
 
--- Vim Rspec
-map("<Leader>w", ":TestSuite<CR>", "silent")
-map("<Leader>e", ":TestNearest<CR>", "silent")
-map("<Leader>t", ":TestFile<CR>", "silent")
+-- Neotest
+map("<Leader>s", ':lua require("neotest").summary.toggle()<CR>', "silent")
+map("<Leader>w", ':lua require("neotest").run.run(vim.fn.getcwd() .. "/test")<CR>', "silent")
+map("<Leader>e", ":lua require('neotest').run.run()<CR>", "silent")
+map("<Leader>t", ":lua require('neotest').run.run(vim.fn.expand('%'))<CR>", "silent")
 
 -- Easyalign
 vmap("<Enter>", "<Plug>(EasyAlign)", "silent")
