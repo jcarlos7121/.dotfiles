@@ -36,6 +36,7 @@ brew "fd"
 brew "fzf"
 brew "jq"
 brew "ripgrep"
+brew "the_silver_searcher"
 brew "zoxide"
 
 # Networking
@@ -49,6 +50,7 @@ brew "gcc"
 
 # Version managers
 brew "asdf"
+brew "mise"
 
 # Databases
 brew "mysql"
