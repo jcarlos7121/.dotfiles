@@ -50,6 +50,10 @@ fun! Av( cmd ) "{{{
   execute 'Dispatch av ' . a:cmd
 endfunction "}}}
 
+fun! Mise( cmd ) "{{{
+  execute 'Dispatch mise ' . a:cmd
+endfunction "}}}
+
 command! -nargs=* Fs call Fs( '<args>' )"}}}"
 command! -nargs=* Pry call Pry( '<args>' )"}}}"
 command! -nargs=* Redis call Redis( '<args>' )"}}}"
@@ -63,3 +67,4 @@ command! -nargs=* Django call Django( '<args>' )"}}}"
 command! -nargs=* Heroku call Heroku( '<args>' )"}}}"
 command! -nargs=* Bundle call Bundle( '<args>' )"}}}"
 command! -nargs=* Av call Av( '<args>' )"}}}"
+command! -nargs=* Mise call Mise( '<args>' )"}}}"

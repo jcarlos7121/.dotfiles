@@ -77,6 +77,9 @@ map(",,b", "<cmd>HopWordBC<CR>")
 map(",,k", "<cmd>HopLineBC<CR>")
 map(",,j", "<cmd>HopLineAC<CR>")
 
+-- Gitlinker
+map("<Leader>gy", ":GitLink<CR>", "silent")
+
 -- Snacks Terminal
 map("<Leader>3", ":ToggleTerm size=15 direction=float<CR>", "silent")
 

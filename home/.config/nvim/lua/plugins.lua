@@ -33,31 +33,21 @@ require("lazy").setup({
     end
   },
   {
-    'olivercederborg/poimandres.nvim',
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require('poimandres').setup {
-        -- leave this setup function empty for default config
-        -- or refer to the configuration section
-        -- for configuration options
-      }
-    end,
-  }, -- Poimandres
-  {
     "zenbones-theme/zenbones.nvim",
     dependencies = "rktjmp/lush.nvim"
   },
   require 'plugins.rosepine', -- Rosepine colorscheme
   { 'yorickpeterse/nvim-grey' }, -- Github colorscheme
+  { 'cocopon/iceberg.vim' }, -- Iceberg colorscheme
+  { 'sainnhe/everforest' }, -- Everforest colorscheme
 
   -- Commands
   'danro/rename.vim', -- :Rename filename
-  'mileszs/ack.vim', -- :Ack to find word appearances on project
+  require 'plugins.ack', -- :Ack to find word appearances on project
   'tpope/vim-dispatch', -- :Dispatch command
   'ThePrimeagen/git-worktree.nvim',
   {
-    "NeogitOrg/neogit",
+    "jcarlos7121/neogit",
     dependencies = {
       "nvim-lua/plenary.nvim",         -- required
       "sindrets/diffview.nvim",        -- optional - Diff integration
@@ -67,16 +57,15 @@ require("lazy").setup({
         integrations = {
           diffview = false
         },
-        auto_close_console = true
+        auto_close_console = true,
+        stream_hook_output = true
       }
     end
   }, -- Adds :Neogit command
   {
-    "ruifm/gitlinker.nvim",
-    requires = "nvim-lua/plenary.nvim",
-    config = function()
-      require("gitlinker").setup()
-    end,
+    "linrongbin16/gitlinker.nvim",
+    cmd = "GitLink",
+    opts = {}
   },
   {
     {
@@ -91,7 +80,6 @@ require("lazy").setup({
     },
   }, -- Adds :Blame command
   'tpope/vim-rails', -- Adds :Rails command
-  'tpope/vim-rbenv', -- Adds :Rbenv command
   'tpope/vim-rake', -- Adds :Rake command
   'mattreduce/vim-mix', -- Adds :Mix elixir command
   'rizzatti/dash.vim', -- Adds :Dash command to search on Dash docs
@@ -185,23 +173,7 @@ require("lazy").setup({
       require('numb').setup()
     end,
   }, -- Quicker line search for neovim
-  {
-    'pwntester/octo.nvim',
-    event = "VeryLazy",
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'kyazdani42/nvim-web-devicons',
-    },
-    config = function ()
-      require"octo".setup(
-        {
-          suppress_missing_scope = {
-            projects_v2 = true
-          }
-        }
-      )
-    end
-  }, -- Github UI for nvim
+  require 'plugins.octo', -- Github UI for nvim
   {
     "mgierada/lazydocker.nvim",
     dependencies = { "akinsho/toggleterm.nvim" },

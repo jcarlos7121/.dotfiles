@@ -160,16 +160,16 @@ hs.hotkey.bind({"ctrl", "shift"}, "T", function()
   -- Move the mouse to the click area and click
   hs.mouse.setAbsolutePosition(clickArea.center)
 end)
-
--- Move to left top corner
-hs.hotkey.bind({"ctrl", "shift"}, "C", function()
-  local screen = hs.screen.mainScreen()
-  local screenFrame = screen:frame()
-
-  local clickArea = hs.geometry.rect(screenFrame.w - 100, screenFrame.h - 65, 1, 1)
-  -- Move the mouse to the click area and click
-  hs.mouse.setAbsolutePosition(clickArea.center)
-end)
+--
+-- -- Move to left top corner
+-- hs.hotkey.bind({"ctrl", "shift"}, "C", function()
+--   local screen = hs.screen.mainScreen()
+--   local screenFrame = screen:frame()
+--
+--   local clickArea = hs.geometry.rect(screenFrame.w - 100, screenFrame.h - 65, 1, 1)
+--   -- Move the mouse to the click area and click
+--   hs.mouse.setAbsolutePosition(clickArea.center)
+-- end)
 
 -- Move Window
 local function moveWindow(offsetX, offsetY)

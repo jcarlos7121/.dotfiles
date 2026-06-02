@@ -1,9 +1,4 @@
-return {
-  'zaldih/themery.nvim',
-  config = function()
-    -- Set custom name to the list
-    require("themery").setup({
-      themes = {
+local themes = {
         {
           name = "Default",
           colorscheme = "default"
@@ -11,18 +6,25 @@ return {
         {
           name = "Koda",
           colorscheme = "koda",
+          after = [[
+            vim.opt.background = "dark" -- set this to dark or light
+          ]]
         },
         {
           name = "At the Beach",
           colorscheme = "grey",
         },
         {
-          name = "Habamax",
-          colorscheme = "habamax"
-        },
-        {
           name = "Rosepine",
           colorscheme = "rose-pine"
+        },
+        {
+          name = "Iceberg",
+          colorscheme = "iceberg"
+        },
+        {
+          name = "Everforest",
+          colorscheme = "everforest"
         },
         {
           name = "Aquarium",
@@ -45,19 +47,8 @@ return {
           ]]
         },
         {
-          name = "Poimandres",
-          colorscheme = "poimandres",
-        },
-        {
           name = "Rosebones",
           colorscheme = "rosebones",
-          after = [[
-          vim.opt.background = "dark" -- set this to dark or light
-          ]]
-        },
-        {
-          name = "Nordbones",
-          colorscheme = "nordbones",
           after = [[
           vim.opt.background = "dark" -- set this to dark or light
           ]]
@@ -77,22 +68,8 @@ return {
           ]]
         },
         {
-          name = "Tokyobones",
-          colorscheme = "tokyobones",
-          after = [[
-          vim.opt.background = "dark" -- set this to dark or light
-          ]]
-        },
-        {
           name = "Duckbones",
           colorscheme = "duckbones",
-          after = [[
-          vim.opt.background = "dark" -- set this to dark or light
-          ]]
-        },
-        {
-          name = "Zenburned",
-          colorscheme = "zenburned",
           after = [[
           vim.opt.background = "dark" -- set this to dark or light
           ]]
@@ -113,7 +90,44 @@ return {
           vim.cmd 'hi VertSplit guibg=NONE guifg=#141414'
           ]]
         }
-      }
-    })
+}
+
+-- Names of themes to exclude from the weekly Mon-Fri rotation.
+local rotation_blocklist = {
+  ["Default"] = true,
+  ["At the Beach"] = true,
+}
+
+return {
+  'zaldih/themery.nvim',
+  config = function()
+    require("themery").setup({ themes = themes })
+
+    local now = os.date("*t")
+    -- wday: 1=Sunday, 2=Monday, ..., 7=Saturday. Only rotate Mon-Fri.
+    if now.wday < 2 or now.wday > 6 then
+      return
+    end
+
+    local eligible = {}
+    for _, theme in ipairs(themes) do
+      if not rotation_blocklist[theme.name] then
+        table.insert(eligible, theme)
+      end
+    end
+    if #eligible == 0 then
+      return
+    end
+
+    -- Deterministic by (year, day-of-year): same theme all day, different next day.
+    local idx = (now.year * 366 + now.yday) % #eligible + 1
+    local picked = eligible[idx]
+
+    vim.schedule(function()
+      vim.cmd.colorscheme(picked.colorscheme)
+      if picked.after then
+        loadstring(picked.after)()
+      end
+    end)
   end
 }
