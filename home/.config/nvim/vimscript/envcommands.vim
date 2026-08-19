@@ -46,8 +46,8 @@ fun! Bundle( arg ) "{{{
   execute 'Dispatch bundle ' . a:arg
 endfunction "}}}
 
-fun! Av( cmd ) "{{{
-  execute 'Dispatch av ' . a:cmd
+fun! Gh( cmd ) "{{{
+  execute 'Dispatch gh ' . a:cmd
 endfunction "}}}
 
 fun! Mise( cmd ) "{{{
@@ -66,5 +66,5 @@ command! -nargs=* Dock call Dock( '<args>' )"}}}"
 command! -nargs=* Django call Django( '<args>' )"}}}"
 command! -nargs=* Heroku call Heroku( '<args>' )"}}}"
 command! -nargs=* Bundle call Bundle( '<args>' )"}}}"
-command! -nargs=* Av call Av( '<args>' )"}}}"
+command! -nargs=* Gh call Gh( '<args>' )"}}}"
 command! -nargs=* Mise call Mise( '<args>' )"}}}"

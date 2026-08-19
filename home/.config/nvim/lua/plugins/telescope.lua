@@ -29,6 +29,7 @@ return {
     pcall(require("telescope").load_extension, "projects")
     pcall(require("telescope").load_extension, "harpoon")
     pcall(require("telescope").load_extension, "git_worktree")
+    require("utils.git-worktree-hookup").setup({ run_post_checkout = false })
 
     local actions = require("telescope.actions")
     local action_layout = require("telescope.actions.layout")
@@ -45,31 +46,29 @@ return {
         prompt_prefix = " ",
         selection_caret = " ",
         entry_prefix = " ",
+        -- NOTE: these are Lua patterns, not globs. Directory entries are anchored
+        -- with a `/` boundary (and `^` for repo-root dirs) so they only match real
+        -- path segments -- otherwise a bare substring like "log" would also hide
+        -- branches such as "embryology-refactor" and files like "catalog.rb".
         file_ignore_patterns = {
-          "./node_modules/*",
-          "node_modules",
-          "^node_modules/*",
-          "node_modules/*",
-          "public/packs/*",
-          "doc/*",
-          "log/*",
-          "dist/*",
-          ".yardoc/*",
-          "tmp/*",
-          "deps/*",
-          "coverage/*",
-          "webclient/node_modules/*",
-          "client/node_modules/*",
-          "app/build/*",
-          "storage/*",
-          ".git/*",
-          ".svn/*",
-          ".hg/*",
-          ".mp4",
-          ".keep",
-          ".woff2",
-          ".woff",
-          ".ttf"
+          "node_modules/",
+          "public/packs/",
+          "app/build/",
+          "%.yardoc/",
+          "%.git/",
+          "%.svn/",
+          "%.hg/",
+          "^doc/", "/doc/",
+          "^log/", "/log/",
+          "^tmp/", "/tmp/",
+          "^dist/", "/dist/",
+          "^deps/", "/deps/",
+          "^coverage/", "/coverage/",
+          "^storage/", "/storage/",
+          "%.mp4$",
+          "%.keep$",
+          "%.woff2?$",
+          "%.ttf$",
         },
         layout_strategy = 'bottom_pane',
         sorting_strategy = 'ascending',

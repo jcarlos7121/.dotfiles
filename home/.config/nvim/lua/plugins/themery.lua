@@ -11,8 +11,8 @@ local themes = {
           ]]
         },
         {
-          name = "At the Beach",
-          colorscheme = "grey",
+          name = "Dayfox",
+          colorscheme = "dayfox",
         },
         {
           name = "Rosepine",
@@ -95,39 +95,38 @@ local themes = {
 -- Names of themes to exclude from the weekly Mon-Fri rotation.
 local rotation_blocklist = {
   ["Default"] = true,
-  ["At the Beach"] = true,
+  ["Dayfox"] = true,
 }
 
 return {
   'zaldih/themery.nvim',
   config = function()
     require("themery").setup({ themes = themes })
-
-    local now = os.date("*t")
-    -- wday: 1=Sunday, 2=Monday, ..., 7=Saturday. Only rotate Mon-Fri.
-    if now.wday < 2 or now.wday > 6 then
-      return
-    end
-
-    local eligible = {}
-    for _, theme in ipairs(themes) do
-      if not rotation_blocklist[theme.name] then
-        table.insert(eligible, theme)
-      end
-    end
-    if #eligible == 0 then
-      return
-    end
-
-    -- Deterministic by (year, day-of-year): same theme all day, different next day.
-    local idx = (now.year * 366 + now.yday) % #eligible + 1
-    local picked = eligible[idx]
-
-    vim.schedule(function()
-      vim.cmd.colorscheme(picked.colorscheme)
-      if picked.after then
-        loadstring(picked.after)()
-      end
-    end)
+    -- local now = os.date("*t")
+    -- -- wday: 1=Sunday, 2=Monday, ..., 7=Saturday. Only rotate Mon-Fri.
+    -- if now.wday < 2 or now.wday > 6 then
+    --   return
+    -- end
+    --
+    -- local eligible = {}
+    -- for _, theme in ipairs(themes) do
+    --   if not rotation_blocklist[theme.name] then
+    --     table.insert(eligible, theme)
+    --   end
+    -- end
+    -- if #eligible == 0 then
+    --   return
+    -- end
+    --
+    -- -- Deterministic by (year, day-of-year): same theme all day, different next day.
+    -- local idx = (now.year * 366 + now.yday) % #eligible + 1
+    -- local picked = eligible[idx]
+    --
+    -- vim.schedule(function()
+    --   vim.cmd.colorscheme(picked.colorscheme)
+    --   if picked.after then
+    --     loadstring(picked.after)()
+    --   end
+    -- end)
   end
 }

@@ -40,6 +40,7 @@ require("lazy").setup({
   { 'yorickpeterse/nvim-grey' }, -- Github colorscheme
   { 'cocopon/iceberg.vim' }, -- Iceberg colorscheme
   { 'sainnhe/everforest' }, -- Everforest colorscheme
+  { "EdenEast/nightfox.nvim" }, -- Nightfox colorscheme
 
   -- Commands
   'danro/rename.vim', -- :Rename filename
@@ -261,7 +262,7 @@ require("lazy").setup({
     lazy = false,
     config = true,
     opts = {
-      terminal_cmd = "claude --enable-auto-mode --continue",
+      terminal_cmd = "claude --dangerously-skip-permissions --continue",
     }
   },
 

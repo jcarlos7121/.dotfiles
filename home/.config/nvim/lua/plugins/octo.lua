@@ -105,7 +105,8 @@ local function apply_graphql_fragment_workaround()
 end
 
 return {
-  'pwntester/octo.nvim',
+  'jcarlos7121/octo.nvim',
+  branch = 'stacked-prs-all',
   event = "VeryLazy",
   dependencies = {
     'nvim-lua/plenary.nvim',
