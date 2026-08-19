@@ -1,0 +1,92 @@
+onboarding = false
+
+[theme]
+name = "vesper"
+auto_switch = false
+
+[keys]
+# tmux: set -g prefix C-a
+prefix = "ctrl+a"
+
+# tmux: bind | split-window -h  (side-by-side panes)
+# Spanish/ISO Mac layout: the | key is really alt+1, so bind the physical chord.
+split_vertical = ["prefix+alt+1", "prefix+|"]
+# tmux: bind - split-window -v  (stacked panes)
+split_horizontal = "prefix+minus"
+
+# tmux: bind -n S-Left/S-Right previous/next-window (direct, no prefix)
+previous_tab = "shift+left"
+next_tab = "shift+right"
+
+# tmux: bind c new-window + rename prompt (prompt comes from ui.prompt_new_tab_name)
+new_tab = "prefix+c"
+# tmux: bind , rename-window
+rename_tab = "prefix+comma"
+
+# new session ≈ new workspace (prefix+C)
+new_workspace = "prefix+shift+c"
+# tmux default: prefix+$ rename-session
+rename_workspace = "prefix+shift+$"
+
+# tmux: bind ' choose-window
+goto = "prefix+quote"
+
+# tmux: prefix+s session list (sessions ≈ herdr workspaces/spaces)
+workspace_picker = "prefix+s"
+# settings UI moved off prefix+s to make room for the picker
+settings = "prefix+g"
+
+# tmux default: prefix+d detach
+detach = "prefix+d"
+
+# tmux default: prefix+[ enters copy mode
+# alt+backtick = the [ key on Spanish/ISO Mac layout (⌥`); prefix+[ covers the ZMK/US-Intl board
+copy_mode = ["prefix+[", "prefix+alt+backtick"]
+
+# ctrl+h/j/k/l pane movement moved to herdr-leap smart-nav below (vim/fzf-aware,
+# like tmux vim-tmux-navigator). Herdr's own focus_pane_* stay on default prefix+h/j/k/l.
+
+# tmux-jump equivalent: herdr-leap word-start jump into copy mode
+[[keys.command]]
+key = "prefix+f"
+type = "plugin_action"
+command = "RooseveltAdvisors.herdr-leap.open"
+description = "leap: jump to word on screen"
+
+[[keys.command]]
+key = "ctrl+h"
+type = "plugin_action"
+command = "RooseveltAdvisors.herdr-leap.smart-left"
+description = "smart pane left"
+
+[[keys.command]]
+key = "ctrl+j"
+type = "plugin_action"
+command = "RooseveltAdvisors.herdr-leap.smart-down"
+description = "smart pane down"
+
+[[keys.command]]
+key = "ctrl+k"
+type = "plugin_action"
+command = "RooseveltAdvisors.herdr-leap.smart-up"
+description = "smart pane up"
+
+[[keys.command]]
+key = "ctrl+l"
+type = "plugin_action"
+command = "RooseveltAdvisors.herdr-leap.smart-right"
+description = "smart pane right"
+
+[ui]
+# match tmux rename prompts on window/session creation
+prompt_new_tab_name = true
+prompt_new_workspace_name = true
+# tab row at the bottom, like tmux status-position bottom
+tab_bar_position = "bottom"
+
+[ui.sound]
+enabled = true
+
+[experimental]
+# Kitty graphics passthrough for images (icat, timg, etc.) — outer terminal is kitty
+kitty_graphics = true
