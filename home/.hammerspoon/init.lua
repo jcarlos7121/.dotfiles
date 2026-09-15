@@ -259,3 +259,9 @@ function scrollDown()
     hs.eventtap.scrollWheel({0, 10}, {}, "line")
 end
 hs.hotkey.bind({"ctrl", "cmd"}, "U", scrollDown, nil, scrollDown)
+
+-- Open GitHub pull request and issue links in a running Neovim (octo.nvim).
+-- Hammerspoon is the system http/https handler: PR and issue links go to Neovim,
+-- everything else (and anything Neovim cannot take) falls through to Safari.
+-- ctrl+shift+O still routes whatever url is on the clipboard.
+require("octo_open").setup { become_default_browser = true }

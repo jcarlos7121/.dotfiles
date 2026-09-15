@@ -8,8 +8,7 @@ end
 
 require'mapx'.setup { global = "force" }
 
-vim.g.mapleader = ","
-vim.g.maplocalleader = " "
+-- mapleader/maplocalleader are set in init.lua, before plugins load
 
 -- Camel Case
 map("<S-W>", "<Plug>CamelCaseMotion_w")
@@ -58,13 +57,17 @@ nmap("<Leader>j", ":lua require('harpoon'):list():next()<CR>", "silent")
 map("<Leader>z", ":tab split<CR>")
 map("<Leader>q", ":tabclose<CR>")
 
--- AI
-map("<Leader>4", ":ClaudeCode<CR>", 'silent')
-map("<Leader>5", ":ClaudeCodeSend<cr>")
-map("<Leader>6", ":ClaudeCodeTreeAdd %<cr>", 'silent')
-map("<Leader>7", ":Codex<cr><CR>", 'silent')
-map("<Leader>8", ":<C-u>CodexSend<cr><CR>", 'silent')
-map("<Leader>9", "<cmd>CodexSendFile<cr>", 'silent')
+-- AI (outside herdr only: claudecode.nvim/codex.nvim embedded terminals.
+-- Inside herdr these same keys drive real agent panes — see the herdr-sidekick-agents
+-- block further down, which is the single source of truth there.)
+if vim.env.HERDR_ENV ~= '1' then
+  map("<Leader>4", ":ClaudeCode<CR>", 'silent')
+  map("<Leader>5", ":ClaudeCodeSend<cr>")
+  map("<Leader>6", ":ClaudeCodeTreeAdd %<cr>", 'silent')
+  map("<Leader>7", ":Codex<cr><CR>", 'silent')
+  map("<Leader>8", ":<C-u>CodexSend<cr><CR>", 'silent')
+  map("<Leader>9", "<cmd>CodexSendFile<cr>", 'silent')
+end
 
 -- Yank filepath
 map("<Leader>p", ":let @+ = expand('%:p')<CR>", "silent")
@@ -89,11 +92,22 @@ vim.keymap.set('t', '<C-q>', [[<C-\><C-n>]], { silent = true })
 vim.api.nvim_set_keymap('v', '<Tab>', '>gv', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<S-Tab>', '<gv', { noremap = true, silent = true })
 
--- Mappings for switching between vim and tmux panes
-vim.keymap.set('n', '<C-h>', require('smart-splits').move_cursor_left)
-vim.keymap.set('n', '<C-j>', require('smart-splits').move_cursor_down)
-vim.keymap.set('n', '<C-k>', require('smart-splits').move_cursor_up)
-vim.keymap.set('n', '<C-l>', require('smart-splits').move_cursor_right)
+-- Herdr-native agent panes (replace claudecode.nvim/codex.nvim inside herdr)
+if vim.env.HERDR_ENV == '1' then
+  local hc = require('herdr-sidekick-agents')
+  -- ,4 opens the agent pane (asking which agent on a fresh one) or hides/shows it;
+  -- ,5 sends context to whichever agent is open. ,6 starts an extra agent alongside.
+  vim.keymap.set('n', ',4', function() hc.toggle() end, { desc = 'Toggle agent pane (herdr)' })
+  vim.keymap.set({ 'n', 'v' }, ',5', function() hc.send() end, { desc = 'Send file/selection ref to agent pane' })
+  vim.keymap.set('n', ',6', function() hc.pick() end, { desc = 'Start another agent pane (herdr)' })
+end
+
+-- Mappings for switching between vim splits and herdr/tmux panes
+local splits = vim.env.HERDR_ENV == '1' and require('herdr-splits') or require('smart-splits')
+vim.keymap.set('n', '<C-h>', splits.move_cursor_left)
+vim.keymap.set('n', '<C-j>', splits.move_cursor_down)
+vim.keymap.set('n', '<C-k>', splits.move_cursor_up)
+vim.keymap.set('n', '<C-l>', splits.move_cursor_right)
 
 -- Nerdtree Finder and CtrlP
 nnoremap("<F5>", ":NvimTreeFindFileToggle<CR>", "silent")

@@ -75,8 +75,24 @@ vim.api.nvim_create_autocmd("VimResized", {
   command = "wincmd =",
 })
 
+-- Close the quickfix/location window with q (vim-dispatch results, :Ack, ...)
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "qf",
+  callback = function(ev)
+    vim.keymap.set("n", "q", "<cmd>close<CR>", {
+      buffer = ev.buf,
+      silent = true,
+      desc = "Close quickfix window",
+    })
+  end,
+})
+
 -- Bookmarks configuration
 vim.g.bookmark_sign = '₪'
 vim.g.bookmark_highlight_lines = 1
 
 vim.cmd [[source ~/.config/nvim/vimscript/envcommands.vim]]
+
+-- vim-dispatch: try the herdr strategy first (autoload/dispatch/herdr.vim),
+-- falling back to the stock handlers outside herdr
+vim.g.dispatch_handlers = { "herdr", "tmux", "job", "screen", "windows", "iterm", "x11", "headless" }

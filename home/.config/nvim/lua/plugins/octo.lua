@@ -1,109 +1,3 @@
-local function graphql_fragment_spreads(text)
-  local spreads = {}
-
-  for name in text:gmatch("%.%.%.%s*([%w_]+)") do
-    if name ~= "on" then
-      spreads[name] = true
-    end
-  end
-
-  return spreads
-end
-
-local function normalize_graphql_fragments(query)
-  local operation
-  local fragment_order = {}
-  local fragments = {}
-  local pos = 1
-
-  while true do
-    local fragment_start, match_end, name = query:find("fragment%s+([%w_]+)%s+on%s+[%w_]+%s*{", pos)
-
-    if not fragment_start then
-      break
-    end
-
-    if not operation then
-      operation = query:sub(1, fragment_start - 1)
-    end
-
-    local depth = 1
-    local fragment_end = match_end
-
-    for i = match_end + 1, #query do
-      local char = query:sub(i, i)
-      if char == "{" then
-        depth = depth + 1
-      elseif char == "}" then
-        depth = depth - 1
-        if depth == 0 then
-          fragment_end = i
-          break
-        end
-      end
-    end
-
-    if not fragments[name] then
-      local definition = query:sub(fragment_start, fragment_end)
-      fragment_order[#fragment_order + 1] = name
-      fragments[name] = {
-        definition = definition,
-        spreads = graphql_fragment_spreads(definition),
-      }
-    end
-
-    pos = fragment_end + 1
-  end
-
-  if not operation then
-    return query
-  end
-
-  local reachable = {}
-  local queue = {}
-
-  for name in pairs(graphql_fragment_spreads(operation)) do
-    queue[#queue + 1] = name
-  end
-
-  while #queue > 0 do
-    local name = table.remove(queue)
-    local fragment = fragments[name]
-
-    if fragment and not reachable[name] then
-      reachable[name] = true
-      for dependency in pairs(fragment.spreads) do
-        queue[#queue + 1] = dependency
-      end
-    end
-  end
-
-  local result = { operation }
-
-  for _, name in ipairs(fragment_order) do
-    if reachable[name] then
-      result[#result + 1] = fragments[name].definition
-    end
-  end
-
-  return table.concat(result, "\n")
-end
-
-local function apply_graphql_fragment_workaround()
-  -- Temporary workaround for pwntester/octo.nvim#1491-era queries that
-  -- append duplicate or unused GraphQL fragment definitions.
-  for _, module_name in ipairs({ "octo.gh.queries", "octo.gh.mutations" }) do
-    local ok, module = pcall(require, module_name)
-    if ok then
-      for key, value in pairs(module) do
-        if type(value) == "string" then
-          module[key] = normalize_graphql_fragments(value)
-        end
-      end
-    end
-  end
-end
-
 return {
   'jcarlos7121/octo.nvim',
   branch = 'stacked-prs-all',
@@ -114,11 +8,35 @@ return {
   },
   config = function()
     require("octo").setup({
-      suppress_missing_scope = {
-        projects_v2 = true
-      }
+      -- Hammerspoon is the system http handler and sends PR/issue links back
+      -- into Octo, which would make "view in browser" a no-op. Naming Safari
+      -- explicitly bypasses the handler, so this command still reaches the web.
+      gh_env = {
+        BROWSER = "open -b com.apple.Safari",
+      },
+      default_to_projects_v2 = true,
+      -- Two-column PR and issue buffers: a main column with a metadata sidebar
+      -- beside it (jcarlos7121/octo.nvim#26 and #27). Upstream default is
+      -- "classic", the flat `Label: value` list.
+      ui = {
+        -- layout = "columns",
+        sidebar_width = 0.5, -- a share of the window, so both columns are the same size
+        min_main_width = 40, -- an even split halves the window: allow a smaller main column
+        check_rows = 0, -- list every workflow instead of folding the rest into "+N more"
+      },
     })
 
-    apply_graphql_fragment_workaround()
+    -- pwntester/octo.nvim#1491 (2026-05-18) started concatenating
+    -- review_thread_information and review_thread_comment onto
+    -- update_pull_request_state without ever spreading them. GitHub rejects the
+    -- whole document with `useAndDefineFragment`, so `:Octo pr close` and
+    -- `:Octo pr reopen` fail -- they are the only consumers of that mutation.
+    -- Still unfixed on master @37a4168 (2026-08-24); the #1520 follow-up only
+    -- removed duplicate definitions, not unused ones.
+    local mutations = require "octo.gh.mutations"
+    local fragments = require "octo.gh.fragments"
+    mutations.update_pull_request_state = mutations.update_pull_request_state
+      :gsub(vim.pesc(fragments.review_thread_information), "", 1)
+      :gsub(vim.pesc(fragments.review_thread_comment), "", 1)
   end
 }

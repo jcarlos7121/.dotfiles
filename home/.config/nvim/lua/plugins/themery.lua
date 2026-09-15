@@ -23,6 +23,10 @@ local themes = {
           colorscheme = "iceberg"
         },
         {
+          name = "Vesper",
+          colorscheme = "vesper"
+        },
+        {
           name = "Everforest",
           colorscheme = "everforest"
         },

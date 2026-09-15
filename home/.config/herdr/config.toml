@@ -39,43 +39,79 @@ settings = "prefix+g"
 # tmux default: prefix+d detach
 detach = "prefix+d"
 
+# cycle through agent panes (herdr ships these unbound)
+next_agent = "prefix+n"
+previous_agent = "prefix+p"
+
+# moved off their defaults (prefix+e / prefix+o) to make room for the
+# herdr-nvim sidebar and file picker bound below
+edit_scrollback = "prefix+shift+e"
+
+# direct one-keystroke pane resizing (herdr 0.8.2+), mirroring ctrl+h/j/k/l nav
+resize_pane_left = "ctrl+alt+h"
+resize_pane_down = "ctrl+alt+j"
+resize_pane_up = "ctrl+alt+k"
+resize_pane_right = "ctrl+alt+l"
+
+# navigate mode (prefix+s space picker): vim keys to move up/down the list
+navigate_workspace_up = ["up", "k"]
+navigate_workspace_down = ["down", "j"]
+# j/k now drive the space list, so unbind them from pane movement in this mode
+# (arrows still focus panes left/right; prefix+h/j/k/l still moves panes normally)
+navigate_pane_down = ""
+navigate_pane_up = ""
+
 # tmux default: prefix+[ enters copy mode
 # alt+backtick = the [ key on Spanish/ISO Mac layout (⌥`); prefix+[ covers the ZMK/US-Intl board
 copy_mode = ["prefix+[", "prefix+alt+backtick"]
 
-# ctrl+h/j/k/l pane movement moved to herdr-leap smart-nav below (vim/fzf-aware,
-# like tmux vim-tmux-navigator). Herdr's own focus_pane_* stay on default prefix+h/j/k/l.
-
-# tmux-jump equivalent: herdr-leap word-start jump into copy mode
-[[keys.command]]
-key = "prefix+f"
-type = "plugin_action"
-command = "RooseveltAdvisors.herdr-leap.open"
-description = "leap: jump to word on screen"
-
+# vim-tmux-navigator equivalent: herdr-splits.nvim forwards ctrl+h/j/k/l into
+# Neovim panes and moves herdr pane focus everywhere else (paired with the
+# lazy.nvim spec in nvim's plugins.lua). Resize actions deliberately unbound:
+# alt+h/j/k/l would require kitty macos_option_as_alt, which breaks Spanish-
+# layout Option typing (| [ { ...) — use prefix+r resize mode instead.
+# Herdr's own focus_pane_* remain on their defaults (prefix+h/j/k/l).
 [[keys.command]]
 key = "ctrl+h"
 type = "plugin_action"
-command = "RooseveltAdvisors.herdr-leap.smart-left"
-description = "smart pane left"
+command = "herdr-splits.nav-left"
+description = "navigate left (vim/herdr)"
 
 [[keys.command]]
 key = "ctrl+j"
 type = "plugin_action"
-command = "RooseveltAdvisors.herdr-leap.smart-down"
-description = "smart pane down"
+command = "herdr-splits.nav-down"
+description = "navigate down (vim/herdr)"
 
 [[keys.command]]
 key = "ctrl+k"
 type = "plugin_action"
-command = "RooseveltAdvisors.herdr-leap.smart-up"
-description = "smart pane up"
+command = "herdr-splits.nav-up"
+description = "navigate up (vim/herdr)"
 
 [[keys.command]]
 key = "ctrl+l"
 type = "plugin_action"
-command = "RooseveltAdvisors.herdr-leap.smart-right"
-description = "smart pane right"
+command = "herdr-splits.nav-right"
+description = "navigate right (vim/herdr)"
+
+# close the focused pane when it's an agent pane — claude, codex, grok,
+# opencode, anything else herdr detects (counterpart of nvim ,4; guarded
+# script, does nothing on shell/editor panes). prefix+4 would shadow
+# switch_tab's prefix+1..9, hence q.
+[[keys.command]]
+key = "prefix+q"
+type = "shell"
+command = "/Users/juanhinojo/.local/bin/herdr-agent-close"
+description = "close focused agent pane"
+
+# Herdr Nvim
+
+[[keys.command]]
+key = "prefix+e"
+type = "plugin_action"
+command = "chmarax.herdr-nvim.pick-file"
+description = "open file from agent output"
 
 [ui]
 # match tmux rename prompts on window/session creation
@@ -83,6 +119,11 @@ prompt_new_tab_name = true
 prompt_new_workspace_name = true
 # tab row at the bottom, like tmux status-position bottom
 tab_bar_position = "bottom"
+
+# in-app toasts — plugins report their errors this way (default "off" hides them)
+show_agent_labels_on_pane_borders = true
+[ui.toast]
+delivery = "herdr"
 
 [ui.sound]
 enabled = true

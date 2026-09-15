@@ -36,6 +36,7 @@ require("lazy").setup({
     "zenbones-theme/zenbones.nvim",
     dependencies = "rktjmp/lush.nvim"
   },
+  { 'datsfilipe/vesper.nvim' },
   require 'plugins.rosepine', -- Rosepine colorscheme
   { 'yorickpeterse/nvim-grey' }, -- Github colorscheme
   { 'cocopon/iceberg.vim' }, -- Iceberg colorscheme
@@ -166,7 +167,28 @@ require("lazy").setup({
   require 'plugins.neotest', -- Adds neotest for testing
 
   { "alexghergh/nvim-tmux-navigation" }, -- Allows to navigate between tmux panes
-  { 'mrjones2014/smart-splits.nvim' },
+  { 'mrjones2014/smart-splits.nvim', cond = vim.env.HERDR_ENV ~= '1' }, -- outside herdr (tmux/plain)
+  {
+    'lmilojevicc/herdr-splits.nvim', -- smart-splits equivalent for herdr panes
+    cond = vim.env.HERDR_ENV == '1',
+    config = function()
+      require('herdr-splits').setup()
+    end,
+  },
+  {
+    'jcarlos7121/herdr-sidekick-agents.nvim', -- Agent panes in herdr (,4 toggle / ,5 send / ,6 extra — keymaps.lua)
+    cond = vim.env.HERDR_ENV == '1',
+    lazy = false,
+    main = 'herdr-sidekick-agents',
+    opts = {
+      agents = {
+        claude = { args = { '--dangerously-skip-permissions', '--continue' } },
+        codex = { args = { 'resume' } },
+        opencode = { args = { '--continue' } },
+        grok = { args = { '--continue' } },
+      },
+    },
+  },
   'MattesGroeger/vim-bookmarks', -- Allows to bookmark lines to come back
   {
     'nacro90/numb.nvim',
@@ -253,21 +275,35 @@ require("lazy").setup({
   {
     "folke/snacks.nvim",
     lazy = false,
-    opts = {},
+    -- snacks.picker's ui_select default replaces vim.ui.select. Octo's <CR>
+    -- action menu is a vim.ui.select call; the built-in fallback renders in the
+    -- message area, which cannot scroll past ~11 items.
+    opts = {
+      picker = {},
+    },
   },
 
   {
     "coder/claudecode.nvim",
     dependencies = { "folke/snacks.nvim" },
     lazy = false,
+    -- inside herdr, ,4/,5 open Claude in a real herdr pane instead (herdr-claude-nvim)
+    cond = vim.env.HERDR_ENV ~= "1",
     config = true,
     opts = {
       terminal_cmd = "claude --dangerously-skip-permissions --continue",
     }
   },
 
+  require 'plugins.herdr-context', -- Send code context to Herdr agents (,a* keymaps)
+
+  -- annotations on <leader>h* (,hc/,hl/,hs/,hS) — <leader>a* belongs to herdr-context
+  { "ChmaraX/herdr-nvim", cond = vim.env.HERDR_ENV == "1", opts = { prefix = "<leader>h" } },
+
   {
     "jcarlos7121/codex.nvim",
+    -- inside herdr, ,6/,7 open Codex in a real herdr pane instead (herdr-claude-nvim)
+    cond = vim.env.HERDR_ENV ~= "1",
     config = function()
       require("codex").setup()
     end

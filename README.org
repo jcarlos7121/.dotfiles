@@ -27,7 +27,6 @@
  - [X] Neovim
  - [X] Kitty
  - [X] Fish
- - [X] Tmux
  - [X] Amazon Q
  - [X] Yabai
  - [X] Hammerspoon

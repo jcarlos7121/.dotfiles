@@ -1,7 +1,11 @@
-# Auto-start tmux (skip when running as a Claude Code agent)
-if status is-interactive; and not set -q TMUX; and not set -q CLAUDECODE
-  tmux new-session -A -s filial -n workstation
+# Auto-start herdr (skip when running as a Claude Code agent)
+# Trial run — previous tmux auto-start kept below for easy rollback
+if status is-interactive; and not set -q HERDR_ENV; and not set -q TMUX; and not set -q CLAUDECODE
+  herdr --session filial
 end
+# if status is-interactive; and not set -q TMUX; and not set -q CLAUDECODE
+#   tmux new-session -A -s filial -n workstation
+# end
 
 set fish_greeting ""
 
@@ -17,3 +21,7 @@ if not set -q CLAUDECODE
     fzf --fish | source
     jump shell fish | source
 end
+
+# >>> grok installer >>>
+fish_add_path $HOME/.grok/bin
+# <<< grok installer <<<

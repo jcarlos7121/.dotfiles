@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+# vim-dispatch herdr strategy helper (see ~/.config/nvim/autoload/dispatch/herdr.vim)
+# Usage: herdr-dispatch-run <placement:split|tab> <ratio> <focus:0|1> <base64-script> [cwd] [label]
+#   split: pane below the invoking nvim pane (ratio = nvim's share)
+#   tab:   a whole new tab in the same workspace (ratio ignored, label = tab name)
+#
+# Two things the obvious implementation gets wrong, both of which look identical
+# from the outside (a pane opens and just sits at a prompt):
+#
+#  1. Do NOT type the payload itself. macOS caps a canonical-mode tty line at
+#     1024 bytes and silently discards anything longer. base64 inflates by 4/3,
+#     so bigger commands vanish. The payload goes to a temp script and only a
+#     short, constant-length `sh <path>` line is typed.
+#
+#  2. Do NOT send before the shell is ready. The tty does not usefully buffer
+#     type-ahead here: characters sent before the line editor initializes are
+#     echoed and then discarded. Shell startup in a large repo is slow (~12s in
+#     rails-dev/master), so this loses the command every time there. Wait for
+#     the pane to emit its first output (the prompt) before sending.
+#
+# HERDR_FAST_SHELL=1 tells the fish config to skip interactive-only shell
+# integrations it does not need here (see ~/.config/fish/conf.d/99_fig_post.fish).
+set -euo pipefail
+export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:${PATH:-}"
+
+herdr="${HERDR_BIN_PATH:-herdr}"
+placement="${1:?placement}"
+ratio="${2:?ratio}"
+focus="${3:?focus}"
+b64="${4:?base64 payload}"
+cwd="${5:-$PWD}"
+label="${6:-}"
+
+focusflag=--no-focus
+[ "$focus" = "1" ] && focusflag=--focus
+
+if [ "$placement" = "tab" ]; then
+  out=$("$herdr" tab create --workspace "${HERDR_WORKSPACE_ID:?not inside a herdr pane}" \
+    --cwd "$cwd" --env HERDR_FAST_SHELL=1 ${label:+--label "$label"} "$focusflag")
+else
+  out=$("$herdr" pane split --pane "${HERDR_PANE_ID:?not inside a herdr pane}" \
+    --direction down --ratio "$ratio" --cwd "$cwd" --env HERDR_FAST_SHELL=1 "$focusflag")
+fi
+pane=$(printf '%s' "$out" | grep -o '"pane_id":"[^"]*"' | head -1 | cut -d'"' -f4)
+[ -n "$pane" ] || exit 1
+
+# A pane killed mid-run never reaches its own rm, so sweep old strays.
+find "${TMPDIR:-/tmp}" -maxdepth 1 -name 'herdr-dispatch.*' -type f -mtime +1 -delete 2>/dev/null || true
+
+script=$(mktemp "${TMPDIR:-/tmp}/herdr-dispatch.XXXXXX")
+printf '%s' "$b64" | base64 -d > "$script"
+
+# A fresh pane emits nothing until its prompt, so any output means "ready".
+# Best effort: on timeout we still send, rather than dropping the command.
+"$herdr" pane wait-output "$pane" \
+  --regex "${HERDR_DISPATCH_READY_REGEX:-\\S}" \
+  --source visible \
+  --timeout "${HERDR_DISPATCH_READY_TIMEOUT_MS:-30000}" >/dev/null 2>&1 || true
+
+exec "$herdr" pane run "$pane" "sh '$script'; rm -f '$script'; exit"

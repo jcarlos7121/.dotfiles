@@ -12,6 +12,7 @@ brew "fish"
 brew "reattach-to-user-namespace"
 brew "tmate"
 brew "tmux"
+brew "herdr"
 cask "font-hack-nerd-font"
 cask "kitty"
 
@@ -83,7 +84,6 @@ cask "docker-desktop"
 
 # macOS utilities
 brew "blueutil"
-brew "mkcert"
 cask "1password-cli"
 cask "alfred"
 cask "bartender"

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Close the focused Herdr pane — but only when it is a Claude agent pane.
+# Bound to prefix+q in ~/.config/herdr/config.toml; counterpart of nvim's ,4
+# toggle (janos/herdr_claude.lua). `claude --continue` resumes the
+# conversation the next time the pane is opened.
+set -euo pipefail
+
+herdr="${HERDR_BIN_PATH:-herdr}"
+info=$("$herdr" pane current --current 2>/dev/null) || exit 0
+
+pane_id=$(printf '%s' "$info" | grep -o '"pane_id"[[:space:]]*:[[:space:]]*"[^"]*"' | head -1 | sed 's/.*"\([^"]*\)"$/\1/')
+agent=$(printf '%s' "$info" | grep -o '"agent"[[:space:]]*:[[:space:]]*"[^"]*"' | head -1 | sed 's/.*"\([^"]*\)"$/\1/')
+
+if [ -n "$pane_id" ] && [ "$agent" = "claude" ]; then
+  exec "$herdr" pane close "$pane_id"
+fi
+exit 0
