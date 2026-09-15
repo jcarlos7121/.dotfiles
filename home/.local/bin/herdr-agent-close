@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+# Close the focused Herdr pane — but only when it is an agent pane (claude,
+# codex, grok, opencode, gemini, ...). Bound to prefix+q in
+# ~/.config/herdr/config.toml; counterpart of the ,4 toggle in
+# herdr-sidekick-agents.nvim. Agents started with a resume flag
+# (claude --continue, grok --continue) pick the conversation back up the next
+# time the pane is opened.
+#
+# Any agent kind Herdr detects counts, so agents added later work with no edit
+# here. To restrict it, set HERDR_CLOSE_AGENT_KINDS to a space- or
+# comma-separated list, e.g. HERDR_CLOSE_AGENT_KINDS="claude codex".
+# HERDR_CLOSE_DRY_RUN=1 reports what it would do instead of closing.
+set -euo pipefail
+export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:${PATH:-}"
+
+herdr="${HERDR_BIN_PATH:-herdr}"
+info=$("$herdr" pane current --current 2>/dev/null) || exit 0
+
+pane_id=$(printf '%s' "$info" | grep -o '"pane_id"[[:space:]]*:[[:space:]]*"[^"]*"' | head -1 | sed 's/.*"\([^"]*\)"$/\1/')
+# top-level "agent" only: "agent_status"/"agent_session" are different keys and
+# do not match this pattern
+agent=$(printf '%s' "$info" | grep -o '"agent"[[:space:]]*:[[:space:]]*"[^"]*"' | head -1 | sed 's/.*"\([^"]*\)"$/\1/')
+
+if [ -z "$pane_id" ] || [ -z "$agent" ]; then
+  [ "${HERDR_CLOSE_DRY_RUN:-}" = "1" ] && echo "skip: not an agent pane (pane=${pane_id:-?} agent=${agent:-none})"
+  exit 0
+fi
+
+allow="${HERDR_CLOSE_AGENT_KINDS:-}"
+if [ -n "$allow" ]; then
+  case " ${allow//,/ } " in
+    *" $agent "*) ;;
+    *)
+      [ "${HERDR_CLOSE_DRY_RUN:-}" = "1" ] && echo "skip: $agent not in allow-list ($allow)"
+      exit 0
+      ;;
+  esac
+fi
+
+if [ "${HERDR_CLOSE_DRY_RUN:-}" = "1" ]; then
+  echo "would close: pane=$pane_id agent=$agent"
+  exit 0
+fi
+exec "$herdr" pane close "$pane_id"
