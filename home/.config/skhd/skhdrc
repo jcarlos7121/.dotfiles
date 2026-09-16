@@ -1,7 +1,7 @@
 # Makes a window fullscreen
 alt + shift - d : /Users/juanhinojo/.config/skhd/toggle_fullscreen.sh
 
-alt - d : yabai -m window --toggle zoom-fullscreen
+alt - d : /Users/juanhinojo/.config/skhd/toggle_fullscreen.sh
 
 # Switch in Y-axis orientation
 alt + shift - a : yabai -m space --mirror y-axis
@@ -27,11 +27,13 @@ cmd + shift - k : yabai -m display --focus next
 # move focus to previous display
 cmd + shift - j : yabai -m display --focus prev
 
-# Switch focus clockwise or counterclockwise
-alt - h : yabai -m window --focus west
-alt - j : yabai -m window --focus south
-alt - k : yabai -m window --focus north
-alt - l : yabai -m window --focus east
+# Switch focus clockwise or counterclockwise.
+# Carries zoom-fullscreen along: if the focused window is zoomed, the neighbour
+# becomes the zoomed one instead. Identical to a plain --focus when unzoomed.
+alt - h : /Users/juanhinojo/.config/skhd/focus_carry_zoom.sh west
+alt - j : /Users/juanhinojo/.config/skhd/focus_carry_zoom.sh south
+alt - k : /Users/juanhinojo/.config/skhd/focus_carry_zoom.sh north
+alt - l : /Users/juanhinojo/.config/skhd/focus_carry_zoom.sh east
 
 # Swap windows clockwise or counterclockwise
 alt + shift + ctrl - h : yabai -m window --swap west

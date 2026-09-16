@@ -2,6 +2,12 @@ yabai -m config layout bsp
 yabai -m config window_placement first_child
 yabai -m config mouse_follows_focus on
 
+# Small/transient windows -- dialogs, sheets, palettes, popovers -- are never
+# AXStandardWindow. Leaving them unmanaged keeps them out of the bsp tree and,
+# just as importantly, at sub-layer "normal" (0) so they render above tiled
+# windows, which yabai keeps at "below" (-20).
+yabai -m rule --add subrole!="AXStandardWindow" manage=off
+
 yabai -m rule --add app="^(Software Update|Dictionary|VLC|System Preferences|System Settings|zoom.us|Photo Booth|Archive Utility|App Store|Activity Monitor)$" manage=off
 yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^Archetype Plini X$" manage=off
@@ -14,6 +20,11 @@ yabai -m rule --add app="Arc.LittleBrowserWindow$" manage=off
 yabai -m rule --add app="Arc" title="Developer Tools" manage=off
 yabai -m rule --add app="Postgres" title="Postgres" manage=off
 yabai -m rule --add app="Postman" title="Postman" manage=off
+
+# A window created while another window in the space is zoom-fullscreen leaves
+# the layout inconsistent (stale fullscreen frame spanning several tile slots,
+# new window drawn on top). Drop the zoom and force a clean re-tile.
+yabai -m signal --add event=window_created action="/Users/juanhinojo/.config/yabai/unzoom_on_new_window.sh"
 
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 sudo yabai --load-sa
