@@ -57,4 +57,11 @@ case "$new" in
   *'"has-fullscreen-zoom":true'*) ;;
   *) yabai -m window "$new_id" --toggle zoom-fullscreen ;;
 esac
-yabai -m window "$cur_id" --toggle zoom-fullscreen
+
+# Re-read the old window instead of toggling it blind. The window_focused
+# signal handler may already have un-zoomed it when focus moved, and an
+# unconditional toggle would zoom it straight back in.
+old_state=$(yabai -m query --windows --window "$cur_id" 2>/dev/null) || exit 0
+case "$old_state" in
+  *'"has-fullscreen-zoom":true'*) yabai -m window "$cur_id" --toggle zoom-fullscreen ;;
+esac

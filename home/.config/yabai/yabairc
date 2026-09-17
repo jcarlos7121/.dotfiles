@@ -29,5 +29,10 @@ yabai -m signal --add event=window_created      action="$SIG"
 yabai -m signal --add event=window_deminimized  action="$SIG"
 yabai -m signal --add event=application_visible action="$SIG"
 
+# A zoomed window keeps covering the screen after focus moves elsewhere (click a
+# link in a zoomed mail client and the browser is focused but hidden behind it).
+# Drop the zoom when focus lands on a different tiled window.
+yabai -m signal --add event=window_focused action="/Users/juanhinojo/.config/yabai/unzoom_on_focus_change.sh"
+
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 sudo yabai --load-sa
