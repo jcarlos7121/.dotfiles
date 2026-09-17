@@ -265,3 +265,11 @@ hs.hotkey.bind({"ctrl", "cmd"}, "U", scrollDown, nil, scrollDown)
 -- everything else (and anything Neovim cannot take) falls through to Safari.
 -- ctrl+shift+O still routes whatever url is on the clipboard.
 require("octo_open").setup { become_default_browser = true }
+
+-- Expose the Hammerspoon message port so the `hs` command-line tool can call
+-- into this config. Used to drive scratchpad.lua from the shell.
+require("hs.ipc")
+
+-- Multi-window scratchpad: alt-f hides the visible scratchpad, or opens a
+-- chooser to summon one. alt-d (skhd) adds and removes windows from the set.
+require("scratchpad")

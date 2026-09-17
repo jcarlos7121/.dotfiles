@@ -1,7 +1,14 @@
 # Makes a window fullscreen
 alt + shift - d : /Users/juanhinojo/.config/skhd/toggle_fullscreen.sh
 
-alt - d : /Users/juanhinojo/.config/skhd/toggle_fullscreen.sh
+# Scratchpad: windows you hide and summon on demand. Assigning a label makes
+# yabai treat the window as manage=off floating, so it leaves the bsp tree.
+# alt - d adds or removes the focused window, labelling it after its app.
+#
+# alt - f is deliberately NOT here: Hammerspoon binds it (scratchpad.lua) to
+# hide the visible scratchpad or open a chooser to summon one. Two hotkey
+# daemons must not bind the same chord.
+alt - d : /Users/juanhinojo/.config/skhd/scratchpad_assign.sh
 
 # Switch in Y-axis orientation
 alt + shift - a : yabai -m space --mirror y-axis
