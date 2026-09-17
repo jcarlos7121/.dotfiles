@@ -101,6 +101,27 @@ function M.center(label)
   hs.execute(string.format("%s -m window %d --move abs:%d:%d", YABAI, id, x, y))
 end
 
+-- Windows already given a size, keyed by window id. A scratchpad is sized and
+-- centred the FIRST time it is summoned and left alone afterwards, so a window
+-- you resized by hand keeps that size on later summons.
+--
+-- Keyed by window id rather than label so a different window taking over a
+-- label gets sized. Reset when Hammerspoon reloads, which means the first
+-- summon after a reload sizes once more -- cheap and predictable. Releasing and
+-- re-adding the same window does NOT reset it.
+M.sized = M.sized or {}
+
+-- Centre the labelled window unless it has already been sized once.
+function M.centerOnce(label)
+  local id
+  for _, w in ipairs(M.tagged()) do
+    if w.scratchpad == label then id = w.id break end
+  end
+  if not id or M.sized[id] then return end
+  M.sized[id] = true
+  M.center(label)
+end
+
 function M.toggle()
   local shown = M.visible()
   if #shown > 0 then
@@ -137,7 +158,7 @@ function M.toggle()
       M.toggleLabel(choice.label)
       -- yabai needs a beat to actually surface the window; positioning inline
       -- lands on the frame it had before it was shown.
-      hs.timer.doAfter(0.25, function() M.center(choice.label) end)
+      hs.timer.doAfter(0.25, function() M.centerOnce(choice.label) end)
     end)
     M.chooser:placeholderText("scratchpad")
   end
