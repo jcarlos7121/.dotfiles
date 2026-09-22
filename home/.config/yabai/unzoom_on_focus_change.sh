@@ -38,8 +38,19 @@ yabai -m query --windows --space "$sp" 2>/dev/null \
       [ -n "$id" ] && yabai -m window "$id" --toggle zoom-fullscreen 2>/dev/null
     done
 
+# Only ever SET the hint here, never remove it.
+#
+# This handler runs concurrently with focus_carry_zoom.sh, which un-zooms the
+# window you left and zooms the one you arrived at. Querying in the gap between
+# those two steps sees no zoom at all, and removing the hint there deletes a
+# flag that is about to be true again. The next alt-h/j/k/l then takes the fast
+# path, skips the carry, and leaves a zoomed window covering the screen -- the
+# failure looks intermittent because it only bites from the second keypress on.
+#
+# The asymmetry is what keeps this safe: a hint that lingers costs one extra
+# query and corrects itself, while a hint wrongly removed silently disables
+# zoom-carry. Stale hints are cleared by the synchronous paths that cannot race
+# -- toggle_fullscreen.sh and focus_carry_zoom.sh's own refresh.
 if yabai -m query --windows 2>/dev/null | grep -q '"has-fullscreen-zoom":true'; then
   : > "$HINT"
-else
-  rm -f "$HINT"
 fi

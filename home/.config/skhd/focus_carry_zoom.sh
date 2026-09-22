@@ -65,3 +65,8 @@ old_state=$(yabai -m query --windows --window "$cur_id" 2>/dev/null) || exit 0
 case "$old_state" in
   *'"has-fullscreen-zoom":true'*) yabai -m window "$cur_id" --toggle zoom-fullscreen ;;
 esac
+
+# Re-assert the hint. A zoom is definitely live now (it was just moved to the
+# destination), so say so regardless of what the concurrent window_focused
+# handler concluded while the zoom was mid-flight.
+: > "$HINT"
