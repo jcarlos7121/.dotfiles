@@ -183,9 +183,9 @@ require("lazy").setup({
     opts = {
       agents = {
         claude = { args = { '--dangerously-skip-permissions', '--continue' } },
-        codex = { args = { 'resume' } },
-        opencode = { args = { '--continue' } },
-        grok = { args = { '--continue' } },
+        codex = { args = { 'resume', '--yolo' } },
+        opencode = { args = { '--continue', '--yolo' } },
+        grok = { args = { '--continue', '--yolo' } },
       },
     },
   },

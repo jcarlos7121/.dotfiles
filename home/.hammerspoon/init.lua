@@ -262,9 +262,12 @@ hs.hotkey.bind({"ctrl", "cmd"}, "U", scrollDown, nil, scrollDown)
 
 -- Open GitHub pull request and issue links in a running Neovim (octo.nvim).
 -- Hammerspoon is the system http/https handler: PR and issue links go to Neovim,
--- everything else (and anything Neovim cannot take) falls through to Safari.
+-- everything else (and anything Neovim cannot take) falls through to Arc.
 -- ctrl+shift+O still routes whatever url is on the clipboard.
-require("octo_open").setup { become_default_browser = true }
+require("octo_open").setup {
+  become_default_browser = true,
+  browser_bundle = "company.thebrowser.Browser", -- Arc
+}
 
 -- Expose the Hammerspoon message port so the `hs` command-line tool can call
 -- into this config. Used to drive scratchpad.lua from the shell.

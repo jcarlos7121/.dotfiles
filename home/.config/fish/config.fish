@@ -25,3 +25,6 @@ end
 # >>> grok installer >>>
 fish_add_path $HOME/.grok/bin
 # <<< grok installer <<<
+
+# Composio CLI
+set --export PATH "$HOME/.local/bin" $PATH

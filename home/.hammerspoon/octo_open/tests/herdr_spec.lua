@@ -94,16 +94,23 @@ local WORKSPACE_LIST = {
 }
 
 local function stub_cli()
-  local last_argv
+  -- The stub answers with the command line itself and decode() reads it back.
+  -- Remembering only the last argv would not survive capture_all, where several
+  -- answers come back at once and each has to be told apart from the others.
   herdr.system = {
     capture = function(argv)
-      last_argv = argv
-      return "{}" -- decoding is stubbed out below
+      return table.concat(argv, " ")
+    end,
+    capture_all = function(argvs)
+      local answers = {}
+      for index, argv in ipairs(argvs) do
+        answers[index] = table.concat(argv, " ")
+      end
+      return answers
     end,
   }
   herdr.json = {
-    decode = function()
-      local command = table.concat(last_argv, " ")
+    decode = function(command)
       if command:find "pane list" then
         return PANE_LIST
       elseif command:find "workspace list" then
@@ -259,6 +266,8 @@ T.test("runs the focus commands for the matching pane", function()
       end
       return outer_capture(argv)
     end,
+    -- panes() batches its process-info calls; keep the stub's version.
+    capture_all = herdr.system.capture_all,
   }
   local ok = herdr.focus { pid = 44904, ppid = 44903, cwd = "/code/rails" }
   herdr.system, herdr.json = restore_system, restore_json

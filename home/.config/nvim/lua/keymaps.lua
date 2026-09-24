@@ -96,10 +96,13 @@ vim.api.nvim_set_keymap('v', '<S-Tab>', '<gv', { noremap = true, silent = true }
 if vim.env.HERDR_ENV == '1' then
   local hc = require('herdr-sidekick-agents')
   -- ,4 opens the agent pane (asking which agent on a fresh one) or hides/shows it;
-  -- ,5 sends context to whichever agent is open. ,6 starts an extra agent alongside.
+  -- ,5 sends context to whichever agent is open.
   vim.keymap.set('n', ',4', function() hc.toggle() end, { desc = 'Toggle agent pane (herdr)' })
   vim.keymap.set({ 'n', 'v' }, ',5', function() hc.send() end, { desc = 'Send file/selection ref to agent pane' })
-  vim.keymap.set('n', ',6', function() hc.pick() end, { desc = 'Start another agent pane (herdr)' })
+  -- ,6 is the inverse of ,4: jump to the agent pane full-screen, hiding nvim.
+  -- From there herdr's own ctrl+a z unzooms to bring nvim back.
+  vim.keymap.set('n', ',6', function() hc.focus() end, { desc = 'Focus agent pane, hide editor (herdr)' })
+  -- starting a second agent alongside the first is rare: require('herdr-sidekick-agents').pick()
 end
 
 -- Mappings for switching between vim splits and herdr/tmux panes

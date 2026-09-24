@@ -25,6 +25,11 @@ local function activate_terminal()
   hs.application.launchOrFocusByBundleID(M.terminal_bundle)
 end
 
+--- How long to let hs.application:activate() land before showing the chooser.
+--- Measured on this config: showing in the same turn is dismissed every time,
+--- 0.05s was already enough, so this leaves margin without being perceptible.
+local ACTIVATION_GRACE = 0.15
+
 --- Held only so the live chooser is not collected while the user is reading it.
 local chooser
 
@@ -47,7 +52,24 @@ local function choose_instance(candidates, callback)
   chooser:searchSubText(true)
   chooser:rows(math.min(#choices, 8))
   chooser:choices(choices)
-  chooser:show()
+
+  -- M.open already asked for focus; repeat it here because the hotkey path and
+  -- any caller that skips M.open still needs it, and because activation is
+  -- refused silently. The delay is the part that matters: activate() is
+  -- asynchronous, and a chooser shown in the same turn is dismissed by AppKit
+  -- before it ever becomes the key window -- the flicker.
+  local app = hs.application.get(hs.processInfo.processID)
+  if not app then
+    return chooser:show()
+  end
+  app:activate()
+  local pending = chooser
+  hs.timer.doAfter(ACTIVATION_GRACE, function()
+    -- A second link can arrive first and replace the chooser this call built.
+    if chooser == pending then
+      pending:show()
+    end
+  end)
 end
 
 --- Routes one url. Asynchronous: a link that needs a choice lands once the user makes it.
@@ -55,11 +77,34 @@ end
 --- it already opened in the browser, so there is nothing to interrupt anyone about.
 ---@param raw string?
 function M.open(raw)
-  router.route(raw, function(outcome)
-    if outcome == "browser" and url.parse(raw) then
-      print("octo_open: no Neovim took " .. raw .. ", opened in the browser")
-    end
-  end)
+  local function route()
+    router.route(raw, function(outcome)
+      if outcome == "browser" and url.parse(raw) then
+        print("octo_open: no Neovim took " .. raw .. ", opened in the browser")
+      end
+    end)
+  end
+
+  -- A link we do not claim never needs our focus.
+  if not url.parse(raw) then
+    return route()
+  end
+
+  -- Claim focus while the click is still recent -- macOS refuses an activation
+  -- that is not close to real user input -- and then yield before routing.
+  -- Yielding is the part that matters: routing blocks the main thread for
+  -- seconds probing nvim and herdr, and an app that never returns to its run
+  -- loop cannot finish becoming frontmost. Activating and then blocking drops
+  -- the activation, and the chooser opens *behind* the app the link was clicked
+  -- in -- Slack and the other scratchpads float at sub-layer "normal", the same
+  -- one an unmanaged chooser gets, so the frontmost app wins and the chooser
+  -- stays buried until that window is closed.
+  local app = hs.application.get(hs.processInfo.processID)
+  if not app then
+    return route()
+  end
+  app:activate()
+  hs.timer.doAfter(ACTIVATION_GRACE, route)
 end
 
 ---@param opts table? { become_default_browser, hotkey, hosts, terminal_bundle, browser_bundle, chooser, herdr_session }

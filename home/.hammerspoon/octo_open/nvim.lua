@@ -143,25 +143,49 @@ local PROBE = [[printf("%d\t%s", getpid(), getcwd())]]
 function M.discover()
   local instances, seen = {}, {}
   local parents = M.system.parents()
-  for _, pattern in ipairs(M.socket_globs()) do
-    for _, socket in ipairs(M.system.glob(pattern)) do
-      if not seen[socket] then
-        seen[socket] = true
-        local probe = M.system.capture { "nvim", "--server", socket, "--remote-expr", PROBE }
-        local pid, cwd = (probe and trim(probe) or ""):match "^(%d+)\t(.+)$"
-        if cwd then
-          local chain = M.ancestry(tonumber(pid), parents)
-          instances[#instances + 1] = {
-            socket = socket,
-            cwd = cwd,
-            pid = tonumber(pid),
-            pids = chain,
-            ppid = chain[2],
-            remote = M.repo_from_remote(M.system.capture { "git", "-C", cwd, "remote", "get-url", "origin" }),
-            mtime = M.system.mtime(socket) or 0,
-          }
-        end
-      end
+
+  -- Instances in one repo share a directory, so origin gets asked for the same
+  -- cwd repeatedly and every ask is an io.popen. Cache by directory; `false`
+  -- records "looked up, no remote" so a miss is not retried either.
+  local remotes = {}
+  local function remote_for(cwd)
+    if remotes[cwd] == nil then
+      remotes[cwd] = M.repo_from_remote(M.system.capture { "git", "-C", cwd, "remote", "get-url", "origin" })
+        or false
+    end
+    return remotes[cwd] or nil
+  end
+
+  -- Every glob in one call, then every probe in one call, then every mtime in
+  -- one call -- three subprocesses instead of three per socket.
+  local sockets = {}
+  for _, socket in ipairs(M.system.glob_all(M.socket_globs())) do
+    if not seen[socket] then
+      seen[socket] = true
+      sockets[#sockets + 1] = socket
+    end
+  end
+
+  local queries = {}
+  for index, socket in ipairs(sockets) do
+    queries[index] = { "nvim", "--server", socket, "--remote-expr", PROBE }
+  end
+  local answers = M.system.capture_all(queries)
+  local times = M.system.mtimes(sockets)
+
+  for index, socket in ipairs(sockets) do
+    local pid, cwd = trim(answers[index] or ""):match "^(%d+)\t(.+)$"
+    if cwd then
+      local chain = M.ancestry(tonumber(pid), parents)
+      instances[#instances + 1] = {
+        socket = socket,
+        cwd = cwd,
+        pid = tonumber(pid),
+        pids = chain,
+        ppid = chain[2],
+        remote = remote_for(cwd),
+        mtime = times[socket] or 0,
+      }
     end
   end
   return instances

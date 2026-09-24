@@ -42,7 +42,13 @@ local function session()
     return M.session_name
   end
   local home = os.getenv "HOME" or ""
-  return M.session_from_paths(M.system.glob(home .. "/.config/herdr/sessions/*/herdr.sock"))
+  local found = M.session_from_paths(M.system.glob(home .. "/.config/herdr/sessions/*/herdr.sock"))
+  -- Remember it. argv() runs for every herdr command, so re-globbing here costs
+  -- an io.popen -- about 90ms in Hammerspoon's environment -- on every one of
+  -- them: 30 subprocesses to list 14 panes instead of 16. A nil result is not
+  -- cached, and clearing the field (as the tests do) forces a fresh lookup.
+  M.session_name = found
+  return found
 end
 
 --- Builds a herdr command line with the session flag in front of the subcommand.
@@ -135,9 +141,18 @@ function M.panes()
     return {}
   end
 
+  -- Ask for every pane's process info in one subprocess. One call per pane is
+  -- the single slowest thing octo_open does: 14 panes meant 14 io.popens, about
+  -- 90ms each, before the chooser could be built.
+  local queries = {}
+  for index, pane in ipairs(listed) do
+    queries[index] = M.argv("pane", "process-info", "--pane", pane.pane_id)
+  end
+  local answers = M.system.capture_all(queries)
+
   local panes = {}
-  for _, pane in ipairs(listed) do
-    local info = decode(M.system.capture(M.argv("pane", "process-info", "--pane", pane.pane_id)))
+  for index, pane in ipairs(listed) do
+    local info = decode(answers[index])
     local process_info = info and info.result and info.result.process_info
     local pids = {}
     if process_info then

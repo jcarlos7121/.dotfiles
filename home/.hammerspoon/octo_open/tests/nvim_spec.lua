@@ -98,24 +98,33 @@ end)
 
 -- discovery --------------------------------------------------------------
 
---- One probe returns "<pid>\t<cwd>"; a second call resolves the parent pid.
+--- discover() asks in batches: every glob at once, every probe at once, every
+--- mtime at once. A live probe answers "<pid>\t<cwd>"; a dead one answers with
+--- nothing, and has to keep its place in the batch so the rest stay aligned.
 local function stub_probe(cwd, pid, ppid, remote)
   return {
-    glob = function()
+    glob_all = function()
       return { "/sock/dead", "/sock/live" }
     end,
-    mtime = function()
-      return 42
+    mtimes = function(paths)
+      local times = {}
+      for _, path in ipairs(paths) do
+        times[path] = 42
+      end
+      return times
     end,
     parents = function()
       return { [pid] = ppid, [ppid] = 1 }
     end,
+    capture_all = function(argvs)
+      local answers = {}
+      for index, argv in ipairs(argvs) do
+        answers[index] = argv[3] == "/sock/live" and string.format("%d\t%s\n", pid, cwd) or ""
+      end
+      return answers
+    end,
     capture = function(argv)
-      if argv[1] == "nvim" and argv[3] == "/sock/live" then
-        return string.format("%d\t%s\n", pid, cwd)
-      elseif argv[1] == "nvim" then
-        return nil -- dead socket: nvim exits non-zero
-      elseif argv[1] == "git" then
+      if argv[1] == "git" then
         return remote
       end
     end,
@@ -229,19 +238,27 @@ end)
 T.test("records the whole ancestry on each discovered instance", function()
   local restore = nvim.system
   nvim.system = {
-    glob = function()
+    glob_all = function()
       return { "/sock/live" }
     end,
-    mtime = function()
-      return 1
+    mtimes = function(paths)
+      local times = {}
+      for _, path in ipairs(paths) do
+        times[path] = 1
+      end
+      return times
     end,
     parents = function()
       return PARENTS
     end,
-    capture = function(argv)
-      if argv[1] == "nvim" then
-        return "42147\t/code\n"
+    capture_all = function(argvs)
+      local answers = {}
+      for index in ipairs(argvs) do
+        answers[index] = "42147\t/code\n"
       end
+      return answers
+    end,
+    capture = function()
       return nil
     end,
   }
