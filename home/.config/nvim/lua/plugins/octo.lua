@@ -12,7 +12,8 @@ return {
       -- into Octo, which would make "view in browser" a no-op. Naming Safari
       -- explicitly bypasses the handler, so this command still reaches the web.
       gh_env = {
-        BROWSER = "open -b com.apple.Safari",
+        -- (Linux has no such handler yet, so the default browser is fine there.)
+        BROWSER = vim.fn.has("mac") == 1 and "open -b com.apple.Safari" or "xdg-open",
       },
       default_to_projects_v2 = true,
       -- Two-column PR and issue buffers: a main column with a metadata sidebar

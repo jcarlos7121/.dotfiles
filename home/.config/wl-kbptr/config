@@ -1,0 +1,26 @@
+# wl-kbptr: keyboard clicking (the Shortcat replacement on Super+D).
+# Defaults: wl-kbptr --help-config. Colors are #rgb[a] / #rrggbb[aa].
+#
+# High-contrast hints: no dimming over the rest of the screen, and each target
+# gets a near-solid black box with a gold border and bright gold letters.
+
+[general]
+cancellation_status_code=0
+
+[mode_floating]
+unselectable_bg_color=#0000
+selectable_bg_color=#000000dd
+selectable_border_color=#ffd700ff
+label_color=#ffd700ff
+label_select_color=#ff5f5fff
+label_font_family=sans-serif
+label_font_size=14 50% 100
+
+[mode_tile]
+unselectable_bg_color=#0000
+selectable_bg_color=#00000055
+selectable_border_color=#ffd700aa
+label_color=#ffd700ff
+label_select_color=#ff5f5fff
+label_font_family=sans-serif
+label_font_size=10 50% 100

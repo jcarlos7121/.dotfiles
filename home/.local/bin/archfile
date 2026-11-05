@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+# brew bundle, for Arch: install or check the packages in ~/.Archfile.
+#
+#   archfile [install]   install everything listed that's missing
+#   archfile check       list packages installed by hand (pacman -Qe) that are
+#                        neither in the Archfile nor part of Omarchy
+set -euo pipefail
+
+ARCHFILE="${ARCHFILE:-$HOME/.Archfile}"
+
+entries() { # entries <source>
+  sed 's/#.*//' "$ARCHFILE" | awk -v s="$1" '$1 == s && NF >= 2 { print $2 }'
+}
+
+missing_pacman() { # names not installed
+  local name
+  for name in "$@"; do
+    pacman -Q "$name" &>/dev/null || echo "$name"
+  done
+}
+
+install() {
+  local pkgs
+  mapfile -t pkgs < <(missing_pacman $(entries pacman))
+  if ((${#pkgs[@]})); then
+    echo "==> pacman: ${pkgs[*]}"
+    sudo pacman -S --needed --noconfirm "${pkgs[@]}"
+  fi
+
+  mapfile -t pkgs < <(missing_pacman $(entries aur))
+  if ((${#pkgs[@]})); then
+    echo "==> aur: ${pkgs[*]}"
+    yay -S --needed --noconfirm "${pkgs[@]}"
+  fi
+
+  local installed name
+  installed=$(uv tool list 2>/dev/null | awk '/^[^- ]/ { print $1 }')
+  for name in $(entries uv); do
+    grep -qx "$name" <<<"$installed" && continue
+    echo "==> uv: $name"
+    uv tool install "$name"
+  done
+
+  echo "==> Archfile up to date"
+}
+
+check() {
+  local omarchy="${OMARCHY_PATH:-/usr/share/omarchy}/install"
+  comm -23 \
+    <(pacman -Qqe | sort -u) \
+    <({ entries pacman; entries aur; entries ignore; cat "$omarchy"/omarchy-*.packages 2>/dev/null | sed 's/#.*//'; } | awk 'NF { print $1 }' | sort -u)
+}
+
+case "${1:-install}" in
+  install) install ;;
+  check) check ;;
+  *) echo "usage: archfile [install|check]" >&2; exit 64 ;;
+esac

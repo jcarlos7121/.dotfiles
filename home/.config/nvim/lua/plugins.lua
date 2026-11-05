@@ -20,6 +20,7 @@ require("lazy").setup({
     priority = 1000, -- make sure to load this before all the other start plugins
   },
   require 'plugins.themery', -- Themery for colorschemes
+  require 'plugins.omarchy-theme', -- Follow the Omarchy system theme (no-op off Omarchy)
   'FrenzyExists/aquarium-vim', -- Aquarium colorscheme i mostly use
   {
     'AlexvZyl/nordic.nvim',
@@ -84,7 +85,7 @@ require("lazy").setup({
   'tpope/vim-rails', -- Adds :Rails command
   'tpope/vim-rake', -- Adds :Rake command
   'mattreduce/vim-mix', -- Adds :Mix elixir command
-  'rizzatti/dash.vim', -- Adds :Dash command to search on Dash docs
+  { 'rizzatti/dash.vim', cond = vim.fn.has('mac') == 1 }, -- Adds :Dash command to search on Dash docs (macOS only)
   'adelarsq/vim-matchit', --% to match closing tag on xml/html
 
   -- FileSearch
@@ -250,7 +251,9 @@ require("lazy").setup({
     'akinsho/toggleterm.nvim',
     config = function()
       require('toggleterm').setup {
-        shell = '/Users/juanhinojo/.local/bin/kiro-cli-term -- fish',
+        -- kiro-cli-term where it's installed (Mac), plain fish elsewhere
+        shell = vim.fn.executable(vim.fn.expand('~/.local/bin/kiro-cli-term')) == 1
+          and vim.fn.expand('~/.local/bin/kiro-cli-term') .. ' -- fish' or 'fish',
       }
     end
   },

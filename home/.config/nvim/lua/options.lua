@@ -12,7 +12,7 @@ opt.scrolloff = 5
 opt.sidescroll = 1
 opt.sidescrolloff = 10
 opt.formatoptions = "qcrn1"
-opt.clipboard = { 'unnamed' }
+opt.clipboard = vim.fn.has('mac') == 1 and { 'unnamed' } or { 'unnamedplus' } -- unnamedplus: Wayland clipboard
 opt.visualbell = false
 opt.errorbells = false
 opt.autoread = true
