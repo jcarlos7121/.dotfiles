@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+# Contexts-style window switcher for Hyprland.
+#
+# Alt+Tab opens a floating list of every window, most recently used first, with
+# the previous window preselected. While it is open, Alt+Tab / Alt+Shift+Tab
+# move down / up, as do j/k, Tab and ctrl+j/k. "/" switches to typing a search.
+# Enter focuses the window (bringing a scratchpad window on screen), Esc cancels.
+#
+#   window-switcher [next|prev]   open the list, or move in it when already open
+#   window-switcher --pick        the fzf list itself (run inside the popup)
+set -euo pipefail
+
+CLASS=org.dotfiles.window-switcher
+SOCK="${XDG_RUNTIME_DIR:-/tmp}/window-switcher.sock"
+
+if [[ ${1:-} == --pick ]]; then
+  # address <TAB> what is shown
+  windows=$(hyprctl clients -j | jq -r --arg self "$CLASS" '
+    map(select(.class != $self and .mapped))
+    | sort_by(.focusHistoryID)[]
+    | [.address, .class, .title, (.workspace.name | sub("^special:"; "*"))]
+    | @tsv' |
+    awk -F'\t' '{ printf "%s\t%-18.18s  %-60.60s  %s\n", $1, $2, $3, $4 }')
+
+  [[ -z $windows ]] && exit 0
+
+  choice=$(printf '%s\n' "$windows" | fzf \
+    --listen="$SOCK" \
+    --delimiter='\t' --with-nth=2 \
+    --disabled --no-sort --cycle --layout=reverse --no-scrollbar \
+    --prompt='  ' --ghost='j/k move · / search · enter focus' \
+    --bind 'start:pos(2)' \
+    --bind 'j:down,k:up,tab:down,btab:up,q:abort' \
+    --bind '/:enable-search+unbind(j,k,q,/)+clear-query' \
+    --bind 'enter:accept' ) || exit 0
+
+  address=${choice%%$'\t'*}
+  hyprctl dispatch "hl.dsp.focus({ window = \"address:$address\" })" >/dev/null 2>&1 ||
+    hyprctl dispatch focuswindow "address:$address" >/dev/null
+  exit 0
+fi
+
+# Already open: a repeated Alt+Tab moves the selection instead of reopening
+if [[ -S $SOCK ]] && hyprctl clients -j | jq -e --arg c "$CLASS" 'any(.[]; .class == $c)' >/dev/null; then
+  action=down
+  [[ ${1:-} == prev ]] && action=up
+  curl -s --unix-socket "$SOCK" -XPOST http://localhost -d "$action" >/dev/null || true
+  exit 0
+fi
+
+rm -f "$SOCK"
+exec kitty --class "$CLASS" -o font_size=12 -o window_padding_width=10 \
+  -e "$0" --pick

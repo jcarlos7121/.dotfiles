@@ -1,0 +1,29 @@
+# Local package: the official Grok Bot arm64 .deb repackaged for Arch (aarch64).
+# The AUR's grok-bot-bin is x86_64 only. Update: bump pkgver, _build and the
+# checksum from the Linux arm64 links on https://cursor.com/download/bot
+# Build/install: cd here && makepkg -f && sudo pacman -U grok-bot-*.pkg.tar.*
+pkgname=grok-bot
+pkgver=0.78.1
+_build=72e130b4e6be3fdc47b97e809b6b420908ce2dd8
+pkgrel=1
+pkgdesc='Grok Bot desktop app by xAI (official arm64 build)'
+arch=('aarch64')
+url='https://cursor.com/download/bot'
+license=('custom')
+depends=('gtk3' 'libnotify' 'nss' 'libxss' 'libxtst' 'xdg-utils' 'at-spi2-core'
+         'util-linux-libs' 'libsecret' 'alsa-lib' 'mesa' 'libxkbcommon' 'libdrm' 'hicolor-icon-theme')
+options=('!strip' '!debug')
+source=("grok-bot_${pkgver}_arm64.deb::https://downloads.cursor.com/grokbot/stable/${_build}/linux/arm64/grok-bot_${pkgver}_arm64.deb")
+sha256sums=('ed9f29cc1fa147267d9171916caa7b44ecbfc36d766c8d7f2ce089bddc2da94d')
+noextract=("grok-bot_${pkgver}_arm64.deb")
+
+package() {
+  bsdtar -xOf "$srcdir/grok-bot_${pkgver}_arm64.deb" 'data.tar*' | bsdtar -xf - -C "$pkgdir"
+
+  # What the .deb's postinst does: launcher symlink and the Electron sandbox
+  install -d "$pkgdir/usr/bin"
+  ln -sf "/opt/Grok Bot/grok-bot" "$pkgdir/usr/bin/grok-bot"
+  chmod 4755 "$pkgdir/opt/Grok Bot/chrome-sandbox"
+
+  rm -rf "$pkgdir/usr/share/doc"
+}

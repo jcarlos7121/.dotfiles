@@ -1,0 +1,124 @@
+# Archfile: the Linux (Omarchy) counterpart of home/.Brewfile.
+#
+# One package per line: <source> <name>   # optional comment
+#   pacman  official Arch repos
+#   aur     Arch User Repository (built with yay)
+#   uv      Python CLI tools (uv tool install)
+#   ignore  installed by hand but not worth tracking (hardware/system); only
+#           hides it from `archfile check`
+#
+#   archfile install   install anything listed here that's missing
+#   archfile check     show packages installed by hand that aren't listed here
+#
+# Omarchy already ships (no need to list): bat eza fd fzf jq ripgrep zoxide
+# tmux herdr git gcc mise obsidian docker, and
+# through mise (/etc/mise/conf.d/omarchy-tools.toml, installed on first run):
+# gh opencode copilot kiro-cli claude codex uv node.
+
+# Apps
+pacman kitty
+pacman neovim
+pacman 1password
+pacman google-chrome
+pacman slack-desktop
+pacman dotnet-runtime-bin
+aur    min-browser-bin
+aur    librepods               # AirPods
+
+# Shell & terminal
+pacman fish
+pacman fisher
+pacman tmate
+pacman ttf-hack-nerd
+pacman ttf-inconsolata-nerd
+
+# Editor & dotfiles
+pacman stow
+pacman stylua
+pacman yazi
+
+# Git & code review
+pacman git-lfs
+aur    av-cli-bin              # Aviator (aviator-co/tap/av)
+uv     ggshield
+
+# Modern CLI utilities
+pacman the_silver_searcher
+
+# Networking
+pacman nmap
+pacman wget
+aur    expressvpn
+
+# Build tools
+pacman cmake
+
+# Version managers
+aur    asdf-vm                 # mise reads .tool-versions too
+
+# Databases
+pacman mariadb                 # mysql
+pacman valkey                  # redis
+
+# Containers (Podman instead of Docker Desktop)
+pacman podman
+pacman podman-compose
+pacman lazydocker
+
+# AI / modern dev
+pacman ollama
+pacman gemini-cli
+
+# Cloud & infra
+aur    heroku-cli
+uv     localstack
+
+# Utilities
+pacman 1password-cli
+aur    wl-kbptr                # Shortcat: click by keyboard. The AUR build wants OpenCV 4;
+                               # with Arch's OpenCV 5 add to PKGBUILD prepare():
+                               #   meson.build: dependency('opencv4') -> 'opencv5'
+                               #   src/target_detection.cpp: #include <opencv2/geometry.hpp>
+
+# Fun / toys
+pacman cmatrix
+pacman cowsay
+pacman figlet
+pacman viu
+
+# Asahi / MacBook hardware and base system (not tracked, just hidden from check)
+ignore alsa-ucm-conf-aurora
+ignore archlinuxarm-keyring
+ignore asahi-alarm-keyring
+ignore asahi-fwextract
+ignore asahi-scripts
+ignore aurora-audio
+ignore aurora-bless
+ignore curl
+ignore e2fsprogs
+ignore ex-vi-compat
+ignore gnupg
+ignore iwd
+ignore linux-aurora
+ignore linux-aurora-headers
+ignore m1n1-aurora
+ignore mesa
+ignore mkinitcpio
+ignore omarchy-aurora-firmware
+ignore omarchy-dev
+ignore omarchy-settings-dev
+ignore qt6-connectivity
+ignore qt6-tools
+ignore speakerguardd
+ignore sudo
+ignore uboot-aurora
+ignore vulkan-aurora
+aur vesktop-bin   # Discord desktop client (official Discord has no ARM build); Super+1..9 switches servers
+ignore grok-bot   # official arm64 .deb repackaged: ~/.dotfiles/pkgbuilds/grok-bot (makepkg)
+aur zen-browser-bin   # default browser
+pacman ydotool        # keyboard clicks (Super+Ctrl+N/R); needs: systemctl --user enable --now ydotool
+pacman aerc                    # terminal email client
+pacman w3m                     # aerc: renders HTML mail
+pacman gtk-layer-shell         # hints (uv tool: hints) overlay on Wayland
+pacman gobject-introspection   # hints
+aur claude-desktop   # official Claude Desktop beta (Anthropic arm64 .deb)

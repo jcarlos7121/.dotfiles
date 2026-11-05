@@ -102,7 +102,7 @@ description = "navigate right (vim/herdr)"
 [[keys.command]]
 key = "prefix+q"
 type = "shell"
-command = "/Users/juanhinojo/.local/bin/herdr-agent-close"
+command = "herdr-agent-close"  # found via PATH (~/.local/bin)
 description = "close focused agent pane"
 
 # Herdr Nvim
@@ -112,6 +112,11 @@ key = "prefix+e"
 type = "plugin_action"
 command = "chmarax.herdr-nvim.pick-file"
 description = "open file from agent output"
+
+[terminal]
+# Panes default to $SHELL, which is the login shell (bash on Omarchy). Run
+# fish instead; resolved through PATH, so it works on the Mac too.
+default_shell = "fish"
 
 [ui]
 # match tmux rename prompts on window/session creation
