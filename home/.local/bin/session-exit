@@ -1,0 +1,26 @@
+#!/bin/bash
+# Save the open windows (session-save), then log out / reboot / shut down
+# through Omarchy. The next login reopens them (session-restore, via the
+# post-boot hook). Wired into the Omarchy menu's System entries by
+# ~/.config/omarchy/extensions/omarchy-menu.jsonc.
+#
+#   session-exit <reboot|shutdown|logout>
+#
+# Linux + Omarchy only.
+set -uo pipefail
+
+case ${1:-} in
+  reboot | shutdown | logout) ;;
+  *) echo "Usage: session-exit <reboot|shutdown|logout>" >&2; exit 2 ;;
+esac
+
+if [[ $(uname -s) != Linux ]] || ! command -v omarchy-system >/dev/null; then
+  echo "session-exit: Linux/Omarchy only" >&2
+  exit 1
+fi
+
+if ! "$HOME/.local/bin/session-save" >/dev/null; then
+  omarchy-notification-send -u critical "Session not saved" "Continuing with $1 anyway" 2>/dev/null || true
+fi
+
+exec omarchy-system "$1"
