@@ -1,1 +1,14 @@
 .DS_Store
+
+# fish: machine state and files fisher installs from fish_plugins
+home/.config/fish/fish_variables
+home/.config/fish/conf.d/fzf.fish
+home/.config/fish/conf.d/zoxide.fish
+home/.config/fish/completions/fisher.fish
+home/.config/fish/completions/fzf_configure_bindings.fish
+home/.config/fish/completions/pj.fish
+home/.config/fish/functions/fisher.fish
+home/.config/fish/functions/pj.fish
+home/.config/fish/functions/fzf_configure_bindings.fish
+home/.config/fish/functions/_fzf_*.fish
+home/.config/fish/functions/__zoxide_*.fish
