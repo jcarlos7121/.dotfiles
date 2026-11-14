@@ -117,8 +117,6 @@ aur vesktop-bin   # Discord desktop client (official Discord has no ARM build); 
 ignore grok-bot   # official arm64 .deb repackaged: ~/.dotfiles/pkgbuilds/grok-bot (makepkg)
 aur zen-browser-bin   # default browser
 pacman ydotool        # keyboard clicks (Super+Ctrl+N/R); needs: systemctl --user enable --now ydotool
-pacman aerc                    # terminal email client
-pacman w3m                     # aerc: renders HTML mail
 pacman gtk-layer-shell         # hints (uv tool: hints) overlay on Wayland
 pacman gobject-introspection   # hints
 aur claude-desktop   # official Claude Desktop beta (Anthropic arm64 .deb)
