@@ -25,7 +25,9 @@ SKIP_CLASS_PREFIXES = ("org.omarchy.",)
 
 
 def hypr(*args):
-    return json.loads(subprocess.run(["hyprctl", "-j", *args], capture_output=True, text=True, check=True).stdout)
+    out = subprocess.run(["hyprctl", "-j", *args], capture_output=True, text=True, check=True).stdout
+    # Window titles can carry raw control characters; don't let one title sink the save.
+    return json.loads(out, strict=False)
 
 
 def launch_argv(pid):
@@ -47,30 +49,42 @@ def cwd_of(pid):
         return os.path.expanduser("~")
 
 
-windows = []
-for c in hypr("clients"):
+def snapshot(c):
     if not c.get("mapped", True) or c.get("pid", 0) <= 0 or not c.get("class"):
-        continue
+        return None
     # Omarchy's own surfaces (screensaver, etc.) start themselves.
     if c["class"].startswith(SKIP_CLASS_PREFIXES):
-        continue
-    if c["workspace"]["id"] == -1 and not c["workspace"]["name"].startswith("special:"):
-        continue
+        return None
+    ws = c.get("workspace") or {}
+    if ws.get("id") == -1 and not str(ws.get("name", "")).startswith("special:"):
+        return None
     argv = launch_argv(c["pid"])
     if not argv:
-        continue
-    windows.append({
+        return None
+    return {
         "class": c["class"],
         "title": c.get("title", ""),
         "initial_title": c.get("initialTitle", ""),
-        "workspace": c["workspace"]["name"],
+        "workspace": ws.get("name", ""),
         "floating": c.get("floating", False),
         "at": c.get("at"),
         "size": c.get("size"),
         "pid": c["pid"],
         "argv": argv,
         "cwd": cwd_of(c["pid"]),
-    })
+    }
+
+
+windows = []
+for c in hypr("clients"):
+    # One odd window must not cost the whole snapshot: skip it and say why.
+    try:
+        w = snapshot(c)
+    except Exception as e:  # noqa: BLE001
+        print(f"skipped {c.get('class', '?')} (pid {c.get('pid', '?')}): {e!r}", file=sys.stderr)
+        continue
+    if w:
+        windows.append(w)
 
 if not windows:
     # Never clobber a good snapshot with an empty desktop.

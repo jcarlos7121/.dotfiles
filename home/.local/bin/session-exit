@@ -19,8 +19,13 @@ if [[ $(uname -s) != Linux ]] || ! command -v omarchy-system >/dev/null; then
   exit 1
 fi
 
-if ! "$HOME/.local/bin/session-save" >/dev/null; then
-  omarchy-notification-send -u critical "Session not saved" "Continuing with $1 anyway" 2>/dev/null || true
+# Keep session-save's errors: a failure here is otherwise invisible.
+log="${XDG_STATE_HOME:-$HOME/.local/state}/session-restore/save.log"
+mkdir -p "${log%/*}"
+{ printf '%s session-exit %s\n' "$(date '+%F %T')" "$1"; } >>"$log"
+if ! "$HOME/.local/bin/session-save" >>"$log" 2>&1; then
+  reason=$(tail -n 1 "$log")
+  omarchy-notification-send -u critical "Session not saved" "Continuing with $1 anyway. ${reason:0:160} (see $log)" 2>/dev/null || true
 fi
 
 exec omarchy-system "$1"
