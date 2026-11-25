@@ -1,0 +1,6 @@
+#!/bin/bash
+# Reopen the windows saved by session-exit (reboot/shutdown/logout from the
+# Omarchy menu). Detached so it never holds up the other post-boot hooks.
+[[ $(uname -s) == Linux ]] || exit 0
+[[ -x $HOME/.local/bin/session-restore ]] || exit 0
+setsid -f "$HOME/.local/bin/session-restore" </dev/null >/dev/null 2>&1

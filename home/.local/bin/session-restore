@@ -1,0 +1,130 @@
+#!/usr/bin/env python3
+"""Reopen the windows session-save recorded and put each back on its
+workspace (or in the drawer, special:scratchpad).
+
+Runs once per snapshot: the snapshot is moved to session.last.json before
+anything launches, so a crash mid-restore never loops on the next boot.
+Started at login by ~/.config/omarchy/hooks/post-boot.d/50-session-restore.
+
+  session-restore            restore the pending snapshot, if any
+  session-restore --last     restore the previous snapshot again
+
+Linux + Hyprland only; anywhere else (the Mac) it exits quietly.
+"""
+import json
+import os
+import subprocess
+import sys
+import time
+
+if not sys.platform.startswith("linux") or not os.environ.get("HYPRLAND_INSTANCE_SIGNATURE"):
+    sys.exit(0)
+
+STATE_DIR = os.path.join(
+    os.environ.get("XDG_STATE_HOME", os.path.expanduser("~/.local/state")), "session-restore"
+)
+SESSION = os.path.join(STATE_DIR, "session.json")
+LAST = os.path.join(STATE_DIR, "session.last.json")
+LOG = os.path.join(STATE_DIR, "restore.log")
+TIMEOUT = 60  # seconds to wait for slow apps (Electron, browsers) to map windows
+
+
+def log(msg):
+    with open(LOG, "a") as f:
+        f.write(time.strftime("%F %T ") + msg + "\n")
+
+
+def clients():
+    out = subprocess.run(["hyprctl", "-j", "clients"], capture_output=True, text=True).stdout
+    try:
+        return json.loads(out)
+    except ValueError:
+        return []
+
+
+def dispatch(expr):
+    subprocess.run(["hyprctl", "dispatch", expr], capture_output=True)
+
+
+def lua_str(s):
+    return '"' + s.replace("\\", "\\\\").replace('"', '\\"') + '"'
+
+
+def place(window, slot):
+    target = "window = " + lua_str("address:" + window["address"])
+    dispatch(f"hl.dsp.window.move({{ workspace = {lua_str(slot['workspace'])}, follow = false, {target} }})")
+    if slot.get("floating") and slot.get("size") and slot.get("at"):
+        if not window.get("floating"):
+            dispatch(f'hl.dsp.window.float({{ action = "on", {target} }})')
+        w, h = slot["size"]
+        x, y = slot["at"]
+        dispatch(f"hl.dsp.window.resize({{ x = {w}, y = {h}, {target} }})")
+        dispatch(f"hl.dsp.window.move({{ x = {x}, y = {y}, {target} }})")
+
+
+def launch(slot):
+    argv = slot["argv"]
+    cwd = slot["cwd"] if os.path.isdir(slot.get("cwd") or "") else os.path.expanduser("~")
+    try:
+        subprocess.Popen(
+            ["uwsm-app", "--", *argv], cwd=cwd, start_new_session=True,
+            stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+        )
+        log(f"launched {slot['class']}: {' '.join(argv)[:160]}")
+    except OSError as e:
+        log(f"failed to launch {slot['class']}: {e}")
+
+
+source = LAST if "--last" in sys.argv else SESSION
+if not os.path.exists(source):
+    sys.exit(0)
+os.makedirs(STATE_DIR, exist_ok=True)
+with open(source) as f:
+    snapshot = json.load(f)
+if source == SESSION:
+    os.replace(SESSION, LAST)
+
+slots = snapshot.get("windows", [])
+log(f"restoring {len(slots)} window(s) from {source}")
+
+# Apps that are already up (autostarted) are not launched again; their
+# windows are just moved into place. Everything else is launched once per
+# original process: a browser with two windows restores both itself.
+before = clients()
+running_classes = {c["class"] for c in before}
+launched_pids = set()
+for slot in slots:
+    if slot["class"] in running_classes or slot["pid"] in launched_pids:
+        continue
+    launched_pids.add(slot["pid"])
+    launch(slot)
+
+pending = list(slots)
+placed = set()
+deadline = time.time() + TIMEOUT
+while pending and time.time() < deadline:
+    for window in clients():
+        if window["address"] in placed:
+            continue
+        candidates = [s for s in pending if s["class"] == window["class"]]
+        if not candidates:
+            continue
+        # Prefer the slot whose title matches; otherwise first come, first served.
+        slot = next(
+            (s for s in candidates if window.get("title") and window["title"] in (s["title"], s["initial_title"])),
+            candidates[0],
+        )
+        place(window, slot)
+        placed.add(window["address"])
+        pending.remove(slot)
+        log(f"placed {window['class']} -> {slot['workspace']}")
+    if pending:
+        time.sleep(0.5)
+
+for slot in pending:
+    log(f"gave up on {slot['class']} ({slot['workspace']}): no window after {TIMEOUT}s")
+
+active = snapshot.get("active_workspace")
+if active and not active.startswith("special:"):
+    dispatch(f"hl.dsp.focus({{ workspace = {lua_str(active)} }})")
+log("done")

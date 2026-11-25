@@ -1,0 +1,99 @@
+#!/usr/bin/env python3
+"""Snapshot the open Hyprland windows so session-restore can reopen them.
+
+Records, per window: the command that launched its app, the working
+directory, the workspace it sits on (drawer included: special:scratchpad),
+and floating geometry. Written to $XDG_STATE_HOME/session-restore/session.json.
+
+Linux + Hyprland only; anywhere else (the Mac) it exits quietly.
+Called by session-exit right before reboot/shutdown/logout; safe to run by hand.
+"""
+import json
+import os
+import subprocess
+import sys
+import time
+
+if not sys.platform.startswith("linux") or not os.environ.get("HYPRLAND_INSTANCE_SIGNATURE"):
+    sys.exit(0)
+
+STATE_DIR = os.path.join(
+    os.environ.get("XDG_STATE_HOME", os.path.expanduser("~/.local/state")), "session-restore"
+)
+SESSION = os.path.join(STATE_DIR, "session.json")
+SKIP_CLASS_PREFIXES = ("org.omarchy.",)
+
+
+def hypr(*args):
+    out = subprocess.run(["hyprctl", "-j", *args], capture_output=True, text=True, check=True).stdout
+    # Window titles can carry raw control characters; don't let one title sink the save.
+    return json.loads(out, strict=False)
+
+
+def launch_argv(pid):
+    try:
+        with open(f"/proc/{pid}/cmdline", "rb") as f:
+            argv = [a.decode(errors="replace") for a in f.read().split(b"\0") if a]
+    except OSError:
+        return None
+    # Chromium/Electron rewrite their argv into one space-joined string.
+    if len(argv) == 1 and " " in argv[0] and not os.path.exists(argv[0]):
+        argv = argv[0].split(" ")
+    return argv or None
+
+
+def cwd_of(pid):
+    try:
+        return os.readlink(f"/proc/{pid}/cwd")
+    except OSError:
+        return os.path.expanduser("~")
+
+
+def snapshot(c):
+    if not c.get("mapped", True) or c.get("pid", 0) <= 0 or not c.get("class"):
+        return None
+    # Omarchy's own surfaces (screensaver, etc.) start themselves.
+    if c["class"].startswith(SKIP_CLASS_PREFIXES):
+        return None
+    ws = c.get("workspace") or {}
+    if ws.get("id") == -1 and not str(ws.get("name", "")).startswith("special:"):
+        return None
+    argv = launch_argv(c["pid"])
+    if not argv:
+        return None
+    return {
+        "class": c["class"],
+        "title": c.get("title", ""),
+        "initial_title": c.get("initialTitle", ""),
+        "workspace": ws.get("name", ""),
+        "floating": c.get("floating", False),
+        "at": c.get("at"),
+        "size": c.get("size"),
+        "pid": c["pid"],
+        "argv": argv,
+        "cwd": cwd_of(c["pid"]),
+    }
+
+
+windows = []
+for c in hypr("clients"):
+    # One odd window must not cost the whole snapshot: skip it and say why.
+    try:
+        w = snapshot(c)
+    except Exception as e:  # noqa: BLE001
+        print(f"skipped {c.get('class', '?')} (pid {c.get('pid', '?')}): {e!r}", file=sys.stderr)
+        continue
+    if w:
+        windows.append(w)
+
+if not windows:
+    # Never clobber a good snapshot with an empty desktop.
+    sys.exit(0)
+
+active = hypr("activeworkspace").get("name")
+os.makedirs(STATE_DIR, exist_ok=True)
+tmp = SESSION + ".tmp"
+with open(tmp, "w") as f:
+    json.dump({"saved_at": time.time(), "active_workspace": active, "windows": windows}, f, indent=2)
+os.replace(tmp, SESSION)
+print(f"saved {len(windows)} window(s) to {SESSION}")
