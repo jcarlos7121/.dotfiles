@@ -135,15 +135,16 @@ o.window("org.dotfiles.window-switcher", { float = true, center = true, size = {
 -- Toggle AirPods Max between music mode and call mode (mic)
 o.bind("SUPER + CTRL + ALT + A", "Toggle AirPods call mode", "airpods-mode")
 
--- Shortcat replacement: hints labels the buttons/links apps expose through
--- accessibility (AT-SPI); type a label to click it, Esc cancels. Shift+label
--- right-clicks, Ctrl+label hovers. Replaces the Super+D -> Ctrl+D app shortcut.
-o.rebind("SUPER + D", "Click by keyboard (hints)", os.getenv("HOME") .. "/.local/bin/hints")
-
--- Fallback for apps that expose no accessibility tree: wl-kbptr finds the
--- buttons/links on screen by image detection (OpenCV) instead.
-o.bind("SUPER + ALT + D", "Click by keyboard (wl-kbptr)",
+-- Shortcat replacement: wl-kbptr finds the buttons/links on screen by image
+-- detection (OpenCV), so it works in every app, even ones with no
+-- accessibility tree (hints relied on AT-SPI and missed most targets).
+-- Type a label to click it, Esc cancels. Replaces the Super+D -> Ctrl+D shortcut.
+o.rebind("SUPER + D", "Click by keyboard (wl-kbptr)",
   "wl-kbptr -o modes=floating,click -o mode_floating.source=detect")
+
+-- Fallback when detection misses a target: a labelled grid over the screen,
+-- then narrow down (bisect) to the exact spot and click.
+o.bind("SUPER + ALT + D", "Click by keyboard (grid)", "wl-kbptr -o modes=tile,bisect,click")
 
 -- ctrl + shift - n : dismiss notifications (was Hammerspoon on the Mac)
 o.bind("CTRL + SHIFT + N", "Dismiss all notifications", { ipc = "notifications.dismissAll" })
@@ -179,7 +180,7 @@ end
 
 -- Super keys Omarchy leaves free: Cmd+K in Slack, Cmd+B bold, Cmd+Z undo, ...
 -- Skipped in terminals, where Ctrl+K/D/R/Z mean something else entirely.
--- D is left out: Super+D is hints (click by keyboard).
+-- D is left out: Super+D is wl-kbptr (click by keyboard).
 for _, key in ipairs({ "B", "E", "H", "K", "N", "R", "Y", "Z" }) do
   o.bind("SUPER + " .. key, "App shortcut (Ctrl + " .. key .. ")", function()
     if not active_window_is_terminal() then
@@ -250,8 +251,11 @@ end)
 o.bind("ALT + I", "1Password Quick Access", "1password --quick-access")
 
 -- Omarchy menu moved from SUPER + SPACE to ALT + SPACE (Alfred habit);
--- SUPER + SPACE left free
+-- SUPER + SPACE left free. Omarchy also binds ALT + SPACE to toggle dictation
+-- when a dictation backend is installed; unbind it so the key only opens the
+-- menu (push-to-talk on Right Alt still works).
 hl.unbind("SUPER + SPACE")
+hl.unbind("ALT + SPACE")
 o.bind("ALT + SPACE", "Omarchy menu", { menu = "root" })
 
 -- cmd + ctrl + shift - 4 : smart screenshot (pick an area or window; saved to
@@ -308,3 +312,11 @@ for slot = 1, 9 do
     end
   end)
 end
+
+-- SUPER + SHIFT + SPACE opens 1Password Quick Access instead of hiding the top
+-- bar (Omarchy's default). The bar can still be toggled with: omarchy toggle bar
+o.rebind("SUPER + SHIFT + SPACE", "1Password Quick Access", "1password --quick-access")
+
+-- SUPER + SHIFT + C left free (Omarchy binds it to the HEY Calendar web app):
+-- it collides with the Mac habit of Cmd+Shift+C to copy a password.
+hl.unbind("SUPER + SHIFT + C")
